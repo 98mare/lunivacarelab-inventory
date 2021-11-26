@@ -16,6 +16,7 @@ Currently suman(design) anib(service/operation)
 
 git clone <link>
 
+* important pull the main pull origin main when main is changed
 keep files in the folder & go to folder
 git add . to stage all changes
 git status to check
