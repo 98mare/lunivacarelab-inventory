@@ -7,12 +7,21 @@ import store from './store/configureStore'
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+// import 'antd/dist/antd.css';
+// import "antd/lib/select/style/index.css";
+import { BrowserRouter as Router } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
+<<<<<<< HEAD
     <Provider store={store}>
     <App />
     </Provider>
+=======
+  <Router>
+    <App />
+  </Router>
+>>>>>>> 5db34c285c6397d3ae7331fd6e670fc1c18b44d8
   </React.StrictMode>,
   document.getElementById('root')
 );

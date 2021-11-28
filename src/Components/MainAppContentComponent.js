@@ -1,0 +1,61 @@
+import React from 'react'
+import { Layout } from 'antd'
+import SideNav from '../Components/Common/SideNav'
+
+import {Switch, Route} from "react-router-dom";
+import DashBoardContainer from '../Containers/DashBoardContainer'
+import styled from 'styled-components'
+import Item from '../Components/Item'
+import PageHeader from './Common/pageHeader'
+import AddItem from './Item/AddItem';
+const { Header, Footer, Sider, Content } = Layout;
+
+
+const MainAppContentComponent = (props) => {
+  // console.log('this is app content props', props)
+  return (
+    <MainAppContentComponentContainer>
+      <Layout className='mainLayout'>
+      {/* <Header><NavigationBar></NavigationBar></Header> */}
+        <Layout>
+          <Sider><SideNav></SideNav></Sider>
+          <Layout>
+          
+          <Content style={{padding: '20px'}}>
+            
+           
+            <Switch>
+              <Route path='/' exact>
+                <DashBoardContainer />
+              </Route>
+              <Route path='/item' exact>
+                <Item />
+              </Route>
+              <Route path='/item/add' exact>
+                <AddItem />
+              </Route>
+              {/* <Route path='/ds' exact>
+                <DashBard2 />
+              </Route> */}
+              <Route >
+                <h4>Error page</h4>
+              </Route>
+            </Switch>
+
+          </Content>
+          </Layout>
+        </Layout>
+        {/* <Footer >Luniva careLab Inventory</Footer> */}
+      </Layout>
+    </MainAppContentComponentContainer>
+  )
+} 
+
+export default MainAppContentComponent
+
+const MainAppContentComponentContainer = styled.div`
+  .mainLayout{
+    min-height: 100vh;
+  }
+ 
+`
