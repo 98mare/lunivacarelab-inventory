@@ -1,3 +1,6 @@
+@import '~antd/dist/antd.css';
+
+
 .App {
   text-align: center;
 }
@@ -35,4 +38,15 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+h1{
+  color: #232324;
+  font-size: 36px;
+  text-align: left;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+h4{
+  color: #fefefe;
 }
