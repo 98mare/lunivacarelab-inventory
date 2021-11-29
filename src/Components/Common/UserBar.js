@@ -20,7 +20,7 @@ const UserBar = () => {
   return (
     <UserBarContainer>
       <div className="userIcon">
-        <img src="./Assets/images/user.webp" alt="" />
+        <img src="./Assets/icons/user.svg" alt="" />
       </div>
       <span className='userName'>user user</span>
       <Dropdown overlay={menu}  placement="bottomLeft">
@@ -39,20 +39,17 @@ const UserBarContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   border: 1px solid #fefefe;
-  padding: 5px 10px 5px 6px;
+  padding: 5px 10px 5px 20px;
   border-radius: 20px;
   background-color: #e95b29;
   color: #fefefe;
-  gap: 20px;
+  gap: 15px;
   .userIcon{
     width: 30px;
     height: 30px;
-    border-radius: 50%;
-    overflow: hidden;
     img{
       width: 100%;
       height: 100%;
-      border-radius: 50%;
     }
   }
   .userName{

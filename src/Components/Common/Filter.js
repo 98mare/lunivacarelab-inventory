@@ -6,11 +6,17 @@ import AppButton from './AppButton'
 import Datepicker from './Datepicker'
 const { Option } = Select;
 
-const Filter = (itemType, categroryType , dateRange) => {
+const Filter = (props) => {
+  const {itemType, categroryType, reangeOfDate} = props;
   return (
     <FilterContainer>
       <Row justify='space-between'>
         <Row justify='space-between' className='gapping'>
+          {reangeOfDate && 
+            <Col>
+            <Datepicker></Datepicker>
+            </Col>
+          }
           {itemType && 
             <Col>
               <Select defaultValue="Basic unit" size='large' className='inputWidth'>
@@ -35,12 +41,7 @@ const Filter = (itemType, categroryType , dateRange) => {
             </Select>
             </Col>
           }
-          {
-            dateRange && 
-            <Col>
-            <Datepicker></Datepicker>
-            </Col>
-          }
+          
         </Row>
         
         
@@ -49,7 +50,7 @@ const Filter = (itemType, categroryType , dateRange) => {
         
         <Col >
           {/* <Button size='large' type='primary'>Search</Button> */}
-          <AppButton className='primary-btn'></AppButton>
+          <AppButton className='primary-btn' buttonTitle='Search' buttonOnClick={()=> console.log('button clicked')}></AppButton>
         </Col>
       </Row>
     </FilterContainer>

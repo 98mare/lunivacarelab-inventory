@@ -25,21 +25,9 @@ export const MenuRoute = [
   },
   {
     icon: './Assets/icons/product.svg',
-    key: 'unit',
-    name: 'Unit',
-    path: '/unit',
-    subMenu: [
-      {
-        key: 'addUnit',
-        name: 'add unit',
-        path: '/unit/add',
-      },
-      {
-        key: 'editUnit',
-        name: 'edit unit',
-        path: '/unit/edit',
-      },
-    ],
+    key: 'goodsin',
+    name: 'goods in',
+    path: '/goodsin',
   },
   {
     icon: './Assets/icons/product.svg',
