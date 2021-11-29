@@ -2,17 +2,16 @@ import { GetListOfLabItemsDetailsByTypeId, InsertUpdateNewItemsDetails } from '.
 import { fetch, store } from '../utils/httpUtil';
 import { generateUrlEncodedData } from '../utils/generateFormData';
 
-export const getLabItemsApi = (catId = 0, successCallback) => {
+export const getLabItemsApi = (data, successCallback) => {
     return async dispatch => {
         try {
-            let data = {
-                fromdate: '2021-11-01',
-                todate: '2021-11-28',
-            }
             let formData = generateUrlEncodedData(data)
             let newUrl = `${GetListOfLabItemsDetailsByTypeId}?${formData}`
             const response = await fetch(newUrl);
-            successCallback(response?.data);
+            if(response?.status === 200)
+                successCallback(response?.data?.GetListOfLabItemsDetailsByTypeId);
+            else
+                successCallback([])
         } catch (error) {
 
         }

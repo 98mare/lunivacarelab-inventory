@@ -7,7 +7,6 @@ import styled from 'styled-components'
 import { useDispatch } from 'react-redux';
 import { getLabItemsApi } from '../../services/itemNewItemService'
 import PageHeader from '../Common/pageHeader'
-import Filter from '../Common/Filter';
 
 const Index = () => {
   const history = useHistory();
@@ -17,23 +16,38 @@ const Index = () => {
 
   const columns = [
     {
+    title: 'Item name',
+    dataIndex: 'Item name',
+    key: 'itemName',
       title: 'Item Code',
       dataIndex: 'ItemCode',
       key: 'itemCode'
     },
     {
+    title: 'count',
+    dataIndex: 'count',
+    key: 'count'
       title: 'Item Name',
       dataIndex: 'ItemName',
       key: 'itemName'
     },
     {
+    title: 'type',
+    dataIndex: 'type',
+    key: 'type'
       title: 'MinQty',
       dataIndex: 'MinQty',
       key: 'minQty'
     },
+    {
+    title: 'unit',
+    dataIndex: 'unit',
+    key: 'unit'
+  },
   {
       title: 'action',
       key: 'action',
+    redner: (text, record) => (
       render: (text, record) => (
         <Space size="middle">
           <a href="#">Edit</a>
@@ -43,7 +57,8 @@ const Index = () => {
     }
   ]
 
-
+const Index = () => {
+  const history = useHistory();
   const getLabData = () => {
     let data = {
       typeId: 0,
@@ -60,7 +75,7 @@ const Index = () => {
 
   return (
     <ItemContainer>
-
+<<<<<<< HEAD
      <PageHeader 
       buttonTitle='Add Item'
       pageTitle = 'Item'
@@ -70,11 +85,18 @@ const Index = () => {
       itemType
       categroryType
      ></Filter>
-
+=======
+      <PageHeader
+        buttonTitle='add Button'
+        pageTitle='Item'
+        buttonOnClick={() => history.push('./item/add')}
+      ></PageHeader>
+>>>>>>> a286e26f4d7861df1ab169e5c142f272bb49a93c
       <div className="top">
         {/* <Button type="primary" onClick={()=> history.push('./item/add')}>Add Item</Button> */}
         
       </div>
+      <Table columns={columns}></Table>
       <Table 
       columns={columns}
       dataSource={tableData}
@@ -88,3 +110,4 @@ export default Index
 const ItemContainer = styled.div`
 
 `
+const ItemContainer = styled.div``

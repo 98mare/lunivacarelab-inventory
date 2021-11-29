@@ -47,9 +47,10 @@ const SideNav = () => {
 export default SideNav
 
 const SideNavContainer = styled.div`
-  min-height: 100vh;
+  height: 100%;
   padding: 20px 0;
   background-color: #Fefefe;
+  box-shadow: 0px 0px 10px #9696c02b;
   .logo{
     display: flex;
     justify-content: space-evenly;

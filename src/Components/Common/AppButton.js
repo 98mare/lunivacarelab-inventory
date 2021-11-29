@@ -18,14 +18,13 @@ const AppButtonContainer = styled.div`
   .primary-btn{
   background-color: #1890ff;
   color: #fefefe;
-  border-radius: 20px!important;
-  height: 40px;
+  border-radius: 30px!important;
+  padding:  23px 40px;
   display: flex;
   align-items: center;
-  font-size: 16px;
-  letter-spacing: 1.3px;
+  font-size: 18px;
+  letter-spacing: 1.1px;
   font-weight: 400;
-  text-transform: capitalize;
  
 }
 `

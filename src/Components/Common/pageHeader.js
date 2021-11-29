@@ -20,7 +20,7 @@ const pageHeader = ({pageTitle,buttonTitle,buttonOnClick}) => {
 export default pageHeader
 
 const PageHeaderContainer = styled.div`
-  background-color: #fefefe;
+  /* background-color: #fefefe; */
   padding: 20px;
   width: 100%;
   margin-bottom: 20px;
