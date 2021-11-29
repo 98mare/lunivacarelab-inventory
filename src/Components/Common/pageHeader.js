@@ -7,7 +7,7 @@ const pageHeader = ({pageTitle,buttonTitle,buttonOnClick}) => {
   return (
     <PageHeaderContainer>
       <Row justify='space-between align-center'>
-        <span>{pageTitle}</span>
+        <span className='pageTtitle'>{pageTitle}</span>
         <Row>
           {buttonTitle && <AppButton buttonTitle={buttonTitle} buttonOnClick={buttonOnClick} ></AppButton>}
           
@@ -21,6 +21,8 @@ export default pageHeader
 
 const PageHeaderContainer = styled.div`
   background-color: #fefefe;
-  height: 100px;
+  padding: 20px;
   width: 100%;
+  margin-bottom: 20px;
+  align-items: center;
 `

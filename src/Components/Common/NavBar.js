@@ -12,7 +12,7 @@ const NavBar = () => {
           <Col span={8}>
             <SerchBar></SerchBar>
           </Col>
-          <Col span={4} offset={12}>
+          <Col offset={12}>
             <UserBar></UserBar>
           </Col>
         </Row>

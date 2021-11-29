@@ -10,15 +10,14 @@ const SideNav = () => {
   return (
     <SideNavContainer>
       
-      <Menu theme='dark' 
+      <Menu 
         mode="inline"
         // defaultSelectedKeys={['1']}
         // defaultOpenKeys={['sub1']}
       >
       
       <div className="logo">
-      <img src="./Assets/images/logo1.png" alt="" />
-      <h3>CareLab</h3>
+      <img src="./Assets/images/logo.png" alt="" />
       </div>
       
       
@@ -40,11 +39,6 @@ const SideNav = () => {
           ))} 
       </SubMenu>
       ))} */}
-      
-      
-      
-      
-        
       </Menu>
     </SideNavContainer>
   )
@@ -55,17 +49,13 @@ export default SideNav
 const SideNavContainer = styled.div`
   min-height: 100vh;
   padding: 20px 0;
+  background-color: #Fefefe;
   .logo{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     img{
-      width: 60px;
-    }
-    h3{
-      font-size: 20px;
-      color: #fefefe;
-      text-transform: uppercase;
+      width: 80%;
     }
   }
   .navLInk{
@@ -75,7 +65,7 @@ const SideNavContainer = styled.div`
     align-items: center;
     text-transform: capitalize;
     p{
-      margin-top: 30px;
+      margin-top: 21px;
     }
   }
 `
