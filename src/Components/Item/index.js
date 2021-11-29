@@ -1,13 +1,12 @@
-import { Button, Space, Table } from 'antd'
-
 import React, { useState } from 'react'
+import { Button, Space, Table } from 'antd'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { useDispatch } from 'react-redux';
 import { getLabItemsApi } from '../../services/itemNewItemService'
 import PageHeader from '../Common/pageHeader'
-import Filter from '../Common/Filter';
+import Filter from '../Common/Filter'
 
 const Index = () => {
   const history = useHistory();
@@ -31,7 +30,7 @@ const Index = () => {
       dataIndex: 'MinQty',
       key: 'minQty'
     },
-  {
+    {
       title: 'action',
       key: 'action',
       render: (text, record) => (
@@ -43,41 +42,40 @@ const Index = () => {
     }
   ]
 
-
-  const getLabData = () => {
+  const getLabData = (tId = 0, cId = 0) => {
     let data = {
-      typeId: 0,
-      categoryId: 0
+      typeId: tId,
+      categoryId: cId
     }
     dispatch(getLabItemsApi(data, (val) => {
       setTableData(val)
     }))
   }
 
-  if(tableData.length === 0){
-    getLabData()
+  // if (tableData.length === 0) {
+  //   getLabData()
+  // }
+
+  const dataRet = (val) => {
+    getLabData(val?.iType, val?.cType)
   }
 
   return (
     <ItemContainer>
-
-     <PageHeader 
-      buttonTitle='Add Item'
-      pageTitle = 'Item'
-      buttonOnClick ={()=> history.push('./item/add')}   
-     ></PageHeader>
-     <Filter 
-      itemType
-      categroryType
-     ></Filter>
-
-      <div className="top">
-        {/* <Button type="primary" onClick={()=> history.push('./item/add')}>Add Item</Button> */}
-        
-      </div>
-      <Table 
-      columns={columns}
-      dataSource={tableData}
+      <PageHeader
+        buttonTitle='add Button'
+        pageTitle='Item'
+        buttonOnClick={() => history.push('./item/add')}
+      ></PageHeader>
+      <Filter
+        itemType
+        categroryType
+        dataRet={dataRet}
+      />
+      <div className="top"></div>
+      <Table
+        columns={columns}
+        dataSource={tableData}
       />
     </ItemContainer>
   )
@@ -85,6 +83,4 @@ const Index = () => {
 
 export default Index
 
-const ItemContainer = styled.div`
-
-`
+const ItemContainer = styled.div``

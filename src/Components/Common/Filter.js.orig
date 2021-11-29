@@ -40,11 +40,25 @@ const Filter = (props) => {
     )
   }, [])
 
+<<<<<<< HEAD
+const Filter = (props) => {
+  const {itemType, categroryType, reangeOfDate} = props;
+=======
+>>>>>>> 3f30dee4df0f715170260f9ec724bf155616d3b4
   return (
     <FilterContainer>
       <Row justify='space-between'>
         <Row justify='space-between' className='gapping'>
+<<<<<<< HEAD
+          {reangeOfDate && 
+            <Col>
+            <Datepicker></Datepicker>
+            </Col>
+          }
           {itemType && 
+=======
+          {itemType &&
+>>>>>>> 3f30dee4df0f715170260f9ec724bf155616d3b4
             <Col>
               <Select defaultValue="0" onChange={(val) => { setiType(val) }} size='large' className='inputWidth'>
                 <Option value="0">All</Option>
@@ -78,16 +92,25 @@ const Filter = (props) => {
               </Select>
             </Col>
           }
+<<<<<<< HEAD
+          
+=======
           {
             dateRange &&
             <Col>
               <Datepicker></Datepicker>
             </Col>
           }
+>>>>>>> 3f30dee4df0f715170260f9ec724bf155616d3b4
         </Row>
 
         <Col >
+<<<<<<< HEAD
+          {/* <Button size='large' type='primary'>Search</Button> */}
+          <AppButton className='primary-btn' buttonTitle='Search' buttonOnClick={()=> console.log('button clicked')}></AppButton>
+=======
           <AppButton className='primary-btn' buttonTitle="Search" buttonOnClick={() => { handleClicker() }}></AppButton>
+>>>>>>> 3f30dee4df0f715170260f9ec724bf155616d3b4
         </Col>
       </Row>
     </FilterContainer>

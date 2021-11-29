@@ -2,11 +2,14 @@ import { GetItemCategory, InsertUpdateItemCategory } from '../constants/url';
 import { fetch, store } from '../utils/httpUtil';
 import { generateUrlEncodedData } from '../utils/generateFormData';
 
-export const getItemCategoryApi = (catId = 0, successCallback) => {
+export const getItemCategoryApi = (successCallback) => {
     return async dispatch => {
         try {
             const response = await fetch(GetItemCategory);
-            successCallback(response?.data);
+            if(response?.status === 200)
+                successCallback(response?.data?.ItemGategory);
+            else
+                successCallback([])
         } catch (error) {
             
         }
