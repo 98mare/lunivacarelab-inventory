@@ -9,11 +9,22 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "antd": "^4.13.0",
+<<<<<<< HEAD
+<<<<<<< HEAD
     "axios": "^0.24.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
-    "react-router-dom": "^5.3.0",
+=======
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router": "^6.0.2",
+>>>>>>> 5db34c285c6397d3ae7331fd6e670fc1c18b44d8
+=======
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router": "^6.0.2",
+>>>>>>> 5db34c285c6397d3ae7331fd6e670fc1c18b44d8
     "react-scripts": "4.0.3",
     "styled-components": "^5.3.3",
     "web-vitals": "^1.1.2"

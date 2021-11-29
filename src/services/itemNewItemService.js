@@ -14,7 +14,7 @@ export const getLabItemsApi = (catId = 0, successCallback) => {
             const response = await fetch(newUrl);
             successCallback(response?.data);
         } catch (error) {
-            
+
         }
 
     }
@@ -23,14 +23,11 @@ export const getLabItemsApi = (catId = 0, successCallback) => {
 export const insertNewItemDetailsApi = (params, returnData) => {
     return async dispatch => {
         try {
-            let data = {
-                "CId": 0,
-                "CategoryType": "Updated Cate",
-                "IsActive": true
-            }
-            // let formData = generateUrlEncodedData(data)
-            const response = await store(InsertUpdateNewItemsDetails, data);
-            console.log(response);
+            let formData = generateUrlEncodedData(params)
+            const response = await store(InsertUpdateNewItemsDetails, formData);
+            // if(response?.status === 200){
+            returnData(response?.data);
+            // }else{}
         } catch (error) {
 
         }
