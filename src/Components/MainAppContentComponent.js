@@ -8,6 +8,7 @@ import styled from 'styled-components'
 import Item from '../Components/Item'
 import PageHeader from './Common/pageHeader'
 import AddItem from './Item/AddItem';
+import NavBar from './Common/NavBar';
 const { Header, Footer, Sider, Content } = Layout;
 
 
@@ -16,12 +17,12 @@ const MainAppContentComponent = (props) => {
   return (
     <MainAppContentComponentContainer>
       <Layout className='mainLayout'>
-      {/* <Header><NavigationBar></NavigationBar></Header> */}
         <Layout>
           <Sider><SideNav></SideNav></Sider>
           <Layout>
-          
+          <NavBar></NavBar>
           <Content style={{padding: '20px'}}>
+            
             
            
             <Switch>
@@ -34,9 +35,7 @@ const MainAppContentComponent = (props) => {
               <Route path='/item/add' exact>
                 <AddItem />
               </Route>
-              {/* <Route path='/ds' exact>
-                <DashBard2 />
-              </Route> */}
+              
               <Route >
                 <h4>Error page</h4>
               </Route>

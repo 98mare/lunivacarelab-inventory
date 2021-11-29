@@ -10,10 +10,9 @@ function App() {
     <div className="App">
       <AppContentContainer />
       
-=======
-      <AppContentContainer />
-      
->>>>>>> 5db34c285c6397d3ae7331fd6e670fc1c18b44d8
+
+      {/* <AppContentContainer /> */}
+
     </div>
   );
 }
