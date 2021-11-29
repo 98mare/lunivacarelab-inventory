@@ -3,7 +3,7 @@ import React from 'react'
 
 const AppButton = (props) => {
   return (
-    <Button className='btn-primary' type="primary" shape="circle" onClick={props.buttonOnClick} >
+    <Button className='.primary-btn' shape="circle" onClick={props.buttonOnClick} >
       {props.buttonTitle}
     </Button>
   )

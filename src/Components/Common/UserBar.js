@@ -23,7 +23,7 @@ const UserBar = () => {
         <img src="./Assets/images/user.webp" alt="" />
       </div>
       <span className='userName'>user user</span>
-      <Dropdown overlay={menu}  placement="bottomCenter">
+      <Dropdown overlay={menu}  placement="bottomLeft">
         <CaretDownFilled />
       </Dropdown>
       
@@ -37,7 +37,13 @@ export default UserBar
 const UserBarContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  border: 1px solid #fefefe;
+  padding: 5px 10px 5px 6px;
+  border-radius: 20px;
+  background-color: #e95b29;
+  color: #fefefe;
+  gap: 20px;
   .userIcon{
     width: 30px;
     height: 30px;

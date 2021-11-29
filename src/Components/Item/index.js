@@ -3,6 +3,7 @@ import { Button, Space, Table } from 'antd'
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
 
 
@@ -50,6 +51,10 @@ const Index = () => {
       pageTitle = 'Item'
       buttonOnClick ={()=> history.push('./item/add')}   
      ></PageHeader>
+     <Filter 
+      itemType
+      categroryType
+     ></Filter>
       <div className="top">
         {/* <Button type="primary" onClick={()=> history.push('./item/add')}>Add Item</Button> */}
         
