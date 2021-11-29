@@ -1,55 +1,93 @@
-import { Button, Col, Input, Row,Select } from 'antd'
-import Search from 'antd/lib/input/Search'
-import React from 'react'
+import { Col, Row, Select } from 'antd'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import AppButton from './AppButton'
 import Datepicker from './Datepicker'
-const { Option } = Select;
+import { useDispatch } from 'react-redux';
+import { getItemTypeApi } from '../../services/itemItemTypeService'
+import { getItemCategoryApi } from '../../services/itemCategoryService'
 
-const Filter = (itemType, categroryType , dateRange) => {
+
+const Filter = (props) => {
+  const { itemType, categroryType, dateRange, dataRet } = props
+  const dispatch = useDispatch();
+
+  const { Option } = Select;
+
+  const [iType, setiType] = useState(0)
+  const [catType, setCatType] = useState(0)
+  const [itemList, setItemList] = useState([])
+  const [cateList, setcateList] = useState([])
+
+  const handleClicker = () => {
+    let data = {
+      cType: catType,
+      iType: iType
+    }
+    dataRet(data);
+  }
+
+  useEffect(() => {
+    dispatch(
+      getItemTypeApi((val) => {
+        setItemList(val)
+      })
+    )
+    dispatch(
+      getItemCategoryApi((val) => {
+        setcateList(val)
+      })
+    )
+  }, [])
+
   return (
     <FilterContainer>
       <Row justify='space-between'>
         <Row justify='space-between' className='gapping'>
-          {itemType && 
+          {itemType &&
             <Col>
-              <Select defaultValue="Basic unit" size='large' className='inputWidth'>
-                <Option value="time">Time</Option>
-                <Option value="date">Date</Option>
-                <Option value="week">Week</Option>
-                <Option value="month">Month</Option>
-                <Option value="quarter">Quarter</Option>
-                <Option value="year">Year</Option>
+              <Select defaultValue="0" onChange={(val) => { setiType(val) }} size='large' className='inputWidth'>
+                <Option value="0">All</Option>
+                {itemList?.map(iTy => {
+                  if (iTy?.IsActive) {
+                    return (
+                      <Option value={iTy?.TId}>
+                        {iTy?.ItemType}
+                      </Option>
+                    )
+                  }
+                })
+                }
               </Select>
             </Col>
           }
-          {categroryType && 
+          {categroryType &&
             <Col>
-            <Select defaultValue="Basic unit" size='large' className='inputWidth'>
-              <Option value="time">Time</Option>
-              <Option value="date">Date</Option>
-              <Option value="week">Week</Option>
-              <Option value="month">Month</Option>
-              <Option value="quarter">Quarter</Option>
-              <Option value="year">Year</Option>
-            </Select>
+              <Select defaultValue="0" onChange={(val) => { setCatType(val) }} size='large' className='inputWidth'>
+                <Option value="0">All</Option>
+                {cateList?.map(iTy => {
+                  if (iTy?.IsActive) {
+                    return (
+                      <Option value={iTy?.CId}>
+                        {iTy?.CategoryType}
+                      </Option>
+                    )
+                  }
+                })
+                }
+              </Select>
             </Col>
           }
           {
-            dateRange && 
+            dateRange &&
             <Col>
-            <Datepicker></Datepicker>
+              <Datepicker></Datepicker>
             </Col>
           }
         </Row>
-        
-        
-        
-        
-        
+
         <Col >
-          {/* <Button size='large' type='primary'>Search</Button> */}
-          <AppButton className='primary-btn'></AppButton>
+          <AppButton className='primary-btn' buttonTitle="Search" buttonOnClick={() => { handleClicker() }}></AppButton>
         </Col>
       </Row>
     </FilterContainer>
@@ -68,5 +106,4 @@ const FilterContainer = styled.div`
       text-align: left;
     }
   }
-
 `

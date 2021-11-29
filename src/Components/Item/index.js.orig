@@ -1,18 +1,20 @@
-import React, { useState } from 'react'
 import { Button, Space, Table } from 'antd'
+
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-
+<<<<<<< HEAD
 import { useDispatch } from 'react-redux';
 import { getLabItemsApi } from '../../services/itemNewItemService'
-import PageHeader from '../Common/pageHeader'
+=======
 import Filter from '../Common/Filter'
+>>>>>>> 744224811d22ff23eb23e583158a12ecb31cb151
+import PageHeader from '../Common/pageHeader'
 
 const Index = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [tableData, setTableData] = useState([]);
-
 
   const columns = [
     {
@@ -42,40 +44,45 @@ const Index = () => {
     }
   ]
 
-  const getLabData = (tId = 0, cId = 0) => {
+  const getLabData = () => {
     let data = {
-      typeId: tId,
-      categoryId: cId
+      typeId: 0,
+      categoryId: 0
     }
     dispatch(getLabItemsApi(data, (val) => {
       setTableData(val)
     }))
   }
 
-  // if (tableData.length === 0) {
-  //   getLabData()
-  // }
-
-  const dataRet = (val) => {
-    getLabData(val?.iType, val?.cType)
+  if(tableData.length === 0){
+    getLabData()
   }
 
   return (
     <ItemContainer>
+<<<<<<< HEAD
       <PageHeader
         buttonTitle='add Button'
         pageTitle='Item'
         buttonOnClick={() => history.push('./item/add')}
       ></PageHeader>
-      <Filter
-        itemType
-        categroryType
-        dataRet={dataRet}
-      />
-      <div className="top"></div>
-      <Table
-        columns={columns}
-        dataSource={tableData}
+=======
+     <PageHeader 
+      buttonTitle='add Button'
+      pageTitle = 'Item'
+      buttonOnClick ={()=> history.push('./item/add')}   
+     ></PageHeader>
+     <Filter 
+      itemType
+      categroryType
+     ></Filter>
+>>>>>>> 744224811d22ff23eb23e583158a12ecb31cb151
+      <div className="top">
+        
+      </div>
+      <Table 
+      columns={columns}
+      dataSource={tableData}
       />
     </ItemContainer>
   )

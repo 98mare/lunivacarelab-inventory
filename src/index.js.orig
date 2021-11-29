@@ -12,17 +12,18 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from "react-router-dom";
 
 ReactDOM.render(
-  <React.StrictMode>
 <<<<<<< HEAD
-
-    
+  <React.StrictMode>
+    <Router>    
 =======
->>>>>>> 78506549c8da92cb679d387cf9411a802711eef7
+  <React.StrictMode> 
   <Router>
+>>>>>>> 744224811d22ff23eb23e583158a12ecb31cb151
     <Provider store={store}>
-      <App />
+    <App />
     </Provider>
   </Router>
+
   </React.StrictMode>,
   document.getElementById('root')
 );
