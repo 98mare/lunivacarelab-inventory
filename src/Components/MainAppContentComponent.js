@@ -6,7 +6,7 @@ import {Switch, Route} from "react-router-dom";
 import DashBoardContainer from '../Containers/DashBoardContainer'
 import styled from 'styled-components'
 import Item from '../Components/Item'
-import PageHeader from './Common/pageHeader'
+// import PageHeader from './Common/pageHeader'
 import AddItem from './Item/AddItem';
 import NavBar from './Common/NavBar';
 const { Header, Footer, Sider, Content } = Layout;
@@ -18,13 +18,11 @@ const MainAppContentComponent = (props) => {
     <MainAppContentComponentContainer>
       <Layout className='mainLayout'>
         <Layout>
+        {/* style={{overflow:'auto',height:'100vh',position:'fixed',left:0}} */}
           <Sider><SideNav></SideNav></Sider>
           <Layout>
           <NavBar></NavBar>
           <Content style={{padding: '20px'}}>
-            
-            
-           
             <Switch>
               <Route path='/' exact>
                 <DashBoardContainer />
