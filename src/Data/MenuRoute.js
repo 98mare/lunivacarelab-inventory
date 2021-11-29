@@ -1,9 +1,15 @@
 export const MenuRoute = [
-  
+  {
+    key: 'dashbord',
+    name: 'dashbord',
+    path: '/',
+    icon: './Assets/icons/home.svg'
+  },
   {
     key: 'item',
     name: 'Item',
     path: '/item',
+    icon: './Assets/icons/product.svg',
     subMenu: [
       {
         key: 'addItem',
@@ -18,6 +24,7 @@ export const MenuRoute = [
     ],
   },
   {
+    icon: './Assets/icons/product.svg',
     key: 'unit',
     name: 'Unit',
     path: '/unit',
@@ -35,27 +42,32 @@ export const MenuRoute = [
     ],
   },
   {
+    icon: './Assets/icons/product.svg',
     key: 'type',
     name: 'type',
     path: '/type'
   },
   {
+    icon: './Assets/icons/product.svg',
     key: 'category',
     name: 'category',
     path: '/category'
   },
   {
+    icon: './Assets/icons/product.svg',
     key: 'location',
     name: 'location',
     path: '/location'
   },
   {
+    icon: './Assets/icons/product.svg',
     key: 'rack',
     name: 'rack',
     path: '/rack'
   }
   ,
   {
+    icon: './Assets/icons/product.svg',
     key: 'wastage',
     name: 'wastage',
     path: '/wastage'

@@ -15,16 +15,20 @@ const SideNav = () => {
         // defaultSelectedKeys={['1']}
         // defaultOpenKeys={['sub1']}
       >
-      <NavLink to='/'>
+      
       <div className="logo">
       <img src="./Assets/images/logo1.png" alt="" />
       <h3>CareLab</h3>
       </div>
-      </NavLink>
+      
       
       {data.map(e => (
         <Menu.Item key={e.key}>
-          <NavLink to={e?.path}>{e.name}</NavLink>
+          
+          <NavLink to={e?.path} className='navLInk'>
+            <span><img src={e.icon} alt="" /></span>
+            <p>{e.name}</p>
+          </NavLink>
         </Menu.Item>
       ))}
       {/* {data.map(e => (
@@ -62,6 +66,16 @@ const SideNavContainer = styled.div`
       font-size: 20px;
       color: #fefefe;
       text-transform: uppercase;
+    }
+  }
+  .navLInk{
+    display: flex;
+    gap: 20px;
+    font-size: 16px;
+    align-items: center;
+    text-transform: capitalize;
+    p{
+      margin-top: 30px;
     }
   }
 `

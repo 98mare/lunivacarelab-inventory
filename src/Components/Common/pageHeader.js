@@ -1,16 +1,17 @@
 import { Button, Col, Row } from 'antd'
 import React from 'react'
 import styled from 'styled-components'
+import AppButton from './AppButton'
 
-const pageHeader = () => {
+const pageHeader = ({pageTitle,buttonTitle,buttonOnClick}) => {
   return (
     <PageHeaderContainer>
-      <Row>
-        <Col span={8}>
-          <h1>DashBoard</h1>
-        </Col>
-        
-        <Col span={8} offset={8}> col-11</Col>
+      <Row justify='space-between align-center'>
+        <span>{pageTitle}</span>
+        <Row>
+          {buttonTitle && <AppButton buttonTitle={buttonTitle} buttonOnClick={buttonOnClick} ></AppButton>}
+          
+        </Row>
       </Row>
     </PageHeaderContainer>
   )

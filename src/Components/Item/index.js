@@ -45,10 +45,14 @@ const Index = () => {
   
   return (
     <ItemContainer>
-     <PageHeader></PageHeader>
+     <PageHeader 
+      buttonTitle='add Button'
+      pageTitle = 'Item'
+      buttonOnClick ={()=> history.push('./item/add')}   
+     ></PageHeader>
       <div className="top">
-        <Button type="primary" onClick={()=> history.push('./item/add')}>Add Item</Button>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, omnis.</p>
+        {/* <Button type="primary" onClick={()=> history.push('./item/add')}>Add Item</Button> */}
+        
       </div>
       <Table columns={columns}></Table>
     </ItemContainer>
