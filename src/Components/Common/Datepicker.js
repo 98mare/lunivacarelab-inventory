@@ -3,11 +3,12 @@ import { DatePicker, Space } from 'antd';
 
 const { RangePicker } = DatePicker;
 
-const Datepicker = () => {
+const Datepicker = (props) => {
+  const {onChanger} = props
   return (
     <>
       <Space direction="vertical" size='large'>
-        <RangePicker  size= "large"/>
+        <RangePicker onChange={onChanger}  size= "large"/>
       </Space>
     </>
   )

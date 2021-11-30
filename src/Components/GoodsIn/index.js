@@ -1,57 +1,77 @@
-import {Table} from 'antd'
-import React from 'react'
+import { Table } from 'antd'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import { useDispatch } from 'react-redux';
+import { getGoodsReceivedApi } from '../../services/labGoodsReceivedService'
 import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
 
 const columns = [
   {
-    title: 'Item Id',
-    dataIndex: 'item id',
-    key: 'itemId',
+    title: 'Item Name',
+    dataIndex: 'ItemName',
+    key: 'itemName',
   },
   {
-    title: 'total',
-    dataIndex: 'total',
-    key: 'total',
+    title: 'Total',
+    dataIndex: 'Total',
+    key: 'Total',
   },
   {
-    title: 'expiry date',
-    dataIndex: 'expiry date',
-    key: 'expiryDate',
+    title: 'Expiry Date',
+    dataIndex: 'ExpiryDate',
+    key: 'ExpiryDate',
+    render: (text) => {
+      return text.split('T')[0]
+    }
   },
   {
-    title: 'track id',
-    dataIndex: 'track id',
-    key: 'trackId',
-  },
-  {
-    title: 'status',
-    dataIndex: 'status',
-    key: 'status',
+    title: 'Item Status',
+    dataIndex: 'ItemStatus',
+    key: 'ItemStatus',
   }
 ]
 
 const Index = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const [goodsList, setgoodsList] = useState([])
+
+  const getLabData = (data) => {
+    dispatch(getGoodsReceivedApi(data, (val) => {
+      console.log(val);
+      setgoodsList(val)
+    }))
+  }
+
+  const dataRet = (val) => {
+    let data = {
+      fromdate: val[0].format("YYYY-MM-DD"),
+      todate: val[1].format("YYYY-MM-DD"),
+    }
+    getLabData(data)
+  }
+
   return (
     <GoodsInContainer>
       <PageHeader
         buttonTitle='add Goods'
         pageTitle='Goods In'
-        buttonOnClick = {() => history.push('./goodsin/add')}
+        buttonOnClick={() => history.push('./goodsin/add')}
       ></PageHeader>
-       <Filter 
-        reangeOfDate
-     ></Filter>
-     <Table columns={columns}></Table>
+      <Filter
+        dateRange
+        dateRet={dataRet}
+      ></Filter>
+      <Table
+        columns={columns}
+        dataSource={goodsList}
+      />
     </GoodsInContainer>
   )
 }
 
 export default Index
 
-const GoodsInContainer = styled.div`
-
-`
+const GoodsInContainer = styled.div``
