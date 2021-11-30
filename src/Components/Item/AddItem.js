@@ -300,7 +300,7 @@ const AddItem = () => {
                 span: 16,
               }}
             >
-              <Button type="primary" htmlType="submit" disabled={butDis}>
+              <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
                 Submit
               </Button>
             </Form.Item>

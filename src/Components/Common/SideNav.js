@@ -25,20 +25,11 @@ const SideNav = () => {
         <Menu.Item key={e.key}>
           
           <NavLink to={e?.path} className='navLInk'>
-            <span><img src={e.icon} alt="" /></span>
+            <i className={e.icon}></i>
             <p>{e.name}</p>
           </NavLink>
         </Menu.Item>
       ))}
-      {/* {data.map(e => (
-        <SubMenu key={e.key} title={e.name}>
-          {e.subMenu && e.subMenu.map(a => (
-            <Menu.Item key={a.key}>
-              <NavLink to={a?.path}>{a.name}</NavLink>
-            </Menu.Item>
-          ))} 
-      </SubMenu>
-      ))} */}
       </Menu>
     </SideNavContainer>
   )
@@ -72,8 +63,9 @@ const SideNavContainer = styled.div`
       margin-top: 21px;
       color: #464343;
     }
-    img{
-      width: 30px;
+    i{
+      font-size: 20px;
+      color: #464343;
     }
   }
   

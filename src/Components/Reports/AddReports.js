@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { getLocationApi } from '../../services/itemLocationService';
 import { insertRackDetailsApi } from '../../services/itemRackService';
 
-const AddRack = () => {
+const AddReports = () => {
   const { Option } = Select;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
@@ -46,7 +46,7 @@ const AddRack = () => {
   };
 
   return (
-    <AddRackContainer>
+    <AddReportsContainer>
       <Row justify='center'>
         <Col span={16}>
           <Form
@@ -133,13 +133,13 @@ const AddRack = () => {
         </Col>
 
       </Row>
-    </AddRackContainer>
+    </AddReportsContainer>
   );
 };
 
-export default AddRack;
+export default AddReports;
 
-const AddRackContainer = styled.div`
+const AddReportsContainer = styled.div`
   background-color: #fefefe;
   padding-top: 30px;
 `

@@ -17,7 +17,7 @@ const DashBoardContainer = () => {
               <NavLink to={e.path}>
               
               <span>{e.name}</span>
-              <span><img src={e.icon} alt="" /></span> 
+              <span><i className={e.icon}></i> </span> 
               </NavLink>
             </Button> : ''}
           </>
@@ -59,8 +59,8 @@ const DashbordContainer = styled.div`
       text-transform: uppercase;
       margin-right: 20px;
       color: #a09999;
-      img{
-        width: 40px;
+      i{
+        font-size: 25px;
       
       }
     }
