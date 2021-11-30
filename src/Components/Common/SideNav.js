@@ -68,5 +68,8 @@ const SideNavContainer = styled.div`
     p{
       margin-top: 21px;
     }
+    img{
+      width: 30px;
+    }
   }
 `

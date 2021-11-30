@@ -6,12 +6,13 @@ import {Switch, Route} from "react-router-dom";
 import DashBoardContainer from '../Containers/DashBoardContainer'
 import styled from 'styled-components'
 import Item from '../Components/Item'
-// import PageHeader from './Common/pageHeader'
 import AddItem from './Item/AddItem';
 import NavBar from './Common/NavBar';
 import GoodsIn from './GoodsIn'
 import AddGoods from './GoodsIn/AddGoods';
 import ErrorPage from './Common/ErrorPage';
+import Type from '../Components/Type'
+import PrivateRoute from '../Routes/PrivateRoute';
 const { Header, Footer, Sider, Content } = Layout;
 
 
@@ -27,25 +28,8 @@ const MainAppContentComponent = (props) => {
           <NavBar></NavBar>
           <Content style={{padding: '20px'}}>
             <Switch>
-              <Route path='/' exact>
-                <DashBoardContainer />
-              </Route>
-              <Route path='/item' exact>
-                <Item />
-              </Route>
-              <Route path='/item/add' exact>
-                <AddItem />
-              </Route>
-              <Route path='/goodsin' exact>
-                <GoodsIn></GoodsIn>
-              </Route>
-              <Route path='/goodsin/add' exact>
-                <AddGoods/>
-              </Route>
+              <PrivateRoute></PrivateRoute>
               
-              <Route >
-                <ErrorPage></ErrorPage>
-              </Route>
             </Switch>
 
           </Content>

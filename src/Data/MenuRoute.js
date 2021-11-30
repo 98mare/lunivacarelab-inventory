@@ -24,25 +24,25 @@ export const MenuRoute = [
     ],
   },
   {
-    icon: './Assets/icons/product.svg',
+    icon: './Assets/icons/suppliers.svg',
     key: 'goodsin',
     name: 'goods in',
     path: '/goodsin',
   },
   {
-    icon: './Assets/icons/product.svg',
+    icon: './Assets/icons/approval.svg',
     key: 'type',
     name: 'type',
     path: '/type'
   },
   {
-    icon: './Assets/icons/product.svg',
+    icon: './Assets/icons/invoice.svg',
     key: 'category',
     name: 'category',
     path: '/category'
   },
   {
-    icon: './Assets/icons/product.svg',
+    icon: './Assets/icons/company.svg',
     key: 'location',
     name: 'location',
     path: '/location'
