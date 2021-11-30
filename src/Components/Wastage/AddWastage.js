@@ -2,9 +2,9 @@ import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { getItemTypeApi } from '../../services/itemItemTypeService';
 import { getLabItemsApi } from '../../services/itemNewItemService';
 import { insertWastageApi } from '../../services/wastageService';
+import moment from 'moment';
 
 const AddWastage = () => {
   const { Option } = Select;

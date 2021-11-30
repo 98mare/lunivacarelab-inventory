@@ -53,6 +53,16 @@ export const GetlistOfwastageDetailsByDate = 'GetlistOfwastageDetailsByDate';
  * @param: 
  */
 export const GetListOfItemVsTestRatio = 'GetListOfItemVsTestRatio';
+/**
+ * @desc: get list of goods out record by date
+ * @param: ?fromdate={fromdate}&todate={todate}
+ */
+export const GetListofGoodsOutRecordByDate = 'GetListofGoodsOutRecordByDate';
+/**
+ * @desc: get list of test for inventory
+ * @param:
+ */
+export const GetListOfTestForInventory = 'GetListOfTestForInventory';
 
 //POST
 /**
@@ -175,3 +185,18 @@ export const InsertUpdateItemVsTestRatio = 'InsertUpdateItemVsTestRatio';
 }
  */
 export const InsertUpdateNewItemsDetails = 'InsertUpdateNewItemsDetails';
+/**
+ * @desc: insert update goods out details
+ * @param: {
+  "GOId": 1,
+  "TestId": 2,
+  "ItemId": 3,
+  "GoodReceivedNo": 4,
+  "Quantity": 5.1,
+  "UserId": 6,
+  "GoodsOutDate": "2021-11-30T14:38:13.8160149+05:45",
+  "IsActive": true,
+  "Remarks": "sample string 9"
+}
+ */
+export const InsertUpdateGoodsoutRecord = 'InsertUpdateGoodsoutRecord'
