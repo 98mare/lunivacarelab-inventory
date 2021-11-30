@@ -1,25 +1,42 @@
-import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col } from 'antd';
+import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col, Descriptions } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { getManuDetApi } from '../../services/itemManufactureService';
+import { getLabItemsApi } from '../../services/itemNewItemService';
 import { insertGoodsReceivedApi } from '../../services/labGoodsReceivedService';
 
 const AddGoods = () => {
   const { Option } = Select;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
+  const [itemList, setitemList] = useState([])
   const [manuList, setmanuList] = useState([])
+  const [enQty, setenQty] = useState(0);
+  const [enRate, setenRate] = useState(0);
+  const [totalCal, settotalCal] = useState(0);
 
   const dateFormat = 'YYYY-MM-DD';
 
   useEffect(() => {
+
     dispatch(
       getManuDetApi((val) => {
         setmanuList(val)
       })
     )
-  },[])
+    getAllLabItem()
+  }, [])
+
+  const getAllLabItem = (ty = 0, cI = 0) => {
+    let data = {
+      typeId: ty,
+      categoryId: cI
+    }
+    dispatch(getLabItemsApi(data, (val) => {
+      setitemList(val)
+    }))
+  }
 
   const onFinish = (values) => {
     setButDis(true)
@@ -28,7 +45,7 @@ const AddGoods = () => {
       "ItemId": values?.item_name,
       "Quantity": values?.qty,
       "Rate": values?.rate,
-      "Total": values?.total,
+      "Total": totalCal,
       "ExpiryDate": values?.expiry_date.format("YYYY-MM-DD"),
       "ManufactureId": values?.manu_id,
       "LotNo": values?.lot_no,
@@ -53,6 +70,15 @@ const AddGoods = () => {
   const onFinishFailed = (errorInfo) => {
     setButDis(false)
   };
+
+  useEffect(() => {
+    calculateTotal()
+  }, [enQty, enRate])
+
+  const calculateTotal = () => {
+    let newTotal = enQty * enRate;
+    settotalCal(newTotal)
+  }
 
   return (
     <AddGoodsContainer>
@@ -84,7 +110,16 @@ const AddGoods = () => {
                 },
               ]}
             >
-              <Input />
+              <Select allowClear>
+                {itemList?.map(iTy => {
+                  return (
+                    <Option value={iTy?.TId}>
+                      {iTy?.ItemName}
+                    </Option>
+                  )
+                })
+                }
+              </Select>
             </Form.Item>
 
             <Form.Item
@@ -97,7 +132,9 @@ const AddGoods = () => {
                 },
               ]}
             >
-              <InputNumber />
+              <InputNumber
+                onInput={(val) => { setenQty(val) }}
+              />
             </Form.Item>
 
             <Form.Item
@@ -110,20 +147,9 @@ const AddGoods = () => {
                 },
               ]}
             >
-              <InputNumber />
-            </Form.Item>
-
-            <Form.Item
-              label="Total"
-              name="total"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input total!',
-                },
-              ]}
-            >
-              <InputNumber />
+              <InputNumber
+                onInput={(val) => { setenRate(val) }}
+              />
             </Form.Item>
 
             <Form.Item
@@ -162,8 +188,8 @@ const AddGoods = () => {
                 },
               ]}
             >
-              <DatePicker 
-              format={dateFormat}
+              <DatePicker
+                format={dateFormat}
               />
             </Form.Item>
 
@@ -212,8 +238,22 @@ const AddGoods = () => {
                 },
               ]}
             >
-              <Input />
+              <Select allowClear>
+                <Option value="0">Not Available</Option>
+                <Option value="1">Available</Option>
+              </Select>
             </Form.Item>
+
+            <Descriptions
+              bordered
+              layout="horizontal"
+              column={1}
+              size="small"
+            >
+              <Descriptions.Item label="SubTotal">
+                {totalCal}
+              </Descriptions.Item>
+            </Descriptions>
 
             <Form.Item
               wrapperCol={{

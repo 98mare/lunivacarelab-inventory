@@ -1,7 +1,7 @@
 import { Button, Card } from 'antd'
 import React from 'react'
 import styled from 'styled-components'
-import {Link, NavLink} from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { MenuRoute } from '../Data/MenuRoute'
 import PageHeader from '../Components/Common/pageHeader'
 
@@ -9,7 +9,7 @@ const DashBoardContainer = () => {
   const data = MenuRoute;
   return (
     <DashbordContainer>
-    {/* <PageHeader></PageHeader> */}
+      {/* <PageHeader></PageHeader> */}
       <div className="buttonSection">
         {/* {data.map(e => (
           <Card className='card'>
@@ -19,15 +19,17 @@ const DashBoardContainer = () => {
           </Card>
         ))} */}
         {data.map(e => (
-          <Button className='cButton'>
-            <NavLink to={e.path}>
-              {e.name}
-            </NavLink>
-          </Button>
+          <>
+            {e.key !== "dashbord" ? <Button className='cButton'>
+              <NavLink to={e.path}>
+              <span><img src={e.icon} alt="" /></span> {e.name}
+              </NavLink>
+            </Button> : ''}
+          </>
         ))}
-          
-        
-        
+
+
+
         {/* <Card className='card'>
           <p>Add Item</p>
         </Card>
