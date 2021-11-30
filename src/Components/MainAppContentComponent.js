@@ -11,6 +11,7 @@ import AddItem from './Item/AddItem';
 import NavBar from './Common/NavBar';
 import GoodsIn from './GoodsIn'
 import AddGoods from './GoodsIn/AddGoods';
+import ErrorPage from './Common/ErrorPage';
 const { Header, Footer, Sider, Content } = Layout;
 
 
@@ -43,7 +44,7 @@ const MainAppContentComponent = (props) => {
               </Route>
               
               <Route >
-                <h4>Error page</h4>
+                <ErrorPage></ErrorPage>
               </Route>
             </Switch>
 
