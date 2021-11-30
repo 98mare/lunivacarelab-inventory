@@ -22,7 +22,8 @@ const DashBoardContainer = () => {
           <>
             {e.key !== "dashbord" ? <Button className='cButton'>
               <NavLink to={e.path}>
-              <span><img src={e.icon} alt="" /></span> {e.name}
+              {/* <span><img src={e.icon} alt="" /></span>  */}
+              {e.name}
               </NavLink>
             </Button> : ''}
           </>
