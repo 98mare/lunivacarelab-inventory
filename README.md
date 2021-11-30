@@ -10,7 +10,9 @@ location - suman
 rack - no
 wastage - no
 
-CURD operation http://192.168.100.34/CarelabInventory/swagger/ui/index#/
+CURD operation http://lunivacare.ddns.net/CarelabDataMetricService_qc
+
+in Inventory
 
 Currently suman(design) anib(service/operation)
 
