@@ -17,7 +17,7 @@ export const getItemCategoryApi = (successCallback) => {
     }
 }
 
-export const insertItemCategoryApi = (params, returnData) => {
+export const insertItemCategoryApi = (data, returnData) => {
     return async dispatch => {
         try {
             let formData = generateUrlEncodedData(data)

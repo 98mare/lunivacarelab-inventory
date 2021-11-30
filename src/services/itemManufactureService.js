@@ -17,7 +17,7 @@ export const getManuDetApi = (successCallback) => {
     }
 }
 
-export const insertManufactureApi = (params, returnData) => {
+export const insertManufactureApi = (data, returnData) => {
     return async dispatch => {
         try {
             let formData = generateUrlEncodedData(data)

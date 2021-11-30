@@ -17,7 +17,7 @@ export const getLocationApi = (successCallback) => {
     }
 }
 
-export const insertLocationApi = (params, returnData) => {
+export const insertLocationApi = (data, returnData) => {
     return async dispatch => {
         try {
             let formData = generateUrlEncodedData(data)
