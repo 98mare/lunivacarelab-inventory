@@ -22,20 +22,16 @@ const MainAppContentComponent = (props) => {
     <MainAppContentComponentContainer>
       <Layout className='mainLayout'>
         <Layout>
-        {/* style={{overflow:'auto',height:'100vh',position:'fixed',left:0}} */}
           <Sider><SideNav></SideNav></Sider>
           <Layout>
           <NavBar></NavBar>
           <Content style={{padding: '20px'}}>
             <Switch>
               <PrivateRoute></PrivateRoute>
-              
             </Switch>
-
           </Content>
           </Layout>
         </Layout>
-        {/* <Footer >Luniva careLab Inventory</Footer> */}
       </Layout>
     </MainAppContentComponentContainer>
   )
