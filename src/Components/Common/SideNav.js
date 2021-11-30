@@ -70,6 +70,7 @@ const SideNavContainer = styled.div`
     text-transform: capitalize;
     p{
       margin-top: 21px;
+      color: #464343;
     }
     img{
       width: 30px;

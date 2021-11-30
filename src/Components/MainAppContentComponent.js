@@ -43,11 +43,11 @@ const MainAppContentComponentContainer = styled.div`
   .mainLayout{
     min-height: 100vh;
   }
-  .sideNav{
+  /* .sideNav{
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     overflow: hidden;
-  }
+  } */
   @media(max-width: 768px){
     .sideNav{
       display: none;

@@ -18,6 +18,10 @@ import Rack from '../Components/Rack'
 import AddRack from '../Components/Rack/AddRack';
 import Wastage from '../Components/Wastage'
 import AddWastage from '../Components/Wastage/AddWastage';
+import GoodsOut from '../Components/GoodsOut'
+import AddGoodsOut from '../Components/GoodsOut/AddGoodsOut';
+import ItemVsRatio from '../Components/ItemVsRatio'
+import AddItemVsRatio from '../Components/ItemVsRatio/AddItemVSRatio';
 
 const PrivateRoute = (props) => {
   const history = useHistory();
@@ -32,11 +36,19 @@ const PrivateRoute = (props) => {
       <Route path='/item/add' exact>
         <AddItem />
       </Route>
+
       <Route path='/goodsin' exact>
         <GoodsIn></GoodsIn>
       </Route>
       <Route path='/goodsin/add' exact>
         <AddGoods/>
+      </Route>
+
+      <Route path='/goodsout' exact>
+        <GoodsOut></GoodsOut>
+      </Route>
+      <Route path='/goodsout/add' exact>
+        <AddGoodsOut/>
       </Route>
 
       <Route path='/type' exact>
@@ -74,6 +86,15 @@ const PrivateRoute = (props) => {
       <Route path='/wastage/add' exact>
         <AddWastage/>
       </Route>
+
+      <Route path='/itemvsratio' exact>
+        <ItemVsRatio/>
+      </Route>
+      <Route path='/itemvsratio/add' exact>
+        <AddItemVsRatio/>
+      </Route>
+
+      
       
       {/* <Route path=''>
         <ErrorPage></ErrorPage>

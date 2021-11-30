@@ -26,4 +26,5 @@ export default NavBar
 const NavBarContainer = styled.div`
   padding: 20px;
   cursor: pointer;
+  background-color: #fefefe;
 `

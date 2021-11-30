@@ -12,18 +12,6 @@ export const MenuRoute = [
     name: 'Item',
     path: '/item',
     icon: './Assets/icons/product.svg',
-    subMenu: [
-      {
-        key: 'addItem',
-        name: 'add Item',
-        path: '/item/add',
-      },
-      {
-        key: 'editItem',
-        name: 'edit Item',
-        path: '/item/edit',
-      },
-    ],
   },
   {
     icon: './Assets/icons/suppliers.svg',
@@ -61,7 +49,19 @@ export const MenuRoute = [
     key: 'wastage',
     name: 'wastage',
     path: '/wastage'
-  }
+  },
+  {
+    icon: './Assets/icons/suppliers.svg',
+    key: 'goodsOut',
+    name: 'Goods Out',
+    path: '/goodsout'
+  },
+  {
+    icon: './Assets/icons/department.svg',
+    key: 'itemVsRatio',
+    name: 'Item Vs Ratio',
+    path: '/itemvsratio'
+  },
 
   
 ]

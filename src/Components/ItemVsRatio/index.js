@@ -63,15 +63,10 @@ const Index = () => {
   return (
     <ItemContainer>
       <PageHeader
-        buttonTitle='add Button'
-        pageTitle='Item'
-        buttonOnClick={() => history.push('./item/add')}
+        buttonTitle='add Item Vs Ratio'
+        pageTitle='Item Vs Ratio'
+        buttonOnClick={() => history.push('./itemvsratio/add')}
       ></PageHeader>
-      <Filter
-        itemType
-        categroryType
-        dataRet={dataRet}
-      />
       <div className="top"></div>
       <Table
         columns={columns}
