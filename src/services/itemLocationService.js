@@ -1,4 +1,4 @@
-import { GetLocationDetails } from '../constants/url';
+import { GetLocationDetails, InsertUpdateLocation } from '../constants/url';
 import { fetch, store } from '../utils/httpUtil';
 import { generateUrlEncodedData } from '../utils/generateFormData';
 
@@ -12,6 +12,22 @@ export const getLocationApi = (successCallback) => {
                 successCallback([])
         } catch (error) {
             
+        }
+
+    }
+}
+
+export const insertLocationApi = (params, returnData) => {
+    return async dispatch => {
+        try {
+            let formData = generateUrlEncodedData(data)
+            const response = await store(InsertUpdateLocation, formData);
+            // if(response?.status === 200)
+                returnData(response?.data)
+            // else
+            //     returnData([])
+        } catch (error) {
+
         }
 
     }
