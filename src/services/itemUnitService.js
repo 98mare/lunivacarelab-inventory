@@ -20,12 +20,8 @@ export const getItemUnitApi = (successCallback) => {
 export const insertItemUnitApi = (params, returnData) => {
     return async dispatch => {
         try {
-            let data = {
-                "UnId": 1,
-                "Units": "sample string 2",
-                "IsActive": true
-              }
-            const response = await store(InsertUpdateUnits, data);
+            let formData = generateUrlEncodedData(params)
+            const response = await store(InsertUpdateUnits, formData);
             console.log(response);
         } catch (error) {
 

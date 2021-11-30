@@ -1,4 +1,4 @@
-import { GetManufactureDetails } from '../constants/url';
+import { GetManufactureDetails, InsertUpdateManufacture } from '../constants/url';
 import { fetch, store } from '../utils/httpUtil';
 import { generateUrlEncodedData } from '../utils/generateFormData';
 
@@ -12,6 +12,22 @@ export const getManuDetApi = (successCallback) => {
                 successCallback([])
         } catch (error) {
             
+        }
+
+    }
+}
+
+export const insertManufactureApi = (data, returnData) => {
+    return async dispatch => {
+        try {
+            let formData = generateUrlEncodedData(data)
+            const response = await store(InsertUpdateManufacture, formData);
+            // if(response?.status === 200)
+                returnData(response?.data)
+            // else
+            //     returnData([])
+        } catch (error) {
+
         }
 
     }

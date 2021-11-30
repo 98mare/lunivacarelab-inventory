@@ -1,13 +1,13 @@
-import { RackDetailsByLocationId, InsertUpdatRackDetails } from '../constants/url';
+import { InsertUpdateWastageDetails, GetlistOfwastageDetailsByDate } from '../constants/url';
 import { fetch, store } from '../utils/httpUtil';
 import { generateUrlEncodedData } from '../utils/generateFormData';
 
-export const getRackDetApi = (location, successCallback) => {
+export const getWastageApi = (data, successCallback) => {
     return async dispatch => {
         try {
-            const response = await fetch(`${RackDetailsByLocationId}?location=${location}`);
+            const response = await fetch(`${GetlistOfwastageDetailsByDate}?fromdate=${data.fromdate}&todate=${data.todate}`);
             if(response?.status === 200)
-                successCallback(response?.data?.RackDetailsByLocationId);
+                successCallback(response?.data?.GetlistOfwastageDetailsByDate);
             else
                 successCallback([])
         } catch (error) {
@@ -17,11 +17,11 @@ export const getRackDetApi = (location, successCallback) => {
     }
 }
 
-export const insertRackDetailsApi = (params, returnData) => {
+export const insertWastageApi = (params, returnData) => {
     return async dispatch => {
         try {
             let formData = generateUrlEncodedData(params)
-            const response = await store(InsertUpdatRackDetails, formData);
+            const response = await store(InsertUpdateWastageDetails, formData);
             // if(response?.status === 200){
             returnData(response?.data);
             // }else{}

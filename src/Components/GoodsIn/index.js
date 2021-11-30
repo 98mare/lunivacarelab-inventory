@@ -40,7 +40,6 @@ const Index = () => {
 
   const getLabData = (data) => {
     dispatch(getGoodsReceivedApi(data, (val) => {
-      console.log(val);
       setgoodsList(val)
     }))
   }

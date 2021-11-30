@@ -17,17 +17,15 @@ export const getItemCategoryApi = (successCallback) => {
     }
 }
 
-export const insertItemCategoryApi = (params, returnData) => {
+export const insertItemCategoryApi = (data, returnData) => {
     return async dispatch => {
         try {
-            let data = {
-                "CId": 0,
-                "CategoryType": "Updated Cate",
-                "IsActive": true
-            }
             let formData = generateUrlEncodedData(data)
             const response = await store(InsertUpdateItemCategory, formData);
-            console.log(response);
+            // if(response?.status === 200)
+                returnData(response?.data)
+            // else
+            //     returnData([])
         } catch (error) {
 
         }

@@ -1,24 +1,32 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import PageHeader from '../Common/pageHeader'
-import {Space, Table } from 'antd'
+import { Space, Table } from 'antd'
 import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { getItemCategoryApi } from '../../services/itemCategoryService'
 
 const columns = [
   {
     title: 'Id',
-    dataIndex: 'categoryId',
+    dataIndex: 'CId',
     key: 'categoryId'
   },
   {
     title: 'Category Name',
-    dataIndex: 'categoryName',
+    dataIndex: 'CategoryType',
     key: 'categoryName'
   },
   {
     title: 'Is Active',
-    dataIndex: 'isActive',
-    key: 'isActive'
+    dataIndex: 'IsActive',
+    key: 'isActive',
+    render: (text) => {
+      if (text === true) {
+        return 'Active'
+      }
+      return 'Inactive'
+    }
   },
   {
     title: 'action',
@@ -33,13 +41,25 @@ const columns = [
 ]
 
 const Index = () => {
-
+  const dispatch = useDispatch();
   const history = useHistory();
+
+  const [tableData, setTableData] = useState([])
+
+  useEffect(() => {
+    dispatch(getItemCategoryApi((val) => {
+      setTableData(val)
+    }))
+  }, [])
+
   return (
     <ItemContainer>
-      <PageHeader pageTitle="Category" buttonTitle='Add Category' buttonOnClick={()=> history.push('./category/add')}></PageHeader>
+      <PageHeader pageTitle="Category" buttonTitle='Add Category' buttonOnClick={() => history.push('./category/add')}></PageHeader>
       {/* <Filter ></Filter> */}
-      <Table columns={columns}></Table>
+      <Table
+        columns={columns}
+        dataSource={tableData}
+      ></Table>
     </ItemContainer>
   )
 }
