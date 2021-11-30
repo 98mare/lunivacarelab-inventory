@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { insertItemCategoryApi } from '../../services/itemCategoryService';
+import AppButton from '../Common/AppButton';
 
 const AddCategory = () => {
   const { Option } = Select;
@@ -78,9 +79,10 @@ const AddCategory = () => {
                 span: 16,
               }}
             >
-              <Button type="primary" htmlType="submit" disabled={butDis}>
+              <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
                 Submit
               </Button>
+              
             </Form.Item>
           </Form>
         </Col>
