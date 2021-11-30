@@ -27,4 +27,8 @@ const NavBarContainer = styled.div`
   padding: 20px;
   cursor: pointer;
   background-color: #fefefe;
+
+  @media(max-width: 500px){
+    display: none;
+  }
 `
