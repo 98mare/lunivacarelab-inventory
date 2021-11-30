@@ -1,30 +1,22 @@
-import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col, Descriptions } from 'antd';
+import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col, Descriptions, Checkbox } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { getManuDetApi } from '../../services/itemManufactureService';
 import { getLabItemsApi } from '../../services/itemNewItemService';
-import { insertGoodsReceivedApi } from '../../services/labGoodsReceivedService';
+import { insertGoodsOutApi } from '../../services/labGoodsOutService';
+import { getTestListApi } from '../../services/itemVsRatioService';
 
 const AddGoodsOut = () => {
   const { Option } = Select;
+  const { TextArea } = Input;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
   const [itemList, setitemList] = useState([])
-  const [manuList, setmanuList] = useState([])
-  const [enQty, setenQty] = useState(0);
-  const [enRate, setenRate] = useState(0);
-  const [totalCal, settotalCal] = useState(0);
+  const [testList, settestList] = useState([])
 
   const dateFormat = 'YYYY-MM-DD';
 
   useEffect(() => {
-
-    dispatch(
-      getManuDetApi((val) => {
-        setmanuList(val)
-      })
-    )
     getAllLabItem()
   }, [])
 
@@ -36,25 +28,26 @@ const AddGoodsOut = () => {
     dispatch(getLabItemsApi(data, (val) => {
       setitemList(val)
     }))
+
+    dispatch(getTestListApi((val) => {
+      settestList(val)
+    }))
   }
 
   const onFinish = (values) => {
     setButDis(true)
     let data = {
-      "GId": 0,
+      "GOId": 0,
+      "TestId": values?.test_id,
       "ItemId": values?.item_name,
+      "GoodReceivedNo": values?.good_no,
       "Quantity": values?.qty,
-      "Rate": values?.rate,
-      "Total": totalCal,
-      "ExpiryDate": values?.expiry_date.format("YYYY-MM-DD"),
-      "ManufactureId": values?.manu_id,
-      "LotNo": values?.lot_no,
-      "ItmTrackId": values?.itm_track_id,
-      "CreatedDate": values?.create_date.format("YYYY-MM-DD"),
-      "CreatedBy": 1,
-      "ItemStatus": values?.itm_stat,
+      "UserId": 1,
+      "GoodsOutDate": values?.good_date.format('YYYY-MM-DD'),
+      "IsActive": values?.isactive,
+      "Remarks": values?.remarks
     }
-    dispatch(insertGoodsReceivedApi(data, (res) => {
+    dispatch(insertGoodsOutApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg == true) {
         message.success(res?.Message)
         setTimeout(() => {
@@ -70,15 +63,6 @@ const AddGoodsOut = () => {
   const onFinishFailed = (errorInfo) => {
     setButDis(false)
   };
-
-  useEffect(() => {
-    calculateTotal()
-  }, [enQty, enRate])
-
-  const calculateTotal = () => {
-    let newTotal = enQty * enRate;
-    settotalCal(newTotal)
-  }
 
   return (
     <AddGoodsOutContainer>
@@ -101,7 +85,41 @@ const AddGoodsOut = () => {
           >
 
             <Form.Item
-              label="Goods out"
+              label="Test"
+              name="test_id"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input Test!',
+                },
+              ]}
+            >
+              <Select
+                showSearch
+                optionFilterProp="children"
+                placeholder="select a test"
+                filterOption={(input, option) => {
+                  return (
+                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                    option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  );
+                }}
+                allowClear>
+                {testList?.map(iTy => {
+                  return (
+                    <Option
+                      title={iTy?.Testname}
+                      key={iTy?.Id}
+                      value={iTy?.Id}>
+                      {iTy?.Testname}
+                    </Option>
+                  )
+                })
+                }
+              </Select>
+            </Form.Item>
+            <Form.Item
+              label="Item Name"
               name="item_name"
               rules={[
                 {
@@ -123,6 +141,19 @@ const AddGoodsOut = () => {
             </Form.Item>
 
             <Form.Item
+              label="Goods Received No"
+              name="good_no"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input Goods Received No!',
+                },
+              ]}
+            >
+              <InputNumber />
+            </Form.Item>
+
+            <Form.Item
               label="Quantity"
               name="qty"
               rules={[
@@ -132,59 +163,16 @@ const AddGoodsOut = () => {
                 },
               ]}
             >
-              <InputNumber
-                onInput={(val) => { setenQty(val) }}
-              />
+              <InputNumber />
             </Form.Item>
 
             <Form.Item
-              label="Rate"
-              name="rate"
+              label="Goods out Date"
+              name="good_date"
               rules={[
                 {
                   required: true,
-                  message: 'Please input rate!',
-                },
-              ]}
-            >
-              <InputNumber
-                onInput={(val) => { setenRate(val) }}
-              />
-            </Form.Item>
-
-            <Form.Item
-              label="Lot No"
-              name="lot_no"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input lot no!',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Item Track"
-              name="itm_track_id"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input Item Track!',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Created Date"
-              name="create_date"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input Created Date!',
+                  message: 'Please input Goods out Date!',
                 },
               ]}
             >
@@ -194,66 +182,24 @@ const AddGoodsOut = () => {
             </Form.Item>
 
             <Form.Item
-              label="Expiry Date"
-              name="expiry_date"
+              label="Remarks"
+              name="remarks"
               rules={[
                 {
                   required: true,
-                  message: 'Please input Expiry Date!',
+                  message: 'Please input remarks!',
                 },
               ]}
             >
-              <DatePicker format={dateFormat} />
+              <TextArea />
             </Form.Item>
 
             <Form.Item
-              label="Manufacturer"
-              name="manu_id"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please select Manufacturer!',
-                },
-              ]}
+              name="isactive"
+              valuePropName="checked"
             >
-              <Select allowClear>
-                {manuList?.map(iTy => {
-                  return (
-                    <Option value={iTy?.MId}>
-                      {iTy?.ManufactureBY}
-                    </Option>
-                  )
-                })
-                }
-              </Select>
+              <Checkbox>Is Active</Checkbox>
             </Form.Item>
-
-            <Form.Item
-              label="Item Status"
-              name="itm_stat"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input Item Status!',
-                },
-              ]}
-            >
-              <Select allowClear>
-                <Option value="0">Not Available</Option>
-                <Option value="1">Available</Option>
-              </Select>
-            </Form.Item>
-
-            <Descriptions
-              bordered
-              layout="horizontal"
-              column={1}
-              size="small"
-            >
-              <Descriptions.Item label="SubTotal">
-                {totalCal}
-              </Descriptions.Item>
-            </Descriptions>
 
             <Form.Item
               wrapperCol={{

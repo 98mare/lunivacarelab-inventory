@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { getItemTypeApi } from '../../services/itemItemTypeService'
 import { getItemCategoryApi } from '../../services/itemCategoryService'
 import { getLocationApi } from '../../services/itemLocationService'
-
+import moment from 'moment';
 
 const Filter = (props) => {
   const { itemType, categroryType, dateRange, dataRet, dateRet, locateRange } = props
@@ -21,11 +21,13 @@ const Filter = (props) => {
   const [cateList, setcateList] = useState([])
   const [locationList, setlocationList] = useState([])
   const [locationId, setlocationId] = useState(0)
-  const [fromDate, setfromDate] = useState([])
+  const [fromDate, setfromDate] = useState([moment(), moment()])
   
   const handleClicker = () => {
     if (dateRange !== undefined) {
-      dateRet(fromDate)
+      if(fromDate != null){
+        dateRet(fromDate)
+      }
     } else if(locateRange !== undefined){
       locateRange(locationId)
     } else {
@@ -117,7 +119,7 @@ const Filter = (props) => {
           {
             dateRange &&
             <Col>
-              <Datepicker onChanger={ (value) => {setfromDate(value)} }></Datepicker>
+              <Datepicker defaultValuer={fromDate} onChanger={ (value) => {setfromDate(value)} }></Datepicker>
             </Col>
           }
         </Row>

@@ -1,24 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Space, Table } from 'antd'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { useDispatch } from 'react-redux';
-import { getLabItemsApi } from '../../services/itemNewItemService'
 import PageHeader from '../Common/pageHeader'
-import Filter from '../Common/Filter'
+import { getItemVsRatioApi } from '../../services/itemVsRatioService';
 
 const Index = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [tableData, setTableData] = useState([]);
 
+  useEffect(() => {
+    dispatch(getItemVsRatioApi((val) => {
+      setTableData(val)
+    }))
+  }, [])
 
   const columns = [
     {
-      title: 'Item Code',
-      dataIndex: 'ItemCode',
-      key: 'itemCode'
+      title: 'Test Name',
+      dataIndex: 'TestName',
+      key: 'Testname',
     },
     {
       title: 'Item Name',
@@ -26,10 +30,21 @@ const Index = () => {
       key: 'itemName'
     },
     {
-      title: 'MinQty',
-      dataIndex: 'MinQty',
-      key: 'minQty'
+      title: 'Item Per Unit Test',
+      dataIndex: 'ItemPerUnitTest',
+      key: 'ItemPerUnitTest'
     },
+    {
+      title: 'Is Active',
+      dataIndex: 'IsActive',
+      key: 'IsActive',
+      render: (text) => {
+        if (text === true) {
+          return 'Active'
+        }
+        return 'Inactive'
+      }
+    }, 
     {
       title: 'action',
       key: 'action',
@@ -41,24 +56,6 @@ const Index = () => {
       )
     }
   ]
-
-  const getLabData = (tId = 0, cId = 0) => {
-    let data = {
-      typeId: tId,
-      categoryId: cId
-    }
-    dispatch(getLabItemsApi(data, (val) => {
-      setTableData(val)
-    }))
-  }
-
-  // if (tableData.length === 0) {
-  //   getLabData()
-  // }
-
-  const dataRet = (val) => {
-    getLabData(val?.iType, val?.cType)
-  }
 
   return (
     <ItemContainer>

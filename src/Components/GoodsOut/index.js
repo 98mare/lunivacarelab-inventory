@@ -3,33 +3,49 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux';
-import { getGoodsReceivedApi } from '../../services/labGoodsReceivedService'
 import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
+import { getGoodsOutApi } from '../../services/labGoodsOutService';
 
 const columns = [
+  {
+    title: 'Test Name',
+    dataIndex: 'Testname',
+    key: 'Testname',
+  },
   {
     title: 'Item Name',
     dataIndex: 'ItemName',
     key: 'itemName',
   },
   {
-    title: 'Total',
-    dataIndex: 'Total',
-    key: 'Total',
+    title: 'Quantity',
+    dataIndex: 'Quantity',
+    key: 'Quantity',
   },
   {
-    title: 'Expiry Date',
-    dataIndex: 'ExpiryDate',
-    key: 'ExpiryDate',
+    title: 'Goods Out Date',
+    dataIndex: 'GoodsOutDate',
+    key: 'GoodsOutDate',
     render: (text) => {
       return text.split('T')[0]
     }
   },
   {
-    title: 'Item Status',
-    dataIndex: 'ItemStatus',
-    key: 'ItemStatus',
+    title: 'Is Active',
+    dataIndex: 'IsActive',
+    key: 'IsActive',
+    render: (text) => {
+      if (text === true) {
+        return 'Active'
+      }
+      return 'Inactive'
+    }
+  }, 
+  {
+    title: 'Remarks',
+    dataIndex: 'Remarks',
+    key: 'Remarks',
   }
 ]
 
@@ -39,7 +55,7 @@ const Index = () => {
   const [goodsList, setgoodsList] = useState([])
 
   const getLabData = (data) => {
-    dispatch(getGoodsReceivedApi(data, (val) => {
+    dispatch(getGoodsOutApi(data, (val) => {
       setgoodsList(val)
     }))
   }
@@ -59,6 +75,10 @@ const Index = () => {
         pageTitle='Goods Out'
         buttonOnClick={() => history.push('./goodsout/add')}
       ></PageHeader>
+      <Filter
+        dateRange
+        dateRet={dataRet}
+      />
       <Table
         columns={columns}
         dataSource={goodsList}

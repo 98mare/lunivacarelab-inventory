@@ -9,6 +9,7 @@ import { getManuDetApi } from '../../services/itemManufactureService';
 import { insertNewItemDetailsApi } from '../../services/itemNewItemService';
 import { getRackDetApi } from '../../services/itemRackService';
 import { getItemUnitApi } from '../../services/itemUnitService';
+import moment from 'moment';
 
 const AddItem = () => {
   const { Option } = Select;
@@ -76,7 +77,7 @@ const AddItem = () => {
       "RackId": values?.item_rack,
       "MinQty": values?.min_qty,
       "CreatedBy": 1, //needs login userid
-      "CreatedDate": '2021-11-29', //default date for now update
+      "CreatedDate": moment().format('YYYY-MM-DD'), //default date for now update
       "IsActive": values?.isactive
     }
     dispatch(insertNewItemDetailsApi(data, (res) => {

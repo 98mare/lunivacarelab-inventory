@@ -1,30 +1,20 @@
-import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col, Descriptions } from 'antd';
+import { Form, Button, DatePicker, Select, InputNumber, message, Row, Col, Checkbox } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { getManuDetApi } from '../../services/itemManufactureService';
 import { getLabItemsApi } from '../../services/itemNewItemService';
-import { insertGoodsReceivedApi } from '../../services/labGoodsReceivedService';
+import { getTestListApi, insertItemVsRatioApi } from '../../services/itemVsRatioService';
 
 const AddItemVsRatio = () => {
   const { Option } = Select;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
   const [itemList, setitemList] = useState([])
-  const [manuList, setmanuList] = useState([])
-  const [enQty, setenQty] = useState(0);
-  const [enRate, setenRate] = useState(0);
-  const [totalCal, settotalCal] = useState(0);
+  const [testList, settestList] = useState([])
 
   const dateFormat = 'YYYY-MM-DD';
 
   useEffect(() => {
-
-    dispatch(
-      getManuDetApi((val) => {
-        setmanuList(val)
-      })
-    )
     getAllLabItem()
   }, [])
 
@@ -36,25 +26,24 @@ const AddItemVsRatio = () => {
     dispatch(getLabItemsApi(data, (val) => {
       setitemList(val)
     }))
+
+    dispatch(getTestListApi((val) => {
+      settestList(val)
+    }))
   }
 
   const onFinish = (values) => {
     setButDis(true)
     let data = {
-      "GId": 0,
+      "RId": 0,
       "ItemId": values?.item_name,
-      "Quantity": values?.qty,
-      "Rate": values?.rate,
-      "Total": totalCal,
-      "ExpiryDate": values?.expiry_date.format("YYYY-MM-DD"),
-      "ManufactureId": values?.manu_id,
-      "LotNo": values?.lot_no,
-      "ItmTrackId": values?.itm_track_id,
-      "CreatedDate": values?.create_date.format("YYYY-MM-DD"),
-      "CreatedBy": 1,
-      "ItemStatus": values?.itm_stat,
+      "TestId": values?.test_name,
+      "ItemPerUnitTest": values?.item_per,
+      "IsActive": values?.isactive,
+      "CreatedDate": values?.create_date.format('YYYY-MM-DD'),
+      "CreatedBy": 1
     }
-    dispatch(insertGoodsReceivedApi(data, (res) => {
+    dispatch(insertItemVsRatioApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg == true) {
         message.success(res?.Message)
         setTimeout(() => {
@@ -70,15 +59,6 @@ const AddItemVsRatio = () => {
   const onFinishFailed = (errorInfo) => {
     setButDis(false)
   };
-
-  useEffect(() => {
-    calculateTotal()
-  }, [enQty, enRate])
-
-  const calculateTotal = () => {
-    let newTotal = enQty * enRate;
-    settotalCal(newTotal)
-  }
 
   return (
     <AddItemVsRatioContainer>
@@ -101,7 +81,42 @@ const AddItemVsRatio = () => {
           >
 
             <Form.Item
-              label="Item Vs Ratio"
+              label="Test Name"
+              name="test_name"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please select test!',
+                },
+              ]}
+            >
+              <Select
+                showSearch
+                optionFilterProp="children"
+                placeholder="select a test"
+                filterOption={(input, option) => {
+                  return (
+                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                    option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  );
+                }}
+                allowClear>
+                {testList?.map(iTy => {
+                  return (
+                    <Option
+                      title={iTy?.Testname}
+                      key={iTy?.Id}
+                      value={iTy?.Id}>
+                      {iTy?.Testname}
+                    </Option>
+                  )
+                })
+                }
+              </Select>
+            </Form.Item>
+
+            <Form.Item
+              label="Item Name"
               name="item_name"
               rules={[
                 {
@@ -123,59 +138,16 @@ const AddItemVsRatio = () => {
             </Form.Item>
 
             <Form.Item
-              label="Quantity"
-              name="qty"
+              label="Item Per Unit Test"
+              name="item_per"
               rules={[
                 {
                   required: true,
-                  message: 'Please input quantity!',
+                  message: 'Please input Item Per Unit Test!',
                 },
               ]}
             >
-              <InputNumber
-                onInput={(val) => { setenQty(val) }}
-              />
-            </Form.Item>
-
-            <Form.Item
-              label="Rate"
-              name="rate"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input rate!',
-                },
-              ]}
-            >
-              <InputNumber
-                onInput={(val) => { setenRate(val) }}
-              />
-            </Form.Item>
-
-            <Form.Item
-              label="Lot No"
-              name="lot_no"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input lot no!',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Item Track"
-              name="itm_track_id"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input Item Track!',
-                },
-              ]}
-            >
-              <Input />
+              <InputNumber />
             </Form.Item>
 
             <Form.Item
@@ -194,66 +166,11 @@ const AddItemVsRatio = () => {
             </Form.Item>
 
             <Form.Item
-              label="Expiry Date"
-              name="expiry_date"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input Expiry Date!',
-                },
-              ]}
+              name="isactive"
+              valuePropName="checked"
             >
-              <DatePicker format={dateFormat} />
+              <Checkbox>Is Active</Checkbox>
             </Form.Item>
-
-            <Form.Item
-              label="Manufacturer"
-              name="manu_id"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please select Manufacturer!',
-                },
-              ]}
-            >
-              <Select allowClear>
-                {manuList?.map(iTy => {
-                  return (
-                    <Option value={iTy?.MId}>
-                      {iTy?.ManufactureBY}
-                    </Option>
-                  )
-                })
-                }
-              </Select>
-            </Form.Item>
-
-            <Form.Item
-              label="Item Status"
-              name="itm_stat"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input Item Status!',
-                },
-              ]}
-            >
-              <Select allowClear>
-                <Option value="0">Not Available</Option>
-                <Option value="1">Available</Option>
-              </Select>
-            </Form.Item>
-
-            <Descriptions
-              bordered
-              layout="horizontal"
-              column={1}
-              size="small"
-            >
-              <Descriptions.Item label="SubTotal">
-                {totalCal}
-              </Descriptions.Item>
-            </Descriptions>
 
             <Form.Item
               wrapperCol={{
