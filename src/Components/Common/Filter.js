@@ -26,7 +26,7 @@ const Filter = (props) => {
   const handleClicker = () => {
     if (dateRange !== undefined) {
       dateRet(fromDate)
-    } if(locateRange !== undefined){
+    } else if(locateRange !== undefined){
       locateRange(locationId)
     } else {
       let data = {

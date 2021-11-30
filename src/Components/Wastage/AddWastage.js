@@ -1,85 +1,46 @@
-import { Form, Input, Button, Checkbox, Select, InputNumber, message, Row, Col } from 'antd';
+import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col } from 'antd';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { getItemCategoryApi } from '../../services/itemCategoryService';
 import { getItemTypeApi } from '../../services/itemItemTypeService';
-import { getLocationApi } from '../../services/itemLocationService';
-import { getManuDetApi } from '../../services/itemManufactureService';
-import { insertNewItemDetailsApi } from '../../services/itemNewItemService';
-import { getRackDetApi } from '../../services/itemRackService';
-import { getItemUnitApi } from '../../services/itemUnitService';
+import { getLabItemsApi } from '../../services/itemNewItemService';
+import { insertWastageApi } from '../../services/wastageService';
 
 const AddWastage = () => {
   const { Option } = Select;
+  const { TextArea } = Input;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
   const [itemList, setItemList] = useState([])
-  const [cateList, setcateList] = useState([])
-  const [unitList, setunitList] = useState([])
-  const [manuList, setmanuList] = useState([])
-  const [locationList, setlocationList] = useState([])
-  const [rackList, setrackList] = useState([])
 
   useEffect(() => {
-    getAllItemList()
+    getAllLabItem()
   }, [])
 
-  const getAllItemList = () => {
 
-    dispatch(
-      getItemTypeApi((val) => {
-        setItemList(val)
-      })
-    )
-    dispatch(
-      getItemCategoryApi((val) => {
-        setcateList(val)
-      })
-    )
-    dispatch(
-      getItemUnitApi((val) => {
-        setunitList(val)
-      })
-    )
-    dispatch(
-      getManuDetApi((val) => {
-        setmanuList(val)
-      })
-    )
-    dispatch(
-      getLocationApi((val) => {
-        setlocationList(val)
-      })
-    )
+  const getAllLabItem = (ty = 0, cI = 0) => {
+    let data = {
+      typeId: ty,
+      categoryId: cI
+    }
+    dispatch(getLabItemsApi(data, (val) => {
+      setItemList(val)
+    }))
   }
 
-  const handleRackLocation = (value) => {
-    dispatch(
-      getRackDetApi( value, (val) => {
-        setrackList(val)
-      })
-    )
-  }
 
   const onFinish = (values) => {
     setButDis(true)
     let data = {
-      "TId": 0,
-      "ItemCode": values?.item_code,
-      "ItemName": values?.item_name,
-      "ItemTypeId": values?.item_type,
-      "ItemCategoryId": values?.item_category,
-      "UnitId": values?.item_unit,
-      "ManufactureId": values?.item_manufacturer,
-      "LocationId": values?.location,
-      "RackId": values?.item_rack,
-      "MinQty": values?.min_qty,
-      "CreatedBy": 1, //needs login userid
-      "CreatedDate": '2021-11-29', //default date for now update
-      "IsActive": values?.isactive
+      "WId": 0,
+      "ItemId": values?.item_name,
+      "WastageAmount": values?.wastage_amount,
+      "Reason": values?.reason,
+      "Remarks": values?.remarks,
+      "CreatedDate": values?.created_date.format("YYYY-MM-DD"),
+      "CreatedBy": 1
     }
-    dispatch(insertNewItemDetailsApi(data, (res) => {
+    dispatch(insertWastageApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg == true) {
         message.success(res?.Message)
         setTimeout(() => {
@@ -115,39 +76,14 @@ const AddWastage = () => {
             onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
-            <Form.Item
-              label="Location name"
-              name="item_code"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input item code!',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
 
             <Form.Item
-              label="Westage name"
+              label="Item Name"
               name="item_name"
               rules={[
                 {
                   required: true,
-                  message: 'Please input item name!',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Item Type"
-              name="item_type"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please select item type!',
+                  message: 'Please select item name!',
                 },
               ]}
             >
@@ -155,7 +91,7 @@ const AddWastage = () => {
                 {itemList?.map(iTy => {
                   return (
                     <Option value={iTy?.TId}>
-                      {iTy?.ItemType}
+                      {iTy?.ItemName}
                     </Option>
                   )
                 })
@@ -164,122 +100,12 @@ const AddWastage = () => {
             </Form.Item>
 
             <Form.Item
-              label="Item Category"
-              name="item_category"
+              label="Wastage Amount"
+              name="wastage_amount"
               rules={[
                 {
                   required: true,
-                  message: 'Please select item category!',
-                },
-              ]}
-            >
-              <Select allowClear>
-                {cateList?.map(iTy => {
-                  return (
-                    <Option value={iTy?.CId}>
-                      {iTy?.CategoryType}
-                    </Option>
-                  )
-                })
-                }
-              </Select>
-            </Form.Item>
-
-            <Form.Item
-              label="Item unit"
-              name="item_unit"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please select item unit!',
-                },
-              ]}
-            >
-              <Select allowClear>
-                {unitList?.map(iTy => {
-                  return (
-                    <Option value={iTy?.UnId}>
-                      {iTy?.Units}
-                    </Option>
-                  )
-                })
-                }
-              </Select>
-            </Form.Item>
-
-            <Form.Item
-              label="Item manufacturer"
-              name="item_manufacturer"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please select item manufacturer!',
-                },
-              ]}
-            >
-              <Select allowClear>
-                {manuList?.map(iTy => {
-                  return (
-                    <Option value={iTy?.MId}>
-                      {iTy?.ManufactureBY}
-                    </Option>
-                  )
-                })
-                }
-              </Select>
-            </Form.Item>
-
-            <Form.Item
-              label="Location"
-              name="location"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please select Location!',
-                },
-              ]}
-            >
-              <Select onChange={ (val) => handleRackLocation(val) } allowClear>
-                {locationList?.map(iTy => {
-                  return (
-                    <Option value={iTy?.LId}>
-                      {iTy?.Location}
-                    </Option>
-                  )
-                })
-                }
-              </Select>
-            </Form.Item>
-
-            <Form.Item
-              label="Rack"
-              name="item_rack"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please select rack!',
-                },
-              ]}
-            >
-              <Select allowClear>
-                {rackList?.map(iTy => {
-                  return (
-                    <Option value={iTy?.RId}>
-                      {iTy?.RackName}
-                    </Option>
-                  )
-                })
-                }
-              </Select>
-            </Form.Item>
-
-            <Form.Item
-              label="Min Qty"
-              name="min_qty"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input minimum quantity!',
+                  message: 'Please input wastage number!',
                 },
               ]}
             >
@@ -287,10 +113,42 @@ const AddWastage = () => {
             </Form.Item>
 
             <Form.Item
-              name="isactive"
-              valuePropName="checked"
+              label="Reason"
+              name="reason"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input reason!',
+                },
+              ]}
             >
-              <Checkbox>Is Active</Checkbox>
+              <TextArea />
+            </Form.Item>
+
+            <Form.Item
+              label="Remarks"
+              name="remarks"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input remarks!',
+                },
+              ]}
+            >
+              <TextArea />
+            </Form.Item>
+
+            <Form.Item
+              label="Created Date"
+              name="created_date"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input created Date!',
+                },
+              ]}
+            >
+              <DatePicker format='YYYY-MM-DD' />
             </Form.Item>
 
             <Form.Item
