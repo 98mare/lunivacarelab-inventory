@@ -50,7 +50,10 @@ const SideNavContainer = styled.div`
   height: 100%;
   padding: 20px 0;
   background-color: #Fefefe;
-  box-shadow: 0px 0px 10px #9696c02b;
+    box-shadow: 0 2px 22px 0 rgba( 31, 38, 135, 0.17 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    
   .logo{
     display: flex;
     justify-content: space-evenly;
@@ -72,4 +75,5 @@ const SideNavContainer = styled.div`
       width: 30px;
     }
   }
+  
 `

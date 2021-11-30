@@ -9,10 +9,10 @@ const NavBar = () => {
     <NavBarContainer>
       
         <Row justify="space-between">
-          <Col span={8}>
+          <Col>
             <SerchBar></SerchBar>
           </Col>
-          <Col offset={12}>
+          <Col>
             <UserBar></UserBar>
           </Col>
         </Row>

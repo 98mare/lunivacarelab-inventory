@@ -22,7 +22,7 @@ const MainAppContentComponent = (props) => {
     <MainAppContentComponentContainer>
       <Layout className='mainLayout'>
         <Layout>
-          <Sider><SideNav></SideNav></Sider>
+          <Sider className='sideNav'><SideNav></SideNav></Sider>
           <Layout>
           <NavBar></NavBar>
           <Content style={{padding: '20px'}}>
@@ -42,6 +42,19 @@ export default MainAppContentComponent
 const MainAppContentComponentContainer = styled.div`
   .mainLayout{
     min-height: 100vh;
+  }
+  .sideNav{
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    overflow: hidden;
+  }
+  @media(max-width: 768px){
+    .sideNav{
+      display: none;
+      
+      
+    }
+    
   }
  
 `

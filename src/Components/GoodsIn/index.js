@@ -74,4 +74,12 @@ const Index = () => {
 
 export default Index
 
-const GoodsInContainer = styled.div``
+const GoodsInContainer = styled.div`
+  background: rgba( 255, 255, 255, 0.25 );
+  box-shadow: 0 2px 22px 0 rgba( 31, 38, 135, 0.17 );
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  overflow: hidden;
+`

@@ -9,37 +9,21 @@ const DashBoardContainer = () => {
   const data = MenuRoute;
   return (
     <DashbordContainer>
-      {/* <PageHeader></PageHeader> */}
       <div className="buttonSection">
-        {/* {data.map(e => (
-          <Card className='card'>
-            <NavLink to={e.path}>
-              {e.name}
-            </NavLink>
-          </Card>
-        ))} */}
+
         {data.map(e => (
           <>
             {e.key !== "dashbord" ? <Button className='cButton'>
               <NavLink to={e.path}>
-              {/* <span><img src={e.icon} alt="" /></span>  */}
-              {e.name}
+              
+              <span>{e.name}</span>
+              <span><img src={e.icon} alt="" /></span> 
               </NavLink>
             </Button> : ''}
           </>
         ))}
 
 
-
-        {/* <Card className='card'>
-          <p>Add Item</p>
-        </Card>
-        <Card className='card'>
-          <p>Add Item</p>
-        </Card>
-        <Card className='card'>
-          <p>Add Item</p>
-        </Card> */}
       </div>
     </DashbordContainer>
   )
@@ -52,15 +36,39 @@ const DashbordContainer = styled.div`
   .buttonSection{
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 25px;
     
   }
   .cButton{
     height: 120px;
-    width: calc(25% - 20px);
-    /* border-radius: 5px; */
-    font-size: 20px;
-    letter-spacing: 1.4px;
-    text-transform: uppercase;
+    width: calc(33% - 40px);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 2px 22px 0 rgba( 31, 38, 135, 0.17 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    span{
+      font-size: 20px;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      margin-right: 20px;
+      color: #a09999;
+      img{
+        width: 40px;
+      
+      }
+    }
+    @media(max-width: 768px){
+      width: calc(50% - 20px);
+    }
+    @media(max-width: 500px){
+      width: calc(100%);
+    }
   }
 `
