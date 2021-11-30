@@ -6,10 +6,11 @@ import Datepicker from './Datepicker'
 import { useDispatch } from 'react-redux';
 import { getItemTypeApi } from '../../services/itemItemTypeService'
 import { getItemCategoryApi } from '../../services/itemCategoryService'
+import { getLocationApi } from '../../services/itemLocationService'
 
 
 const Filter = (props) => {
-  const { itemType, categroryType, dateRange, dataRet, dateRet } = props
+  const { itemType, categroryType, dateRange, dataRet, dateRet, locateRange } = props
   const dispatch = useDispatch();
 
   const { Option } = Select;
@@ -18,11 +19,15 @@ const Filter = (props) => {
   const [catType, setCatType] = useState(0)
   const [itemList, setItemList] = useState([])
   const [cateList, setcateList] = useState([])
+  const [locationList, setlocationList] = useState([])
+  const [locationId, setlocationId] = useState(0)
   const [fromDate, setfromDate] = useState([])
   
   const handleClicker = () => {
     if (dateRange !== undefined) {
       dateRet(fromDate)
+    } if(locateRange !== undefined){
+      locateRange(locationId)
     } else {
       let data = {
         cType: catType,
@@ -42,6 +47,14 @@ const Filter = (props) => {
       dispatch(
         getItemCategoryApi((val) => {
           setcateList(val)
+        })
+      )
+    }
+
+    if(locateRange !== undefined){
+      dispatch(
+        getLocationApi((val) => {
+          setlocationList(val)
         })
       )
     }
@@ -77,6 +90,22 @@ const Filter = (props) => {
                     return (
                       <Option value={iTy?.CId}>
                         {iTy?.CategoryType}
+                      </Option>
+                    )
+                  }
+                })
+                }
+              </Select>
+            </Col>
+          }
+          {locateRange &&
+            <Col>
+              <Select onChange={(val) => { setlocationId(val) }} size='large' className='inputWidth'>
+                {locationList?.map(iTy => {
+                  if (iTy?.IsActive) {
+                    return (
+                      <Option value={iTy?.LId}>
+                        {iTy?.Location}
                       </Option>
                     )
                   }
