@@ -9,7 +9,7 @@ import { getItemCategoryApi } from '../../services/itemCategoryService'
 
 
 const Filter = (props) => {
-  const { itemType, categroryType, dateRange, dataRet } = props
+  const { itemType, categroryType, dateRange, dataRet, dateRet } = props
   const dispatch = useDispatch();
 
   const { Option } = Select;
@@ -18,33 +18,40 @@ const Filter = (props) => {
   const [catType, setCatType] = useState(0)
   const [itemList, setItemList] = useState([])
   const [cateList, setcateList] = useState([])
-
+  const [fromDate, setfromDate] = useState([])
+  
   const handleClicker = () => {
-    let data = {
-      cType: catType,
-      iType: iType
+    if (dateRange !== undefined) {
+      dateRet(fromDate)
+    } else {
+      let data = {
+        cType: catType,
+        iType: iType
+      }
+      dataRet(data);
     }
-    dataRet(data);
   }
 
   useEffect(() => {
-    dispatch(
-      getItemTypeApi((val) => {
-        setItemList(val)
-      })
-    )
-    dispatch(
-      getItemCategoryApi((val) => {
-        setcateList(val)
-      })
-    )
+    if (dateRange === undefined) {
+      dispatch(
+        getItemTypeApi((val) => {
+          setItemList(val)
+        })
+      )
+      dispatch(
+        getItemCategoryApi((val) => {
+          setcateList(val)
+        })
+      )
+    }
   }, [])
 
   return (
     <FilterContainer>
       <Row justify='space-between'>
         <Row justify='space-between' className='gapping'>
-          {itemType && 
+          {itemType &&
             <Col>
               <Select defaultValue="0" onChange={(val) => { setiType(val) }} size='large' className='inputWidth'>
                 <Option value="0">All</Option>
@@ -81,7 +88,7 @@ const Filter = (props) => {
           {
             dateRange &&
             <Col>
-              <Datepicker></Datepicker>
+              <Datepicker onChanger={ (value) => {setfromDate(value)} }></Datepicker>
             </Col>
           }
         </Row>
