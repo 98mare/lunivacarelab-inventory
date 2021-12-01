@@ -278,4 +278,5 @@ export default AddGoods;
 const AddGoodsContainer = styled.div`
   background-color: #fefefe;
   padding-top: 30px;
+  margin-bottom: 50px;
 `

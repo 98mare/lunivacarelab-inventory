@@ -72,4 +72,5 @@ const ItemContainer = styled.div`
   border-radius: 10px;
   border: 1px solid rgba( 255, 255, 255, 0.18 );
   overflow: hidden;
+  margin-bottom: 50px;
 `
