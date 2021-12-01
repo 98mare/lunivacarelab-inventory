@@ -198,6 +198,13 @@ function App() {
           component={AsyncAddUnits}
           layout={AsyncAppLayout}
         />
+        <PrivateRouter
+          exact
+          path='/units/edit/:id'
+          component={AsyncAddUnits}
+          layout={AsyncAppLayout}
+          forEdit
+        />
 
         <Route component={AsyncNotFound} />
 

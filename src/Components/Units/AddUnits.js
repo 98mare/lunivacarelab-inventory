@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { insertItemUnitApi } from '../../services/itemUnitService';
 
-const AddUnits = () => {
+const AddUnits = (props) => {
+  const {forEdit} = props
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
 
