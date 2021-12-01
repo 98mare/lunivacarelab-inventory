@@ -5,11 +5,13 @@ import styled from 'styled-components';
 import { getLocationApi } from '../../services/itemLocationService';
 import { insertRackDetailsApi } from '../../services/itemRackService';
 
-const AddRack = () => {
+const AddRack = (props) => {
+  const {forEdit} = props;
   const { Option } = Select;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
   const [locationList, setlocationList] = useState([])
+  const RId = props?.match?.params?.id;
 
   useEffect(() => {
     dispatch(
@@ -22,7 +24,7 @@ const AddRack = () => {
   const onFinish = (values) => {
     setButDis(true)
     let data = {
-      "RId": 0,
+      "RId": forEdit ? RId : 0,
       "RackCode": values?.rack_code,
       "RackName": values?.rack_name,
       "LocationId": values?.location,
@@ -126,7 +128,7 @@ const AddRack = () => {
               }}
             >
               <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
-                Submit
+                {forEdit ? 'edit' : 'Submit'}
               </Button>
             </Form.Item>
           </Form>

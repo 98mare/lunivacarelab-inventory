@@ -7,50 +7,52 @@ import { useDispatch } from 'react-redux';
 import { getRackDetApi } from '../../services/itemRackService'
 import Filter from '../Common/Filter'
 
-const columns = [
-  {
-    title: 'Id',
-    dataIndex: 'RId',
-    key: 'rackId'
-  },
-  {
-    title: 'Rack Code',
-    dataIndex: 'RackCode',
-    key: 'rackCode'
-  },
-  {
-    title: 'Rack Name',
-    dataIndex: 'RackName',
-    key: 'rackName'
-  },
-  {
-    title: 'Is Active',
-    dataIndex: 'IsActive',
-    key: 'isActive',
-    render: (text) => {
-      if (text === true) {
-        return 'Active'
-      }
-      return 'Inactive'
-    }
-  },
-  {
-    title: 'action',
-    key: 'action',
-    render: (text, record) => (
-      <Space size="middle">
-        <a href="#">Edit</a>
-        <a href="#">Delete</a>
-      </Space>
-    )
-  }
-]
+
 
 const Index = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
   const [tableData, setTableData] = useState([])
+
+  const columns = [
+    {
+      title: 'Id',
+      dataIndex: 'RId',
+      key: 'rackId'
+    },
+    {
+      title: 'Rack Code',
+      dataIndex: 'RackCode',
+      key: 'rackCode'
+    },
+    {
+      title: 'Rack Name',
+      dataIndex: 'RackName',
+      key: 'rackName'
+    },
+    {
+      title: 'Is Active',
+      dataIndex: 'IsActive',
+      key: 'isActive',
+      render: (text) => {
+        if (text === true) {
+          return 'Active'
+        }
+        return 'Inactive'
+      }
+    },
+    {
+      title: 'action',
+      key: 'action',
+      render: (text, record) => (
+        <Space size="middle">
+          <a onClick={() => history.push(`rack/edit/${record.RId}`)}>Edit</a>
+          {/* <a href="#">Delete</a> */}
+        </Space>
+      )
+    }
+  ]
 
   const locateRange = (val) => {
     dispatch(getRackDetApi(val, (value) => {

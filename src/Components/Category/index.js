@@ -47,8 +47,8 @@ const Index = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <a onClick={()=>history.push(`./category/edit/:id/${record.CId}`)}>Edit</a>
-          <a href="#">Delete</a>
+          <a onClick={()=>history.push(`./category/edit/${record.CId}`)}>Edit</a>
+          {/* <a href="#">Delete</a> */}
         </Space>
       )
     }

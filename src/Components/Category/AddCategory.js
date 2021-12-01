@@ -5,15 +5,16 @@ import styled from 'styled-components';
 import { insertItemCategoryApi } from '../../services/itemCategoryService';
 import AppButton from '../Common/AppButton';
 
-const AddCategory = () => {
+const AddCategory = (props) => {
+  const {forEdit} = props;
   const { Option } = Select;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
-
+  const CuId = props?.match?.params?.id;
   const onFinish = (values) => {
     setButDis(true)
     let data = {
-      "CId": 0,
+      "CId": forEdit ? CuId : 0,
       "CategoryType": values?.cate_type,
       "IsActive": values?.isactive
     }
@@ -80,7 +81,7 @@ const AddCategory = () => {
               }}
             >
               <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
-                Submit
+                {forEdit ? 'Edit' : 'Submit'}
               </Button>
               
             </Form.Item>

@@ -6,12 +6,14 @@ import { getLabItemsApi } from '../../services/itemNewItemService';
 import { insertWastageApi } from '../../services/wastageService';
 // import moment from 'moment';
 
-const AddWastage = () => {
+const AddWastage = (props) => {
+  const {forEdit} = props;
   const { Option } = Select;
   const { TextArea } = Input;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
   const [itemList, setItemList] = useState([])
+  const WId = props?.match?.params?.id;
 
   useEffect(() => {
     getAllLabItem(0,0)
@@ -32,7 +34,7 @@ const AddWastage = () => {
   const onFinish = (values) => {
     setButDis(true)
     let data = {
-      "WId": 0,
+      "WId": forEdit ? WId : 0,
       "ItemId": values?.item_name,
       "WastageAmount": values?.wastage_amount,
       "Reason": values?.reason,
@@ -158,7 +160,7 @@ const AddWastage = () => {
               }}
             >
               <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
-                Submit
+                {forEdit? 'edit' : 'Submit'}
               </Button>
             </Form.Item>
           </Form>

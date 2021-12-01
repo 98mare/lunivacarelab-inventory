@@ -4,14 +4,16 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { insertItemTypeApi } from '../../services/itemItemTypeService';
 
-const AddType = () => {
+const AddType = (props) => {
+  const {forEdit} = props;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
+  const TId = props?.match?.params?.id;
 
   const onFinish = (values) => {
     setButDis(true)
     let data = {
-      "TId": 0,
+      "TId": forEdit ? TId : 0,
       "ItemType": values?.item_type_name,
       "IsActive": values?.isactive
     }
@@ -78,7 +80,7 @@ const AddType = () => {
               }}
             >
               <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
-                Submit
+                {forEdit ? 'edit': 'Submit'}
               </Button>
             </Form.Item>
           </Form>

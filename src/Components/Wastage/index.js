@@ -7,48 +7,50 @@ import { useDispatch } from 'react-redux';
 import Filter from '../Common/Filter'
 import { getWastageApi } from '../../services/wastageService'
 
-const columns = [
-  {
-    title: 'Id',
-    dataIndex: 'WId',
-    key: 'wastageId'
-  },
-  {
-    title: 'Item Name',
-    dataIndex: 'ItemName',
-    key: 'itemName'
-  },
-  {
-    title: 'Wastage Amount',
-    dataIndex: 'WastageAmount',
-    key: 'WastageAmount'
-  },
-  {
-    title: 'Reason',
-    dataIndex: 'Reason',
-    key: 'Reason'
-  },
-  {
-    title: 'Remarks',
-    dataIndex: 'Remarks',
-    key: 'Remarks'
-  },
-  {
-    title: 'action',
-    key: 'action',
-    render: (text, record) => (
-      <Space size="middle">
-        <a href="#">Edit</a>
-        <a href="#">Delete</a>
-      </Space>
-    )
-  }
-]
+
 
 const Index = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [tableData, setTableData] = useState([])
+
+  const columns = [
+    {
+      title: 'Id',
+      dataIndex: 'WId',
+      key: 'wastageId'
+    },
+    {
+      title: 'Item Name',
+      dataIndex: 'ItemName',
+      key: 'itemName'
+    },
+    {
+      title: 'Wastage Amount',
+      dataIndex: 'WastageAmount',
+      key: 'WastageAmount'
+    },
+    {
+      title: 'Reason',
+      dataIndex: 'Reason',
+      key: 'Reason'
+    },
+    {
+      title: 'Remarks',
+      dataIndex: 'Remarks',
+      key: 'Remarks'
+    },
+    {
+      title: 'action',
+      key: 'action',
+      render: (text, record) => (
+        <Space size="middle">
+          <a onClick={()=> history.push(`./wastage/edit/${record.WId}`)}>Edit</a>
+          {/* <a href="#">Delete</a> */}
+        </Space>
+      )
+    }
+  ]
 
   const getWastage = (data) => {
     dispatch(getWastageApi(data, (val) => {

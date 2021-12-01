@@ -11,7 +11,8 @@ import { getRackDetApi } from '../../services/itemRackService';
 import { getItemUnitApi } from '../../services/itemUnitService';
 import moment from 'moment';
 
-const AddItem = () => {
+const AddItem = (props) => {
+  const {forEdit} = props;
   const { Option } = Select;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
@@ -20,7 +21,8 @@ const AddItem = () => {
   const [unitList, setunitList] = useState([])
   const [manuList, setmanuList] = useState([])
   const [locationList, setlocationList] = useState([])
-  const [rackList, setrackList] = useState([])
+  const [rackList, setrackList] = useState([]);
+  const TId = props?.match?.params?.id;
 
   useEffect(() => {
     getAllItemList()
@@ -66,7 +68,7 @@ const AddItem = () => {
   const onFinish = (values) => {
     setButDis(true)
     let data = {
-      "TId": 0,
+      "TId": forEdit ? TId : 0,
       "ItemCode": values?.item_code,
       "ItemName": values?.item_name,
       "ItemTypeId": values?.item_type,
@@ -301,7 +303,7 @@ const AddItem = () => {
               }}
             >
               <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
-                Submit
+                {forEdit ? 'edit' : 'Submit'}
               </Button>
             </Form.Item>
           </Form>

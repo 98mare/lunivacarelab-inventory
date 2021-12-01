@@ -68,13 +68,20 @@ function App() {
           component={AsyncItems}
           layout={AsyncAppLayout}
         />
-
         <PrivateRouter
           exact
           path='/item/add'
           component={AsyncAddItems}
           layout={AsyncAppLayout}
         />
+        <PrivateRouter
+          exact
+          path='/item/edit/:id'
+          component={AsyncAddItems}
+          layout={AsyncAppLayout}
+          forEdit
+        />
+
 
         <PrivateRouter
           exact
@@ -101,6 +108,13 @@ function App() {
           component={AsyncAddType}
           layout={AsyncAppLayout}
         />
+        <PrivateRouter
+          exact
+          path='/type/edit/:id'
+          component={AsyncAddType}
+          layout={AsyncAppLayout}
+          forEdit
+        />
 
         <PrivateRouter
           exact
@@ -118,6 +132,7 @@ function App() {
           exact
           path='/category/edit/:id'
           component={AsyncAddCategory}
+          forEdit
           layout={AsyncAppLayout}
         />
 
@@ -133,6 +148,13 @@ function App() {
           component={AsyncAddLocation}
           layout={AsyncAppLayout}
         />
+        <PrivateRouter
+          exact
+          path='/location/edit/:id'
+          component={AsyncAddLocation}
+          layout={AsyncAppLayout}
+          forEdit
+        />
 
         <PrivateRouter
           exact
@@ -145,6 +167,13 @@ function App() {
           path='/rack/add'
           component={AsyncAddRack}
           layout={AsyncAppLayout}
+        />
+        <PrivateRouter
+          exact
+          path='/rack/edit/:id'
+          component={AsyncAddRack}
+          layout={AsyncAppLayout}
+          forEdit
         />
 
         <PrivateRouter
@@ -159,6 +188,13 @@ function App() {
           component={AsyncAddWastage}
           layout={AsyncAppLayout}
         />
+        <PrivateRouter
+          exact
+          path='/wastage/edit/:id'
+          component={AsyncAddWastage}
+          layout={AsyncAppLayout}
+          forEdit
+        />
 
         <PrivateRouter
           exact
@@ -171,6 +207,13 @@ function App() {
           path='/itemvsratio/add'
           component={AsyncAddItemVsRatio}
           layout={AsyncAppLayout}
+        />
+        <PrivateRouter
+          exact
+          path='/itemvsratio/eidt/:id'
+          component={AsyncAddItemVsRatio}
+          layout={AsyncAppLayout}
+          forEdit
         />
 
         <PrivateRouter
