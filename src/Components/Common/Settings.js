@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import settingsMenu from '../../Data/MenuRoute'
+import {settingsMenu} from '../../Data/MenuRoute'
 
 const Settings = () => {
   const data = settingsMenu;

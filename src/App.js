@@ -2,7 +2,7 @@
 import { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
-import { AsyncAppLayout, AsyncGoodsIn, AsyncLogin, AsyncPublicLayout } from './App/asyncComponent';
+import { AsyncAddCategory, AsyncAddItems, AsyncAddItemVsRatio, AsyncAddLocation, AsyncAddRack, AsyncAddReports, AsyncAddType, AsyncAddUnits, AsyncAddWastage, AsyncAppLayout, AsyncCategory, AsyncDashbord, AsyncGoodOut, AsyncGoodsIn, AsyncGoodsInAdd, AsyncGoodsOutAdd, AsyncItems, AsyncItemVsRatio, AsyncLocation, AsyncLogin, AsyncPublicLayout, AsyncRack, AsyncReports, AsyncSettings, AsyncType, AsyncUnits, AsyncWastage } from './App/asyncComponent';
 import Login from './Components/Login/Login';
 import useToken from './Components/Login/useToken';
 
@@ -31,8 +31,15 @@ function App() {
     >
       <Switch>
         <Route exact path="/">
-          <Redirect to="/login" />
+          <Redirect to="/dashbord" />
         </Route>
+
+        <PrivateRouter
+          exact
+          path='/dashbord'
+          component={AsyncDashbord}
+          layout={AsyncAppLayout}
+        />
 
         <PublicRoute
           exact
@@ -47,6 +54,155 @@ function App() {
           component={AsyncGoodsIn}
           layout={AsyncAppLayout}
         />
+        <PrivateRouter
+          exact
+          path='/goodsin/add'
+          component={AsyncGoodsInAdd}
+          layout={AsyncAppLayout}
+        />
+
+        <PrivateRouter
+          exact
+          path='/item'
+          component={AsyncItems}
+          layout={AsyncAppLayout}
+        />
+
+        <PrivateRouter
+          exact
+          path='/item/add'
+          component={AsyncAddItems}
+          layout={AsyncAppLayout}
+        />
+
+        <PrivateRouter
+          exact
+          path='/goodsout'
+          component={AsyncGoodOut}
+          layout={AsyncAppLayout}
+        />
+        <PrivateRouter
+          exact
+          path='/goodsout/add'
+          component={AsyncGoodsOutAdd}
+          layout={AsyncAppLayout}
+        />
+
+        <PrivateRouter
+          exact
+          path='/type'
+          component={AsyncType}
+          layout={AsyncAppLayout}
+        />
+        <PrivateRouter
+          exact
+          path='/type/add'
+          component={AsyncAddType}
+          layout={AsyncAppLayout}
+        /> 
+
+        <PrivateRouter
+          exact
+          path='/category'
+          component={AsyncCategory}
+          layout={AsyncAppLayout}
+        />
+        <PrivateRouter
+          exact
+          path='/category/add'
+          component={AsyncAddCategory}
+          layout={AsyncAppLayout}
+        /> 
+
+        <PrivateRouter
+          exact
+          path='/location'
+          component={AsyncLocation}
+          layout={AsyncAppLayout}
+        />
+        <PrivateRouter
+          exact
+          path='/location/add'
+          component={AsyncAddLocation}
+          layout={AsyncAppLayout}
+        /> 
+
+        <PrivateRouter
+          exact
+          path='/rack'
+          component={AsyncRack}
+          layout={AsyncAppLayout}
+        />
+        <PrivateRouter
+          exact
+          path='/rack/add'
+          component={AsyncAddRack}
+          layout={AsyncAppLayout}
+        /> 
+
+        <PrivateRouter
+          exact
+          path='/wastage'
+          component={AsyncWastage}
+          layout={AsyncAppLayout}
+        />
+        <PrivateRouter
+          exact
+          path='/wastage/add'
+          component={AsyncAddWastage}
+          layout={AsyncAppLayout}
+        /> 
+
+        <PrivateRouter
+          exact
+          path='/itemvsratio'
+          component={AsyncItemVsRatio}
+          layout={AsyncAppLayout}
+        />
+        <PrivateRouter
+          exact
+          path='/itemvsratio/add'
+          component={AsyncAddItemVsRatio}
+          layout={AsyncAppLayout}
+        /> 
+
+        <PrivateRouter
+          exact
+          path='/reports'
+          component={AsyncReports}
+          layout={AsyncAppLayout}
+        />
+        <PrivateRouter
+          exact
+          path='/reports/add'
+          component={AsyncAddReports}
+          layout={AsyncAppLayout}
+        /> 
+
+        <PrivateRouter
+          exact
+          path='/settings'
+          component={AsyncSettings}
+          layout={AsyncAppLayout}
+        /> 
+
+        <PrivateRouter
+          exact
+          path='/units'
+          component={AsyncUnits}
+          layout={AsyncAppLayout}
+        />
+        <PrivateRouter
+          exact
+          path='/units/add'
+          component={AsyncAddUnits}
+          layout={AsyncAppLayout}
+        /> 
+
+        
+
+        
+
 
       </Switch>
     </Suspense>

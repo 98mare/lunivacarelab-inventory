@@ -79,6 +79,12 @@ export const settingsMenu= [
     key: 'rack',
     name: 'rack',
     path: '/rack'
+  },
+  {
+    icon: 'icon-bar-chart',
+    key: 'unit',
+    name: 'unit',
+    path: '/units'
   }
   
 ]
