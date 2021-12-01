@@ -3,6 +3,8 @@ import { Layout } from 'antd';
 import NavBar from '../Components/Common/NavBar';
 import SideNav from '../Components/Common/SideNav'
 import styled from 'styled-components'
+import BottomNav from '../Components/Common/BottomNav';
+import MobileNav from '../Components/Common/MobileNav';
 
 const { Sider, Content } = Layout;
 
@@ -14,12 +16,14 @@ const AppLayout = (props) => {
                     <Sider className='sideNav'><SideNav></SideNav></Sider>
                     <Layout className="main-app-layout">
                         <NavBar></NavBar>
+                        <MobileNav />
                         {props?.secondaryNav &&
                             props?.secondaryNavigation
                         }
                         <Content style={{padding: '20px'}}>
                             {props?.children}
                         </Content>
+                        <BottomNav></BottomNav>
                     </Layout>
                 </Layout>
             </Layout>

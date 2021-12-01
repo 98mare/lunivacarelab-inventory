@@ -6,16 +6,16 @@ const BottomNav = () => {
   return (
     <BottomNavContainer>
       <li>
-        <Link to=''><i className='icon-line2-home'></i></Link>
+        <Link to='/'><i className='icon-line2-home'></i></Link>
       </li>
       <li>
-        <Link to=''><i className='icon-line-box'></i></Link>
+        <Link to='/item'><i className='icon-line-box'></i></Link>
       </li>
       <li>
         <Link to=''><i className='icon-user1'></i></Link>
       </li>
       <li>
-        <Link to=''><i className='icon-line2-settings'></i></Link>
+        <Link to='/settings'><i className='icon-line2-settings'></i></Link>
       </li>
     </BottomNavContainer>
   )

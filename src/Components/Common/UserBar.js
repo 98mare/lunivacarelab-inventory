@@ -11,7 +11,7 @@ const UserBar = () => {
   const [userHere, setUserHere] = useState('');
 
   useEffect(() => {
-    handleUser()
+    // handleUser()
   }, [])
 
   const handleLogout = () => {
@@ -19,10 +19,10 @@ const UserBar = () => {
     history.push('/login')
   }
 
-  const handleUser = () => {
-    const tokenString = JSON.parse(localStorage.getItem('token'));
-    setUserHere(tokenString.username);
-  }
+  // const handleUser = () => {
+  //   const tokenString = JSON.parse(localStorage.getItem('token'));
+  //   setUserHere(tokenString.username);
+  // }
 
   const menu = (
     <Menu>

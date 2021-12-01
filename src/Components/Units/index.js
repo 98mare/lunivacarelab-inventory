@@ -9,9 +9,9 @@ import PageHeader from '../Common/pageHeader'
 
 const columns = [
   {
-    title: 'Item Name',
-    dataIndex: 'ItemName',
-    key: 'itemName',
+    title: 'Unit Name',
+    dataIndex: 'UnitName',
+    key: 'unitName',
   },
   {
     title: 'Total',
@@ -55,9 +55,9 @@ const Index = () => {
   return (
     <GoodsInContainer>
       <PageHeader
-        buttonTitle='add Goods'
-        pageTitle='Goods In'
-        buttonOnClick={() => history.push('./goodsin/add')}
+        buttonTitle='add Units'
+        pageTitle='Units'
+        buttonOnClick={() => history.push('./units/add')}
       ></PageHeader>
       <Filter
         dateRange
