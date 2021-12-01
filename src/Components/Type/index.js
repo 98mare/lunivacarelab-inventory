@@ -6,44 +6,46 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { getItemTypeApi } from '../../services/itemItemTypeService'
 
-const columns = [
-  {
-    title: 'Id',
-    dataIndex: 'TId',
-    key: 'typeId'
-  },
-  {
-    title: 'Type Name',
-    dataIndex: 'ItemType',
-    key: 'typeName'
-  },
-  {
-    title: 'Is Active',
-    dataIndex: 'IsActive',
-    key: 'isActive',
-    render: (text) => {
-      if (text === true) {
-        return 'Active'
-      }
-      return 'Inactive'
-    }
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (text, record) => (
-      <Space size="middle">
-        <a href="#">Edit</a>
-        <a href="#">Delete</a>
-      </Space>
-    )
-  }
-]
+
 
 const Index = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [tableData, setTableData] = useState([])
+
+  const columns = [
+    {
+      title: 'Id',
+      dataIndex: 'TId',
+      key: 'typeId'
+    },
+    {
+      title: 'Type Name',
+      dataIndex: 'ItemType',
+      key: 'typeName'
+    },
+    {
+      title: 'Is Active',
+      dataIndex: 'IsActive',
+      key: 'isActive',
+      render: (text) => {
+        if (text === true) {
+          return 'Active'
+        }
+        return 'Inactive'
+      }
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (text, record) => (
+        <Space size="middle">
+          <a onClick={()=> history.push(`./type/edit/${record.TId}`)}>Edit</a>
+          {/* <a href="#">Delete</a> */}
+        </Space>
+      )
+    }
+  ]
 
   useEffect(() => {
     dispatch(getItemTypeApi((val) => {

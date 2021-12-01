@@ -50,8 +50,8 @@ const Index = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <a href="#">Edit</a>
-          <a href="#">Delete</a>
+          <a onClick={()=> history.push(`/itemvsratio/eidt/${record.RId}`)}>Edit</a>
+          {/* <a href="#">Delete</a> */}
         </Space>
       )
     }

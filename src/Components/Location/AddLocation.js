@@ -4,15 +4,17 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { insertLocationApi } from '../../services/itemLocationService';
 
-const AddLocation = () => {
+const AddLocation = (props) => {
   // const { Option } = Select;
+  const {forEdit} = props;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
+  const LId = props?.match?.params?.id;
 
   const onFinish = (values) => {
     setButDis(true)
     let data = {
-      "LId": 0,
+      "LId": forEdit ? LId : 0,
       "LCode": values?.lcode,
       "Location": values?.location_name,
       "IsActive": values?.isactive
@@ -93,7 +95,7 @@ const AddLocation = () => {
               }}
             >
               <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
-                Submit
+                {forEdit ? 'edit' : 'Submit'}
               </Button>
             </Form.Item>
           </Form>

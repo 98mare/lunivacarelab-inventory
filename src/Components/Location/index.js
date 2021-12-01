@@ -6,50 +6,52 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { getLocationApi } from '../../services/itemLocationService'
 
-const columns = [
-  {
-    title: 'Id',
-    dataIndex: 'LId',
-    key: 'locationId'
-  },
-  {
-    title: 'Location Code',
-    dataIndex: 'LCode',
-    key: 'locationCode'
-  },
-  {
-    title: 'Location Name',
-    dataIndex: 'Location',
-    key: 'locationName'
-  },
-  {
-    title: 'Is Active',
-    dataIndex: 'IsActive',
-    key: 'isActive',
-    render: (text) => {
-      if (text === true) {
-        return 'Active'
-      }
-      return 'Inactive'
-    }
-  },
-  {
-    title: 'action',
-    key: 'action',
-    render: (text, record) => (
-      <Space size="middle">
-        <a href="#">Edit</a>
-        <a href="#">Delete</a>
-      </Space>
-    )
-  }
-]
+
 
 const Index = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
   const [tableData, setTableData] = useState([])
+
+  const columns = [
+    {
+      title: 'Id',
+      dataIndex: 'LId',
+      key: 'locationId'
+    },
+    {
+      title: 'Location Code',
+      dataIndex: 'LCode',
+      key: 'locationCode'
+    },
+    {
+      title: 'Location Name',
+      dataIndex: 'Location',
+      key: 'locationName'
+    },
+    {
+      title: 'Is Active',
+      dataIndex: 'IsActive',
+      key: 'isActive',
+      render: (text) => {
+        if (text === true) {
+          return 'Active'
+        }
+        return 'Inactive'
+      }
+    },
+    {
+      title: 'action',
+      key: 'action',
+      render: (text, record) => (
+        <Space size="middle">
+          <a onClick={()=> history.push(`./location/edit/${record.LId}`)}>Edit</a>
+          {/* <a href="#">Delete</a> */}
+        </Space>
+      )
+    }
+  ]
 
   useEffect(() => {
     dispatch(getLocationApi((val) => {

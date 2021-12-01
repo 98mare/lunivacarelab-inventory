@@ -5,12 +5,14 @@ import styled from 'styled-components';
 import { getLabItemsApi } from '../../services/itemNewItemService';
 import { getTestListApi, insertItemVsRatioApi } from '../../services/itemVsRatioService';
 
-const AddItemVsRatio = () => {
+const AddItemVsRatio = (props) => {
+  const {forEdit} = props;
   const { Option } = Select;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
   const [itemList, setitemList] = useState([])
   const [testList, settestList] = useState([])
+  const RId = props?.match?.params?.id;
 
   const dateFormat = 'YYYY-MM-DD';
 
@@ -35,7 +37,7 @@ const AddItemVsRatio = () => {
   const onFinish = (values) => {
     setButDis(true)
     let data = {
-      "RId": 0,
+      "RId": forEdit ? RId : 0,
       "ItemId": values?.item_name,
       "TestId": values?.test_name,
       "ItemPerUnitTest": values?.item_per,
@@ -179,7 +181,7 @@ const AddItemVsRatio = () => {
               }}
             >
               <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
-                Submit
+                {forEdit ? 'edit' : 'Submit'}
               </Button>
             </Form.Item>
           </Form>
