@@ -1,23 +1,23 @@
-import { Form, Input, Button, Checkbox, Select, InputNumber, message, Row, Col } from 'antd';
-import { useState, useEffect } from 'react';
+import { Form, Input, Button, Checkbox, message, Row, Col } from 'antd';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { getLocationApi } from '../../services/itemLocationService';
+// import { getLocationApi } from '../../services/itemLocationService';
 import { insertRackDetailsApi } from '../../services/itemRackService';
 
 const AddReports = () => {
-  const { Option } = Select;
+  // const { Option } = Select;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
-  const [locationList, setlocationList] = useState([])
+  // const [locationList, setlocationList] = useState([])
 
-  useEffect(() => {
-    dispatch(
-      getLocationApi((val) => {
-        setlocationList(val)
-      })
-    )
-  }, [])
+  // useEffect(() => {
+  //   dispatch(
+  //     getLocationApi((val) => {
+  //       setlocationList(val)
+  //     })
+  //   )
+  // }, [])
 
   const onFinish = (values) => {
     setButDis(true)
@@ -29,7 +29,7 @@ const AddReports = () => {
       "IsActive": values?.isactive
     }
     dispatch(insertRackDetailsApi(data, (res) => {
-      if (res?.CreatedId > 0 && res?.SuccessMsg == true) {
+      if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
           window.location.reload(false);
@@ -88,28 +88,6 @@ const AddReports = () => {
               ]}
             >
               <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Location"
-              name="location"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please select Location!',
-                },
-              ]}
-            >
-              <Select allowClear>
-                {locationList?.map(iTy => {
-                  return (
-                    <Option value={iTy?.LId}>
-                      {iTy?.Location}
-                    </Option>
-                  )
-                })
-                }
-              </Select>
             </Form.Item>
 
             <Form.Item

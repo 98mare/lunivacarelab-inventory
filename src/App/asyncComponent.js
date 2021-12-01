@@ -43,3 +43,5 @@ export const AsyncSettings = lazy(() => pMinDelay(import('../Components/Common/S
 
 export const AsyncUnits = lazy(() => pMinDelay(import('../Components/Units/index'), 300));
 export const AsyncAddUnits = lazy(() => pMinDelay(import('../Components/Units/AddUnits'), 300));
+
+export const AsyncNotFound = lazy(() => pMinDelay(import('../Components/Common/ErrorPage'), 300));

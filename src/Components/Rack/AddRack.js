@@ -1,4 +1,4 @@
-import { Form, Input, Button, Checkbox, Select, InputNumber, message, Row, Col } from 'antd';
+import { Form, Input, Button, Checkbox, Select, message, Row, Col } from 'antd';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
@@ -29,7 +29,7 @@ const AddRack = () => {
       "IsActive": values?.isactive
     }
     dispatch(insertRackDetailsApi(data, (res) => {
-      if (res?.CreatedId > 0 && res?.SuccessMsg == true) {
+      if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
           window.location.reload(false);

@@ -1,79 +1,75 @@
-import { Table } from 'antd'
-import React, { useState } from 'react'
+import { Table, Space } from 'antd'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux';
-import { getGoodsReceivedApi } from '../../services/labGoodsReceivedService'
-import Filter from '../Common/Filter'
+// import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
+import { getItemUnitApi } from '../../services/itemUnitService';
 
 const columns = [
   {
     title: 'Unit Name',
-    dataIndex: 'UnitName',
+    dataIndex: 'Units',
     key: 'unitName',
   },
   {
-    title: 'Total',
-    dataIndex: 'Total',
-    key: 'Total',
-  },
-  {
-    title: 'Expiry Date',
-    dataIndex: 'ExpiryDate',
-    key: 'ExpiryDate',
+    title: 'Is Active',
+    dataIndex: 'IsActive',
+    key: 'IsActive',
     render: (text) => {
-      return text.split('T')[0]
+      if (text === true) {
+        return 'Active'
+      }
+      return 'Inactive'
     }
   },
   {
-    title: 'Item Status',
-    dataIndex: 'ItemStatus',
-    key: 'ItemStatus',
+    title: 'Action',
+    key: 'action',
+    render: (text, record) => (
+      <Space size="middle">
+        <a href="#">Edit</a>
+        <a href="#">Delete</a>
+      </Space>
+    )
   }
 ]
 
 const Index = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const [goodsList, setgoodsList] = useState([])
+  const [unitList, setunitList] = useState([])
 
-  const getLabData = (data) => {
-    dispatch(getGoodsReceivedApi(data, (val) => {
-      setgoodsList(val)
+  useEffect(() => {
+    getLabData()
+  }, [])
+
+  const getLabData = () => {
+    dispatch(getItemUnitApi((val) => {
+      setunitList(val)
     }))
   }
 
-  const dataRet = (val) => {
-    let data = {
-      fromdate: val[0].format("YYYY-MM-DD"),
-      todate: val[1].format("YYYY-MM-DD"),
-    }
-    getLabData(data)
-  }
-
   return (
-    <GoodsInContainer>
+    <UnitContainer>
       <PageHeader
         buttonTitle='add Units'
         pageTitle='Units'
         buttonOnClick={() => history.push('./units/add')}
       ></PageHeader>
-      <Filter
-        dateRange
-        dateRet={dataRet}
-      ></Filter>
+      {/* <Filter/> */}
       <Table className='tableWidth'
         columns={columns}
-        dataSource={goodsList}
+        dataSource={unitList}
       />
-    </GoodsInContainer>
+    </UnitContainer>
   )
 }
 
 export default Index
 
-const GoodsInContainer = styled.div`
+const UnitContainer = styled.div`
   background: rgba( 255, 255, 255, 0.25 );
   box-shadow: 0 2px 22px 0 rgba( 31, 38, 135, 0.10 );
   backdrop-filter: blur( 4px );

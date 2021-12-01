@@ -22,7 +22,7 @@ export const insertItemUnitApi = (params, returnData) => {
         try {
             let formData = generateUrlEncodedData(params)
             const response = await store(InsertUpdateUnits, formData);
-            console.log(response);
+            returnData(response?.data?.units);
         } catch (error) {
 
         }

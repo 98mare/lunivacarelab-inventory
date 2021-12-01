@@ -2,20 +2,20 @@ import React from 'react'
 import { Layout } from 'antd'
 import SideNav from '../Components/Common/SideNav'
 
-import {Switch, Route} from "react-router-dom";
-import DashBoardContainer from '../Containers/DashBoardContainer'
+import {Switch} from "react-router-dom";
+// import DashBoardContainer from '../Containers/DashBoardContainer'
 import styled from 'styled-components'
-import Item from '../Components/Item'
-import AddItem from './Item/AddItem';
+// import Item from '../Components/Item'
+// import AddItem from './Item/AddItem';
 import NavBar from './Common/NavBar';
-import GoodsIn from './GoodsIn'
-import AddGoods from './GoodsIn/AddGoods';
-import ErrorPage from './Common/ErrorPage';
-import Type from '../Components/Type'
+// import GoodsIn from './GoodsIn'
+// import AddGoods from './GoodsIn/AddGoods';
+// import ErrorPage from './Common/ErrorPage';
+// import Type from '../Components/Type'
 import PrivateRoute from '../Routes/PrivateRoute';
 import BottomNav from './Common/BottomNav'
 import MobileNav from './Common/MobileNav';
-const { Header, Footer, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 
 

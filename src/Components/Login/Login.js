@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { getLoginApi } from '../../services/loginService';
+// import { useDispatch } from 'react-redux';
+// import { getLoginApi } from '../../services/loginService';
 
 export default function Login() {
   // const { setToken } = props;
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
@@ -14,6 +14,7 @@ export default function Login() {
       user: username, 
       pass: password
     }
+    console.log(data);
     // dispatch(getLoginApi(data, (val) => {
     //   console.log(val);
     // }))
