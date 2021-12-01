@@ -59,4 +59,5 @@ const MainAppContentComponentContainer = styled.div`
       display: none; 
     } 
   } 
+ 
 `

@@ -19,7 +19,7 @@ const AppButtonContainer = styled.div`
   background-color: #1890ff;
   color: #fefefe;
   border-radius: 30px!important;
-  padding:  23px 40px;
+  padding:  20px 40px;
   display: flex;
   align-items: center;
   font-size: 18px;
