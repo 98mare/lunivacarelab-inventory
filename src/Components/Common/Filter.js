@@ -84,7 +84,7 @@ const Filter = (props) => {
             </Col>
           }
           {categroryType &&
-            <Col>
+            <Col >
               <Select defaultValue="0" onChange={(val) => { setCatType(val) }} size='large' className='inputWidth'>
                 <Option value="0">All</Option>
                 {cateList?.map(iTy => {
@@ -136,12 +136,17 @@ export default Filter
 
 const FilterContainer = styled.div`
   background-color: #fefefe;
+  
   padding: 10px;
   .gapping{
     gap: 20px;
     .inputWidth{
       width: 300px;
       text-align: left;
+    }
+    @media(max-width: 500px){
+      flex-direction: column;
+      flex-wrap: wrap;
     }
   }
 `

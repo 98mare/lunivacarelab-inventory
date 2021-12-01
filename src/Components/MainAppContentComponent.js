@@ -14,6 +14,7 @@ import ErrorPage from './Common/ErrorPage';
 import Type from '../Components/Type'
 import PrivateRoute from '../Routes/PrivateRoute';
 import BottomNav from './Common/BottomNav'
+import MobileNav from './Common/MobileNav';
 const { Header, Footer, Sider, Content } = Layout;
 
 
@@ -27,6 +28,7 @@ const MainAppContentComponent = (props) => {
           <Sider className='sideNav'><SideNav></SideNav></Sider>
           <Layout>
           <NavBar></NavBar>
+          <MobileNav></MobileNav>
           <Content style={{padding: '20px'}}>
             <Switch>
               <PrivateRoute></PrivateRoute>

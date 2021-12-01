@@ -3,6 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link, NavLink } from 'react-router-dom'
 import { MenuRoute } from '../Data/MenuRoute'
+import DashbordCard from '../Components/Common/DashbordCard'
 import PageHeader from '../Components/Common/pageHeader'
 
 const DashBoardContainer = () => {
@@ -12,18 +13,23 @@ const DashBoardContainer = () => {
         {data.map(e => (
           <>
             {e.key !== "dashbord" ? 
+            <NavLink to={e.path}>
               <div className='cButton'>
-                <NavLink to={e.path}>
+                
                   <span>{e.name}</span>
                   <span><i className={e.icon}></i> </span>
-                </NavLink>
+               
               </div> 
-              
+              </NavLink>
+           
+             
              : ''}
           </>
         ))}
 
 
+              {/* <DashbordCard path={e.path} name={e.name} icon={e.icon}></DashbordCard> */}
+ 
     
     </DashbordContainer>
   )
@@ -87,7 +93,8 @@ const DashbordContainer = styled.div`
     }
     }
     @media(max-width: 500px){
-      width: 45%;
+      width: 310px;
+      height: 80px;
     }
    
   }
