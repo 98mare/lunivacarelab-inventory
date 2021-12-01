@@ -1,4 +1,4 @@
-import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col, Descriptions, Checkbox } from 'antd';
+import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col, Checkbox } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
@@ -18,7 +18,7 @@ const AddGoodsOut = () => {
 
   useEffect(() => {
     getAllLabItem()
-  }, [])
+  })
 
   const getAllLabItem = (ty = 0, cI = 0) => {
     let data = {
@@ -48,7 +48,7 @@ const AddGoodsOut = () => {
       "Remarks": values?.remarks
     }
     dispatch(insertGoodsOutApi(data, (res) => {
-      if (res?.CreatedId > 0 && res?.SuccessMsg == true) {
+      if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
           window.location.reload(false);

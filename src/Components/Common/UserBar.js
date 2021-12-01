@@ -1,32 +1,51 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import {CaretDownFilled} from '@ant-design/icons'
+import { CaretDownFilled } from '@ant-design/icons'
+import { useDispatch } from 'react-redux';
 import { Menu, Dropdown, Button, Space } from 'antd'
-
-const menu = (
-  <Menu>
-    <Menu.Item>
-      <a target='_blank' rel='noopener noreferrer' href='#'>settings</a>
-    </Menu.Item>
-    <Menu.Item>
-      <a target='_blank' rel='noopener noreferrer' href='#'>log-out</a>
-    </Menu.Item>
-    
-  </Menu>
-)
+import { Link, useHistory } from 'react-router-dom'
 
 const UserBar = () => {
-  
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const [userHere, setUserHere] = useState('');
+
+  useEffect(() => {
+    handleUser()
+  }, [])
+
+  const handleLogout = () => {
+    localStorage.clear()
+    history.push('/login')
+  }
+
+  const handleUser = () => {
+    const tokenString = JSON.parse(localStorage.getItem('token'));
+    setUserHere(tokenString.username);
+  }
+
+  const menu = (
+    <Menu>
+      <Menu.Item>
+        <a target='_blank' rel='noopener noreferrer' href='#'>settings</a>
+      </Menu.Item>
+      <Menu.Item>
+        <Link onClick={() => handleLogout()}>{'logout'}</Link>
+      </Menu.Item>
+
+    </Menu>
+  )
+
   return (
     <UserBarContainer>
       <div className="userIcon">
         <img src="./Assets/icons/user.svg" alt="" />
       </div>
-      <span className='userName'>user user</span>
-      <Dropdown overlay={menu}  placement="bottomLeft">
+      <span className='userName'>{userHere}</span>
+      <Dropdown overlay={menu} placement="bottomLeft">
         <CaretDownFilled />
       </Dropdown>
-      
+
     </UserBarContainer>
   )
 }
@@ -56,4 +75,4 @@ const UserBarContainer = styled.div`
     font-size: 16px;
 
   }
-` 
+`
