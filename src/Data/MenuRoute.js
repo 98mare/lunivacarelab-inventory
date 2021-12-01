@@ -19,31 +19,7 @@ export const MenuRoute = [
     name: 'goods in',
     path: '/goodsin',
   },
-  {
-    icon: 'icon-line-stack',
-    key: 'type',
-    name: 'type',
-    path: '/type'
-  },
-  {
-    icon: 'icon-line-book',
-    key: 'category',
-    name: 'category',
-    path: '/category'
-  },
-  {
-    icon: 'icon-location',
-    key: 'location',
-    name: 'location',
-    path: '/location'
-  },
-  {
-    icon: 'icon-line-archive',
-    key: 'rack',
-    name: 'rack',
-    path: '/rack'
-  }
-  ,
+  
   {
     icon: 'icon-line-trash',
     key: 'wastage',
@@ -68,6 +44,41 @@ export const MenuRoute = [
     name: 'Reports',
     path: '/reports'
   },
+  // {
+  //   icon: 'icon-line2-settings',
+  //   key: 'settings',
+  //   name: 'Settings',
+  //   path: '/',
+   
+  // }
 
+  
+]
+
+export const settingsMenu= [
+  {
+    icon: 'icon-line-stack',
+    key: 'type',
+    name: 'type',
+    path: '/type'
+  },
+  {
+    icon: 'icon-line-book',
+    key: 'category',
+    name: 'category',
+    path: '/category'
+  },
+  {
+    icon: 'icon-location',
+    key: 'location',
+    name: 'location',
+    path: '/location'
+  },
+  {
+    icon: 'icon-line-archive',
+    key: 'rack',
+    name: 'rack',
+    path: '/rack'
+  }
   
 ]

@@ -13,7 +13,10 @@ import AddGoods from './GoodsIn/AddGoods';
 import ErrorPage from './Common/ErrorPage';
 import Type from '../Components/Type'
 import PrivateRoute from '../Routes/PrivateRoute';
+import BottomNav from './Common/BottomNav'
+import MobileNav from './Common/MobileNav';
 const { Header, Footer, Sider, Content } = Layout;
+
 
 
 const MainAppContentComponent = (props) => {
@@ -25,6 +28,7 @@ const MainAppContentComponent = (props) => {
           <Sider className='sideNav'><SideNav></SideNav></Sider>
           <Layout>
           <NavBar></NavBar>
+          <MobileNav></MobileNav>
           <Content style={{padding: '20px'}}>
             <Switch>
               <PrivateRoute></PrivateRoute>
@@ -32,6 +36,7 @@ const MainAppContentComponent = (props) => {
           </Content>
           </Layout>
         </Layout>
+        <BottomNav></BottomNav>
       </Layout>
     </MainAppContentComponentContainer>
   )
@@ -62,9 +67,16 @@ const MainAppContentComponentContainer = styled.div`
 }
   @media(max-width: 768px){
     .sideNav{
+      /* display: none; */
+      
+      
+    }
+    
+  }
+  @media(max-width: 600px){
+    .sideNav{
       display: none;
-      
-      
+    
     }
     
   }

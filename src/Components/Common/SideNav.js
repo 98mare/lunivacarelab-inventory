@@ -1,15 +1,17 @@
 import {Button, Menu} from 'antd'
-import SubMenu from 'antd/lib/menu/SubMenu'
 import React from 'react'
 import styled from 'styled-components'
-import { MenuRoute } from '../../Data/MenuRoute'
+import { MenuRoute,settingsMenu } from '../../Data/MenuRoute'
 import {NavLink} from 'react-router-dom'
+const { SubMenu } = Menu;
+
 
 const SideNav = () => {
   const data =  MenuRoute;
+  const menuData = settingsMenu;
   return (
     <SideNavContainer>
-      
+
       <Menu 
         mode="inline"
         // defaultSelectedKeys={['1']}
@@ -30,6 +32,21 @@ const SideNav = () => {
           </NavLink>
         </Menu.Item>
       ))}
+
+      
+          <SubMenu title={<span className='navLInk'><i className='icon-line2-settings'></i><p>Settings</p></span>} style={{fontSize: '16px'}}>
+            {
+              menuData.map(e => (
+                <Menu.Item key={e.key}>
+                  <NavLink to={e?.path} className='navLInk'>
+                  <i className={e.icon}></i>
+                  <p>{e.name}</p>
+                  </NavLink>
+                </Menu.Item >
+                ) )
+            }
+          </SubMenu>
+       
       </Menu>
     </SideNavContainer>
   )
