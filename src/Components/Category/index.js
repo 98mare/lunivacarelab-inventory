@@ -6,39 +6,7 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { getItemCategoryApi } from '../../services/itemCategoryService'
 
-const columns = [
-  {
-    title: 'Id',
-    dataIndex: 'CId',
-    key: 'categoryId'
-  },
-  {
-    title: 'Category Name',
-    dataIndex: 'CategoryType',
-    key: 'categoryName'
-  },
-  {
-    title: 'Is Active',
-    dataIndex: 'IsActive',
-    key: 'isActive',
-    render: (text) => {
-      if (text === true) {
-        return 'Active'
-      }
-      return 'Inactive'
-    }
-  },
-  {
-    title: 'action',
-    key: 'action',
-    render: (text, record) => (
-      <Space size="middle">
-        <a href="#">Edit</a>
-        <a href="#">Delete</a>
-      </Space>
-    )
-  }
-]
+
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -51,6 +19,40 @@ const Index = () => {
       setTableData(val)
     }))
   }, [])
+
+  const columns = [
+    {
+      title: 'Id',
+      dataIndex: 'CId',
+      key: 'categoryId'
+    },
+    {
+      title: 'Category Name',
+      dataIndex: 'CategoryType',
+      key: 'categoryName'
+    },
+    {
+      title: 'Is Active',
+      dataIndex: 'IsActive',
+      key: 'isActive',
+      render: (text) => {
+        if (text === true) {
+          return 'Active'
+        }
+        return 'Inactive'
+      }
+    },
+    {
+      title: 'action',
+      key: 'action',
+      render: (text, record) => (
+        <Space size="middle">
+          <a onClick={()=>history.push(`./category/edit/:id/${record.CId}`)}>Edit</a>
+          <a href="#">Delete</a>
+        </Space>
+      )
+    }
+  ]
 
   return (
     <ItemContainer>

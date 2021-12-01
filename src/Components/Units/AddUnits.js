@@ -4,14 +4,16 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { insertItemUnitApi } from '../../services/itemUnitService';
 
-const AddUnits = () => {
+const AddUnits = (props) => {
+  const {forEdit} = props;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
-
+  const unId = props?.match?.params?.id;
+  
   const onFinish = (values) => {
     setButDis(true)
     let data = {
-      "UnId": 0,
+      "UnId": forEdit ? unId : 0,
       "Units": values?.unit_name,
       "IsActive": values?.isactive
     }
@@ -68,6 +70,7 @@ const AddUnits = () => {
             <Form.Item
               name="isactive"
               valuePropName="checked"
+              
             >
               <Checkbox>Is Active</Checkbox>
             </Form.Item>
@@ -79,7 +82,7 @@ const AddUnits = () => {
               }}
             >
               <Button  htmlType="submit" disabled={butDis} className='btnPrimary'>
-                Submit
+                {forEdit ? 'Edit' : 'Submit'}
               </Button>
             </Form.Item>
           </Form>

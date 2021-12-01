@@ -114,6 +114,12 @@ function App() {
           component={AsyncAddCategory}
           layout={AsyncAppLayout}
         />
+        <PrivateRouter
+          exact
+          path='/category/edit/:id'
+          component={AsyncAddCategory}
+          layout={AsyncAppLayout}
+        />
 
         <PrivateRouter
           exact
@@ -198,6 +204,13 @@ function App() {
           path='/units/add'
           component={AsyncAddUnits}
           layout={AsyncAppLayout}
+        />
+        <PrivateRouter
+          exact
+          path='/units/edit/:id'
+          component={AsyncAddUnits}
+          layout={AsyncAppLayout}
+          forEdit
         />
 
         <Route component={AsyncNotFound} />

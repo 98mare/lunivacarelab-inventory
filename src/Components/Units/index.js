@@ -1,42 +1,16 @@
 import { Table, Space } from 'antd'
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux';
 // import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
 import { getItemUnitApi } from '../../services/itemUnitService';
 
-const columns = [
-  {
-    title: 'Unit Name',
-    dataIndex: 'Units',
-    key: 'unitName',
-  },
-  {
-    title: 'Is Active',
-    dataIndex: 'IsActive',
-    key: 'IsActive',
-    render: (text) => {
-      if (text === true) {
-        return 'Active'
-      }
-      return 'Inactive'
-    }
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (text, record) => (
-      <Space size="middle">
-        <a href="#">Edit</a>
-        <a href="#">Delete</a>
-      </Space>
-    )
-  }
-]
+
 
 const Index = () => {
+  
   const history = useHistory();
   const dispatch = useDispatch();
   const [unitList, setunitList] = useState([])
@@ -50,6 +24,35 @@ const Index = () => {
       setunitList(val)
     }))
   }
+  const columns = [
+    {
+      title: 'Unit Name',
+      dataIndex: 'Units',
+      key: 'unitName',
+    },
+    {
+      title: 'Is Active',
+      dataIndex: 'IsActive',
+      key: 'IsActive',
+      render: (text) => {
+        if (text === true) {
+          return 'Active'
+        }
+        return 'Inactive'
+      }
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (text, record) => (
+        <Space size="middle">
+          <a onClick={()=>history.push(`./units/edit/${record.UnId}`)}>Edit</a>
+          {/* <a href="#">Edit</a> */}
+          {/* <a href="#">Delete</a> */}
+        </Space>
+      )
+    }
+  ]
 
   return (
     <UnitContainer>
