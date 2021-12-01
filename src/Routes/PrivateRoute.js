@@ -1,13 +1,13 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 import {Route} from "react-router-dom";
 import DashBoardContainer from '../Containers/DashBoardContainer'
-import styled from 'styled-components'
+// import styled from 'styled-components'
 import Item from '../Components/Item'
 import AddItem from '../Components/Item/AddItem';
 import GoodsIn from '../Components/GoodsIn'
 import AddGoods from '../Components/GoodsIn/AddGoods';
-import ErrorPage from '../Components/Common/ErrorPage';
+// import ErrorPage from '../Components/Common/ErrorPage';
 import Type from '../Components/Type'
 import AddType from '../Components/Type/AddType';
 import Category from '../Components/Category'
@@ -26,7 +26,7 @@ import Reports from  '../Components/Reports'
 import AddReports from '../Components/Reports/AddReports';
 
 const PrivateRoute = (props) => {
-  const history = useHistory();
+  // const history = useHistory();
   return (
       <>
       <Route path='/' exact>

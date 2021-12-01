@@ -40,7 +40,7 @@ const Filter = (props) => {
   }
 
   useEffect(() => {
-    if (dateRange === undefined) {
+    if (dateRange === undefined && itemType !== undefined && categroryType !== undefined) {
       dispatch(
         getItemTypeApi((val) => {
           setItemList(val)

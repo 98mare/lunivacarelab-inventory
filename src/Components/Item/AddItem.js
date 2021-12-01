@@ -81,7 +81,7 @@ const AddItem = () => {
       "IsActive": values?.isactive
     }
     dispatch(insertNewItemDetailsApi(data, (res) => {
-      if (res?.CreatedId > 0 && res?.SuccessMsg == true) {
+      if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
           window.location.reload(false);

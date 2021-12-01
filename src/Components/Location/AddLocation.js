@@ -1,11 +1,11 @@
-import { Form, Input, Button, Checkbox, Select, InputNumber, message, Row, Col } from 'antd';
-import { useState, useEffect } from 'react';
+import { Form, Input, Button, Checkbox, Select, message, Row, Col } from 'antd';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { insertLocationApi } from '../../services/itemLocationService';
 
 const AddLocation = () => {
-  const { Option } = Select;
+  // const { Option } = Select;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
 
@@ -18,7 +18,7 @@ const AddLocation = () => {
       "IsActive": values?.isactive
     }
     dispatch(insertLocationApi(data, (res) => {
-      if (res?.CreatedId > 0 && res?.SuccessMsg == true) {
+      if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
           window.location.reload(false);

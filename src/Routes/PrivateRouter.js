@@ -1,17 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Route } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+// import { useDispatch } from 'react-redux';
 
 const PrivateRouter = ({ component: Component, layout: Layout, forEdit, secondaryNav, secondaryNavigation, ...rest }) => {
 //   const dispatch = useDispatch();
-//   const history = useHistory();
 //   const profileReducer = useSelector(state => state.profile);
-
-//   useEffect(() => {
-//     essentialServices();
-//   }, [])
 
   const checkAuthentication = () => {
     return true

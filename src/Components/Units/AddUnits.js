@@ -1,61 +1,22 @@
-import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col, Descriptions } from 'antd';
-import { useEffect, useState } from 'react';
+import { Form, Input, Button, message, Row, Col, Checkbox } from 'antd';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { getManuDetApi } from '../../services/itemManufactureService';
-import { getLabItemsApi } from '../../services/itemNewItemService';
-import { insertGoodsReceivedApi } from '../../services/labGoodsReceivedService';
+import { insertItemUnitApi } from '../../services/itemUnitService';
 
 const AddUnits = () => {
-  const { Option } = Select;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
-  const [itemList, setitemList] = useState([])
-  const [manuList, setmanuList] = useState([])
-  const [enQty, setenQty] = useState(0);
-  const [enRate, setenRate] = useState(0);
-  const [totalCal, settotalCal] = useState(0);
-
-  const dateFormat = 'YYYY-MM-DD';
-
-  useEffect(() => {
-
-    dispatch(
-      getManuDetApi((val) => {
-        setmanuList(val)
-      })
-    )
-    getAllLabItem()
-  }, [])
-
-  const getAllLabItem = (ty = 0, cI = 0) => {
-    let data = {
-      typeId: ty,
-      categoryId: cI
-    }
-    dispatch(getLabItemsApi(data, (val) => {
-      setitemList(val)
-    }))
-  }
 
   const onFinish = (values) => {
     setButDis(true)
     let data = {
-      "GId": 0,
-      "ItemId": values?.item_name,
-      "Quantity": values?.qty,
-      "Rate": values?.rate,
-      "Total": totalCal,
-      "ExpiryDate": values?.expiry_date.format("YYYY-MM-DD"),
-      "ManufactureId": values?.manu_id,
-      "LotNo": values?.lot_no,
-      "ItmTrackId": values?.itm_track_id,
-      "CreatedDate": values?.create_date.format("YYYY-MM-DD"),
-      "CreatedBy": 1,
-      "ItemStatus": values?.itm_stat,
+      "UnId": 0,
+      "Units": values?.unit_name,
+      "IsActive": values?.isactive
     }
-    dispatch(insertGoodsReceivedApi(data, (res) => {
-      if (res?.CreatedId > 0 && res?.SuccessMsg == true) {
+    dispatch(insertItemUnitApi(data, (res) => {
+      if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
           window.location.reload(false);
@@ -70,15 +31,6 @@ const AddUnits = () => {
   const onFinishFailed = (errorInfo) => {
     setButDis(false)
   };
-
-  useEffect(() => {
-    calculateTotal()
-  }, [enQty, enRate])
-
-  const calculateTotal = () => {
-    let newTotal = enQty * enRate;
-    settotalCal(newTotal)
-  }
 
   return (
     <AddUnitsContainer>
@@ -101,159 +53,24 @@ const AddUnits = () => {
           >
 
             <Form.Item
-              label="Unit name"
-              name="item_name"
+              label="Unit Name"
+              name="unit_name"
               rules={[
                 {
                   required: true,
-                  message: 'Please input item name!',
+                  message: 'Please input unit name!',
                 },
               ]}
             >
-              <Select allowClear>
-                {itemList?.map(iTy => {
-                  return (
-                    <Option value={iTy?.TId}>
-                      {iTy?.ItemName}
-                    </Option>
-                  )
-                })
-                }
-              </Select>
+              <Input/>
             </Form.Item>
 
             <Form.Item
-              label="Quantity"
-              name="qty"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input quantity!',
-                },
-              ]}
+              name="isactive"
+              valuePropName="checked"
             >
-              <InputNumber
-                onInput={(val) => { setenQty(val) }}
-              />
+              <Checkbox>Is Active</Checkbox>
             </Form.Item>
-
-            <Form.Item
-              label="Rate"
-              name="rate"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input rate!',
-                },
-              ]}
-            >
-              <InputNumber
-                onInput={(val) => { setenRate(val) }}
-              />
-            </Form.Item>
-
-            <Form.Item
-              label="Lot No"
-              name="lot_no"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input lot no!',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Item Track"
-              name="itm_track_id"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input Item Track!',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Created Date"
-              name="create_date"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input Created Date!',
-                },
-              ]}
-            >
-              <DatePicker
-                format={dateFormat}
-              />
-            </Form.Item>
-
-            <Form.Item
-              label="Expiry Date"
-              name="expiry_date"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input Expiry Date!',
-                },
-              ]}
-            >
-              <DatePicker format={dateFormat} />
-            </Form.Item>
-
-            <Form.Item
-              label="Manufacturer"
-              name="manu_id"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please select Manufacturer!',
-                },
-              ]}
-            >
-              <Select allowClear>
-                {manuList?.map(iTy => {
-                  return (
-                    <Option value={iTy?.MId}>
-                      {iTy?.ManufactureBY}
-                    </Option>
-                  )
-                })
-                }
-              </Select>
-            </Form.Item>
-
-            <Form.Item
-              label="Item Status"
-              name="itm_stat"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input Item Status!',
-                },
-              ]}
-            >
-              <Select allowClear>
-                <Option value="0">Not Available</Option>
-                <Option value="1">Available</Option>
-              </Select>
-            </Form.Item>
-
-            <Descriptions
-              bordered
-              layout="horizontal"
-              column={1}
-              size="small"
-            >
-              <Descriptions.Item label="SubTotal">
-                {totalCal}
-              </Descriptions.Item>
-            </Descriptions>
 
             <Form.Item
               wrapperCol={{

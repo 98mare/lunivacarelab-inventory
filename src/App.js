@@ -2,7 +2,7 @@
 import { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
-import { AsyncAddCategory, AsyncAddItems, AsyncAddItemVsRatio, AsyncAddLocation, AsyncAddRack, AsyncAddReports, AsyncAddType, AsyncAddUnits, AsyncAddWastage, AsyncAppLayout, AsyncCategory, AsyncDashbord, AsyncGoodOut, AsyncGoodsIn, AsyncGoodsInAdd, AsyncGoodsOutAdd, AsyncItems, AsyncItemVsRatio, AsyncLocation, AsyncLogin, AsyncPublicLayout, AsyncRack, AsyncReports, AsyncSettings, AsyncType, AsyncUnits, AsyncWastage } from './App/asyncComponent';
+import { AsyncAddCategory, AsyncAddItems, AsyncAddItemVsRatio, AsyncAddLocation, AsyncAddRack, AsyncAddReports, AsyncAddType, AsyncAddUnits, AsyncAddWastage, AsyncAppLayout, AsyncCategory, AsyncDashbord, AsyncGoodOut, AsyncGoodsIn, AsyncGoodsInAdd, AsyncGoodsOutAdd, AsyncItems, AsyncItemVsRatio, AsyncLocation, AsyncLogin, AsyncNotFound, AsyncPublicLayout, AsyncRack, AsyncReports, AsyncSettings, AsyncType, AsyncUnits, AsyncWastage } from './App/asyncComponent';
 import Login from './Components/Login/Login';
 import useToken from './Components/Login/useToken';
 
@@ -100,7 +100,7 @@ function App() {
           path='/type/add'
           component={AsyncAddType}
           layout={AsyncAppLayout}
-        /> 
+        />
 
         <PrivateRouter
           exact
@@ -113,7 +113,7 @@ function App() {
           path='/category/add'
           component={AsyncAddCategory}
           layout={AsyncAppLayout}
-        /> 
+        />
 
         <PrivateRouter
           exact
@@ -126,7 +126,7 @@ function App() {
           path='/location/add'
           component={AsyncAddLocation}
           layout={AsyncAppLayout}
-        /> 
+        />
 
         <PrivateRouter
           exact
@@ -139,7 +139,7 @@ function App() {
           path='/rack/add'
           component={AsyncAddRack}
           layout={AsyncAppLayout}
-        /> 
+        />
 
         <PrivateRouter
           exact
@@ -152,7 +152,7 @@ function App() {
           path='/wastage/add'
           component={AsyncAddWastage}
           layout={AsyncAppLayout}
-        /> 
+        />
 
         <PrivateRouter
           exact
@@ -165,7 +165,7 @@ function App() {
           path='/itemvsratio/add'
           component={AsyncAddItemVsRatio}
           layout={AsyncAppLayout}
-        /> 
+        />
 
         <PrivateRouter
           exact
@@ -178,14 +178,14 @@ function App() {
           path='/reports/add'
           component={AsyncAddReports}
           layout={AsyncAppLayout}
-        /> 
+        />
 
         <PrivateRouter
           exact
           path='/settings'
           component={AsyncSettings}
           layout={AsyncAppLayout}
-        /> 
+        />
 
         <PrivateRouter
           exact
@@ -198,12 +198,9 @@ function App() {
           path='/units/add'
           component={AsyncAddUnits}
           layout={AsyncAppLayout}
-        /> 
+        />
 
-        
-
-        
-
+        <Route component={AsyncNotFound} />
 
       </Switch>
     </Suspense>

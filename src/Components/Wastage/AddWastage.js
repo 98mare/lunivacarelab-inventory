@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { getLabItemsApi } from '../../services/itemNewItemService';
 import { insertWastageApi } from '../../services/wastageService';
-import moment from 'moment';
+// import moment from 'moment';
 
 const AddWastage = () => {
   const { Option } = Select;
@@ -14,7 +14,7 @@ const AddWastage = () => {
   const [itemList, setItemList] = useState([])
 
   useEffect(() => {
-    getAllLabItem()
+    getAllLabItem(0,0)
   }, [])
 
 
@@ -41,7 +41,7 @@ const AddWastage = () => {
       "CreatedBy": 1
     }
     dispatch(insertWastageApi(data, (res) => {
-      if (res?.CreatedId > 0 && res?.SuccessMsg == true) {
+      if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
           window.location.reload(false);

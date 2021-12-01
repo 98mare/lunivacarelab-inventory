@@ -16,7 +16,7 @@ const AddType = () => {
       "IsActive": values?.isactive
     }
     dispatch(insertItemTypeApi(data, (res) => {
-      if (res?.CreatedId > 0 && res?.SuccessMsg == true) {
+      if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
           window.location.reload(false);

@@ -18,7 +18,7 @@ const AddGoodsOut = () => {
 
   useEffect(() => {
     getAllLabItem()
-  })
+  }, [])
 
   const getAllLabItem = (ty = 0, cI = 0) => {
     let data = {

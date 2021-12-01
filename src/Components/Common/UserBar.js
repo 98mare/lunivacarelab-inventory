@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { CaretDownFilled } from '@ant-design/icons'
-import { useDispatch } from 'react-redux';
-import { Menu, Dropdown, Button, Space } from 'antd'
+// import { useDispatch } from 'react-redux';
+import { Menu, Dropdown } from 'antd'
 import { Link, useHistory } from 'react-router-dom'
 
 const UserBar = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [userHere, setUserHere] = useState('');
 
   useEffect(() => {
