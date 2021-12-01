@@ -63,7 +63,7 @@ const Index = () => {
   return (
     <ItemContainer>
       <PageHeader
-        buttonTitle='add Button'
+        buttonTitle='Add Item'
         pageTitle='Item'
         buttonOnClick={() => history.push('./item/add')}
       ></PageHeader>
@@ -73,7 +73,7 @@ const Index = () => {
         dataRet={dataRet}
       />
       <div className="top"></div>
-      <Table
+      <Table className='margin-bottom-table'
         columns={columns}
         dataSource={tableData}
       />
@@ -91,4 +91,6 @@ const ItemContainer = styled.div`
   border-radius: 10px;
   border: 1px solid rgba( 255, 255, 255, 0.18 );
   overflow: hidden;
+  margin-bottom: 50px;
+  
 `

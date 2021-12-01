@@ -195,4 +195,5 @@ export default AddItemVsRatio;
 const AddItemVsRatioContainer = styled.div`
   background-color: #fefefe;
   padding-top: 30px;
+  margin-bottom: 50px;
 `

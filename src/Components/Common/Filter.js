@@ -81,10 +81,10 @@ const Filter = (props) => {
                 })
                 }
               </Select>
-            </Col>
+            </Col> 
           }
           {categroryType &&
-            <Col >
+            <Col> 
               <Select defaultValue="0" onChange={(val) => { setCatType(val) }} size='large' className='inputWidth'>
                 <Option value="0">All</Option>
                 {cateList?.map(iTy => {
@@ -98,7 +98,7 @@ const Filter = (props) => {
                 })
                 }
               </Select>
-            </Col>
+            </Col> 
           }
           {locateRange &&
             <Col>
