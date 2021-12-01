@@ -1,6 +1,9 @@
 import { lazy } from "react";
 
-// export const AsyncDashboard = lazy((()=> import('../Containers/DashBord')))
-export const AsyncAppLayout = lazy((()=> import('../AppLayout/AppLayout')))
+export const AsyncLogin = lazy(()=> import('../Components/Login/Login'))
 
-export const AsyncDashboard2 = lazy((()=> import('../Containers/DashBard2.js')))
+export const AsyncPublicLayout = lazy(() => import('../layout/publicLayout'));
+
+export const AsyncAppLayout = lazy(() => import('../layout/appLayout'));
+
+export const AsyncGoodsIn = lazy(() => import('../Components/GoodsIn/index'));
