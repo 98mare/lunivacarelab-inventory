@@ -1,14 +1,22 @@
 import { combineReducers } from 'redux';
+<<<<<<< HEAD
 import categorySlice from './slices/categorySlice';
 import goodsInSlice from './slices/goodsInSlice';
+=======
 import rackSlice from './slices/rackSlice';
+>>>>>>> 1b4c291747a4dea015a51aec905a17e575085e93
 import unitSlice from './slices/unitSlice';
 import userSlice from './slices/userSlice';
 
 const rootReducer = combineReducers({
     user: userSlice,
     units: unitSlice,
-category: categorySlice,
-    goodsin: goodsInSlice,racks: rackSlice})
+<<<<<<< HEAD
+    category: categorySlice,
+    goodsin: goodsInSlice,
+=======
+    racks: rackSlice
+>>>>>>> 1b4c291747a4dea015a51aec905a17e575085e93
+})
 
 export default rootReducer

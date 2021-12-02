@@ -1,11 +1,13 @@
 import { Form, Input, Button, message, Row, Col, Checkbox } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { getItemUnitApi, insertItemUnitApi } from '../../services/itemUnitService';
 
 const AddUnits = (props) => {
   const [form] = Form.useForm();
+  const history = useHistory()
   const { forEdit } = props;
   const unId = props?.match?.params?.id;
   const dispatch = useDispatch();
@@ -41,7 +43,7 @@ const AddUnits = (props) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
-          window.location.reload(false);
+          history.push('/units')
         }, 1000);
       } else {
         setButDis(false)
