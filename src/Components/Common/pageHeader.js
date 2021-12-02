@@ -2,14 +2,38 @@ import { Button, Col, Row } from 'antd'
 import React from 'react'
 import styled from 'styled-components'
 import AppButton from './AppButton'
+import { CSVLink } from 'react-csv';
+import { useSelector } from 'react-redux';
 
-const pageHeader = ({pageTitle,buttonTitle,buttonOnClick}) => {
+
+const PageHeader = ({pageTitle,buttonTitle,buttonOnClick, csvLinkTitle}) => {
+
+  // const itemReducer = useSelector((state) => state);
+  // console.log(itemReducer)
+  // const proRed = (value) => {
+  //   let newArr = [];
+  //   for (const key in value) {
+  //     if (Object.hasOwnProperty.call(value, key)) {
+  //       const ele = value[key];
+  //       newArr.push(ele)
+  //     }
+  //   }
+  //   return newArr;
+  // }
+  // let data = proRed(itemReducer?.products);
+
   return (
     <PageHeaderContainer>
       <Row justify='space-between align-center'>
         <span className='pageTtitle'>{pageTitle}</span>
         <Row>
           {buttonTitle && <AppButton buttonTitle={buttonTitle} buttonOnClick={buttonOnClick} ></AppButton>}
+
+          {
+            csvLinkTitle && 
+            <CSVLink filename={"sample-quote.csv"} className="btn ant-btn btn-primary btn-primary--outline" data='lol'>{csvLinkTitle}</CSVLink>
+
+          }
           
         </Row>
       </Row>
@@ -17,7 +41,7 @@ const pageHeader = ({pageTitle,buttonTitle,buttonOnClick}) => {
   )
 }
 
-export default pageHeader
+export default PageHeader
 
 const PageHeaderContainer = styled.div`
   background-color: #fefefe;

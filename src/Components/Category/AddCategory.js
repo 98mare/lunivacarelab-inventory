@@ -1,8 +1,8 @@
 import { Form, Input, Button, Checkbox, Select, InputNumber, message, Row, Col } from 'antd';
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { insertItemCategoryApi } from '../../services/itemCategoryService';
+import { getItemCategoryApi, insertItemCategoryApi } from '../../services/itemCategoryService';
 import AppButton from '../Common/AppButton';
 
 const AddCategory = (props) => {
@@ -11,6 +11,22 @@ const AddCategory = (props) => {
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
   const CuId = props?.match?.params?.id;
+  const category = useSelector(state => state.category)
+  const [previousValues, setpreviousValues] = useState(forEdit ? category?.category[CuId] : {})
+
+  useEffect(() => {
+    if(forEdit && previousValues === undefined){
+      dispatch(getItemCategoryApi((val) => {
+        setpreviousValues(val[0])
+      }, CuId))
+    }
+  }, [])
+
+  useEffect(() => {
+    console.log('asdf');
+    setpreviousValues(category?.category[CuId])
+  }, [category?.category[CuId]])
+
   const onFinish = (values) => {
     setButDis(true)
     let data = {
@@ -34,7 +50,13 @@ const AddCategory = (props) => {
   const onFinishFailed = (errorInfo) => {
     setButDis(false)
   };
-
+let prevVal = {}
+if(previousValues !== undefined){
+  prevVal = {
+    ...previousValues,
+  cate_type: previousValues['CategoryType']
+  }
+}
   return (
     <AddCategoryContainer>
       <Row justify='center'>
@@ -47,9 +69,7 @@ const AddCategory = (props) => {
             wrapperCol={{
               span: 18
             }}
-            initialValues={{
-              remember: true,
-            }}
+            initialValues={prevVal}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
