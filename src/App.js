@@ -2,7 +2,7 @@
 import { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
-import { AsyncAddCategory, AsyncAddItems, AsyncAddItemVsRatio, AsyncAddLocation, AsyncAddRack, AsyncAddReports, AsyncAddType, AsyncAddUnits, AsyncAddWastage, AsyncAppLayout, AsyncCategory, AsyncDashbord, AsyncGoodOut, AsyncGoodsIn, AsyncGoodsInAdd, AsyncGoodsOutAdd, AsyncItems, AsyncItemVsRatio, AsyncLocation, AsyncLogin, AsyncNotFound, AsyncPublicLayout, AsyncRack, AsyncReports, AsyncSettings, AsyncType, AsyncUnits, AsyncWastage } from './App/asyncComponent';
+import { AsyncAddCategory, AsyncAddItems, AsyncAddItemVsRatio, AsyncAddLocation, AsyncAddRack, AsyncAddType, AsyncAddUnits, AsyncAddWastage, AsyncAppLayout, AsyncCategory, AsyncCSVReports, AsyncDashbord, AsyncGoodOut, AsyncGoodsIn, AsyncGoodsInAdd, AsyncGoodsOutAdd, AsyncItems, AsyncItemVsRatio, AsyncLocation, AsyncLogin, AsyncNotFound, AsyncPublicLayout, AsyncRack, AsyncReports, AsyncSettings, AsyncType, AsyncUnits, AsyncWastage } from './App/asyncComponent';
 import Login from './Components/Login/Login';
 import useToken from './Components/Login/useToken';
 
@@ -224,8 +224,20 @@ function App() {
         />
         <PrivateRouter
           exact
-          path='/reports/add'
-          component={AsyncAddReports}
+          path='/reports/goodsin'
+          component={AsyncCSVReports}
+          layout={AsyncAppLayout}
+        />
+        <PrivateRouter
+          exact
+          path='/reports/goodsout'
+          component={AsyncCSVReports}
+          layout={AsyncAppLayout}
+        />
+        <PrivateRouter
+          exact
+          path='/reports/consumption'
+          component={AsyncCSVReports}
           layout={AsyncAppLayout}
         />
 
