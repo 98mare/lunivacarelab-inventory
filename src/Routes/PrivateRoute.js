@@ -23,7 +23,7 @@ import AddGoodsOut from '../Components/GoodsOut/AddGoodsOut';
 import ItemVsRatio from '../Components/ItemVsRatio'
 import AddItemVsRatio from '../Components/ItemVsRatio/AddItemVSRatio';
 import Reports from  '../Components/Reports'
-import AddReports from '../Components/Reports/AddReports';
+// import AddReports from '../Components/Reports/AddReports';
 
 const PrivateRoute = (props) => {
   // const history = useHistory();
@@ -100,7 +100,7 @@ const PrivateRoute = (props) => {
         <Reports/>
       </Route>
       <Route path='/reports/add' exact>
-        <AddReports/>
+        {/* <AddReports/> */}
       </Route>
       
       

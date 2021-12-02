@@ -2,48 +2,63 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import PageHeader from '../Common/pageHeader'
 import { Space, Table } from 'antd'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { getRackDetApi } from '../../services/itemRackService'
 import Filter from '../Common/Filter'
 
-const columns = [
+// const columns = [
+//   {
+//     title: 'Id',
+//     dataIndex: 'RId',
+//     key: 'rackId'
+//   },
+//   {
+//     title: 'Rack Code',
+//     dataIndex: 'RackCode',
+//     key: 'rackCode'
+//   },
+//   {
+//     title: 'Rack Name',
+//     dataIndex: 'RackName',
+//     key: 'rackName'
+//   },
+//   {
+//     title: 'Is Active',
+//     dataIndex: 'IsActive',
+//     key: 'isActive',
+//     render: (text) => {
+//       if (text === true) {
+//         return 'Active'
+//       }
+//       return 'Inactive'
+//     }
+//   },
+//   {
+//     title: 'action',
+//     key: 'action',
+//     render: (text, record) => (
+//       <Space size="middle">
+//         <a href="#">Edit</a>
+//         <a href="#">Delete</a>
+//       </Space>
+//     )
+//   }
+// ]
+
+const data = [
   {
-    title: 'Id',
-    dataIndex: 'RId',
-    key: 'rackId'
+    name: 'Goods in Report',
+    pathName: 'goodsin'
   },
   {
-    title: 'Rack Code',
-    dataIndex: 'RackCode',
-    key: 'rackCode'
+    name: 'Goods Out reports',
+    pathName: 'goodsout'
   },
   {
-    title: 'Rack Name',
-    dataIndex: 'RackName',
-    key: 'rackName'
+    name: 'Consumption',
+    pathName: 'consumption'
   },
-  {
-    title: 'Is Active',
-    dataIndex: 'IsActive',
-    key: 'isActive',
-    render: (text) => {
-      if (text === true) {
-        return 'Active'
-      }
-      return 'Inactive'
-    }
-  },
-  {
-    title: 'action',
-    key: 'action',
-    render: (text, record) => (
-      <Space size="middle">
-        <a href="#">Edit</a>
-        <a href="#">Delete</a>
-      </Space>
-    )
-  }
 ]
 
 const Index = () => {
@@ -60,12 +75,20 @@ const Index = () => {
 
   return (
     <ReportContainer>
-      <PageHeader pageTitle="Reports" buttonTitle='Add Reports' buttonOnClick={() => history.push('./reports/add')}></PageHeader>
-      <Filter dateRange></Filter>
+      <PageHeader pageTitle="Reports"></PageHeader>
+      {/* <Filter dateRange></Filter>
       <Table
         columns={columns}
         dataSource={tableData}
-      />
+      /> */}
+      <div className="contents">
+        {
+          data.map(e => (
+            <Link to={`./reports/${e.pathName}`} pathname={e.pathName}>{e.name}</Link>
+          ))
+        }
+      </div>
+     
     </ReportContainer>
   )
 }
@@ -81,4 +104,24 @@ const ReportContainer = styled.div`
   border: 1px solid rgba( 255, 255, 255, 0.18 );
   overflow: hidden;
   margin-bottom: 50px;
+  .contents{
+    width: 100%;
+    padding: 40px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    a{
+    font-size: 18px;
+    padding: 20px 30px;
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 2px 22px 0 rgba( 31, 38, 135, 0.17 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    }
+  }
+
+
+  
 `
