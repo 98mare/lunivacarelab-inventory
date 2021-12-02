@@ -1,33 +1,54 @@
 import { Form, Input, Button, Checkbox, Select, message, Row, Col } from 'antd';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { insertLocationApi } from '../../services/itemLocationService';
+import { getLocationApi, insertLocationApi } from '../../services/itemLocationService';
 
 const AddLocation = (props) => {
   // const { Option } = Select;
+  const [form] = Form.useForm()
+  const history = useHistory();
   const {forEdit} = props;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
   const LId = props?.match?.params?.id;
+  const locationReducer = useSelector(state => state.locations);
+  const [previousValues, setPreviousValues] = useState(forEdit ? locationReducer?.locations[LId] : {});
+
+  useEffect(() => {
+    if(forEdit && previousValues === undefined) {
+      dispatch(getLocationApi((val) => {}))
+    }
+  }, [])
+
+  useEffect(() => {
+    setPreviousValues(locationReducer?.locations[LId]);
+  }, [locationReducer?.locations[LId]])
+
+  useEffect(() => {
+    if(previousValues !== undefined){
+      form.resetFields()
+    }
+  }, [previousValues])
 
   const onFinish = (values) => {
     setButDis(true)
     let data = {
       "LId": forEdit ? LId : 0,
-      "LCode": values?.lcode,
-      "Location": values?.location_name,
-      "IsActive": values?.isactive
+      "LCode": values?.LCode,
+      "Location": values?.Location,
+      "IsActive": values?.IsActive
     }
     dispatch(insertLocationApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
-          window.location.reload(false);
+          history.push('/location')
         }, 1000);
       } else {
-        setButDis(true)
-        message.error(res?.Message)
+        setButDis(false)
+        message.error('Something went wrong, Try again')
       }
     }))
   };
@@ -41,6 +62,7 @@ const AddLocation = (props) => {
       <Row justify='center'>
         <Col span={16}>
           <Form
+          form={form}
             name="add_items"
             labelCol={{
               span: 6,
@@ -48,16 +70,14 @@ const AddLocation = (props) => {
             wrapperCol={{
               span: 18
             }}
-            initialValues={{
-              remember: true,
-            }}
+            initialValues={previousValues}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
             <Form.Item
               label="Location Code"
-              name="lcode"
+              name="LCode"
               rules={[
                 {
                   required: true,
@@ -70,7 +90,7 @@ const AddLocation = (props) => {
 
             <Form.Item
               label="Location name"
-              name="location_name"
+              name="Location"
               rules={[
                 {
                   required: true,
@@ -82,7 +102,7 @@ const AddLocation = (props) => {
             </Form.Item>
 
             <Form.Item
-              name="isactive"
+              name="IsActive"
               valuePropName="checked"
             >
               <Checkbox>Is Active</Checkbox>

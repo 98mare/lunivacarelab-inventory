@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux';
 const PageHeader = ({pageTitle,buttonTitle,buttonOnClick, csvLinkTitle}) => {
 
   const itemReducer = useSelector((state) => state.goodsin);
-  console.log(itemReducer)
   const proRed = (value) => {
     let newArr = [];
     for (const key in value) {
@@ -18,9 +17,7 @@ const PageHeader = ({pageTitle,buttonTitle,buttonOnClick, csvLinkTitle}) => {
         newArr.push(ele)
       }
     }
-    console.log("new aray" , newArr);
     return newArr;
-  
   }
   let data = proRed(itemReducer?.goodsin);
 

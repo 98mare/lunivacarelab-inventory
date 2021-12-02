@@ -1,17 +1,23 @@
 import { Form, Input, Button, Checkbox, Select, message, Row, Col } from 'antd';
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { getLocationApi } from '../../services/itemLocationService';
-import { insertRackDetailsApi } from '../../services/itemRackService';
+import { getRackDetApi, insertRackDetailsApi } from '../../services/itemRackService';
 
 const AddRack = (props) => {
+  const [form] = Form.useForm();
+  const history = useHistory();
   const {forEdit} = props;
   const { Option } = Select;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
   const [locationList, setlocationList] = useState([])
+  const locateId = props?.match?.params?.locate;
   const RId = props?.match?.params?.id;
+  const rackReducer = useSelector(state => state.racks);
+  const [previousValues, setPreviousValues] = useState(forEdit ? rackReducer?.racks[RId] : {});
 
   useEffect(() => {
     dispatch(
@@ -19,26 +25,40 @@ const AddRack = (props) => {
         setlocationList(val)
       })
     )
+
+    if(forEdit && previousValues === undefined) {
+      dispatch(getRackDetApi(locateId, (value) => {}))
+    }
   }, [])
+
+  useEffect(() => {
+    setPreviousValues(rackReducer?.racks[RId]);
+  }, [rackReducer?.racks[RId]])
+
+  useEffect(() => {
+    if(previousValues !== undefined){
+      form.resetFields()
+    }
+  }, [previousValues])
 
   const onFinish = (values) => {
     setButDis(true)
     let data = {
       "RId": forEdit ? RId : 0,
-      "RackCode": values?.rack_code,
-      "RackName": values?.rack_name,
-      "LocationId": values?.location,
-      "IsActive": values?.isactive
+      "RackCode": values?.RackCode,
+      "RackName": values?.RackName,
+      "LocationId": values?.LocationId,
+      "IsActive": values?.IsActive
     }
     dispatch(insertRackDetailsApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
-          window.location.reload(false);
+          history.push('/rack')
         }, 1000);
       } else {
-        setButDis(true)
-        message.error(res?.Message)
+        setButDis(false)
+        message.error('Something went wrong. Try again')
       }
     }))
   };
@@ -52,6 +72,7 @@ const AddRack = (props) => {
       <Row justify='center'>
         <Col span={16}>
           <Form
+          form={form}
             name="add_items"
             labelCol={{
               span: 6,
@@ -59,16 +80,14 @@ const AddRack = (props) => {
             wrapperCol={{
               span: 18
             }}
-            initialValues={{
-              remember: true,
-            }}
+            initialValues={previousValues}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
             <Form.Item
               label="Rack Code"
-              name="rack_code"
+              name="RackCode"
               rules={[
                 {
                   required: true,
@@ -81,7 +100,7 @@ const AddRack = (props) => {
 
             <Form.Item
               label="Rack name"
-              name="rack_name"
+              name="RackName"
               rules={[
                 {
                   required: true,
@@ -94,7 +113,7 @@ const AddRack = (props) => {
 
             <Form.Item
               label="Location"
-              name="location"
+              name="LocationId"
               rules={[
                 {
                   required: true,
@@ -115,7 +134,7 @@ const AddRack = (props) => {
             </Form.Item>
 
             <Form.Item
-              name="isactive"
+              name="IsActive"
               valuePropName="checked"
             >
               <Checkbox>Is Active</Checkbox>

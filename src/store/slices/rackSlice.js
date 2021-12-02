@@ -17,6 +17,7 @@ const rack = createSlice({
     initialState,
     reducers: {
         getAllRackSuccess: (state, action) => {
+            console.log(state, action);
             const { RackDetailsByLocationId } = action.payload;
             let normalizedrackData = normalize(RackDetailsByLocationId, rackListSchema)
             // state.allracksId = normalizedrackData.result;

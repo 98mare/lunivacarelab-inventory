@@ -170,7 +170,7 @@ function App() {
         />
         <PrivateRouter
           exact
-          path='/rack/edit/:id'
+          path='/rack/edit/:locate/:id'
           component={AsyncAddRack}
           layout={AsyncAppLayout}
           forEdit

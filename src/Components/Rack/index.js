@@ -47,7 +47,7 @@ const Index = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <a onClick={() => history.push(`rack/edit/${record.RId}`)}>Edit</a>
+          <a onClick={() => history.push(`rack/edit/${record.LocationId}/${record.RId}`)}>Edit</a>
           {/* <a href="#">Delete</a> */}
         </Space>
       )

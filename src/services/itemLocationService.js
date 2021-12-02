@@ -1,13 +1,16 @@
 import { GetLocationDetails, InsertUpdateLocation } from '../constants/url';
 import { fetch, store } from '../utils/httpUtil';
 import { generateUrlEncodedData } from '../utils/generateFormData';
+import { getAllLocationSuccess } from '../store/slices/locationSlice';
 
 export const getLocationApi = (successCallback, id = 0) => {
     return async dispatch => {
         try {
             const response = await fetch(`${GetLocationDetails}?id=${id}`);
-            if(response?.status === 200)
+            if(response?.status === 200){
                 successCallback(response?.data?.LocationDetails);
+                dispatch(getAllLocationSuccess(response?.data))
+            }
             else
                 successCallback([])
         } catch (error) {
