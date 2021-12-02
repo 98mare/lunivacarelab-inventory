@@ -5,19 +5,30 @@ import styled from 'styled-components';
 import { getItemUnitApi, insertItemUnitApi } from '../../services/itemUnitService';
 
 const AddUnits = (props) => {
+  const [form] = Form.useForm();
   const { forEdit } = props;
+  const unId = props?.match?.params?.id;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
-  const [previousValues, setPreviousValues] = useState(forEdit ? {unit_name: '123'} : {});
-  const unId = props?.match?.params?.id;
+  const unitReducer = useSelector(state => state.units);
+  const [previousValues, setPreviousValues] = useState(forEdit ? unitReducer?.units[unId] : {});
 
   useEffect(() => {
     if(forEdit && previousValues === undefined){
       dispatch(getItemUnitApi((val) => {
-        setPreviousValues(val[0]);
       }, unId));
     }
   }, [])
+
+  useEffect(() => {
+    setPreviousValues(unitReducer?.units[unId]);
+  }, [unitReducer?.units[unId]])
+
+  useEffect(() => {
+    if(previousValues !== undefined){
+      form.resetFields()
+    }
+  }, [previousValues])
 
   const onFinish = (values) => {
     setButDis(true)
@@ -33,8 +44,8 @@ const AddUnits = (props) => {
           window.location.reload(false);
         }, 1000);
       } else {
-        setButDis(true)
-        message.error(res?.Message)
+        setButDis(false)
+        message.error('Something went wrong please try again')
       }
     }))
   };
@@ -43,19 +54,29 @@ const AddUnits = (props) => {
     setButDis(false)
   };
 
+  let prevVal = {}
+  if(previousValues !== undefined) {
+    prevVal = {
+      ...previousValues,
+      unit_name: previousValues?.Units,
+      isactive: previousValues?.IsActive
+    }
+  }
+
   return (
     <AddUnitsContainer>
       <Row justify='center'>
         <Col span={16}>
           <Form
             name="add_items"
+            form={form}
             labelCol={{
               span: 6,
             }}
             wrapperCol={{
               span: 18
             }}
-            initialValues={previousValues}
+            initialValues={prevVal}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
