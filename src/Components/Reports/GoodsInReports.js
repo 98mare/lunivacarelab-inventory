@@ -32,7 +32,7 @@ const columns = [
     key: 'ItemStatus',
   }
 ]
-console.log("array distructoring", columns.title)
+// console.log("array distructoring", columns.title)
 
 const Index = () => {
   const history = useHistory();
@@ -42,7 +42,7 @@ const Index = () => {
   const getLabData = (data) => {
     dispatch(getGoodsReceivedApi(data, (val) => {
       setgoodsList(val)
-      console.log("this is goods list",goodsList);
+      // console.log("this is goods list",goodsList);
     }))
   }
 
@@ -59,16 +59,17 @@ const Index = () => {
     <GoodsInContainer>
       <PageHeader
        
-        pageTitle='Goods In'
+        pageTitle='Goods In Report'
         // buttonTitle='add Goods'
         // buttonOnClick={() => history.push('./goodsin/add')}
         csvLinkTitle='Export csv'
+        goodsIn
       ></PageHeader>
       <Filter
         dateRange
         dateRet={dataRet}
       ></Filter>
-      {console.log("new data ", goodsList)}
+      {/* {console.log("new data ", goodsList)} */}
       <Table className='tableWidth'
         columns={columns}
         dataSource={goodsList}

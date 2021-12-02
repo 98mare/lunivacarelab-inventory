@@ -4,12 +4,15 @@ import styled from 'styled-components'
 import AppButton from './AppButton'
 import { CSVLink } from 'react-csv';
 import { useSelector } from 'react-redux';
+import GoodsInCSV from './ExportsCsv/GoodsInCSV';
 
 
-const PageHeader = ({pageTitle,buttonTitle,buttonOnClick, csvLinkTitle}) => {
+const PageHeader = ({pageTitle,buttonTitle,buttonOnClick, csvLinkTitle, goodsIn}) => {
+
+
 
   const itemReducer = useSelector((state) => state.goodsin);
-  console.log(itemReducer)
+  // console.log(itemReducer)
   const proRed = (value) => {
     let newArr = [];
     for (const key in value) {
@@ -18,7 +21,7 @@ const PageHeader = ({pageTitle,buttonTitle,buttonOnClick, csvLinkTitle}) => {
         newArr.push(ele)
       }
     }
-    console.log("new aray" , newArr);
+    // console.log("new aray" , newArr);
     return newArr;
   
   }
@@ -33,8 +36,10 @@ const PageHeader = ({pageTitle,buttonTitle,buttonOnClick, csvLinkTitle}) => {
 
           {
             csvLinkTitle && 
+            <div className='link'>
             <CSVLink filename={"sample-quote.csv"} className="btn ant-btn btn-primary btn-primary--outline" data={data}>{csvLinkTitle}</CSVLink>
-
+            {/* <GoodsInCSV/> */}
+            </div>
           }
           
         </Row>

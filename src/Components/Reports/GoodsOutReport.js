@@ -1,63 +1,101 @@
+import { Table } from 'antd'
 import React, { useState } from 'react'
-import styled from 'styled-components'
-import PageHeader from '../Common/pageHeader'
-import { Space, Table } from 'antd'
 import { useHistory } from 'react-router-dom'
+import styled from 'styled-components'
 import { useDispatch } from 'react-redux';
-import { getRackDetApi } from '../../services/itemRackService'
 import Filter from '../Common/Filter'
+import PageHeader from '../Common/pageHeader'
+import { getGoodsOutApi } from '../../services/labGoodsOutService';
 
 const columns = [
   {
-    title: 'Id',
-    dataIndex: 'RId',
-    key: 'rackId'
+    title: 'Test Name',
+    dataIndex: 'Testname',
+    key: 'Testname',
   },
   {
-    title: 'Rack Code',
-    dataIndex: 'RackCode',
-    key: 'rackCode'
+    title: 'Item Name',
+    dataIndex: 'ItemName',
+    key: 'itemName',
   },
   {
-    title: 'Rack Name',
-    dataIndex: 'RackName',
-    key: 'rackName'
+    title: 'Quantity',
+    dataIndex: 'Quantity',
+    key: 'Quantity',
+  },
+  {
+    title: 'Goods Out Date',
+    dataIndex: 'GoodsOutDate',
+    key: 'GoodsOutDate',
+    render: (text) => {
+      return text.split('T')[0]
+    }
   },
   {
     title: 'Is Active',
     dataIndex: 'IsActive',
-    key: 'isActive',
+    key: 'IsActive',
     render: (text) => {
       if (text === true) {
         return 'Active'
       }
       return 'Inactive'
     }
+  }, 
+  {
+    title: 'Remarks',
+    dataIndex: 'Remarks',
+    key: 'Remarks',
   }
 ]
 
-const GoodsOutReport = () => {
+const Index = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
-//   const history = useHistory();
+  const [goodsList, setgoodsList] = useState([])
 
-  const [tableData, setTableData] = useState([])
-
-  const locateRange = (val) => {
-    dispatch(getRackDetApi(val, (value) => {
-      setTableData(value)
+  const getLabData = (data) => {
+    dispatch(getGoodsOutApi(data, (val) => {
+      setgoodsList(val)
     }))
   }
 
+  const dataRet = (val) => {
+    let data = {
+      fromdate: val[0].format("YYYY-MM-DD"),
+      todate: val[1].format("YYYY-MM-DD"),
+    }
+    getLabData(data)
+  }
+
   return (
-    <GoodsOutReportContainer>
-      <PageHeader pageTitle="Goods Out Report" />
-      <Filter dateRange></Filter>
+    <GoodsOutContainer>
+      <PageHeader
+        pageTitle='Goods Out Report'
+        csvLinkTitle='Export csv'
+        forCVSData='goodsout'
+      ></PageHeader>
+      <Filter
+        dateRange
+        dateRet={dataRet}
+      />
       <Table
         columns={columns}
-        dataSource={tableData}
+        dataSource={goodsList}
       />
-    </GoodsOutReportContainer>
+    </GoodsOutContainer>
   )
 }
 
-export default GoodsOutReport
+export default Index
+
+const GoodsOutContainer = styled.div`
+  background: rgba( 255, 255, 255, 0.25 );
+  box-shadow: 0 2px 22px 0 rgba( 31, 38, 135, 0.10 );
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  overflow: hidden;
+  margin-bottom: 50px;
+`

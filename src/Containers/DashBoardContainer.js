@@ -1,13 +1,15 @@
 // import { Button, Card } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
 import { MenuRoute } from '../Data/MenuRoute'
 // import DashbordCard from '../Components/Common/DashbordCard'
 // import PageHeader from '../Components/Common/pageHeader'
 
+
 const DashBoardContainer = () => {
   const data = MenuRoute;
+ 
   return (
     <DashbordContainer>
         {data.map(e => (

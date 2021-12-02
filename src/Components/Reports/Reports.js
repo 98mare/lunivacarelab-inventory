@@ -4,7 +4,7 @@ import PageHeader from '../Common/pageHeader';
 
 
 const Reports = (props) => {
-  console.log('this is props',props?.match?.path);
+  // console.log('this is props',props?.match?.path);
 
   return (
     <ReportsContainer>

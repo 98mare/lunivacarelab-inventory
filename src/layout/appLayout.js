@@ -1,14 +1,28 @@
-import React from 'react';
-import { Layout } from 'antd';
+import React, { useEffect } from 'react';
+import { Layout, Modal } from 'antd';
 import NavBar from '../Components/Common/NavBar';
 import SideNav from '../Components/Common/SideNav'
 import styled from 'styled-components'
 import BottomNav from '../Components/Common/BottomNav';
 import MobileNav from '../Components/Common/MobileNav';
+import pMinDelay from 'p-min-delay';
 
 const { Sider, Content } = Layout;
 
+// function success() {
+//   Modal.success({
+//     content: 'Welcome User',
+//   });
+// }
+// pMinDelay(success(), 200);
+
+
+
 const AppLayout = (props) => {
+  // useEffect(() => {
+  //   pMinDelay(success(), 200);
+  // }, [])
+  
     return (
         <MainAppContentComponentContainer>
             <Layout className="mainLayout" id="app-layout">

@@ -1,10 +1,22 @@
+import { Modal, Table } from 'antd';
+import pMinDelay from 'p-min-delay';
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 // import { useDispatch } from 'react-redux';
 // import { getLoginApi } from '../../services/loginService';
+
+function success() {
+  Modal.success({
+    content: 'Welccome user',
+    
+  });
+}
+
 
 export default function Login() {
   // const { setToken } = props;
   // const dispatch = useDispatch();
+  const history = useHistory();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
@@ -14,7 +26,14 @@ export default function Login() {
       user: username, 
       pass: password
     }
-    console.log(data);
+    if(data.user === 'admin' && data.pass === 'admin'){
+      history.push({
+        pathname: '/'
+      })
+      pMinDelay(success(), 1000);
+    }else{
+      console.log('noo');
+    }
     // dispatch(getLoginApi(data, (val) => {
     //   console.log(val);
     // }))

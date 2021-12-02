@@ -56,6 +56,7 @@ const Index = () => {
 
   const getLabData = (data) => {
     dispatch(getGoodsOutApi(data, (val) => {
+      // console.log(val);
       setgoodsList(val)
     }))
   }
