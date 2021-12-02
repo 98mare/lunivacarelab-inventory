@@ -1,31 +1,53 @@
 import { Form, Input, Button, Checkbox, message, Row, Col } from 'antd';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { insertItemTypeApi } from '../../services/itemItemTypeService';
+import { getItemTypeApi, insertItemTypeApi } from '../../services/itemItemTypeService';
 
 const AddType = (props) => {
+  const [form] = Form.useForm()
+  const history = useHistory();
   const {forEdit} = props;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
   const TId = props?.match?.params?.id;
+  const itemTypeReducer = useSelector(state => state.itemTypes);
+  const [previousValues, setPreviousValues] = useState(forEdit ? itemTypeReducer?.itemTypes[TId] : {});
+
+  useEffect(() => {
+    if(forEdit && previousValues === undefined) {
+      dispatch(getItemTypeApi((avl) => {}))
+    }
+  }, [])
+
+  useEffect(() => {
+    setPreviousValues(itemTypeReducer?.itemTypes[TId]);
+  }, [itemTypeReducer?.itemTypes[TId]])
+
+  useEffect(() => {
+    if(previousValues !== undefined){
+      form.resetFields()
+    }
+  }, [previousValues])
+
 
   const onFinish = (values) => {
     setButDis(true)
     let data = {
       "TId": forEdit ? TId : 0,
-      "ItemType": values?.item_type_name,
-      "IsActive": values?.isactive
+      "ItemType": values?.ItemType,
+      "IsActive": values?.IsActive
     }
     dispatch(insertItemTypeApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
-          window.location.reload(false);
+          history.push('/type')
         }, 1000);
       } else {
-        setButDis(true)
-        message.error(res?.Message)
+        setButDis(false)
+        message.error('Something went wrong. Try again')
       }
     }))
   };
@@ -39,6 +61,7 @@ const AddType = (props) => {
       <Row justify='center'>
         <Col span={16}>
           <Form
+          form={form}
             name="add_items"
             labelCol={{
               span: 6,
@@ -46,16 +69,14 @@ const AddType = (props) => {
             wrapperCol={{
               span: 18
             }}
-            initialValues={{
-              remember: true,
-            }}
+            initialValues={previousValues}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
             <Form.Item
               label="Item Type name"
-              name="item_type_name"
+              name="ItemType"
               rules={[
                 {
                   required: true,
@@ -67,7 +88,7 @@ const AddType = (props) => {
             </Form.Item>
 
             <Form.Item
-              name="isactive"
+              name="IsActive"
               valuePropName="checked"
             >
               <Checkbox>Is Active</Checkbox>

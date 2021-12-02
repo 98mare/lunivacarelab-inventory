@@ -12,7 +12,10 @@ const PageHeader = ({pageTitle,buttonTitle,buttonOnClick, csvLinkTitle, goodsIn}
 
 
   const itemReducer = useSelector((state) => state.goodsin);
+<<<<<<< HEAD
   // console.log(itemReducer)
+=======
+>>>>>>> 9b5a9fda94dea5d39465548d571cbdeb84e4570b
   const proRed = (value) => {
     let newArr = [];
     for (const key in value) {
@@ -21,9 +24,11 @@ const PageHeader = ({pageTitle,buttonTitle,buttonOnClick, csvLinkTitle, goodsIn}
         newArr.push(ele)
       }
     }
+<<<<<<< HEAD
     // console.log("new aray" , newArr);
+=======
+>>>>>>> 9b5a9fda94dea5d39465548d571cbdeb84e4570b
     return newArr;
-  
   }
   let data = proRed(itemReducer?.goodsin);
 
