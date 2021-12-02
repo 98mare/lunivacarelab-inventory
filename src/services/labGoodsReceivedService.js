@@ -1,14 +1,16 @@
 import { InsertUpdateLabGoodReceived, GetGoodReceivedDetailsByDate } from '../constants/url';
 import { fetch, store } from '../utils/httpUtil';
 import { generateUrlEncodedData } from '../utils/generateFormData';
+import { getAllGoodsInSucess } from '../store/slices/goodsInSlice';
 
 export const getGoodsReceivedApi = (data, successCallback) => {
     return async dispatch => {
         try {
             const response = await fetch(`${GetGoodReceivedDetailsByDate}?fromdate=${data.fromdate}&todate=${data.todate}`);
-            if(response?.status === 200)
+            if(response?.status === 200){
+                dispatch(getAllGoodsInSucess(response?.data))
                 successCallback(response?.data?.GetGoodReceivedDetailsByDate);
-            else
+            }else
                 successCallback([])
         } catch (error) {
             

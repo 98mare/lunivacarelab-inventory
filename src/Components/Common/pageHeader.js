@@ -8,19 +8,21 @@ import { useSelector } from 'react-redux';
 
 const PageHeader = ({pageTitle,buttonTitle,buttonOnClick, csvLinkTitle}) => {
 
-  // const itemReducer = useSelector((state) => state);
-  // console.log(itemReducer)
-  // const proRed = (value) => {
-  //   let newArr = [];
-  //   for (const key in value) {
-  //     if (Object.hasOwnProperty.call(value, key)) {
-  //       const ele = value[key];
-  //       newArr.push(ele)
-  //     }
-  //   }
-  //   return newArr;
-  // }
-  // let data = proRed(itemReducer?.products);
+  const itemReducer = useSelector((state) => state.goodsin);
+  console.log(itemReducer)
+  const proRed = (value) => {
+    let newArr = [];
+    for (const key in value) {
+      if (Object.hasOwnProperty.call(value, key)) {
+        const ele = value[key];
+        newArr.push(ele)
+      }
+    }
+    console.log("new aray" , newArr);
+    return newArr;
+  
+  }
+  let data = proRed(itemReducer?.goodsin);
 
   return (
     <PageHeaderContainer>
@@ -31,7 +33,7 @@ const PageHeader = ({pageTitle,buttonTitle,buttonOnClick, csvLinkTitle}) => {
 
           {
             csvLinkTitle && 
-            <CSVLink filename={"sample-quote.csv"} className="btn ant-btn btn-primary btn-primary--outline" data='lol'>{csvLinkTitle}</CSVLink>
+            <CSVLink filename={"sample-quote.csv"} className="btn ant-btn btn-primary btn-primary--outline" data={data}>{csvLinkTitle}</CSVLink>
 
           }
           

@@ -1,11 +1,14 @@
 import { Form, Input, Button, Checkbox, Select, InputNumber, message, Row, Col } from 'antd';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { getItemCategoryApi, insertItemCategoryApi } from '../../services/itemCategoryService';
 import AppButton from '../Common/AppButton';
 
 const AddCategory = (props) => {
+  const history = useHistory();
+  const [form] = Form.useForm()
   const {forEdit} = props;
   const { Option } = Select;
   const dispatch = useDispatch();
@@ -23,22 +26,27 @@ const AddCategory = (props) => {
   }, [])
 
   useEffect(() => {
-    console.log('asdf');
     setpreviousValues(category?.category[CuId])
   }, [category?.category[CuId]])
+
+  useEffect(() => {
+    if(previousValues !== undefined)
+      form.resetFields()
+  }, [previousValues])
 
   const onFinish = (values) => {
     setButDis(true)
     let data = {
       "CId": forEdit ? CuId : 0,
       "CategoryType": values?.cate_type,
-      "IsActive": values?.isactive
+      "IsActive": values?.IsActive
     }
     dispatch(insertItemCategoryApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg == true) {
         message.success(res?.Message)
         setTimeout(() => {
-          window.location.reload(false);
+          // window.location.reload(false);
+          history.push('/category')
         }, 1000);
       } else {
         setButDis(true)
@@ -62,6 +70,7 @@ if(previousValues !== undefined){
       <Row justify='center'>
         <Col span={16}>
           <Form
+          form={form}
             name="add_items"
             labelCol={{
               span: 6,
@@ -88,7 +97,7 @@ if(previousValues !== undefined){
             </Form.Item>
 
             <Form.Item
-              name="isactive"
+              name="IsActive"
               valuePropName="checked"
             >
               <Checkbox>Is Active</Checkbox>

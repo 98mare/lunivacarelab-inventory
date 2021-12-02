@@ -42,7 +42,7 @@ const Index = () => {
   const getLabData = (data) => {
     dispatch(getGoodsReceivedApi(data, (val) => {
       setgoodsList(val)
-      // console.log("this is goods list",goodsList);
+      console.log("this is goods list",goodsList);
     }))
   }
 
@@ -68,6 +68,7 @@ const Index = () => {
         dateRange
         dateRet={dataRet}
       ></Filter>
+      {console.log("new data ", goodsList)}
       <Table className='tableWidth'
         columns={columns}
         dataSource={goodsList}
