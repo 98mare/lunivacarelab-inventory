@@ -3,7 +3,7 @@ import { normalize, schema } from 'normalizr';
 
 const initialState = {
     units: {},
-    allUnitsId: [],
+    // allUnitsId: [],
 }
 
 
@@ -17,16 +17,13 @@ const unit = createSlice({
     initialState,
     reducers: {
         getAllUnitSuccess: (state, action) => {
-            console.log(state, action);
             const { units } = action.payload;
             let normalizedUnitData = normalize(units, unitListSchema)
-            state.allUnitsId = normalizedUnitData.result;
+            // state.allUnitsId = normalizedUnitData.result;
             state.units = normalizedUnitData.entities.unit
         }
     }
 })
-
-console.log(unit);
 
 export const {
     getAllUnitSuccess

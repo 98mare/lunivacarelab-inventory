@@ -5,27 +5,27 @@ export const BASE_URL = `${DEV_URL}Api/`; // see service for api or Api
 //GET
 /**
  * @desc: get item category
- * @param:
+ * @param: ?id={id}
  */
 export const GetItemCategory = 'GetItemCategory';
 /**
  * @desc: get item type
- * @param:
+ * @param: ?id={id}
  */
 export const GetItemType = 'GetItemType';
 /**
  * @desc: get units details
- * @param:
+ * @param: ?id={id}
  */
 export const GetUnitsDetails = 'GetUnitsDetails';
 /**
  * @desc: get manufacture details
- * @param:
+ * @param: ?id={id}
  */
 export const GetManufactureDetails = 'GetManufactureDetails';
 /**
  * @desc: get location details
- * @param:
+ * @param: ?id={id}
  */
 export const GetLocationDetails = 'LocationDetails';
 /**
@@ -50,7 +50,7 @@ export const RackDetailsByLocationId = 'RackDetailsByLocationId';
 export const GetlistOfwastageDetailsByDate = 'GetlistOfwastageDetailsByDate';
 /**
  * @desc: get list of item vs test ratio
- * @param: 
+ * @param: ?id={id}
  */
 export const GetListOfItemVsTestRatio = 'GetListOfItemVsTestRatio';
 /**

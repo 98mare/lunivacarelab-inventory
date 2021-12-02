@@ -3,18 +3,18 @@ import { fetch, store } from '../utils/httpUtil';
 import { generateUrlEncodedData } from '../utils/generateFormData';
 import { getAllUnitSuccess } from '../store/slices/unitSlice';
 
-export const getItemUnitApi = (successCallback) => {
+export const getItemUnitApi = (successCallback, id = 0) => {
     return async dispatch => {
         try {
-            const response = await fetch(GetUnitsDetails);
-            if(response?.status === 200){
-                // getAllUnitSuccess(response?.data)
+            const response = await fetch(`${GetUnitsDetails}?id=${id}`);
+            if (response?.status === 200) {
+                dispatch(getAllUnitSuccess(response?.data))
                 successCallback(response?.data?.units);
             }
             else
                 successCallback([])
         } catch (error) {
-            
+
         }
 
     }
