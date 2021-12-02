@@ -7,17 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import PageHeader from '../Common/pageHeader'
 import { getItemUnitApi } from '../../services/itemUnitService';
 
-
-
 const Index = () => {
   
   const history = useHistory();
   const dispatch = useDispatch();
   const [unitList, setunitList] = useState([])
-  const unitReducer = useSelector(state => state.unit);
 
   useEffect(() => {
-    console.log(unitReducer?.units);
     getLabData()
   }, [])
 
