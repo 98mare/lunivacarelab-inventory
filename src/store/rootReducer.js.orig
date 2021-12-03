@@ -1,22 +1,46 @@
 import { combineReducers } from 'redux';
-<<<<<<< HEAD
 import categorySlice from './slices/categorySlice';
 import goodsInSlice from './slices/goodsInSlice';
+<<<<<<< HEAD
+import goodsOutSlice from './slices/goodsOutSlice';
+import itemRatioSlice from './slices/itemRatioSlice';
+import locationSlice from './slices/locationSlice';
+import newItemSlice from './slices/newItemSlice';
 =======
+
+import goodsOutSlice from './slices/goodsOutSlice';
+
+import itemRatioSlice from './slices/itemRatioSlice';
+import locationSlice from './slices/locationSlice';
+
+>>>>>>> 74a33d2a36277659d7dab5e154e993ed4a245b11
 import rackSlice from './slices/rackSlice';
->>>>>>> 1b4c291747a4dea015a51aec905a17e575085e93
+import typeSlice from './slices/typeSlice';
 import unitSlice from './slices/unitSlice';
 import userSlice from './slices/userSlice';
+import wastageSlice from './slices/wastageSlice';
 
 const rootReducer = combineReducers({
     user: userSlice,
     units: unitSlice,
-<<<<<<< HEAD
     category: categorySlice,
+<<<<<<< HEAD
     goodsin: goodsInSlice,
+    goodsout: goodsOutSlice,
 =======
-    racks: rackSlice
->>>>>>> 1b4c291747a4dea015a51aec905a17e575085e93
+    goodsin: goodsInSlice, 
+    goodsout: goodsOutSlice, 
+>>>>>>> 74a33d2a36277659d7dab5e154e993ed4a245b11
+    racks: rackSlice,
+    locations: locationSlice,
+    itemTypes: typeSlice,
+    itemRatio: itemRatioSlice,
+<<<<<<< HEAD
+    wastage: wastageSlice,
+    newItem: newItemSlice,
+=======
+    
+>>>>>>> 74a33d2a36277659d7dab5e154e993ed4a245b11
 })
 
 export default rootReducer

@@ -73,7 +73,7 @@ const Index = () => {
       <PageHeader
         pageTitle='Goods Out Report'
         csvLinkTitle='Export csv'
-        forCVSData='goodsout'
+        goodsOut
       ></PageHeader>
       <Filter
         dateRange

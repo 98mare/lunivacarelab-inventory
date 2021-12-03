@@ -249,12 +249,12 @@ function App() {
           component={AsyncGoodsOutReports}
           layout={AsyncAppLayout}
         />
-        <PrivateRouter
+        {/* <PrivateRouter
           exact
           path='/reports/consumption'
-          component={AsyncCSVReports}
+          // component={AsyncCSVReports}
           layout={AsyncAppLayout}
-        />
+        /> */}
 
         <PrivateRouter
           exact

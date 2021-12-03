@@ -10,6 +10,7 @@ const PageHeader = ({pageTitle,buttonTitle,buttonOnClick, csvLinkTitle, goodsIn,
 
 // to CSV goods in report
   const goodsInReducer = useSelector((state) => state.goodsin);
+  console.log("goods in red", goodsInReducer);
   const GoodsInRed = (value) => {
     let newArr = [];
     for (const key in value) {
@@ -22,8 +23,15 @@ const PageHeader = ({pageTitle,buttonTitle,buttonOnClick, csvLinkTitle, goodsIn,
   }
   let goodsInData = GoodsInRed(goodsInReducer?.goodsin);
 
+<<<<<<< HEAD
   const itemReducer = useSelector((state) => state.goodsin);
+  const proRed = (value) => {
+=======
+  // to CSV goods out report
+  const GoodsOutReducer = useSelector((state) => state.goodsout);
+  console.log('goods out',GoodsOutReducer)
   const GoodsOutRed = (value) => {
+>>>>>>> 74a33d2a36277659d7dab5e154e993ed4a245b11
     let newArr = [];
     for (const key in value) {
       if (Object.hasOwnProperty.call(value, key)) {
@@ -50,7 +58,7 @@ const PageHeader = ({pageTitle,buttonTitle,buttonOnClick, csvLinkTitle, goodsIn,
             {/* <GoodsInCSV/> */}
             </div>
           }
-          
+
           {
             goodsOut && 
             <div className='link'>
