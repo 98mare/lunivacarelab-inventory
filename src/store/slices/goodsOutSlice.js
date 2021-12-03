@@ -15,7 +15,8 @@ const goodOut = createSlice({
     name: 'goodOut',
     initialState,
     reducers: {
-        getAllGoodsOutSuccess: (state, action) => {            const { GetListofGoodsOutRecordByDate } = action.payload;
+        getAllGoodsOutSuccess: (state, action) => {            
+            const { GetListofGoodsOutRecordByDate } = action.payload;
             let normalizedgoodOutData = normalize(GetListofGoodsOutRecordByDate, goodOutListSchema)
             // state.allgoodsOutsId = normalizedgoodOutData.result;
             state.goodsOuts = normalizedgoodOutData.entities.goodOut

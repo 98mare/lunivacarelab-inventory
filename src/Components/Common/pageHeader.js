@@ -5,10 +5,10 @@ import AppButton from './AppButton'
 import { CSVLink } from 'react-csv';
 import { useSelector } from 'react-redux';
 
-const PageHeader = ({pageTitle,buttonTitle,buttonOnClick, csvLinkTitle, goodsIn, goodsOut}) => {
+const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, goodsIn, goodsOut }) => {
 
 
-// to CSV goods in report
+  // to CSV goods in report
   const goodsInReducer = useSelector((state) => state.goodsin);
   const GoodsInRed = (value) => {
     let newArr = [];
@@ -22,7 +22,8 @@ const PageHeader = ({pageTitle,buttonTitle,buttonOnClick, csvLinkTitle, goodsIn,
   }
   let goodsInData = GoodsInRed(goodsInReducer?.goodsin);
 
-  const itemReducer = useSelector((state) => state.goodsin);
+  // to CSV goods out report
+  const GoodsOutReducer = useSelector((state) => state.goodsout);
   const GoodsOutRed = (value) => {
     let newArr = [];
     for (const key in value) {
@@ -33,7 +34,7 @@ const PageHeader = ({pageTitle,buttonTitle,buttonOnClick, csvLinkTitle, goodsIn,
     }
     return newArr;
   }
-  let goodsOutData = GoodsOutRed(GoodsOutReducer?.goodsout);
+  let goodsOutData = GoodsOutRed(GoodsOutReducer?.goodsOuts);
 
 
   return (
@@ -44,21 +45,21 @@ const PageHeader = ({pageTitle,buttonTitle,buttonOnClick, csvLinkTitle, goodsIn,
           {buttonTitle && <AppButton buttonTitle={buttonTitle} buttonOnClick={buttonOnClick} ></AppButton>}
 
           {
-            goodsIn && 
+            goodsIn &&
             <div className='link'>
-            <CSVLink filename={"goodsIn.csv"} className="btn ant-btn btn-primary btn-primary--outline" data={goodsInData}>{csvLinkTitle}</CSVLink>
-            {/* <GoodsInCSV/> */}
+              <CSVLink filename={"goodsIn.csv"} className="btn ant-btn btn-primary btn-primary--outline" data={goodsInData}>{csvLinkTitle}</CSVLink>
+              {/* <GoodsInCSV/> */}
             </div>
           }
-          
+
           {
-            goodsOut && 
+            goodsOut &&
             <div className='link'>
-            <CSVLink filename={"goodsOut.csv"} className="btn ant-btn btn-primary btn-primary--outline" data={goodsOutData}>{csvLinkTitle}</CSVLink>
-            {/* <GoodsInCSV/> */}
+              <CSVLink filename={"goodsOut.csv"} className="btn ant-btn btn-primary btn-primary--outline" data={goodsOutData}>{csvLinkTitle}</CSVLink>
+              {/* <GoodsInCSV/> */}
             </div>
           }
-          
+
         </Row>
       </Row>
     </PageHeaderContainer>
