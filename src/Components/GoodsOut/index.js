@@ -1,4 +1,4 @@
-import { Table } from 'antd'
+import { Space, Table } from 'antd'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
@@ -7,56 +7,64 @@ import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
 import { getGoodsOutApi } from '../../services/labGoodsOutService';
 
-const columns = [
-  {
-    title: 'Test Name',
-    dataIndex: 'Testname',
-    key: 'Testname',
-  },
-  {
-    title: 'Item Name',
-    dataIndex: 'ItemName',
-    key: 'itemName',
-  },
-  {
-    title: 'Quantity',
-    dataIndex: 'Quantity',
-    key: 'Quantity',
-  },
-  {
-    title: 'Goods Out Date',
-    dataIndex: 'GoodsOutDate',
-    key: 'GoodsOutDate',
-    render: (text) => {
-      return text.split('T')[0]
-    }
-  },
-  {
-    title: 'Is Active',
-    dataIndex: 'IsActive',
-    key: 'IsActive',
-    render: (text) => {
-      if (text === true) {
-        return 'Active'
-      }
-      return 'Inactive'
-    }
-  }, 
-  {
-    title: 'Remarks',
-    dataIndex: 'Remarks',
-    key: 'Remarks',
-  }
-]
-
 const Index = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [goodsList, setgoodsList] = useState([])
 
+  const columns = [
+    {
+      title: 'Test Name',
+      dataIndex: 'Testname',
+      key: 'Testname',
+    },
+    {
+      title: 'Item Name',
+      dataIndex: 'ItemName',
+      key: 'itemName',
+    },
+    {
+      title: 'Quantity',
+      dataIndex: 'Quantity',
+      key: 'Quantity',
+    },
+    {
+      title: 'Goods Out Date',
+      dataIndex: 'GoodsOutDate',
+      key: 'GoodsOutDate',
+      render: (text) => {
+        return text.split('T')[0]
+      }
+    },
+    {
+      title: 'Is Active',
+      dataIndex: 'IsActive',
+      key: 'IsActive',
+      render: (text) => {
+        if (text === true) {
+          return 'Active'
+        }
+        return 'Inactive'
+      }
+    },
+    {
+      title: 'Remarks',
+      dataIndex: 'Remarks',
+      key: 'Remarks',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (text, record) => (
+        <Space size="middle">
+          <a onClick={() => history.push(`/goodsout/edit/${record.GOId}/${record.GoodsOutDate}`)}>Edit</a>
+        </Space>
+      )
+    }
+  ]
+
   const getLabData = (data) => {
     dispatch(getGoodsOutApi(data, (val) => {
-      // console.log(val);
       setgoodsList(val)
     }))
   }

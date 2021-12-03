@@ -62,6 +62,13 @@ function App() {
           component={AsyncGoodsInAdd}
           layout={AsyncAppLayout}
         />
+        <PrivateRouter
+          exact
+          path='/goodsin/edit/:id/:from'
+          component={AsyncGoodsInAdd}
+          layout={AsyncAppLayout}
+          forEdit
+        />
 
         <PrivateRouter
           exact
@@ -77,7 +84,7 @@ function App() {
         />
         <PrivateRouter
           exact
-          path='/item/edit/:id'
+          path='/item/edit/:id/:typeId/:cateId'
           component={AsyncAddItems}
           layout={AsyncAppLayout}
           forEdit
@@ -95,6 +102,13 @@ function App() {
           path='/goodsout/add'
           component={AsyncGoodsOutAdd}
           layout={AsyncAppLayout}
+        />
+        <PrivateRouter
+          exact
+          path='/goodsout/edit/:id/:from'
+          component={AsyncGoodsOutAdd}
+          layout={AsyncAppLayout}
+          forEdit
         />
 
         <PrivateRouter

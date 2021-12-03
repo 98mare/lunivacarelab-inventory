@@ -1,4 +1,4 @@
-import { Table } from 'antd'
+import { Space, Table } from 'antd'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
@@ -7,36 +7,45 @@ import { getGoodsReceivedApi } from '../../services/labGoodsReceivedService'
 import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
 
-const columns = [
-  {
-    title: 'Item Name',
-    dataIndex: 'ItemName',
-    key: 'itemName',
-  },
-  {
-    title: 'Total',
-    dataIndex: 'Total',
-    key: 'Total',
-  },
-  {
-    title: 'Expiry Date',
-    dataIndex: 'ExpiryDate',
-    key: 'ExpiryDate',
-    render: (text) => {
-      return text.split('T')[0]
-    }
-  },
-  {
-    title: 'Item Status',
-    dataIndex: 'ItemStatus',
-    key: 'ItemStatus',
-  }
-]
-
 const Index = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [goodsList, setgoodsList] = useState([])
+
+  const columns = [
+    {
+      title: 'Item Name',
+      dataIndex: 'ItemName',
+      key: 'itemName',
+    },
+    {
+      title: 'Total',
+      dataIndex: 'Total',
+      key: 'Total',
+    },
+    {
+      title: 'Expiry Date',
+      dataIndex: 'ExpiryDate',
+      key: 'ExpiryDate',
+      render: (text) => {
+        return text.split('T')[0]
+      }
+    },
+    {
+      title: 'Item Status',
+      dataIndex: 'ItemStatus',
+      key: 'ItemStatus',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (text, record) => (
+        <Space size="middle">
+          <a onClick={() => history.push(`/goodsin/edit/${record.GId}/${record.CreatedDate}`)}>Edit</a>
+        </Space>
+      )
+    }
+  ]
 
   const getLabData = (data) => {
     dispatch(getGoodsReceivedApi(data, (val) => {

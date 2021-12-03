@@ -12,6 +12,8 @@ const Index = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [tableData, setTableData] = useState([]);
+  const [typId, setTypId] = useState(0)
+  const [catId, setCatId] = useState(0)
 
 
   const columns = [
@@ -35,8 +37,7 @@ const Index = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <a onClick={() => history.push(`./item/edit/${record.TId}`)}>Edit</a>
-          
+          <a onClick={() => history.push(`/item/edit/${record.TId}/${typId}/${catId}`)}>Edit</a>
         </Space>
       )
     }
@@ -58,6 +59,8 @@ const Index = () => {
 
   const dataRet = (val) => {
     getLabData(val?.iType, val?.cType)
+    setTypId(val?.iType)
+    setCatId(val?.cType)
   }
 
   return (

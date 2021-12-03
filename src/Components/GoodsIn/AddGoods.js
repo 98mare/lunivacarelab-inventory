@@ -1,13 +1,16 @@
 import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col, Descriptions } from 'antd';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { getManuDetApi } from '../../services/itemManufactureService';
 import { getLabItemsApi } from '../../services/itemNewItemService';
-import { insertGoodsReceivedApi } from '../../services/labGoodsReceivedService';
+import { getGoodsReceivedApi, insertGoodsReceivedApi } from '../../services/labGoodsReceivedService';
+import moment from 'moment';
 
-const AddGoods = () => {
+const AddGoods = (props) => {
+  const { forEdit } = props
   const { Option } = Select;
+  const [form] = Form.useForm()
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
   const [itemList, setitemList] = useState([])
@@ -15,11 +18,17 @@ const AddGoods = () => {
   const [enQty, setenQty] = useState(0);
   const [enRate, setenRate] = useState(0);
   const [totalCal, settotalCal] = useState(0);
+  const GId = props?.match?.params?.id;
+  const fromDat = props?.match?.params?.from;
+  const goodsInReducer = useSelector(state => state.goodsin);
+  const [previousValues, setPreviousValues] = useState(forEdit ? goodsInReducer?.goodsin[GId] : {});
 
   const dateFormat = 'YYYY-MM-DD';
 
   useEffect(() => {
-
+    if(forEdit && previousValues === undefined) {
+      dispatch(getGoodsReceivedApi({fromdate: fromDat, todate: fromDat}, (val) => {}))
+    }
     dispatch(
       getManuDetApi((val) => {
         setmanuList(val)
@@ -27,6 +36,20 @@ const AddGoods = () => {
     )
     getAllLabItem()
   }, [])
+
+  useEffect(() => {
+    setPreviousValues(goodsInReducer?.goodsin[GId]);
+  }, [goodsInReducer?.goodsin[GId]])
+
+  useEffect(() => {
+    if(previousValues !== undefined){
+      form.resetFields()
+
+      setenQty(previousValues?.Quantity);
+      setenRate(previousValues?.Rate);
+      settotalCal(previousValues?.Total);
+    }
+  }, [previousValues])
 
   const getAllLabItem = (ty = 0, cI = 0) => {
     let data = {
@@ -41,18 +64,18 @@ const AddGoods = () => {
   const onFinish = (values) => {
     setButDis(true)
     let data = {
-      "GId": 0,
-      "ItemId": values?.item_name,
-      "Quantity": values?.qty,
-      "Rate": values?.rate,
+      "GId": forEdit ? GId : 0,
+      "ItemId": values?.ItemId,
+      "Quantity": values?.Quantity,
+      "Rate": values?.Rate,
       "Total": totalCal,
       "ExpiryDate": values?.expiry_date.format("YYYY-MM-DD"),
-      "ManufactureId": values?.manu_id,
-      "LotNo": values?.lot_no,
-      "ItmTrackId": values?.itm_track_id,
+      "ManufactureId": values?.ManufactureId,
+      "LotNo": values?.LotNO,
+      "ItmTrackId": values?.ItmTrackId,
       "CreatedDate": values?.create_date.format("YYYY-MM-DD"),
       "CreatedBy": 1,
-      "ItemStatus": values?.itm_stat,
+      "ItemStatus": values?.ItemStatus,
     }
     dispatch(insertGoodsReceivedApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg == true) {
@@ -61,8 +84,8 @@ const AddGoods = () => {
           window.location.reload(false);
         }, 1000);
       } else {
-        setButDis(true)
-        message.error(res?.Message)
+        setButDis(false)
+        message.error('Something went wrong Try again')
       }
     }))
   };
@@ -80,11 +103,21 @@ const AddGoods = () => {
     settotalCal(newTotal)
   }
 
+  let prevVal = {}
+  if(previousValues !== undefined){
+    prevVal = {
+      ...previousValues,
+      create_date: moment(previousValues?.CreatedDate),
+      expiry_date: moment(previousValues?.ExpiryDate)
+    }
+  }
+
   return (
     <AddGoodsContainer>
       <Row justify='center'>
         <Col span={16}>
           <Form
+          form={form}
             name="add_items"
             labelCol={{
               span: 6,
@@ -92,9 +125,7 @@ const AddGoods = () => {
             wrapperCol={{
               span: 18
             }}
-            initialValues={{
-              remember: true,
-            }}
+            initialValues={prevVal}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
@@ -102,7 +133,7 @@ const AddGoods = () => {
 
             <Form.Item
               label="Item name"
-              name="item_name"
+              name="ItemId"
               rules={[
                 {
                   required: true,
@@ -124,7 +155,7 @@ const AddGoods = () => {
 
             <Form.Item
               label="Quantity"
-              name="qty"
+              name="Quantity"
               rules={[
                 {
                   required: true,
@@ -139,7 +170,7 @@ const AddGoods = () => {
 
             <Form.Item
               label="Rate"
-              name="rate"
+              name="Rate"
               rules={[
                 {
                   required: true,
@@ -154,7 +185,7 @@ const AddGoods = () => {
 
             <Form.Item
               label="Lot No"
-              name="lot_no"
+              name="LotNO"
               rules={[
                 {
                   required: true,
@@ -167,7 +198,7 @@ const AddGoods = () => {
 
             <Form.Item
               label="Item Track"
-              name="itm_track_id"
+              name="ItmTrackId"
               rules={[
                 {
                   required: true,
@@ -208,7 +239,7 @@ const AddGoods = () => {
 
             <Form.Item
               label="Manufacturer"
-              name="manu_id"
+              name="ManufactureId"
               rules={[
                 {
                   required: true,
@@ -230,7 +261,7 @@ const AddGoods = () => {
 
             <Form.Item
               label="Item Status"
-              name="itm_stat"
+              name="ItemStatus"
               rules={[
                 {
                   required: true,
@@ -262,7 +293,7 @@ const AddGoods = () => {
               }}
             >
               <Button  htmlType="submit" disabled={butDis} className='btnPrimary'>
-                Submit
+              {forEdit ? 'Edit' : 'Submit'}
               </Button>
             </Form.Item>
           </Form>

@@ -1,19 +1,22 @@
 import { Form, Input, Button, Checkbox, Select, InputNumber, message, Row, Col } from 'antd';
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { getItemCategoryApi } from '../../services/itemCategoryService';
 import { getItemTypeApi } from '../../services/itemItemTypeService';
 import { getLocationApi } from '../../services/itemLocationService';
 import { getManuDetApi } from '../../services/itemManufactureService';
-import { insertNewItemDetailsApi } from '../../services/itemNewItemService';
+import { getLabItemsApi, insertNewItemDetailsApi } from '../../services/itemNewItemService';
 import { getRackDetApi } from '../../services/itemRackService';
 import { getItemUnitApi } from '../../services/itemUnitService';
 import moment from 'moment';
+import { useHistory } from 'react-router-dom';
 
 const AddItem = (props) => {
-  const {forEdit} = props;
+  const { forEdit } = props;
   const { Option } = Select;
+  const [form] = Form.useForm()
+  const history = useHistory();
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
   const [itemList, setItemList] = useState([])
@@ -22,11 +25,29 @@ const AddItem = (props) => {
   const [manuList, setmanuList] = useState([])
   const [locationList, setlocationList] = useState([])
   const [rackList, setrackList] = useState([]);
-  const TId = props?.match?.params?.id;
+  const Param = props?.match?.params;
+  const TId = Param?.id;
+  const TyId = Param?.typeId;
+  const CaId = Param?.cateId;
+  const newItemReducer = useSelector(state => state.newItem);
+  const [previousValues, setPreviousValues] = useState(forEdit ? newItemReducer?.newItems[TId] : {});
 
   useEffect(() => {
+    if (forEdit && previousValues === undefined) {
+      dispatch(getLabItemsApi({ typeId: TyId, categoryId: CaId }, (val) => { }, TId))
+    }
     getAllItemList()
   }, [])
+
+  useEffect(() => {
+    setPreviousValues(newItemReducer?.newItems[TId]);
+  }, [newItemReducer?.newItems[TId]])
+
+  useEffect(() => {
+    if (previousValues !== undefined) {
+      form.resetFields()
+    }
+  }, [previousValues])
 
   const getAllItemList = () => {
 
@@ -59,7 +80,7 @@ const AddItem = (props) => {
 
   const handleRackLocation = (value) => {
     dispatch(
-      getRackDetApi( value, (val) => {
+      getRackDetApi(value, (val) => {
         setrackList(val)
       })
     )
@@ -69,33 +90,35 @@ const AddItem = (props) => {
     setButDis(true)
     let data = {
       "TId": forEdit ? TId : 0,
-      "ItemCode": values?.item_code,
-      "ItemName": values?.item_name,
-      "ItemTypeId": values?.item_type,
-      "ItemCategoryId": values?.item_category,
-      "UnitId": values?.item_unit,
-      "ManufactureId": values?.item_manufacturer,
-      "LocationId": values?.location,
-      "RackId": values?.item_rack,
-      "MinQty": values?.min_qty,
+      "ItemCode": values?.ItemCode,
+      "ItemName": values?.ItemName,
+      "ItemTypeId": values?.ItemTypeId,
+      "ItemCategoryId": values?.ItemCategoryId,
+      "UnitId": values?.UnitId,
+      "ManufactureId": values?.ManufactureId,
+      "LocationId": values?.LocationId,
+      "RackId": values?.RackId,
+      "MinQty": values?.MinQty,
       "CreatedBy": 1, //needs login userid
       "CreatedDate": moment().format('YYYY-MM-DD'), //default date for now update
-      "IsActive": values?.isactive
+      "IsActive": values?.IsActive
     }
     dispatch(insertNewItemDetailsApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
-          window.location.reload(false);
+          history.push('/item')
         }, 1000);
       } else {
-        setButDis(true)
-        message.error(res?.Message)
+        setButDis(false)
+        message.error('Something went wrong Try again')
       }
     }))
   };
 
   const onFinishFailed = (errorInfo) => {
+    // const value = form.getFieldValue(field.key)
+    // form.setFieldsValue({[field.key]: {...value, ['type']: your_new_value}})
     setButDis(false)
   };
 
@@ -104,6 +127,7 @@ const AddItem = (props) => {
       <Row justify='center'>
         <Col span={16}>
           <Form
+            form={form}
             name="add_items"
             labelCol={{
               span: 6,
@@ -111,16 +135,14 @@ const AddItem = (props) => {
             wrapperCol={{
               span: 18
             }}
-            initialValues={{
-              remember: true,
-            }}
+            initialValues={previousValues}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
             <Form.Item
               label="Item Code"
-              name="item_code"
+              name="ItemCode"
               rules={[
                 {
                   required: true,
@@ -133,7 +155,7 @@ const AddItem = (props) => {
 
             <Form.Item
               label="Item name"
-              name="item_name"
+              name="ItemName"
               rules={[
                 {
                   required: true,
@@ -146,7 +168,7 @@ const AddItem = (props) => {
 
             <Form.Item
               label="Item Type"
-              name="item_type"
+              name="ItemTypeId"
               rules={[
                 {
                   required: true,
@@ -168,7 +190,7 @@ const AddItem = (props) => {
 
             <Form.Item
               label="Item Category"
-              name="item_category"
+              name="ItemCategoryId"
               rules={[
                 {
                   required: true,
@@ -190,7 +212,7 @@ const AddItem = (props) => {
 
             <Form.Item
               label="Item unit"
-              name="item_unit"
+              name="UnitId"
               rules={[
                 {
                   required: true,
@@ -212,7 +234,7 @@ const AddItem = (props) => {
 
             <Form.Item
               label="Item manufacturer"
-              name="item_manufacturer"
+              name="ManufactureId"
               rules={[
                 {
                   required: true,
@@ -234,7 +256,7 @@ const AddItem = (props) => {
 
             <Form.Item
               label="Location"
-              name="location"
+              name="LocationId"
               rules={[
                 {
                   required: true,
@@ -242,7 +264,7 @@ const AddItem = (props) => {
                 },
               ]}
             >
-              <Select onChange={ (val) => handleRackLocation(val) } allowClear>
+              <Select onChange={(val) => handleRackLocation(val)} allowClear>
                 {locationList?.map(iTy => {
                   return (
                     <Option value={iTy?.LId}>
@@ -256,7 +278,7 @@ const AddItem = (props) => {
 
             <Form.Item
               label="Rack"
-              name="item_rack"
+              name="RackId"
               rules={[
                 {
                   required: true,
@@ -278,7 +300,7 @@ const AddItem = (props) => {
 
             <Form.Item
               label="Min Qty"
-              name="min_qty"
+              name="MinQty"
               rules={[
                 {
                   required: true,
@@ -290,7 +312,7 @@ const AddItem = (props) => {
             </Form.Item>
 
             <Form.Item
-              name="isactive"
+              name="IsActive"
               valuePropName="checked"
             >
               <Checkbox>Is Active</Checkbox>
@@ -303,7 +325,7 @@ const AddItem = (props) => {
               }}
             >
               <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
-                {forEdit ? 'edit' : 'Submit'}
+                {forEdit ? 'Edit' : 'Submit'}
               </Button>
             </Form.Item>
           </Form>

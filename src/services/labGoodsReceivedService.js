@@ -8,8 +8,8 @@ export const getGoodsReceivedApi = (data, successCallback) => {
         try {
             const response = await fetch(`${GetGoodReceivedDetailsByDate}?fromdate=${data.fromdate}&todate=${data.todate}`);
             if(response?.status === 200){
-                dispatch(getAllGoodsInSucess(response?.data))
                 successCallback(response?.data?.GetGoodReceivedDetailsByDate);
+                dispatch(getAllGoodsInSucess(response?.data))
             }else
                 successCallback([])
         } catch (error) {

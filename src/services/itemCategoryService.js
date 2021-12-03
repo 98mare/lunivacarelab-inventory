@@ -7,10 +7,11 @@ export const getItemCategoryApi = (successCallback, id = 0) => {
     return async dispatch => {
         try {
             const response = await fetch(`${GetItemCategory}?id=${id}`);
-            if (response?.status === 200){
-                dispatch(getAllCategorySuccess(response?.data))
-                if(id === 0)
+            if (response?.status === 200) {
+                if (id === 0) {
                     successCallback(response?.data?.ItemGategory);
+                }
+                dispatch(getAllCategorySuccess(response?.data))
             }
             else
                 successCallback([])
