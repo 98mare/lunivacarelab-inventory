@@ -4,19 +4,14 @@ import styled from 'styled-components'
 import AppButton from './AppButton'
 import { CSVLink } from 'react-csv';
 import { useSelector } from 'react-redux';
-import GoodsInCSV from './ExportsCsv/GoodsInCSV';
+
+const PageHeader = ({pageTitle,buttonTitle,buttonOnClick, csvLinkTitle, goodsIn, goodsOut}) => {
 
 
-const PageHeader = ({pageTitle,buttonTitle,buttonOnClick, csvLinkTitle, goodsIn}) => {
-
-
-
-  const itemReducer = useSelector((state) => state.goodsin);
-<<<<<<< HEAD
-  // console.log(itemReducer)
-=======
->>>>>>> 9b5a9fda94dea5d39465548d571cbdeb84e4570b
-  const proRed = (value) => {
+// to CSV goods in report
+  const goodsInReducer = useSelector((state) => state.goodsin);
+  console.log("goods in red", goodsInReducer);
+  const GoodsInRed = (value) => {
     let newArr = [];
     for (const key in value) {
       if (Object.hasOwnProperty.call(value, key)) {
@@ -24,13 +19,25 @@ const PageHeader = ({pageTitle,buttonTitle,buttonOnClick, csvLinkTitle, goodsIn}
         newArr.push(ele)
       }
     }
-<<<<<<< HEAD
-    // console.log("new aray" , newArr);
-=======
->>>>>>> 9b5a9fda94dea5d39465548d571cbdeb84e4570b
     return newArr;
   }
-  let data = proRed(itemReducer?.goodsin);
+  let goodsInData = GoodsInRed(goodsInReducer?.goodsin);
+
+  // to CSV goods out report
+  const GoodsOutReducer = useSelector((state) => state.goodsout);
+  console.log('goods out',GoodsOutReducer)
+  const GoodsOutRed = (value) => {
+    let newArr = [];
+    for (const key in value) {
+      if (Object.hasOwnProperty.call(value, key)) {
+        const ele = value[key];
+        newArr.push(ele)
+      }
+    }
+    return newArr;
+  }
+  let goodsOutData = GoodsOutRed(GoodsOutReducer?.goodsout);
+
 
   return (
     <PageHeaderContainer>
@@ -40,9 +47,17 @@ const PageHeader = ({pageTitle,buttonTitle,buttonOnClick, csvLinkTitle, goodsIn}
           {buttonTitle && <AppButton buttonTitle={buttonTitle} buttonOnClick={buttonOnClick} ></AppButton>}
 
           {
-            csvLinkTitle && 
+            goodsIn && 
             <div className='link'>
-            <CSVLink filename={"sample-quote.csv"} className="btn ant-btn btn-primary btn-primary--outline" data={data}>{csvLinkTitle}</CSVLink>
+            <CSVLink filename={"goodsIn.csv"} className="btn ant-btn btn-primary btn-primary--outline" data={goodsInData}>{csvLinkTitle}</CSVLink>
+            {/* <GoodsInCSV/> */}
+            </div>
+          }
+
+          {
+            goodsOut && 
+            <div className='link'>
+            <CSVLink filename={"goodsOut.csv"} className="btn ant-btn btn-primary btn-primary--outline" data={goodsOutData}>{csvLinkTitle}</CSVLink>
             {/* <GoodsInCSV/> */}
             </div>
           }

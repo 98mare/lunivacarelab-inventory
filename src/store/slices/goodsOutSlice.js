@@ -2,31 +2,31 @@ import { createSlice } from '@reduxjs/toolkit';
 import { normalize, schema } from 'normalizr';
 
 const initialState = {
-    goodsOuts: {},
+    goodsout: {},
     // allgoodsOutsId: [],
 }
 
 
-const goodOutEntity = new schema.Entity('goodOut', {}, {
-    idAttribute: 'UnId'
+const goodOutEntity = new schema.Entity('goodsout', {}, {
+    idAttribute: 'GOId'
 });
 const goodOutListSchema = new schema.Array(goodOutEntity);
 
-const goodOut = createSlice({
-    name: 'goodOut',
+const goodsout = createSlice({
+    name: 'goodsout',
     initialState,
     reducers: {
         getAllGoodsOutSuccess: (state, action) => {
-            const { goodsOuts } = action.payload;
-            let normalizedgoodOutData = normalize(goodsOuts, goodOutListSchema)
+            const { GetListofGoodsOutRecordByDate } = action.payload;
+            let normalizedgoodOutData = normalize(GetListofGoodsOutRecordByDate, goodOutListSchema)
             // state.allgoodsOutsId = normalizedgoodOutData.result;
-            state.goodsOuts = normalizedgoodOutData.entities.goodOut
+            state.goodsout = normalizedgoodOutData.entities.goodsout
         }
     }
 })
 
 export const {
     getAllGoodsOutSuccess
-} = goodOut.actions;
+} = goodsout.actions;
 
-export default goodOut.reducer;
+export default goodsout.reducer;
