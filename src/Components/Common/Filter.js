@@ -65,16 +65,16 @@ const Filter = (props) => {
   return (
     <FilterContainer>
       <Row justify='space-between'>
-        <Row justify='space-between' className='gapping'>
+        <Row  justify='space-between' className='gapping'>
           {itemType &&
-            <Col>
-              <Select defaultValue="0" onChange={(val) => { setiType(val) }} size='large' className='inputWidth'>
-                <Option value="0">All</Option>
+            <Col flex='50px' span={24}>
+              <Select  style={{width: '100%'}} defaultValue="0" onChange={(val) => { setiType(val) }} size='large' className='inputWidth'>
+                <Option  value="0">All</Option>
                 {itemList?.map(iTy => {
                   if (iTy?.IsActive) {
                     return (
                       <Option value={iTy?.TId}>
-                        {iTy?.ItemType}
+                        {iTy?.ItemType} 
                       </Option>
                     )
                   }
@@ -84,7 +84,7 @@ const Filter = (props) => {
             </Col> 
           }
           {categroryType &&
-            <Col> 
+            <Col flex='50px'> 
               <Select defaultValue="0" onChange={(val) => { setCatType(val) }} size='large' className='inputWidth'>
                 <Option value="0">All</Option>
                 {cateList?.map(iTy => {
@@ -141,8 +141,18 @@ const FilterContainer = styled.div`
   .gapping{
     gap: 20px;
     .inputWidth{
-      width: 300px;
+      /* width: 300px;
       text-align: left;
+      margin-bottom: 10px;
+     
+      
+      @media(max-width: 500px){
+        width: 360px;
+      }
+      @media(max-width: 768px){
+        width: 330px;
+      } */
+
     }
     @media(max-width: 500px){
       flex-direction: column;
