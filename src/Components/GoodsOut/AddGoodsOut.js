@@ -1,24 +1,44 @@
 import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col, Checkbox } from 'antd';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { getLabItemsApi } from '../../services/itemNewItemService';
-import { insertGoodsOutApi } from '../../services/labGoodsOutService';
+import { getGoodsOutApi, insertGoodsOutApi } from '../../services/labGoodsOutService';
 import { getTestListApi } from '../../services/itemVsRatioService';
+import moment from 'moment';
 
-const AddGoodsOut = () => {
+const AddGoodsOut = (props) => {
+  const { forEdit } = props
   const { Option } = Select;
   const { TextArea } = Input;
+  const [form] = Form.useForm()
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
   const [itemList, setitemList] = useState([])
   const [testList, settestList] = useState([])
+  const GOId = props?.match?.params?.id;
+  const fromDat = props?.match?.params?.from;
+  const goodsOutReducer = useSelector(state => state.goodsout);
+  const [previousValues, setPreviousValues] = useState(forEdit ? goodsOutReducer?.goodsOuts[GOId] : {});
 
   const dateFormat = 'YYYY-MM-DD';
 
   useEffect(() => {
+    if(forEdit && previousValues === undefined) {
+      dispatch(getGoodsOutApi({fromdate: fromDat, todate: fromDat}, (val) => {}))
+    }
     getAllLabItem()
   }, [])
+
+  useEffect(() => {
+    setPreviousValues(goodsOutReducer?.goodsOuts[GOId]);
+  }, [goodsOutReducer?.goodsOuts[GOId]])
+
+  useEffect(() => {
+    if(previousValues !== undefined){
+      form.resetFields()
+    }
+  }, [previousValues])
 
   const getAllLabItem = (ty = 0, cI = 0) => {
     let data = {
@@ -37,15 +57,15 @@ const AddGoodsOut = () => {
   const onFinish = (values) => {
     setButDis(true)
     let data = {
-      "GOId": 0,
-      "TestId": values?.test_id,
-      "ItemId": values?.item_name,
-      "GoodReceivedNo": values?.good_no,
-      "Quantity": values?.qty,
+      "GOId": forEdit ? GOId : 0,
+      "TestId": values?.TestId,
+      "ItemId": values?.ItemId,
+      "GoodReceivedNo": values?.GoodReceivedNo,
+      "Quantity": values?.Quantity,
       "UserId": 1,
-      "GoodsOutDate": values?.good_date.format('YYYY-MM-DD'),
-      "IsActive": values?.isactive,
-      "Remarks": values?.remarks
+      "GoodsOutDate": values?.GoodsOutDate.format('YYYY-MM-DD'),
+      "IsActive": values?.IsActive,
+      "Remarks": values?.Remarks
     }
     dispatch(insertGoodsOutApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
@@ -54,8 +74,8 @@ const AddGoodsOut = () => {
           window.location.reload(false);
         }, 1000);
       } else {
-        setButDis(true)
-        message.error(res?.Message)
+        setButDis(false)
+        message.error('Something went wrong Try again')
       }
     }))
   };
@@ -64,11 +84,20 @@ const AddGoodsOut = () => {
     setButDis(false)
   };
 
+  let prevVal = {}
+  if(previousValues !== undefined){
+    prevVal = {
+      ...previousValues,
+      GoodsOutDate: moment(previousValues?.GoodsOutDate)
+    }
+  }
+
   return (
     <AddGoodsOutContainer>
       <Row justify='center'>
         <Col span={16}>
           <Form
+          form={form}
             name="add_items"
             labelCol={{
               span: 6,
@@ -76,9 +105,7 @@ const AddGoodsOut = () => {
             wrapperCol={{
               span: 18
             }}
-            initialValues={{
-              remember: true,
-            }}
+            initialValues={prevVal}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
@@ -86,7 +113,7 @@ const AddGoodsOut = () => {
 
             <Form.Item
               label="Test"
-              name="test_id"
+              name="TestId"
               rules={[
                 {
                   required: true,
@@ -120,7 +147,7 @@ const AddGoodsOut = () => {
             </Form.Item>
             <Form.Item
               label="Item Name"
-              name="item_name"
+              name="ItemId"
               rules={[
                 {
                   required: true,
@@ -142,7 +169,7 @@ const AddGoodsOut = () => {
 
             <Form.Item
               label="Goods Received No"
-              name="good_no"
+              name="GoodReceivedNo"
               rules={[
                 {
                   required: true,
@@ -155,7 +182,7 @@ const AddGoodsOut = () => {
 
             <Form.Item
               label="Quantity"
-              name="qty"
+              name="Quantity"
               rules={[
                 {
                   required: true,
@@ -168,7 +195,7 @@ const AddGoodsOut = () => {
 
             <Form.Item
               label="Goods out Date"
-              name="good_date"
+              name="GoodsOutDate"
               rules={[
                 {
                   required: true,
@@ -183,11 +210,11 @@ const AddGoodsOut = () => {
 
             <Form.Item
               label="Remarks"
-              name="remarks"
+              name="Remarks"
               rules={[
                 {
                   required: true,
-                  message: 'Please input remarks!',
+                  message: 'Please input Remarks!',
                 },
               ]}
             >
@@ -195,7 +222,7 @@ const AddGoodsOut = () => {
             </Form.Item>
 
             <Form.Item
-              name="isactive"
+              name="IsActive"
               valuePropName="checked"
             >
               <Checkbox>Is Active</Checkbox>
@@ -208,7 +235,7 @@ const AddGoodsOut = () => {
               }}
             >
               <Button  htmlType="submit" disabled={butDis} className='btnPrimary'>
-                Submit
+                {forEdit ? 'Edit' : 'Submit'}
               </Button>
             </Form.Item>
           </Form>

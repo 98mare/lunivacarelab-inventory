@@ -8,7 +8,7 @@ const initialState = {
 
 
 const goodOutEntity = new schema.Entity('goodOut', {}, {
-    idAttribute: 'UnId'
+    idAttribute: 'GOId'
 });
 const goodOutListSchema = new schema.Array(goodOutEntity);
 
@@ -17,8 +17,8 @@ const goodOut = createSlice({
     initialState,
     reducers: {
         getAllGoodsOutSuccess: (state, action) => {
-            const { goodsOuts } = action.payload;
-            let normalizedgoodOutData = normalize(goodsOuts, goodOutListSchema)
+            const { GetListofGoodsOutRecordByDate } = action.payload;
+            let normalizedgoodOutData = normalize(GetListofGoodsOutRecordByDate, goodOutListSchema)
             // state.allgoodsOutsId = normalizedgoodOutData.result;
             state.goodsOuts = normalizedgoodOutData.entities.goodOut
         }

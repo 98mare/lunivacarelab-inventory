@@ -8,8 +8,8 @@ export const getItemUnitApi = (successCallback, id = 0) => {
         try {
             const response = await fetch(`${GetUnitsDetails}?id=${id}`);
             if (response?.status === 200) {
-                dispatch(getAllUnitSuccess(response?.data))
                 successCallback(response?.data?.units);
+                dispatch(getAllUnitSuccess(response?.data))
             }
             else
                 successCallback([])

@@ -1,24 +1,41 @@
 import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col } from 'antd';
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { getLabItemsApi } from '../../services/itemNewItemService';
-import { insertWastageApi } from '../../services/wastageService';
-// import moment from 'moment';
+import { getWastageApi, insertWastageApi } from '../../services/wastageService';
+import moment from 'moment';
 
 const AddWastage = (props) => {
   const {forEdit} = props;
   const { Option } = Select;
   const { TextArea } = Input;
+  const [form] = Form.useForm()
+  const history = useHistory();
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
   const [itemList, setItemList] = useState([])
   const WId = props?.match?.params?.id;
+  const wastageReducer = useSelector(state => state.wastage);
+  const [previousValues, setPreviousValues] = useState(forEdit ? wastageReducer?.wastages[WId] : {});
 
   useEffect(() => {
+    if(forEdit && previousValues === undefined) {
+      dispatch(getWastageApi({fromdate: '2021-11-28', todate: '2021-12-03'}, (val) => {}))
+    }
     getAllLabItem(0,0)
   }, [])
 
+  useEffect(() => {
+    setPreviousValues(wastageReducer?.wastages[WId]);
+  }, [wastageReducer?.wastages[WId]])
+
+  useEffect(() => {
+    if(previousValues !== undefined){
+      form.resetFields()
+    }
+  }, [previousValues])
 
   const getAllLabItem = (ty = 0, cI = 0) => {
     let data = {
@@ -30,27 +47,26 @@ const AddWastage = (props) => {
     }))
   }
 
-
   const onFinish = (values) => {
     setButDis(true)
     let data = {
       "WId": forEdit ? WId : 0,
-      "ItemId": values?.item_name,
-      "WastageAmount": values?.wastage_amount,
-      "Reason": values?.reason,
-      "Remarks": values?.remarks,
-      "CreatedDate": values?.created_date.format("YYYY-MM-DD"),
+      "ItemId": values?.ItemId,
+      "WastageAmount": values?.WastageAmount,
+      "Reason": values?.Reason,
+      "Remarks": values?.Remarks,
+      "CreatedDate": values?.CreatedDate.format("YYYY-MM-DD"),
       "CreatedBy": 1
     }
     dispatch(insertWastageApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
-          window.location.reload(false);
+          history.push('/wastage')
         }, 1000);
       } else {
-        setButDis(true)
-        message.error(res?.Message)
+        setButDis(false)
+        message.error('Something went wrong Try again')
       }
     }))
   };
@@ -59,11 +75,20 @@ const AddWastage = (props) => {
     setButDis(false)
   };
 
+  let prevVal = {}
+  if(previousValues !== undefined){
+    prevVal = {
+      ...previousValues,
+      CreatedDate: moment(previousValues?.CreatedDate)
+    }
+  }
+
   return (
     <AddWastageContainer>
       <Row justify='center'>
         <Col span={16}>
           <Form
+          form={form}
             name="add_items"
             labelCol={{
               span: 6,
@@ -71,9 +96,7 @@ const AddWastage = (props) => {
             wrapperCol={{
               span: 18
             }}
-            initialValues={{
-              remember: true,
-            }}
+            initialValues={prevVal}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
@@ -81,7 +104,7 @@ const AddWastage = (props) => {
 
             <Form.Item
               label="Item Name"
-              name="item_name"
+              name="ItemId"
               rules={[
                 {
                   required: true,
@@ -103,7 +126,7 @@ const AddWastage = (props) => {
 
             <Form.Item
               label="Wastage Amount"
-              name="wastage_amount"
+              name="WastageAmount"
               rules={[
                 {
                   required: true,
@@ -116,11 +139,11 @@ const AddWastage = (props) => {
 
             <Form.Item
               label="Reason"
-              name="reason"
+              name="Reason"
               rules={[
                 {
                   required: true,
-                  message: 'Please input reason!',
+                  message: 'Please input Reason!',
                 },
               ]}
             >
@@ -129,11 +152,11 @@ const AddWastage = (props) => {
 
             <Form.Item
               label="Remarks"
-              name="remarks"
+              name="Remarks"
               rules={[
                 {
                   required: true,
-                  message: 'Please input remarks!',
+                  message: 'Please input Remarks!',
                 },
               ]}
             >
@@ -142,7 +165,7 @@ const AddWastage = (props) => {
 
             <Form.Item
               label="Created Date"
-              name="created_date"
+              name="CreatedDate"
               rules={[
                 {
                   required: true,
