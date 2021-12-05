@@ -99,7 +99,7 @@ export default function Login() {
           rules={[{ required: true, message: 'Please input your username!' }]}
         // onChange={val => { setUsername(val.target.value) }}
         >
-          <Input autoFocus="true" />
+          <Input autoFocus={true} />
         </Form.Item>
 
         <Form.Item
