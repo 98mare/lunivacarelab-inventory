@@ -72,10 +72,13 @@ const Index = () => {
         dateRange
         dateRet={dataRet}
       ></Filter>
-      <Table className='tableWidth'
-        columns={columns}
-        dataSource={goodsList}
-      />
+      <div className="scrollTable">
+        <Table className='tableWidth'
+          columns={columns}
+          dataSource={goodsList}
+        />
+      </div>
+      
     </GoodsInContainer>
   )
 }
