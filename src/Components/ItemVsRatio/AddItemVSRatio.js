@@ -85,7 +85,7 @@ const AddItemVsRatio = (props) => {
   if(previousValues !== undefined){
     prevVal = {
       ...previousValues,
-      CreatedDate: moment(previousValues?.CreatedDate.split('T')[0])
+      CreatedDate: moment(previousValues?.CreatedDate)
     }
 
     // console.log(prevVal);

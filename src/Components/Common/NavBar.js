@@ -10,7 +10,8 @@ const NavBar = () => {
       
         <Row justify="space-between">
           <Col>
-            <SerchBar></SerchBar>
+            {/* <SerchBar></SerchBar> */}
+            <h1 style={{color: '#232324'}}>Inventory Management system</h1>
           </Col>
           <Col>
             <UserBar></UserBar>

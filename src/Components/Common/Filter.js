@@ -64,12 +64,12 @@ const Filter = (props) => {
 
   return (
     <FilterContainer>
-      <Row justify='space-between'>
-        <Row  justify='space-between' className='gapping'>
+      {/* <Row justify='space-between'> */}
+        <Row justify='space-between' className='gapping'>
           {itemType &&
-            <Col flex='50px' span={24}>
-              <Select  style={{width: '100%'}} defaultValue="0" onChange={(val) => { setiType(val) }} size='large' className='inputWidth'>
-                <Option  value="0">All</Option>
+            <Col xs={{span: 24, offset: 2}}>
+              <Select  defaultValue="0" onChange={(val) => { setiType(val) }} size='large' className='inputWidth'>
+                <Option   value="0">All</Option>
                 {itemList?.map(iTy => {
                   if (iTy?.IsActive) {
                     return (
@@ -84,7 +84,7 @@ const Filter = (props) => {
             </Col> 
           }
           {categroryType &&
-            <Col flex='50px'> 
+            <Col xs={{span: 24, offset: 2}}> 
               <Select defaultValue="0" onChange={(val) => { setCatType(val) }} size='large' className='inputWidth'>
                 <Option value="0">All</Option>
                 {cateList?.map(iTy => {
@@ -101,7 +101,7 @@ const Filter = (props) => {
             </Col> 
           }
           {locateRange &&
-            <Col>
+            <Col >
               <Select onChange={(val) => { setlocationId(val) }} size='large' className='inputWidth'>
                 {locationList?.map(iTy => {
                   if (iTy?.IsActive) {
@@ -122,12 +122,13 @@ const Filter = (props) => {
               <Datepicker defaultValuer={fromDate} onChanger={ (value) => {setfromDate(value)} }></Datepicker>
             </Col>
           }
-        </Row>
-
-        <Col >
+          <Col >
           <AppButton className='primary-btn' buttonTitle="Search" buttonOnClick={() => { handleClicker() }}></AppButton>
         </Col>
-      </Row>
+        </Row>
+
+        
+      {/* </Row> */}
     </FilterContainer>
   )
 }
@@ -140,17 +141,17 @@ const FilterContainer = styled.div`
   padding: 10px;
   .gapping{
     gap: 20px;
-    .inputWidth{
-      /* width: 300px;
+    /* .inputWidth{
+      width: 300px;
       text-align: left;
       margin-bottom: 10px;
      
       
       @media(max-width: 500px){
-        width: 360px;
+        width: 310px;
       }
-      @media(max-width: 768px){
-        width: 330px;
+      @media(max-width: 300px){
+        width: 180px;
       } */
 
     }

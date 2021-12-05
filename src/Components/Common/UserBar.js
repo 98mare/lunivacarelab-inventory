@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { CaretDownFilled } from '@ant-design/icons'
 // import { useDispatch } from 'react-redux';
 import { Menu, Dropdown } from 'antd'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, Redirect} from 'react-router-dom'
 
 const UserBar = () => {
   const history = useHistory();
@@ -15,8 +15,8 @@ const UserBar = () => {
   }, [])
 
   const handleLogout = () => {
-    localStorage.clear()
-    history.push('/login')
+    // localStorage.clear()
+    <Redirect to='/login'></Redirect>
   }
 
   // const handleUser = () => {

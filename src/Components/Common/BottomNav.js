@@ -1,6 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { Popover, Button } from 'antd';
+
+const text = <span>User Name</span>;
+const content = (
+  <div style={{
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '6px',
+    color: 'red'
+    }}>
+    <Link to=''>change passowrd</Link>
+    <Link to='/login'>log-out</Link>
+  </div>
+);
 
 const BottomNav = () => {
   return (
@@ -12,7 +26,9 @@ const BottomNav = () => {
         <Link to='/item'><i className='icon-line-box'></i></Link>
       </li>
       <li>
-        <Link to=''><i className='icon-user1'></i></Link>
+        <Popover placement="top" title={text} content={content} trigger="click">
+          <i className='icon-user1'></i>
+        </Popover>
       </li>
       <li>
         <Link to='/settings'><i className='icon-line2-settings'></i></Link>
@@ -25,6 +41,7 @@ export default BottomNav
 
 const BottomNavContainer = styled.div`
   display: none;
+  
   
   li{
     list-style: none;
