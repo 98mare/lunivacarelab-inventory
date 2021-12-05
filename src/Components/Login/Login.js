@@ -10,7 +10,7 @@ import styled from 'styled-components';
 
 function success() {
   Modal.success({
-    content: 'Welccome user',
+    content: 'Welcome user',
     
   });
 }
@@ -58,14 +58,14 @@ export default function Login() {
       ///here function call
       if(data.user === 'admin' && data.pass === 'admin'){
         setToken({token: data.user, username: 'Anib', roleId: 1, UId: 2})
-        setTimeout(() => {
-          if(token !== undefined){
+        // setTimeout(() => {
+        //   if(token !== undefined){
             history.push({
               pathname: '/'
             })
-            pMinDelay(success(), 2000);
-          }
-        }, 1000);
+            // pMinDelay(success(), 2000);
+        //   }
+        // }, 1000);
       }else{
         console.log('noo');
       }
@@ -98,7 +98,7 @@ export default function Login() {
       name="basic"
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
-      initialValues={{ remember: true }}
+      // initialValues={{ remember: true }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
@@ -110,7 +110,7 @@ export default function Login() {
         rules={[{ required: true, message: 'Please input your username!' }]}
         onChange={val => { setUsername(val.target.value) }}
       >
-        <Input/>
+        <Input autoFocus="true" />
       </Form.Item>
 
       <Form.Item

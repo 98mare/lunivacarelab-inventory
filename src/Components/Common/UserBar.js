@@ -17,19 +17,15 @@ const UserBar = () => {
 
   const handleLogout = () => {
     localStorage.clear()
-    
-    console.log('potaot potato')
   }
 
   const handleUser = () => {
-    // const tokenString = JSON.parse(localStorage.getItem('token'));
-    // <tokenString />
-    console.log(tokenString);
-    if(tokenString === null){
+    const tokenStrings = JSON.parse(localStorage.getItem('token'));
+    if(tokenStrings === null){
       history.push('/login');
       return
     }
-    setUserHere(tokenString.username);
+    setUserHere(tokenStrings.username);
   }
 
   const content = (
@@ -52,7 +48,6 @@ const UserBar = () => {
           <i className='icon-user1'></i>
           <span className='userName'>{userHere}</span>
         </Popover>
-
     </UserBarContainer>
   )
 }

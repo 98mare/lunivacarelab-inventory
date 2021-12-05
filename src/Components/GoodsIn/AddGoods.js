@@ -8,12 +8,14 @@ import { getGoodsReceivedApi, insertGoodsReceivedApi } from '../../services/labG
 import moment from 'moment';
 import { tokenString } from '../Common/HandleUser';
 import { formItemLayout } from '../Common/FormItemLayout';
+import { useHistory } from 'react-router-dom';
 
 const AddGoods = (props) => {
   const { forEdit } = props
   const { Option } = Select;
   const [form] = Form.useForm()
   const dispatch = useDispatch();
+  const history = useHistory();
   const [butDis, setButDis] = useState(false);
   const [itemList, setitemList] = useState([])
   const [manuList, setmanuList] = useState([])
@@ -83,7 +85,7 @@ const AddGoods = (props) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
-          window.location.reload(false);
+          history.push('/goodsin')
         }, 1000);
       } else {
         setButDis(false)
