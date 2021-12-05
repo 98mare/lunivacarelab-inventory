@@ -17,7 +17,7 @@ const UserBar = () => {
 
   const handleLogout = () => {
     localStorage.clear()
-    // <Link to='/login'></Link>
+    
     console.log('potaot potato')
   }
 
@@ -39,30 +39,13 @@ const UserBar = () => {
     </div>
   );
 
-  const menu = (
-    <Menu>
-      {/* <Menu.Item>
-        <a target='_blank' rel='noopener noreferrer' href='#'>settings</a>
-      </Menu.Item> */}
-      <Menu.Item>
-        {/* <Link to='/login' onClick={handleLogout()}>{'logout'}</Link> */}
-      </Menu.Item>
-
-    </Menu>
-  )
+  
 
   return (
     <UserBarContainer>
-      {/* <div className="userIcon">
-        <img src="./Assets/icons/user.svg" alt="" />
-      </div>
-      <span className='userName'>{userHere}</span> */}
-      {/* <Dropdown overlay={menu} placement="bottomLeft">
-        <CaretDownFilled />
-      </Dropdown> */}
       <Popover placement="bottom" content={content} trigger="click">
           <i className='icon-user1'></i>
-          <span>{userHere}</span>
+          <span className='userName'>{userHere}</span>
         </Popover>
 
     </UserBarContainer>
@@ -77,7 +60,7 @@ const UserBarContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   border: 1px solid #fefefe;
-  padding: 5px 10px 5px 20px;
+  padding: 10px 20px;
   border-radius: 20px;
   background-color: #e95b29;
   color: #fefefe;
@@ -92,6 +75,7 @@ const UserBarContainer = styled.div`
   }
   .userName{
     font-size: 16px;
+    margin-left: 20px;
 
   }
 `

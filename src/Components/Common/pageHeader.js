@@ -42,7 +42,7 @@ const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, goods
       <Row justify='space-between align-center'>
         <span className='pageTtitle'>{pageTitle}</span>
         <Row>
-          {buttonTitle && <AppButton buttonTitle={buttonTitle} buttonOnClick={buttonOnClick} ></AppButton>}
+          {buttonTitle && <AppButton buttonTitle={buttonTitle} buttonOnClick={buttonOnClick} primaryBtn ></AppButton>}
 
           {
             goodsIn &&

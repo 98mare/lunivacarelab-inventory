@@ -5,6 +5,8 @@ import { useHistory } from 'react-router-dom';
 import useToken from './useToken';
 // import { useDispatch } from 'react-redux';
 // import { getLoginApi } from '../../services/loginService';
+import { Form, Input, Button, Checkbox } from 'antd';
+import styled from 'styled-components';
 
 function success() {
   Modal.success({
@@ -35,7 +37,7 @@ export default function Login() {
         history.push({
           pathname: '/'
         })
-        pMinDelay(success(), 1000);
+        pMinDelay(success(), 2000);
       // }
     }else{
       console.log('noo');
@@ -45,8 +47,18 @@ export default function Login() {
     // }))
   }
 
+  
+    const onFinish = (values) => {
+      console.log('Success:', values);
+    };
+  
+    const onFinishFailed = (errorInfo) => {
+      console.log('Failed:', errorInfo);
+    };
+
   return (
-    <form onSubmit={handleSubmit}>
+    <LoginFormContainer>
+    {/* <form onSubmit={handleSubmit}>
       <label>
         <p>Username</p>
         <input onChange={val => { setUsername(val.target.value) }} type="text" />
@@ -58,6 +70,63 @@ export default function Login() {
       <div>
         <button type="submit">Submit</button>
       </div>
-    </form>
+    </form> */}
+    <div className="logo">
+      <img src="./Assets/images/logo.png" alt="" />
+    </div>
+
+    <Form
+      name="basic"
+      labelCol={{ span: 8 }}
+      wrapperCol={{ span: 16 }}
+      initialValues={{ remember: true }}
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+      autoComplete="off"
+      onSubmitCapture={handleSubmit}
+    >
+      <Form.Item
+        label="Username"
+        name="username"
+        rules={[{ required: true, message: 'Please input your username!' }]}
+        onChange={val => { setUsername(val.target.value) }}
+      >
+        <Input/>
+      </Form.Item>
+
+      <Form.Item
+        label="Password"
+        name="password"
+        rules={[{ required: true, message: 'Please input your password!' }]}
+        onChange={val => { setPassword(val.target.value) }} 
+      >
+        <Input.Password />
+      </Form.Item>
+
+      {/* <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
+        <Checkbox>Remember me</Checkbox>
+      </Form.Item> */}
+
+      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+       
+      </Form.Item>
+    </Form>
+    </LoginFormContainer>
   )
 }
+
+const LoginFormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  .logo{
+    width: 300px;
+    img{
+      width: 100%;
+    }
+  }
+`

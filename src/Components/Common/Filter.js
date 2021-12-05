@@ -124,7 +124,7 @@ const Filter = (props) => {
         }
 
         {/* <Col md={3} sm={6} xs={24}> */}
-        <AppButton className='primary-btn' buttonTitle="Search" buttonOnClick={() => { handleClicker() }}></AppButton>
+        <AppButton className='primary-btn' buttonTitle="Search" buttonOnClick={() => { handleClicker() }} priamryOutlineBtn></AppButton>
       {/* </Col> */}
       
       </Row>
