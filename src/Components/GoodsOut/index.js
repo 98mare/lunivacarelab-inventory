@@ -22,11 +22,13 @@ const Index = () => {
       title: 'Item Name',
       dataIndex: 'ItemName',
       key: 'itemName',
+      responsive: ['sm'],
     },
     {
       title: 'Quantity',
       dataIndex: 'Quantity',
       key: 'Quantity',
+      responsive: ['md'],
     },
     {
       title: 'Goods Out Date',
@@ -34,7 +36,8 @@ const Index = () => {
       key: 'GoodsOutDate',
       render: (text) => {
         return text.split('T')[0]
-      }
+      },
+      responsive: ['md'],
     },
     {
       title: 'Is Active',
@@ -45,12 +48,14 @@ const Index = () => {
           return 'Active'
         }
         return 'Inactive'
-      }
+      },
+      responsive: ['sm'],
     },
     {
       title: 'Remarks',
       dataIndex: 'Remarks',
       key: 'Remarks',
+      responsive: ['md'],
     },
     {
       title: 'Action',
@@ -88,10 +93,12 @@ const Index = () => {
         dateRange
         dateRet={dataRet}
       />
+      <div className="tableisRes">
       <Table
         columns={columns}
         dataSource={goodsList}
       />
+      </div>
     </GoodsOutContainer>
   )
 }
@@ -107,4 +114,8 @@ const GoodsOutContainer = styled.div`
   border: 1px solid rgba( 255, 255, 255, 0.18 );
   overflow: hidden;
   margin-bottom: 50px;
+
+  .tableisRes {
+    overflow: auto;
+  }
 `

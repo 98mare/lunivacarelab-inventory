@@ -21,6 +21,19 @@ const AddGoodsOut = (props) => {
   const goodsOutReducer = useSelector(state => state.goodsout);
   const [previousValues, setPreviousValues] = useState(forEdit ? goodsOutReducer?.goodsOuts[GOId] : {});
 
+  const formItemLayout = {
+    labelCol: {
+      xs: { span: 24 },
+      sm: { span: 24 },
+      md: { span: 6 },
+    },
+    wrapperCol: {
+      xs: { span: 24 },
+      sm: { span: 24 },
+      md: { span: 10 },
+    },
+  };
+
   const dateFormat = 'YYYY-MM-DD';
 
   useEffect(() => {
@@ -92,6 +105,14 @@ const AddGoodsOut = (props) => {
     }
   }
 
+/*
+labelCol={{
+              span: 6,
+            }}
+            wrapperCol={{
+              span: 6
+            }}*/
+
   return (
     <AddGoodsOutContainer>
       <Row justify='center'>
@@ -99,12 +120,9 @@ const AddGoodsOut = (props) => {
           <Form
           form={form}
             name="add_items"
-            labelCol={{
-              span: 6,
-            }}
-            wrapperCol={{
-              span: 18
-            }}
+            {...formItemLayout}
+            labelAlign="left"
+            colon={false}
             initialValues={prevVal}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
@@ -177,7 +195,9 @@ const AddGoodsOut = (props) => {
                 },
               ]}
             >
-              <InputNumber />
+              <InputNumber 
+              style={{ width: '100%' }}
+              />
             </Form.Item>
 
             <Form.Item
@@ -190,7 +210,9 @@ const AddGoodsOut = (props) => {
                 },
               ]}
             >
-              <InputNumber />
+              <InputNumber 
+              style={{ width: '100%' }}
+              />
             </Form.Item>
 
             <Form.Item
@@ -204,6 +226,7 @@ const AddGoodsOut = (props) => {
               ]}
             >
               <DatePicker
+                style={{ width: '100%' }}
                 format={dateFormat}
               />
             </Form.Item>
