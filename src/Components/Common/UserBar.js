@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { CaretDownFilled } from '@ant-design/icons'
 // import { useDispatch } from 'react-redux';
-import { Menu, Dropdown } from 'antd'
+import { Menu, Dropdown, Popover, Button } from 'antd'
 import { Link, useHistory, Redirect} from 'react-router-dom'
+import { tokenString } from './HandleUser'
 
 const UserBar = () => {
   const history = useHistory();
@@ -11,26 +12,40 @@ const UserBar = () => {
   const [userHere, setUserHere] = useState('');
 
   useEffect(() => {
-    // handleUser()
+    handleUser()
   }, [])
 
   const handleLogout = () => {
-    // localStorage.clear()
-    <Redirect to='/login'></Redirect>
+    localStorage.clear()
+    // <Link to='/login'></Link>
+    console.log('potaot potato')
   }
 
-  // const handleUser = () => {
-  //   const tokenString = JSON.parse(localStorage.getItem('token'));
-  //   setUserHere(tokenString.username);
-  // }
+  const handleUser = () => {
+    // const tokenString = JSON.parse(localStorage.getItem('token'));
+    // <tokenString />
+    setUserHere(tokenString.username);
+  }
+
+  const content = (
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '6px',
+      color: 'red'
+      }}>
+      {/* <Link to=''>change passowrd</Link> */}
+      <Link to='/login' onClick={handleLogout}>log-out</Link>
+    </div>
+  );
 
   const menu = (
     <Menu>
-      <Menu.Item>
+      {/* <Menu.Item>
         <a target='_blank' rel='noopener noreferrer' href='#'>settings</a>
-      </Menu.Item>
+      </Menu.Item> */}
       <Menu.Item>
-        <Link onClick={() => handleLogout()}>{'logout'}</Link>
+        {/* <Link to='/login' onClick={handleLogout()}>{'logout'}</Link> */}
       </Menu.Item>
 
     </Menu>
@@ -38,13 +53,17 @@ const UserBar = () => {
 
   return (
     <UserBarContainer>
-      <div className="userIcon">
+      {/* <div className="userIcon">
         <img src="./Assets/icons/user.svg" alt="" />
       </div>
-      <span className='userName'>{userHere}</span>
-      <Dropdown overlay={menu} placement="bottomLeft">
+      <span className='userName'>{userHere}</span> */}
+      {/* <Dropdown overlay={menu} placement="bottomLeft">
         <CaretDownFilled />
-      </Dropdown>
+      </Dropdown> */}
+      <Popover placement="bottom" content={content} trigger="click">
+          <i className='icon-user1'></i>
+          <span>{userHere}</span>
+        </Popover>
 
     </UserBarContainer>
   )

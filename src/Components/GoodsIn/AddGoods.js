@@ -6,6 +6,7 @@ import { getManuDetApi } from '../../services/itemManufactureService';
 import { getLabItemsApi } from '../../services/itemNewItemService';
 import { getGoodsReceivedApi, insertGoodsReceivedApi } from '../../services/labGoodsReceivedService';
 import moment from 'moment';
+import { tokenString } from '../Common/HandleUser';
 
 const AddGoods = (props) => {
   const { forEdit } = props
@@ -74,7 +75,7 @@ const AddGoods = (props) => {
       "LotNo": values?.LotNO,
       "ItmTrackId": values?.ItmTrackId,
       "CreatedDate": values?.create_date.format("YYYY-MM-DD"),
-      "CreatedBy": 1,
+      "CreatedBy": tokenString.UId,
       "ItemStatus": values?.ItemStatus,
     }
     dispatch(insertGoodsReceivedApi(data, (res) => {

@@ -11,6 +11,7 @@ import { getRackDetApi } from '../../services/itemRackService';
 import { getItemUnitApi } from '../../services/itemUnitService';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
+import { tokenString } from '../Common/HandleUser';
 
 const AddItem = (props) => {
   const { forEdit } = props;
@@ -99,7 +100,7 @@ const AddItem = (props) => {
       "LocationId": values?.LocationId,
       "RackId": values?.RackId,
       "MinQty": values?.MinQty,
-      "CreatedBy": 1, //needs login userid
+      "CreatedBy": tokenString.UId, //needs login userid
       "CreatedDate": moment().format('YYYY-MM-DD'), //default date for now update
       "IsActive": values?.IsActive
     }

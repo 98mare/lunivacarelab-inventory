@@ -6,6 +6,7 @@ import { getLabItemsApi } from '../../services/itemNewItemService';
 import { getGoodsOutApi, insertGoodsOutApi } from '../../services/labGoodsOutService';
 import { getTestListApi } from '../../services/itemVsRatioService';
 import moment from 'moment';
+import { tokenString } from '../Common/HandleUser';
 
 const AddGoodsOut = (props) => {
   const { forEdit } = props
@@ -75,7 +76,7 @@ const AddGoodsOut = (props) => {
       "ItemId": values?.ItemId,
       "GoodReceivedNo": values?.GoodReceivedNo,
       "Quantity": values?.Quantity,
-      "UserId": 1,
+      "UserId": tokenString.UId,
       "GoodsOutDate": values?.GoodsOutDate.format('YYYY-MM-DD'),
       "IsActive": values?.IsActive,
       "Remarks": values?.Remarks

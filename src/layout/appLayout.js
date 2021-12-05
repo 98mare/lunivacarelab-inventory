@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { Layout, Modal } from 'antd';
+import React from 'react';
+import { Layout } from 'antd';
 import NavBar from '../Components/Common/NavBar';
 import SideNav from '../Components/Common/SideNav'
 import styled from 'styled-components'
 import BottomNav from '../Components/Common/BottomNav';
 import MobileNav from '../Components/Common/MobileNav';
-import pMinDelay from 'p-min-delay';
+// import pMinDelay from 'p-min-delay';
 
 const { Sider, Content } = Layout;
 

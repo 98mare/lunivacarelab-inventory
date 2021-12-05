@@ -8,13 +8,12 @@ export default function useToken() {
 
     const getToken = () => {
         const tokenString = localStorage.getItem('token');
-
         if (tokenString || profileReducer?.userData) {
             const userToken = JSON.parse(tokenString);
             if (!profileReducer?.userData) {
                 dispatch(storeUserData(userToken))
             }
-            return userToken?.token
+            return true;//userToken?.token
         }
 
     };

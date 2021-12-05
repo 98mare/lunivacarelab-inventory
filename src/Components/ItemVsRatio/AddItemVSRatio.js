@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { getLabItemsApi } from '../../services/itemNewItemService';
 import { getItemVsRatioApi, getTestListApi, insertItemVsRatioApi } from '../../services/itemVsRatioService';
 import moment from 'moment';
+import { tokenString } from '../Common/HandleUser';
 
 const AddItemVsRatio = (props) => {
   const {forEdit} = props;
@@ -62,7 +63,7 @@ const AddItemVsRatio = (props) => {
       "ItemPerUnitTest": values?.ItemPerUnitTest,
       "IsActive": values?.IsActive,
       "CreatedDate": values?.CreatedDate.format('YYYY-MM-DD'),
-      "CreatedBy": 1
+      "CreatedBy": tokenString.UId
     }
     dispatch(insertItemVsRatioApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {

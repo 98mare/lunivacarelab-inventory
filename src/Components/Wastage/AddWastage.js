@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { getLabItemsApi } from '../../services/itemNewItemService';
 import { getWastageApi, insertWastageApi } from '../../services/wastageService';
 import moment from 'moment';
+import { tokenString } from '../Common/HandleUser';
 
 const AddWastage = (props) => {
   const {forEdit} = props;
@@ -56,7 +57,7 @@ const AddWastage = (props) => {
       "Reason": values?.Reason,
       "Remarks": values?.Remarks,
       "CreatedDate": values?.CreatedDate.format("YYYY-MM-DD"),
-      "CreatedBy": 1
+      "CreatedBy": tokenString.UId
     }
     dispatch(insertWastageApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
