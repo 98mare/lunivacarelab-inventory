@@ -1,33 +1,17 @@
 
-import { Suspense, useEffect } from 'react';
+import { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import { AsyncAddCategory, AsyncAddItems, AsyncAddItemVsRatio, AsyncAddLocation, AsyncAddRack, AsyncAddType, AsyncAddUnits, AsyncAddWastage, AsyncAppLayout, AsyncCategory, AsyncCSVReports, AsyncDashbord, AsyncGoodOut, AsyncGoodsIn, AsyncGoodsInAdd, AsyncGoodsInReports, AsyncGoodsOutAdd, AsyncGoodsOutReports, AsyncItems, AsyncItemVsRatio, AsyncLocation, AsyncLogin, AsyncNotFound, AsyncPublicLayout, AsyncRack, AsyncReports, AsyncSettings, AsyncType, AsyncUnits, AsyncWastage } from './App/asyncComponent';
-import Login from './Components/Login/Login';
-import useToken from './Components/Login/useToken';
-
 import PrivateRouter from './Routes/PrivateRouter';
 import PublicRoute from './Routes/PublicRoute';
 
-
 function App() {
-  // const {token, setToken} = useToken();
-  // if(!token) {
-  //   return <Login setToken={setToken} />
-  // }
-  // return (
-  //   <div className="App">
-  //     <AppContentContainer />
-  //   </div>
-  // );
-
-
-
   return (
     <Suspense
       fallback={
         <div className='fallback-container'>
-        <img src="./assets/images/logo1.png" alt="" />
+          <img src="./assets/images/logo1.png" alt="" />
         </div>
       }
     >

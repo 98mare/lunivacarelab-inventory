@@ -1,15 +1,16 @@
-import { Form, Input, Button, Checkbox, Select, message, Row, Col } from 'antd';
+import { Form, Input, Button, Select, message, Row, Col, Switch } from 'antd';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { getLocationApi } from '../../services/itemLocationService';
 import { getRackDetApi, insertRackDetailsApi } from '../../services/itemRackService';
+import { formItemLayout } from '../Common/FormItemLayout';
 
 const AddRack = (props) => {
   const [form] = Form.useForm();
   const history = useHistory();
-  const {forEdit} = props;
+  const { forEdit } = props;
   const { Option } = Select;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
@@ -26,8 +27,8 @@ const AddRack = (props) => {
       })
     )
 
-    if(forEdit && previousValues === undefined) {
-      dispatch(getRackDetApi(locateId, (value) => {}))
+    if (forEdit && previousValues === undefined) {
+      dispatch(getRackDetApi(locateId, (value) => { }))
     }
   }, [])
 
@@ -36,7 +37,7 @@ const AddRack = (props) => {
   }, [rackReducer?.racks[RId]])
 
   useEffect(() => {
-    if(previousValues !== undefined){
+    if (previousValues !== undefined) {
       form.resetFields()
     }
   }, [previousValues])
@@ -48,7 +49,7 @@ const AddRack = (props) => {
       "RackCode": values?.RackCode,
       "RackName": values?.RackName,
       "LocationId": values?.LocationId,
-      "IsActive": values?.IsActive
+      "IsActive": values?.IsActive !== undefined ? true : false,
     }
     dispatch(insertRackDetailsApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
@@ -72,14 +73,9 @@ const AddRack = (props) => {
       <Row justify='center'>
         <Col span={16}>
           <Form
-          form={form}
+            form={form}
             name="add_items"
-            labelCol={{
-              span: 6,
-            }}
-            wrapperCol={{
-              span: 18
-            }}
+            {...formItemLayout}
             initialValues={previousValues}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
@@ -134,10 +130,11 @@ const AddRack = (props) => {
             </Form.Item>
 
             <Form.Item
+              label='Is Active'
               name="IsActive"
               valuePropName="checked"
             >
-              <Checkbox>Is Active</Checkbox>
+              <Switch />
             </Form.Item>
 
             <Form.Item
@@ -147,7 +144,7 @@ const AddRack = (props) => {
               }}
             >
               <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
-                {forEdit ? 'edit' : 'Submit'}
+                {forEdit ? 'Edit' : 'Submit'}
               </Button>
             </Form.Item>
           </Form>

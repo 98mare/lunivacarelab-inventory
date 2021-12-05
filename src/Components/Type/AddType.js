@@ -1,14 +1,15 @@
-import { Form, Input, Button, Checkbox, message, Row, Col } from 'antd';
+import { Form, Input, Button, message, Row, Col, Switch } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { getItemTypeApi, insertItemTypeApi } from '../../services/itemItemTypeService';
+import { formItemLayout } from '../Common/FormItemLayout';
 
 const AddType = (props) => {
   const [form] = Form.useForm()
   const history = useHistory();
-  const {forEdit} = props;
+  const { forEdit } = props;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
   const TId = props?.match?.params?.id;
@@ -16,8 +17,8 @@ const AddType = (props) => {
   const [previousValues, setPreviousValues] = useState(forEdit ? itemTypeReducer?.itemTypes[TId] : {});
 
   useEffect(() => {
-    if(forEdit && previousValues === undefined) {
-      dispatch(getItemTypeApi((avl) => {}))
+    if (forEdit && previousValues === undefined) {
+      dispatch(getItemTypeApi((avl) => { }))
     }
   }, [])
 
@@ -26,7 +27,7 @@ const AddType = (props) => {
   }, [itemTypeReducer?.itemTypes[TId]])
 
   useEffect(() => {
-    if(previousValues !== undefined){
+    if (previousValues !== undefined) {
       form.resetFields()
     }
   }, [previousValues])
@@ -37,7 +38,7 @@ const AddType = (props) => {
     let data = {
       "TId": forEdit ? TId : 0,
       "ItemType": values?.ItemType,
-      "IsActive": values?.IsActive
+      "IsActive": values?.IsActive !== undefined ? true : false,
     }
     dispatch(insertItemTypeApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
@@ -61,14 +62,9 @@ const AddType = (props) => {
       <Row justify='center'>
         <Col span={16}>
           <Form
-          form={form}
+            form={form}
             name="add_items"
-            labelCol={{
-              span: 6,
-            }}
-            wrapperCol={{
-              span: 18
-            }}
+            {...formItemLayout}
             initialValues={previousValues}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
@@ -88,10 +84,11 @@ const AddType = (props) => {
             </Form.Item>
 
             <Form.Item
+              label='Is Active'
               name="IsActive"
               valuePropName="checked"
             >
-              <Checkbox>Is Active</Checkbox>
+              <Switch />
             </Form.Item>
 
             <Form.Item
@@ -101,7 +98,7 @@ const AddType = (props) => {
               }}
             >
               <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
-                {forEdit ? 'edit': 'Submit'}
+                {forEdit ? 'edit' : 'Submit'}
               </Button>
             </Form.Item>
           </Form>

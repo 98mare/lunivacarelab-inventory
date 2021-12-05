@@ -1,0 +1,38 @@
+import { Col, Row } from 'antd'
+import React from 'react'
+import styled from 'styled-components'
+import UserBar from './UserBar'
+
+const NavBar = () => {
+  return (
+    <NavBarContainer>
+      
+        <Row justify="space-between">
+          <Col>
+<<<<<<< HEAD
+            {/* <SerchBar></SerchBar> */}
+            {/* <h1 style={{color: '#232324'}}>Inventory Management system</h1> */}
+=======
+            <h1 style={{color: '#232324'}}>Inventory Management system</h1>
+>>>>>>> 75f5db1c91d93574132f11a8f400bce0875e2181
+          </Col>
+          <Col>
+            <UserBar></UserBar>
+          </Col>
+        </Row>
+      
+    </NavBarContainer>
+  )
+}
+
+export default NavBar
+
+const NavBarContainer = styled.div`
+  padding: 20px;
+  cursor: pointer;
+  background-color: #fefefe;
+
+  @media(max-width: 500px){
+    display: none;
+  }
+`

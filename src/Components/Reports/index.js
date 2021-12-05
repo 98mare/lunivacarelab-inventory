@@ -1,11 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import PageHeader from '../Common/pageHeader'
-import { Space, Table } from 'antd'
-import { Link, useHistory } from 'react-router-dom'
-import { useDispatch } from 'react-redux';
-import { getRackDetApi } from '../../services/itemRackService'
-import Filter from '../Common/Filter'
+import { Link } from 'react-router-dom'
 
 // const columns = [
 //   {
@@ -62,25 +58,20 @@ const data = [
 ]
 
 const Index = () => {
-  const dispatch = useDispatch();
-  const history = useHistory();
+  // const dispatch = useDispatch();
+  // const history = useHistory();
 
-  const [tableData, setTableData] = useState([])
+  // const [tableData, setTableData] = useState([])
 
-  const locateRange = (val) => {
-    dispatch(getRackDetApi(val, (value) => {
-      setTableData(value)
-    }))
-  }
+  // const locateRange = (val) => {
+  //   dispatch(getRackDetApi(val, (value) => {
+  //     setTableData(value)
+  //   }))
+  // }
 
   return (
     <ReportContainer>
       <PageHeader pageTitle="Reports"></PageHeader>
-      {/* <Filter dateRange></Filter>
-      <Table
-        columns={columns}
-        dataSource={tableData}
-      /> */}
       <div className="contents">
         {
           data.map(e => (

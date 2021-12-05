@@ -1,4 +1,4 @@
-import { Form, Button, DatePicker, Select, InputNumber, message, Row, Col, Checkbox } from 'antd';
+import { Form, Button, DatePicker, Select, InputNumber, message, Row, Col, Switch } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -7,9 +7,10 @@ import { getLabItemsApi } from '../../services/itemNewItemService';
 import { getItemVsRatioApi, getTestListApi, insertItemVsRatioApi } from '../../services/itemVsRatioService';
 import moment from 'moment';
 import { tokenString } from '../Common/HandleUser';
+import { formItemLayout } from '../Common/FormItemLayout';
 
 const AddItemVsRatio = (props) => {
-  const {forEdit} = props;
+  const { forEdit } = props;
   const [form] = Form.useForm()
   const history = useHistory();
   const { Option } = Select;
@@ -20,12 +21,12 @@ const AddItemVsRatio = (props) => {
   const RId = props?.match?.params?.id;
   const itemRatioReducer = useSelector(state => state.itemRatio);
   const [previousValues, setPreviousValues] = useState(forEdit ? itemRatioReducer?.itemRatios[RId] : {});
-  
+
   const dateFormat = 'YYYY-MM-DD';
 
   useEffect(() => {
-    if(forEdit && previousValues === undefined) {
-      dispatch(getItemVsRatioApi((val) => {},RId))
+    if (forEdit && previousValues === undefined) {
+      dispatch(getItemVsRatioApi((val) => { }, RId))
     }
     getAllLabItem()
   }, [])
@@ -35,7 +36,7 @@ const AddItemVsRatio = (props) => {
   }, [itemRatioReducer?.itemRatios[RId]])
 
   useEffect(() => {
-    if(previousValues !== undefined){
+    if (previousValues !== undefined) {
       form.resetFields()
     }
   }, [previousValues])
@@ -61,7 +62,7 @@ const AddItemVsRatio = (props) => {
       "ItemId": values?.ItemId,
       "TestId": values?.TestId,
       "ItemPerUnitTest": values?.ItemPerUnitTest,
-      "IsActive": values?.IsActive,
+      "IsActive": values?.IsActive !== undefined ? true : false,
       "CreatedDate": values?.CreatedDate.format('YYYY-MM-DD'),
       "CreatedBy": tokenString.UId
     }
@@ -83,7 +84,7 @@ const AddItemVsRatio = (props) => {
   };
 
   let prevVal = {}
-  if(previousValues !== undefined){
+  if (previousValues !== undefined) {
     prevVal = {
       ...previousValues,
       CreatedDate: moment(previousValues?.CreatedDate)
@@ -97,14 +98,9 @@ const AddItemVsRatio = (props) => {
       <Row justify='center'>
         <Col span={16}>
           <Form
-          form={form}
+            form={form}
             name="add_items"
-            labelCol={{
-              span: 6,
-            }}
-            wrapperCol={{
-              span: 18
-            }}
+            {...formItemLayout}
             initialValues={prevVal}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
@@ -178,7 +174,7 @@ const AddItemVsRatio = (props) => {
                 },
               ]}
             >
-              <InputNumber />
+              <InputNumber style={{ width: '100%' }} />
             </Form.Item>
 
             <Form.Item
@@ -193,14 +189,16 @@ const AddItemVsRatio = (props) => {
             >
               <DatePicker
                 format={dateFormat}
+                style={{ width: '100%' }}
               />
             </Form.Item>
 
             <Form.Item
+              label='Is Active'
               name="IsActive"
               valuePropName="checked"
             >
-              <Checkbox>Is Active</Checkbox>
+              <Switch />
             </Form.Item>
 
             <Form.Item
@@ -210,7 +208,7 @@ const AddItemVsRatio = (props) => {
               }}
             >
               <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
-                {forEdit ? 'edit' : 'Submit'}
+                {forEdit ? 'Edit' : 'Submit'}
               </Button>
             </Form.Item>
           </Form>

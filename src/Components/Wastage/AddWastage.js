@@ -7,9 +7,10 @@ import { getLabItemsApi } from '../../services/itemNewItemService';
 import { getWastageApi, insertWastageApi } from '../../services/wastageService';
 import moment from 'moment';
 import { tokenString } from '../Common/HandleUser';
+import { formItemLayout } from '../Common/FormItemLayout';
 
 const AddWastage = (props) => {
-  const {forEdit} = props;
+  const { forEdit } = props;
   const { Option } = Select;
   const { TextArea } = Input;
   const [form] = Form.useForm()
@@ -22,10 +23,10 @@ const AddWastage = (props) => {
   const [previousValues, setPreviousValues] = useState(forEdit ? wastageReducer?.wastages[WId] : {});
 
   useEffect(() => {
-    if(forEdit && previousValues === undefined) {
-      dispatch(getWastageApi({fromdate: '2021-11-28', todate: '2021-12-03'}, (val) => {}))
+    if (forEdit && previousValues === undefined) {
+      dispatch(getWastageApi({ fromdate: '2021-11-28', todate: '2021-12-03' }, (val) => { }))
     }
-    getAllLabItem(0,0)
+    getAllLabItem(0, 0)
   }, [])
 
   useEffect(() => {
@@ -33,7 +34,7 @@ const AddWastage = (props) => {
   }, [wastageReducer?.wastages[WId]])
 
   useEffect(() => {
-    if(previousValues !== undefined){
+    if (previousValues !== undefined) {
       form.resetFields()
     }
   }, [previousValues])
@@ -77,7 +78,7 @@ const AddWastage = (props) => {
   };
 
   let prevVal = {}
-  if(previousValues !== undefined){
+  if (previousValues !== undefined) {
     prevVal = {
       ...previousValues,
       CreatedDate: moment(previousValues?.CreatedDate)
@@ -89,14 +90,9 @@ const AddWastage = (props) => {
       <Row justify='center'>
         <Col span={16}>
           <Form
-          form={form}
+            form={form}
             name="add_items"
-            labelCol={{
-              span: 6,
-            }}
-            wrapperCol={{
-              span: 18
-            }}
+            {...formItemLayout}
             initialValues={prevVal}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
@@ -135,7 +131,7 @@ const AddWastage = (props) => {
                 },
               ]}
             >
-              <InputNumber />
+              <InputNumber style={{ width: '100%' }} />
             </Form.Item>
 
             <Form.Item
@@ -174,7 +170,10 @@ const AddWastage = (props) => {
                 },
               ]}
             >
-              <DatePicker format='YYYY-MM-DD' />
+              <DatePicker
+                format='YYYY-MM-DD'
+                style={{ width: '100%' }}
+              />
             </Form.Item>
 
             <Form.Item
@@ -184,7 +183,7 @@ const AddWastage = (props) => {
               }}
             >
               <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
-                {forEdit? 'edit' : 'Submit'}
+                {forEdit ? 'Edit' : 'Submit'}
               </Button>
             </Form.Item>
           </Form>

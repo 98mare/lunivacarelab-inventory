@@ -1,14 +1,13 @@
 import { Table, Space } from 'antd'
 import React, { useState, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-import { useDispatch, useSelector } from 'react-redux';
-// import Filter from '../Common/Filter'
+import { useDispatch } from 'react-redux';
 import PageHeader from '../Common/pageHeader'
 import { getItemUnitApi } from '../../services/itemUnitService';
 
 const Index = () => {
-  
+
   const history = useHistory();
   const dispatch = useDispatch();
   const [unitList, setunitList] = useState([])
@@ -44,9 +43,7 @@ const Index = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <a onClick={()=>history.push(`./units/edit/${record.UnId}`)}>Edit</a>
-          {/* <a href="#">Edit</a> */}
-          {/* <a href="#">Delete</a> */}
+          <a onClick={() => history.push(`./units/edit/${record.UnId}`)}>Edit</a>
         </Space>
       )
     }
@@ -55,11 +52,10 @@ const Index = () => {
   return (
     <UnitContainer>
       <PageHeader
-        buttonTitle='add Units'
+        buttonTitle='Add Units'
         pageTitle='Units'
         buttonOnClick={() => history.push('./units/add')}
       ></PageHeader>
-      {/* <Filter/> */}
       <Table className='tableWidth'
         columns={columns}
         dataSource={unitList}

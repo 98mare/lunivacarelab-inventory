@@ -60,7 +60,7 @@ const Index = () => {
   return (
     <ItemContainer>
       <PageHeader
-        buttonTitle='add Item Vs Ratio'
+        buttonTitle='Add Item Vs Ratio'
         pageTitle='Item Vs Ratio'
         buttonOnClick={() => history.push('./itemvsratio/add')}
       ></PageHeader>

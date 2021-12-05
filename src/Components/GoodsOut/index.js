@@ -85,7 +85,7 @@ const Index = () => {
   return (
     <GoodsOutContainer>
       <PageHeader
-        buttonTitle='add Goods out'
+        buttonTitle='Add Goods out'
         pageTitle='Goods Out'
         buttonOnClick={() => history.push('./goodsout/add')}
       ></PageHeader>

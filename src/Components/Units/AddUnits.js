@@ -1,9 +1,10 @@
-import { Form, Input, Button, message, Row, Col, Checkbox } from 'antd';
+import { Form, Input, Button, message, Row, Col, Switch } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { getItemUnitApi, insertItemUnitApi } from '../../services/itemUnitService';
+import { formItemLayout } from '../Common/FormItemLayout';
 
 const AddUnits = (props) => {
   const [form] = Form.useForm();
@@ -16,7 +17,7 @@ const AddUnits = (props) => {
   const [previousValues, setPreviousValues] = useState(forEdit ? unitReducer?.units[unId] : {});
 
   useEffect(() => {
-    if(forEdit && previousValues === undefined){
+    if (forEdit && previousValues === undefined) {
       dispatch(getItemUnitApi((val) => {
       }, unId));
     }
@@ -27,7 +28,7 @@ const AddUnits = (props) => {
   }, [unitReducer?.units[unId]])
 
   useEffect(() => {
-    if(previousValues !== undefined){
+    if (previousValues !== undefined) {
       form.resetFields()
     }
   }, [previousValues])
@@ -37,7 +38,7 @@ const AddUnits = (props) => {
     let data = {
       "UnId": forEdit ? unId : 0,
       "Units": values?.unit_name,
-      "IsActive": values?.isactive
+      "IsActive": values?.IsActive !== undefined ? true : false,
     }
     dispatch(insertItemUnitApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
@@ -57,11 +58,10 @@ const AddUnits = (props) => {
   };
 
   let prevVal = {}
-  if(previousValues !== undefined) {
+  if (previousValues !== undefined) {
     prevVal = {
       ...previousValues,
-      unit_name: previousValues?.Units,
-      isactive: previousValues?.IsActive
+      unit_name: previousValues?.Units
     }
   }
 
@@ -72,12 +72,7 @@ const AddUnits = (props) => {
           <Form
             name="add_items"
             form={form}
-            labelCol={{
-              span: 6,
-            }}
-            wrapperCol={{
-              span: 18
-            }}
+            {...formItemLayout}
             initialValues={prevVal}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
@@ -98,10 +93,11 @@ const AddUnits = (props) => {
             </Form.Item>
 
             <Form.Item
-              name="isactive"
+              label='Is Active'
+              name="IsActive"
               valuePropName="checked"
             >
-              <Checkbox>Is Active</Checkbox>
+              <Switch />
             </Form.Item>
 
             <Form.Item

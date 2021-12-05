@@ -1,6 +1,6 @@
 import { Table } from 'antd'
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux';
 import { getGoodsReceivedApi } from '../../services/labGoodsReceivedService'
@@ -35,7 +35,7 @@ const columns = [
 // console.log("array distructoring", columns.title)
 
 const Index = () => {
-  const history = useHistory();
+  // const history = useHistory();
   const dispatch = useDispatch();
   const [goodsList, setgoodsList] = useState([])
 
