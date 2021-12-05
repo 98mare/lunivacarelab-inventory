@@ -24,6 +24,11 @@ const UserBar = () => {
   const handleUser = () => {
     // const tokenString = JSON.parse(localStorage.getItem('token'));
     // <tokenString />
+    console.log(tokenString);
+    if(tokenString === null){
+      history.push('/login');
+      return
+    }
     setUserHere(tokenString.username);
   }
 
@@ -35,7 +40,7 @@ const UserBar = () => {
       color: 'red'
       }}>
       {/* <Link to=''>change passowrd</Link> */}
-      <Link to='/login' onClick={handleLogout}>log-out</Link>
+      <Link to='/login' onClick={handleLogout}>Logout</Link>
     </div>
   );
 

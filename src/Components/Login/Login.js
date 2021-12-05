@@ -33,12 +33,14 @@ export default function Login() {
     ///here function call
     if(data.user === 'admin' && data.pass === 'admin'){
       setToken({token: data.user, username: 'Anib', roleId: 1, UId: 2})
-      // if(token !== undefined){
-        history.push({
-          pathname: '/'
-        })
-        pMinDelay(success(), 2000);
-      // }
+      // setTimeout(() => {
+        // if(token !== undefined){
+          history.push({
+            pathname: '/'
+          })
+          pMinDelay(success(), 2000);
+        // }
+      // }, 1000);
     }else{
       console.log('noo');
     }
@@ -49,7 +51,24 @@ export default function Login() {
 
   
     const onFinish = (values) => {
-      console.log('Success:', values);
+      let data = {
+        user: values?.username, 
+        pass: values?.password
+      }
+      ///here function call
+      if(data.user === 'admin' && data.pass === 'admin'){
+        setToken({token: data.user, username: 'Anib', roleId: 1, UId: 2})
+        setTimeout(() => {
+          if(token !== undefined){
+            history.push({
+              pathname: '/'
+            })
+            pMinDelay(success(), 2000);
+          }
+        }, 1000);
+      }else{
+        console.log('noo');
+      }
     };
   
     const onFinishFailed = (errorInfo) => {
@@ -83,7 +102,7 @@ export default function Login() {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
-      onSubmitCapture={handleSubmit}
+      // onSubmitCapture={handleSubmit}
     >
       <Form.Item
         label="Username"
