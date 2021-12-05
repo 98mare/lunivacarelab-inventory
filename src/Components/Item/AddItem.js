@@ -1,4 +1,4 @@
-import { Form, Input, Button, Checkbox, Select, InputNumber, message, Row, Col } from 'antd';
+import { Form, Input, Button, Select, InputNumber, message, Row, Col, Switch } from 'antd';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -12,6 +12,7 @@ import { getItemUnitApi } from '../../services/itemUnitService';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 import { tokenString } from '../Common/HandleUser';
+import { formItemLayout } from '../Common/FormItemLayout';
 
 const AddItem = (props) => {
   const { forEdit } = props;
@@ -102,7 +103,7 @@ const AddItem = (props) => {
       "MinQty": values?.MinQty,
       "CreatedBy": tokenString.UId, //needs login userid
       "CreatedDate": moment().format('YYYY-MM-DD'), //default date for now update
-      "IsActive": values?.IsActive
+      "IsActive": values?.IsActive !== undefined ? true : false
     }
     dispatch(insertNewItemDetailsApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
@@ -130,12 +131,7 @@ const AddItem = (props) => {
           <Form
             form={form}
             name="add_items"
-            labelCol={{
-              span: 6,
-            }}
-            wrapperCol={{
-              span: 18
-            }}
+            {...formItemLayout}
             initialValues={previousValues}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
@@ -309,14 +305,17 @@ const AddItem = (props) => {
                 },
               ]}
             >
-              <InputNumber />
+              <InputNumber style={{width:'100%'}} />
             </Form.Item>
 
             <Form.Item
+            label='Is Active'
               name="IsActive"
               valuePropName="checked"
+              offset={3}
             >
-              <Checkbox>Is Active</Checkbox>
+              <Switch />
+              {/* <Checkbox>Is Active</Checkbox> */}
             </Form.Item>
 
             <Form.Item

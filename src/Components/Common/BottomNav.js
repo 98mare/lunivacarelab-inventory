@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { Popover, Button } from 'antd';
+import { Popover } from 'antd';
 
 const text = <span>User Name</span>;
 const content = (
@@ -11,8 +11,8 @@ const content = (
     gap: '6px',
     color: 'red'
     }}>
-    <Link to=''>change passowrd</Link>
-    <Link to='/login'>log-out</Link>
+    {/* <Link to=''>change passowrd</Link> */}
+    <Link to='/login'>Logout</Link>
   </div>
 );
 

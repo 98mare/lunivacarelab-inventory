@@ -1,15 +1,16 @@
-import { Form, Input, Button, Checkbox, Select, message, Row, Col } from 'antd';
+import { Form, Input, Button, message, Row, Col, Switch } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { getLocationApi, insertLocationApi } from '../../services/itemLocationService';
+import { formItemLayout } from '../Common/FormItemLayout';
 
 const AddLocation = (props) => {
   // const { Option } = Select;
   const [form] = Form.useForm()
   const history = useHistory();
-  const {forEdit} = props;
+  const { forEdit } = props;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
   const LId = props?.match?.params?.id;
@@ -17,8 +18,8 @@ const AddLocation = (props) => {
   const [previousValues, setPreviousValues] = useState(forEdit ? locationReducer?.locations[LId] : {});
 
   useEffect(() => {
-    if(forEdit && previousValues === undefined) {
-      dispatch(getLocationApi((val) => {}))
+    if (forEdit && previousValues === undefined) {
+      dispatch(getLocationApi((val) => { }))
     }
   }, [])
 
@@ -27,7 +28,7 @@ const AddLocation = (props) => {
   }, [locationReducer?.locations[LId]])
 
   useEffect(() => {
-    if(previousValues !== undefined){
+    if (previousValues !== undefined) {
       form.resetFields()
     }
   }, [previousValues])
@@ -38,7 +39,7 @@ const AddLocation = (props) => {
       "LId": forEdit ? LId : 0,
       "LCode": values?.LCode,
       "Location": values?.Location,
-      "IsActive": values?.IsActive
+      "IsActive": values?.IsActive !== undefined ? true : false,
     }
     dispatch(insertLocationApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
@@ -62,14 +63,9 @@ const AddLocation = (props) => {
       <Row justify='center'>
         <Col span={16}>
           <Form
-          form={form}
+            form={form}
             name="add_items"
-            labelCol={{
-              span: 6,
-            }}
-            wrapperCol={{
-              span: 18
-            }}
+            {...formItemLayout}
             initialValues={previousValues}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
@@ -102,10 +98,11 @@ const AddLocation = (props) => {
             </Form.Item>
 
             <Form.Item
+              label='Is Active'
               name="IsActive"
               valuePropName="checked"
             >
-              <Checkbox>Is Active</Checkbox>
+              <Switch />
             </Form.Item>
 
             <Form.Item
@@ -115,7 +112,7 @@ const AddLocation = (props) => {
               }}
             >
               <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
-                {forEdit ? 'edit' : 'Submit'}
+                {forEdit ? 'Edit' : 'Submit'}
               </Button>
             </Form.Item>
           </Form>

@@ -7,6 +7,7 @@ import { getLabItemsApi } from '../../services/itemNewItemService';
 import { getGoodsReceivedApi, insertGoodsReceivedApi } from '../../services/labGoodsReceivedService';
 import moment from 'moment';
 import { tokenString } from '../Common/HandleUser';
+import { formItemLayout } from '../Common/FormItemLayout';
 
 const AddGoods = (props) => {
   const { forEdit } = props
@@ -27,8 +28,8 @@ const AddGoods = (props) => {
   const dateFormat = 'YYYY-MM-DD';
 
   useEffect(() => {
-    if(forEdit && previousValues === undefined) {
-      dispatch(getGoodsReceivedApi({fromdate: fromDat, todate: fromDat}, (val) => {}))
+    if (forEdit && previousValues === undefined) {
+      dispatch(getGoodsReceivedApi({ fromdate: fromDat, todate: fromDat }, (val) => { }))
     }
     dispatch(
       getManuDetApi((val) => {
@@ -43,7 +44,7 @@ const AddGoods = (props) => {
   }, [goodsInReducer?.goodsin[GId]])
 
   useEffect(() => {
-    if(previousValues !== undefined){
+    if (previousValues !== undefined) {
       form.resetFields()
 
       setenQty(previousValues?.Quantity);
@@ -79,7 +80,7 @@ const AddGoods = (props) => {
       "ItemStatus": values?.ItemStatus,
     }
     dispatch(insertGoodsReceivedApi(data, (res) => {
-      if (res?.CreatedId > 0 && res?.SuccessMsg == true) {
+      if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
           window.location.reload(false);
@@ -105,7 +106,7 @@ const AddGoods = (props) => {
   }
 
   let prevVal = {}
-  if(previousValues !== undefined){
+  if (previousValues !== undefined) {
     prevVal = {
       ...previousValues,
       create_date: moment(previousValues?.CreatedDate),
@@ -118,14 +119,9 @@ const AddGoods = (props) => {
       <Row justify='center'>
         <Col span={16}>
           <Form
-          form={form}
+            form={form}
             name="add_items"
-            labelCol={{
-              span: 6,
-            }}
-            wrapperCol={{
-              span: 18
-            }}
+            {...formItemLayout}
             initialValues={prevVal}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
@@ -166,6 +162,7 @@ const AddGoods = (props) => {
             >
               <InputNumber
                 onInput={(val) => { setenQty(val) }}
+                style={{ width: '100%' }}
               />
             </Form.Item>
 
@@ -181,6 +178,7 @@ const AddGoods = (props) => {
             >
               <InputNumber
                 onInput={(val) => { setenRate(val) }}
+                style={{ width: '100%' }}
               />
             </Form.Item>
 
@@ -222,6 +220,7 @@ const AddGoods = (props) => {
             >
               <DatePicker
                 format={dateFormat}
+                style={{ width: '100%' }}
               />
             </Form.Item>
 
@@ -235,7 +234,10 @@ const AddGoods = (props) => {
                 },
               ]}
             >
-              <DatePicker format={dateFormat} />
+              <DatePicker
+                format={dateFormat}
+                style={{ width: '100%' }}
+              />
             </Form.Item>
 
             <Form.Item
@@ -293,8 +295,8 @@ const AddGoods = (props) => {
                 span: 16,
               }}
             >
-              <Button  htmlType="submit" disabled={butDis} className='btnPrimary'>
-              {forEdit ? 'Edit' : 'Submit'}
+              <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
+                {forEdit ? 'Edit' : 'Submit'}
               </Button>
             </Form.Item>
           </Form>

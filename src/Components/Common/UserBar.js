@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { CaretDownFilled } from '@ant-design/icons'
+// import { CaretDownFilled } from '@ant-design/icons'
 // import { useDispatch } from 'react-redux';
-import { Menu, Dropdown, Popover, Button } from 'antd'
-import { Link, useHistory, Redirect} from 'react-router-dom'
+import { Menu, Popover } from 'antd'
+import { Link, useHistory } from 'react-router-dom'
 import { tokenString } from './HandleUser'
 
 const UserBar = () => {
-  const history = useHistory();
+  // const history = useHistory();
   // const dispatch = useDispatch();
   const [userHere, setUserHere] = useState('');
 
@@ -39,17 +39,17 @@ const UserBar = () => {
     </div>
   );
 
-  const menu = (
-    <Menu>
-      {/* <Menu.Item>
-        <a target='_blank' rel='noopener noreferrer' href='#'>settings</a>
-      </Menu.Item> */}
-      <Menu.Item>
-        {/* <Link to='/login' onClick={handleLogout()}>{'logout'}</Link> */}
-      </Menu.Item>
+  // const menu = (
+  //   <Menu>
+  //     {/* <Menu.Item>
+  //       <a target='_blank' rel='noopener noreferrer' href='#'>settings</a>
+  //     </Menu.Item> */}
+  //     <Menu.Item>
+  //       {/* <Link to='/login' onClick={handleLogout()}>{'logout'}</Link> */}
+  //     </Menu.Item>
 
-    </Menu>
-  )
+  //   </Menu>
+  // )
 
   return (
     <UserBarContainer>

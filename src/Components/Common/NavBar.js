@@ -1,7 +1,6 @@
 import { Col, Row } from 'antd'
 import React from 'react'
 import styled from 'styled-components'
-import SerchBar from './SerchBar'
 import UserBar from './UserBar'
 
 const NavBar = () => {
@@ -10,7 +9,6 @@ const NavBar = () => {
       
         <Row justify="space-between">
           <Col>
-            {/* <SerchBar></SerchBar> */}
             <h1 style={{color: '#232324'}}>Inventory Management system</h1>
           </Col>
           <Col>
