@@ -3,7 +3,7 @@
 export const MenuRoute = [
   {
     key: 'dashbord',
-    name: 'dashbord',
+    name: 'dashboard',
     path: '/',
     icon: 'icon-line2-home'
   },

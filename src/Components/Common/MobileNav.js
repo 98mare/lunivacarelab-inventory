@@ -6,7 +6,7 @@ const MobileNav = () => {
   return (
     <MobileNavContainer>
       <div className="logo">
-        <img src="./assets/images/logo1.png" alt="" />
+        <img src="/assets/images/logo1.png" alt="" />
       </div>
       <div className="userIcon">
         

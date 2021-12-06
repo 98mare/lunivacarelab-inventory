@@ -19,7 +19,7 @@ const SideNav = () => {
       >
       
       <div className="logo">
-      <img src="./Assets/images/logo.png" alt="" />
+      <img src="/assets/images/logo.png" alt="luniva" />
       </div>
       
       
@@ -34,7 +34,7 @@ const SideNav = () => {
       ))}
 
       
-          <SubMenu title={<span className='navLInk'><i className='icon-line2-settings'></i><p>Settings</p></span>} style={{fontSize: '16px'}}>
+          <SubMenu key="set1" title={<span className='navLInk'><i className='icon-line2-settings'></i><p>Settings</p></span>} style={{fontSize: '16px'}}>
             {
               menuData.map(e => (
                 <Menu.Item key={e.key}>

@@ -80,7 +80,7 @@ export default function Login() {
       </div>
     </form> */}
       <div className="logo">
-        <img src="./Assets/images/logo.png" alt="" />
+        <img src="/assets/images/logo.png" alt="" />
       </div>
 
       <Form

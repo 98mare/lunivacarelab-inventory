@@ -11,7 +11,7 @@ function App() {
     <Suspense
       fallback={
         <div className='fallback-container'>
-          <img src="./assets/images/logo1.png" alt="" />
+          <img src="/assets/images/logo1.png" alt="" />
         </div>
       }
     >
