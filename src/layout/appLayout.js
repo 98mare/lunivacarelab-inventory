@@ -36,7 +36,7 @@ const AppLayout = (props) => {
             </Content>
             
             <Footer className="footer">
-             <h3>All rights reserved &copy; Luniatech Pvt.Ltd 2021</h3>
+             <h3>All rights reserved &copy; Lunivatech Pvt.Ltd 2021</h3>
             </Footer>
             
             <BottomNav></BottomNav>
