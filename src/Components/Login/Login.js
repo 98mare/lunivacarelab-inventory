@@ -5,13 +5,27 @@ import { useHistory } from 'react-router-dom';
 import useToken from './useToken';
 import { useDispatch } from 'react-redux';
 import { getLoginApi } from '../../services/loginService';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Table } from 'antd';
 import styled from 'styled-components';
 import logo from '../../assets/images/logo.png';
 
+const columns = [
+  {
+    title: 'Item Name',
+    dataIndex: 'itemname',
+    key: 'itemname'
+  },
+  {
+    title: 'Expiry Date',
+    dataIndex: 'expiryDate',
+    key: 'expiryDate'
+  },
+  
+]
+
 function success() {
   Modal.success({
-    content: 'Welcome user',
+    content: <Table columns={columns} />,
 
   });
 }

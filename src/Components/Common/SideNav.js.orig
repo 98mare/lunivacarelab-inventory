@@ -25,6 +25,7 @@ const SideNav = (props) => {
 
   return (
     <SideNavContainer>
+<<<<<<< HEAD
       <Scrollbars
         autoHide
         autoHeight
@@ -40,6 +41,19 @@ const SideNav = (props) => {
 
           </div>
           <Menu mode="inline" defaultSelectedKeys={['1']} style={{ background: '#fefefe', paddingBottom: '15%' }}>
+=======
+           
+      <Sider collapsible collapsed={collpsed} onCollapse={oncollpse} className='sideNav'>
+        <div className="logo">
+        {
+          collpsed === true? 
+          <img src={comlogo1} alt="luniva" /> :
+          <img src={comlogo} alt="luniva"/>
+        }
+        
+        </div>
+          <Menu  mode="inline" defaultSelectedKeys={['1']} style={{background: '#fefefe'}}>
+>>>>>>> a60a4080ab46a93e85a1cfb0cc129018d28790c3
             {data.map(e => (
               <Menu.Item key={e.key} icon={<i className={e.icon}></i>}>
                 <NavLink to={e?.path} className='navLInk' >
@@ -62,7 +76,12 @@ const SideNav = (props) => {
             </SubMenu>
           </Menu>
         </Sider>
+<<<<<<< HEAD
       </Scrollbars>
+=======
+        
+        
+>>>>>>> a60a4080ab46a93e85a1cfb0cc129018d28790c3
     </SideNavContainer>
   )
 }
@@ -72,12 +91,13 @@ export default SideNav
 const SideNavContainer = styled.div`
   height: 100%;
   padding: 20px 0;
-    background-color: #Fefefe;
-    box-shadow: 0 2px 22px 0 rgba( 31, 38, 135, 0.17 );
-    backdrop-filter: blur( 4px );
-    -webkit-backdrop-filter: blur( 4px );
-    position: fixed;
-    z-index: 100;
+  background-color: #Fefefe;
+  box-shadow: 0 2px 22px 0 rgba( 31, 38, 135, 0.17 );
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  position: fixed;
+  z-index: 100;
+  /* overflow-y: auto; */
     
   .logo{
     display: flex;
@@ -106,4 +126,12 @@ const SideNavContainer = styled.div`
   }
   .ant-layout-sider-trigger{
     background-color: var(--primary);
-  }`
+  }
+<<<<<<< HEAD
+=======
+  /* .ant-menu-item a {
+    color: 
+  } */
+  
+>>>>>>> a60a4080ab46a93e85a1cfb0cc129018d28790c3
+`
