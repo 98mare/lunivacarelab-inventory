@@ -1,54 +1,64 @@
-import { Menu} from 'antd'
-import React from 'react'
+// import { Menu} from 'antd'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { MenuRoute,settingsMenu } from '../../Data/MenuRoute'
 import {NavLink} from 'react-router-dom'
 import comlogo from '../../assets/images/logo.png';
+import comlogo1 from '../../assets/images/logo1.png';
+
+import { Layout, Menu } from 'antd';
+const {  Sider } = Layout;
+
 const { SubMenu } = Menu;
 
 
-const SideNav = () => {
+
+const SideNav = (props) => {
+  const {statePass} = props
   const data =  MenuRoute;
   const menuData = settingsMenu;
+  const [collpsed, setcollpsed] = useState(false);
+
+    function oncollpse(){
+      setcollpsed(!collpsed);
+    }
+
+    statePass(collpsed)
+
   return (
     <SideNavContainer>
+      <Sider collapsible collapsed={collpsed} onCollapse={oncollpse} className='sideNav'>
+        <div className="logo">
+        {
+          collpsed === true? 
+          <img src={comlogo1} alt="luniva" /> :
+          <img src={comlogo} alt="luniva"/>
+        }
+        
+        </div>
+          <Menu  mode="inline" defaultSelectedKeys={['1']} style={{background: '#fefefe'}}>
+            {data.map(e => (
+              <Menu.Item key={e.key} icon={<i className={e.icon}></i>}>
+                <NavLink to={e?.path} className='navLInk' >
+                  {e.name}
+                </NavLink>
+              </Menu.Item>
+            ))}
 
-      <Menu 
-        mode="inline"
-        // defaultSelectedKeys={['1']}
-        // defaultOpenKeys={['sub1']}
-      >
-      
-      <div className="logo">
-      <img src={comlogo} alt="luniva" />
-      </div>
-      
-      
-      {data.map(e => (
-        <Menu.Item key={e.key}>
-          
-          <NavLink to={e?.path} className='navLInk'>
-            <i className={e.icon}></i>
-            <p>{e.name}</p>
-          </NavLink>
-        </Menu.Item>
-      ))}
 
-      
-          <SubMenu key="set1" title={<span className='navLInk'><i className='icon-line2-settings'></i><p>Settings</p></span>} style={{fontSize: '16px'}}>
+            <SubMenu key="set1" title='Settings' icon={<i className='icon-line2-settings'></i>}>
             {
               menuData.map(e => (
-                <Menu.Item key={e.key}>
-                  <NavLink to={e?.path} className='navLInk'>
-                  <i className={e.icon}></i>
-                  <p>{e.name}</p>
+                <Menu.Item key={e.key} icon={<i className={e.icon}></i>}>
+                  <NavLink to={e?.path} className='navLInk' >
+                    {e.name}
                   </NavLink>
-                </Menu.Item >
+                </Menu.Item>
                 ) )
             }
           </SubMenu>
-       
-      </Menu>
+        </Menu>
+        </Sider>
     </SideNavContainer>
   )
 }
@@ -58,17 +68,21 @@ export default SideNav
 const SideNavContainer = styled.div`
   height: 100%;
   padding: 20px 0;
-  background-color: #Fefefe;
+    background-color: #Fefefe;
     box-shadow: 0 2px 22px 0 rgba( 31, 38, 135, 0.17 );
     backdrop-filter: blur( 4px );
     -webkit-backdrop-filter: blur( 4px );
+    position: fixed;
+    z-index: 100;
     
   .logo{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    height: 30px;
+    margin-bottom: 10px;
     img{
-      width: 80%;
+      height: 100%;
     }
   }
   .navLInk{
@@ -77,14 +91,17 @@ const SideNavContainer = styled.div`
     font-size: 16px;
     align-items: center;
     text-transform: capitalize;
-    p{
-      margin-top: 21px;
-      color: #464343;
-    }
+   
     i{
       font-size: 20px;
       color: #464343;
     }
+  }
+  .ant-layout-sider{
+    background-color: #fefefe;
+  }
+  .ant-layout-sider-trigger{
+    background-color: var(--primary);
   }
   
 `
