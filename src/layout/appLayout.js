@@ -8,7 +8,7 @@ import MobileNav from '../Components/Common/MobileNav';
 
 import { Layout } from 'antd';
 
-const { Content } = Layout;
+const { Content,Footer } = Layout;
 
 const AppLayout = (props) => {
   const [Value, setValue] = useState();
@@ -32,7 +32,13 @@ const AppLayout = (props) => {
             }
             <Content className={Value === true ? 'costomeContent2' : 'costomeContent1'}>
               {props?.children}
+              
             </Content>
+            
+            <Footer className="footer">
+             <h3>All rights reserved &copy; Luniatech Pvt.Ltd 2021</h3>
+            </Footer>
+            
             <BottomNav></BottomNav>
           </Layout>
         </Layout>
@@ -82,5 +88,12 @@ const MainAppContentComponentContainer = styled.div`
     .sideNav{
       display: none; 
     } 
+  }
+  .footer{
+    display: flex;
+    justify-content: center;
+    @media(max-width: 576px){
+      display: none;
+    }
   }
 `

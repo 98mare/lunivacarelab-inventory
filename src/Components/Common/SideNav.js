@@ -106,4 +106,9 @@ const SideNavContainer = styled.div`
   }
   .ant-layout-sider-trigger{
     background-color: var(--primary);
-  }`
+  }
+  .ant-menu-title-content{
+    font-size: 16px;
+  }
+  
+  `
