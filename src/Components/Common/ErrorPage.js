@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const ErrorPage = () => {
   return (
     <ErrorPageContainer>
-      <img src="./assets/icons/contruction.svg" alt="" />
+      <img src="/assets/icons/contruction.svg" alt="" />
       <h3>Under Construction ...</h3>
     </ErrorPageContainer>
   )
