@@ -68,7 +68,7 @@ const MainAppContentComponentContainer = styled.div`
     color: #e95b29;
   }
 }
-  @media(max-width: 768px){
+  @media(max-width: 576px){
     .sideNav{
       display: none; 
     } 
