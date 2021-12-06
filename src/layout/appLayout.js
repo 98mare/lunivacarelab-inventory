@@ -52,7 +52,6 @@ export default AppLayout;
 const MainAppContentComponentContainer = styled.div`
   .mainLayout{
     min-height: 100vh;
-    
   }
   .costomeContent1{
     padding: 20px 20px 20px 220px;
