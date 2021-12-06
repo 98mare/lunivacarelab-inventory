@@ -1,5 +1,8 @@
 /* @import '~antd/dist/antd.css'; */
 
+:root{
+  --primary: #e95b29;
+}
 
 .App {
   text-align: center;
