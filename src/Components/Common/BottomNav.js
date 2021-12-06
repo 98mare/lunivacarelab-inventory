@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { Popover } from 'antd';
 
+const handleLogout = () => {
+  localStorage.clear()
+}
+
 const text = <span>User Name</span>;
 const content = (
   <div style={{
@@ -12,7 +16,7 @@ const content = (
     color: 'red'
     }}>
     {/* <Link to=''>change passowrd</Link> */}
-    <Link to='/login'>Logout</Link>
+    <Link to='/login' onClick={handleLogout}>Logout</Link>
   </div>
 );
 

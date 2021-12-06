@@ -27,6 +27,7 @@ const SideNav = (props) => {
 
   return (
     <SideNavContainer>
+           
       <Sider collapsible collapsed={collpsed} onCollapse={oncollpse} className='sideNav'>
         <div className="logo">
         {
@@ -59,6 +60,8 @@ const SideNav = (props) => {
           </SubMenu>
         </Menu>
         </Sider>
+        
+        
     </SideNavContainer>
   )
 }
@@ -68,12 +71,13 @@ export default SideNav
 const SideNavContainer = styled.div`
   height: 100%;
   padding: 20px 0;
-    background-color: #Fefefe;
-    box-shadow: 0 2px 22px 0 rgba( 31, 38, 135, 0.17 );
-    backdrop-filter: blur( 4px );
-    -webkit-backdrop-filter: blur( 4px );
-    position: fixed;
-    z-index: 100;
+  background-color: #Fefefe;
+  box-shadow: 0 2px 22px 0 rgba( 31, 38, 135, 0.17 );
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  position: fixed;
+  z-index: 100;
+  /* overflow-y: auto; */
     
   .logo{
     display: flex;
@@ -103,5 +107,8 @@ const SideNavContainer = styled.div`
   .ant-layout-sider-trigger{
     background-color: var(--primary);
   }
+  /* .ant-menu-item a {
+    color: 
+  } */
   
 `
