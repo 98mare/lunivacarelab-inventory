@@ -1,42 +1,45 @@
 // import { Menu} from 'antd'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { MenuRoute,settingsMenu } from '../../Data/MenuRoute'
-import {NavLink} from 'react-router-dom'
+import { MenuRoute, settingsMenu } from '../../Data/MenuRoute'
+import { NavLink } from 'react-router-dom'
 import comlogo from '../../assets/images/logo.png';
 import comlogo1 from '../../assets/images/logo1.png';
-
+import { Scrollbars } from 'react-custom-scrollbars';
 import { Layout, Menu } from 'antd';
-const {  Sider } = Layout;
 
+const { Sider } = Layout;
 const { SubMenu } = Menu;
 
-
-
 const SideNav = (props) => {
-  const {statePass} = props
-  const data =  MenuRoute;
+  const { statePass } = props
+  const data = MenuRoute;
   const menuData = settingsMenu;
   const [collpsed, setcollpsed] = useState(false);
 
-    function oncollpse(){
-      setcollpsed(!collpsed);
-    }
+  function oncollpse() {
+    setcollpsed(!collpsed);
+  }
 
-    statePass(collpsed)
+  statePass(collpsed)
 
   return (
     <SideNavContainer>
-      <Sider collapsible collapsed={collpsed} onCollapse={oncollpse} className='sideNav'>
-        <div className="logo">
-        {
-          collpsed === true? 
-          <img src={comlogo1} alt="luniva" /> :
-          <img src={comlogo} alt="luniva"/>
-        }
-        
-        </div>
-          <Menu  mode="inline" defaultSelectedKeys={['1']} style={{background: '#fefefe'}}>
+      <Scrollbars
+        autoHide
+        autoHeight
+        autoHeightMin={'100vh'}
+      >
+        <Sider collapsible collapsed={collpsed} onCollapse={oncollpse} className='sideNav'>
+          <div className="logo">
+            {
+              collpsed === true ?
+                <img src={comlogo1} alt="luniva" /> :
+                <img src={comlogo} alt="luniva" />
+            }
+
+          </div>
+          <Menu mode="inline" defaultSelectedKeys={['1']} style={{ background: '#fefefe', paddingBottom: '15%' }}>
             {data.map(e => (
               <Menu.Item key={e.key} icon={<i className={e.icon}></i>}>
                 <NavLink to={e?.path} className='navLInk' >
@@ -47,18 +50,19 @@ const SideNav = (props) => {
 
 
             <SubMenu key="set1" title='Settings' icon={<i className='icon-line2-settings'></i>}>
-            {
-              menuData.map(e => (
-                <Menu.Item key={e.key} icon={<i className={e.icon}></i>}>
-                  <NavLink to={e?.path} className='navLInk' >
-                    {e.name}
-                  </NavLink>
-                </Menu.Item>
-                ) )
-            }
-          </SubMenu>
-        </Menu>
+              {
+                menuData.map(e => (
+                  <Menu.Item key={e.key} icon={<i className={e.icon}></i>}>
+                    <NavLink to={e?.path} className='navLInk' >
+                      {e.name}
+                    </NavLink>
+                  </Menu.Item>
+                ))
+              }
+            </SubMenu>
+          </Menu>
         </Sider>
+      </Scrollbars>
     </SideNavContainer>
   )
 }
@@ -103,5 +107,4 @@ const SideNavContainer = styled.div`
   .ant-layout-sider-trigger{
     background-color: var(--primary);
   }
-  
 `
