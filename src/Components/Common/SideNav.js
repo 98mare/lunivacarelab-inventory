@@ -3,6 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { MenuRoute,settingsMenu } from '../../Data/MenuRoute'
 import {NavLink} from 'react-router-dom'
+import comlogo from '../../assets/images/logo.png';
 const { SubMenu } = Menu;
 
 
@@ -19,7 +20,7 @@ const SideNav = () => {
       >
       
       <div className="logo">
-      <img src="/assets/images/logo.png" alt="luniva" />
+      <img src={comlogo} alt="luniva" />
       </div>
       
       

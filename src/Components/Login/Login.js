@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { getLoginApi } from '../../services/loginService';
 import { Form, Input, Button } from 'antd';
 import styled from 'styled-components';
+import logo from '../../assets/images/logo.png';
 
 function success() {
   Modal.success({
@@ -80,7 +81,7 @@ export default function Login() {
       </div>
     </form> */}
       <div className="logo">
-        <img src="/assets/images/logo.png" alt="" />
+        <img src={logo} alt="" />
       </div>
 
       <Form

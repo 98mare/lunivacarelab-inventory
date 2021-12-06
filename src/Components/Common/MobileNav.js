@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-
+import loadlogo from '../../assets/images/logo1.png';
 
 const MobileNav = () => {
   return (
     <MobileNavContainer>
       <div className="logo">
-        <img src="/assets/images/logo1.png" alt="" />
+        <img src={loadlogo} alt="" />
       </div>
       <div className="userIcon">
         
