@@ -4,14 +4,10 @@ import SideNav from '../Components/Common/SideNav'
 import styled from 'styled-components'
 import BottomNav from '../Components/Common/BottomNav';
 import MobileNav from '../Components/Common/MobileNav';
-
-
 import { Layout } from 'antd';
 
-const { Content,Footer } = Layout;
+const { Content, Footer } = Layout;
 const date = new Date();
-
-
 
 const AppLayout = (props) => {
   const [Value, setValue] = useState();
@@ -21,8 +17,6 @@ const AppLayout = (props) => {
   }
 
   return (
-
-
     <MainAppContentComponentContainer>
       <Layout className="mainLayout" id="app-layout">
         <Layout>
@@ -35,17 +29,10 @@ const AppLayout = (props) => {
             }
             <Content className={Value === true ? 'costomeContent2' : 'costomeContent1'}>
               {props?.children}
-              
             </Content>
-            
             <Footer className="footer">
-<<<<<<< HEAD
-             <h3>All rights reserved &copy; Luniatech Pvt.Ltd {date.getFullYear()}</h3>
-=======
-             <h3>All rights reserved &copy; Lunivatech Pvt.Ltd 2021</h3>
->>>>>>> 2d2398f6c58aaf75a5bf68edd2d7af52103833fd
+              <h3>All rights reserved &copy; LunivaTech Pvt Ltd {date.getFullYear()}</h3>
             </Footer>
-            
             <BottomNav></BottomNav>
           </Layout>
         </Layout>
