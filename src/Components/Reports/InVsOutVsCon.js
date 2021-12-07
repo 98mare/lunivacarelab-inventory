@@ -42,7 +42,7 @@ const InVsOutVsCon = () =>{
   // const [goodsList, setgoodsList] = useState([]);
   const [goodsInList, setGoodsInList] = useState([]);
   const [goodsOutList, setGoodsList] = useState([]);
-  const [goodsLabel, setgoodslabe] = useState([])
+  const [goodsLabel, setgoodslabel] = useState([])
 
   const getLabData = (data) => {
     let newData = {
@@ -57,7 +57,7 @@ const InVsOutVsCon = () =>{
         pushedArr.push(ele?.GoodsInDate.split('T')[0])
         pushedGoodsIn.push(ele?.GoodsInCount)
       })
-      setgoodslabe(pushedArr);
+      setgoodslabel(pushedArr);
       setGoodsInList(pushedGoodsIn);
       // 
       // console.log("this is goods list",goodsList);
@@ -85,12 +85,6 @@ const InVsOutVsCon = () =>{
     getLabData(data)
     
   }
- 
-
-  
-  
- 
-
   const labels = goodsLabel;
 
   const data = {
