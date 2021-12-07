@@ -110,5 +110,11 @@ const SideNavContainer = styled.div`
   .ant-menu-title-content{
     font-size: 16px;
   }
-  
+  .ant-menu-item-selected a, .ant-menu-item-selected a:hover {
+    color: red;
+  }
+
+.ant-menu-vertical .ant-menu-item::after, .ant-menu-vertical-left .ant-menu-item::after, .ant-menu-vertical-right .ant-menu-item::after, .ant-menu-inline .ant-menu-item::after{
+  border-right: 3px solid var(--primary);
+}
   `
