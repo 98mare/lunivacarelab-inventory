@@ -63,6 +63,16 @@ export const GetListofGoodsOutRecordByDate = 'GetListofGoodsOutRecordByDate';
  * @param:
  */
 export const GetListOfTestForInventory = 'GetListOfTestForInventory';
+/**
+ * @desc: get goods out count by date wise and item wise
+ * @param: ?fromdate={fromdate}&todate={todate}&itemid={itemid}
+ */
+ export const GetGoodsOutCountByDateWiseandItemWise = 'GetGoodsOutCountByDateWiseandItemWise';
+/**
+ * @desc: get goods in count by date wise and item wise
+ * @param: ?fromdate={fromdate}&todate={todate}&itemid={itemid}
+ */
+ export const GetGoodsInCountByDateWiseandItemWise = 'GetGoodsInCountByDateWiseandItemWise';
 
 //POST
 /**

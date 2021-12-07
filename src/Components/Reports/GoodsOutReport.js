@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { useDispatch } from 'react-redux';
 import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
-import { getGoodsOutApi } from '../../services/labGoodsOutService';
+import { getGoodsOutApi, getGoodsOutCountApi } from '../../services/labGoodsOutService';
 
 const columns = [
   {
@@ -57,6 +57,13 @@ const Index = () => {
   const getLabData = (data) => {
     dispatch(getGoodsOutApi(data, (val) => {
       setgoodsList(val)
+    }))
+    let newData = {
+      ...data,
+      itemid: 0
+    }
+    dispatch(getGoodsOutCountApi(newData, (val) => {
+      console.log(val);
     }))
   }
 

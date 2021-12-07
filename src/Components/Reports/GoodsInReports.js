@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 // import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux';
-import { getGoodsReceivedApi } from '../../services/labGoodsReceivedService'
+import { getGoodsInCountApi, getGoodsReceivedApi } from '../../services/labGoodsReceivedService'
 import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
 
@@ -32,17 +32,21 @@ const columns = [
     key: 'ItemStatus',
   }
 ]
-// console.log("array distructoring", columns.title)
 
 const Index = () => {
-  // const history = useHistory();
   const dispatch = useDispatch();
   const [goodsList, setgoodsList] = useState([])
 
   const getLabData = (data) => {
     dispatch(getGoodsReceivedApi(data, (val) => {
       setgoodsList(val)
-      // console.log("this is goods list",goodsList);
+    }))
+    let newData = {
+      ...data,
+      itemid: 0
+    }
+    dispatch(getGoodsInCountApi(newData, (val) => {
+      console.log(val);
     }))
   }
 
@@ -52,16 +56,13 @@ const Index = () => {
       todate: val[1].format("YYYY-MM-DD"),
     }
     getLabData(data)
-    
+
   }
 
   return (
     <GoodsInContainer>
       <PageHeader
-       
         pageTitle='Goods In Report'
-        // buttonTitle='add Goods'
-        // buttonOnClick={() => history.push('./goodsin/add')}
         csvLinkTitle='Export csv'
         goodsIn
       ></PageHeader>
@@ -69,7 +70,6 @@ const Index = () => {
         dateRange
         dateRet={dataRet}
       ></Filter>
-      {/* {console.log("new data ", goodsList)} */}
       <Table className='tableWidth'
         columns={columns}
         dataSource={goodsList}

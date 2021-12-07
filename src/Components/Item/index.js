@@ -33,7 +33,12 @@ const Index = () => {
       key: 'minQty'
     },
     {
-      title: 'action',
+      title: 'Location',
+      dataIndex: 'Location',
+      key: 'Location'
+    },
+    {
+      title: 'Action',
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
