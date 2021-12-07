@@ -49,13 +49,19 @@ export default function Login() {
       pass: values?.password
     }
     dispatch(getLoginApi(data, (val) => {
-      // if (val.length !== 0) {
-      if (data.user === 'admin' && data.pass === 'admin') {
-        setToken({ token: data.user, username: 'Anib', roleId: 1, UId: 2 })
-        history.push({
-          pathname: '/'
-        })
-        pMinDelay(success(), 2000);
+      if (val.length !== 0) {
+        let andd = val?.CheckValidLoginForInventory;
+        console.log(andd);
+        if(andd[0]?.usruserid > 0){
+        // if (data.user === 'admin' && data.pass === 'admin') {
+          setToken({ token: andd[0]?.usrUsername, username: andd[0]?.usrUsername, roleId: andd[0]?.usrrole, UId: andd[0]?.usruserid })
+          history.push({
+            pathname: '/'
+          })
+          pMinDelay(success(), 2000);
+        }else{
+          message.error('Username or password incorrect');
+        }
       } else {
         message.error('Username or password incorrect')
       }

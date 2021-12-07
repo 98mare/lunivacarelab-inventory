@@ -9,6 +9,9 @@ import MobileNav from '../Components/Common/MobileNav';
 import { Layout } from 'antd';
 
 const { Content,Footer } = Layout;
+const date = new Date();
+
+
 
 const AppLayout = (props) => {
   const [Value, setValue] = useState();
@@ -36,7 +39,11 @@ const AppLayout = (props) => {
             </Content>
             
             <Footer className="footer">
+<<<<<<< HEAD
+             <h3>All rights reserved &copy; Luniatech Pvt.Ltd {date.getFullYear()}</h3>
+=======
              <h3>All rights reserved &copy; Lunivatech Pvt.Ltd 2021</h3>
+>>>>>>> 2d2398f6c58aaf75a5bf68edd2d7af52103833fd
             </Footer>
             
             <BottomNav></BottomNav>
@@ -91,6 +98,10 @@ const MainAppContentComponentContainer = styled.div`
   .footer{
     display: flex;
     justify-content: center;
+    h3{
+      color: #a09999;
+    }
+    
     @media(max-width: 576px){
       display: none;
     }

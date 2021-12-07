@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { Popover } from 'antd';
@@ -7,7 +7,8 @@ const handleLogout = () => {
   localStorage.clear()
 }
 
-const text = <span>User Name</span>;
+
+
 const content = (
   <div style={{
     display: 'flex',
@@ -21,6 +22,7 @@ const content = (
 );
 
 const BottomNav = () => {
+ 
   return (
     <BottomNavContainer>
       <li>
@@ -30,7 +32,7 @@ const BottomNav = () => {
         <Link to='/item'><i className='icon-line-box'></i></Link>
       </li>
       <li>
-        <Popover placement="top" title={text} content={content} trigger="click">
+        <Popover placement="top" content={content} trigger="click">
           <i className='icon-user1'></i>
         </Popover>
       </li>
