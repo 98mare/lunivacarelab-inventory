@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PageHeader from '../Common/pageHeader';
 import { useHistory } from 'react-router-dom';
 import Filter from '../Common/Filter';
-import { getGoodsReceivedApi } from '../../services/labGoodsReceivedService'
+import { getGoodsInCountApi, getGoodsReceivedApi } from '../../services/labGoodsReceivedService'
 import { useDispatch } from 'react-redux';
 
 import {
@@ -17,6 +17,7 @@ import {
   Tooltip,
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
+import { getGoodsOutCountApi } from '../../services/labGoodsOutService';
 // import faker from 'faker';
 
 ChartJS.register(
@@ -38,15 +39,44 @@ const InVsOutVsCon = () =>{
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const [goodsList, setgoodsList] = useState([]);
+  // const [goodsList, setgoodsList] = useState([]);
   const [goodsInList, setGoodsInList] = useState([]);
+  const [goodsOutList, setGoodsList] = useState([]);
+  const [goodsLabel, setgoodslabe] = useState([])
 
   const getLabData = (data) => {
-    dispatch(getGoodsReceivedApi(data, (val) => {
-      setgoodsList(val)
+    let newData = {
+      ...data,
+      itemid: 0
+    }
+    dispatch(getGoodsInCountApi(newData, (val) => {
+      // setgoodsList(val)
+      let pushedArr = []
+      let pushedGoodsIn = []
+      val.forEach(ele => {
+        pushedArr.push(ele?.GoodsInDate.split('T')[0])
+        pushedGoodsIn.push(ele?.GoodsInCount)
+      })
+      setgoodslabe(pushedArr);
+      setGoodsInList(pushedGoodsIn);
+      // 
       // console.log("this is goods list",goodsList);
     }))
+
+    dispatch(getGoodsOutCountApi(newData, (val) => {
+      let pushedArr =[]
+      let pushedGoodsOut = []
+      
+      val.forEach(ele => {
+        pushedArr.push(ele?.GoodsInDate.split('T')[0])
+        pushedGoodsOut.push(ele?.GoodsInCount)
+      })
+      setGoodsList(pushedGoodsOut);
+    }))
+
+
   }
+
   const dataRet = (val) => {
     let data = {
       fromdate: val[0].format("YYYY-MM-DD"),
@@ -55,11 +85,13 @@ const InVsOutVsCon = () =>{
     getLabData(data)
     
   }
-  console.log("this is goods list", goodsList)
+ 
+
+  
   
  
 
-  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  const labels = goodsLabel;
 
   const data = {
     labels,
@@ -70,13 +102,13 @@ const InVsOutVsCon = () =>{
         borderColor: 'rgb(255, 99, 132)',
         borderWidth: 2,
         fill: false,
-        data: [10, 20, 100],
+        data:[],
       },
       {
         type: 'bar',
         label: 'Goods Out',
         backgroundColor: 'rgb(75, 192, 192)',
-        data: [10, 230, 100],
+        data: goodsOutList,
         borderColor: 'white',
         borderWidth: 2,
       },
@@ -84,14 +116,14 @@ const InVsOutVsCon = () =>{
         type: 'bar',
         label: 'Goods In',
         backgroundColor: 'rgb(53, 162, 235)',
-        data: [10, 20, 100],
+        data: goodsInList,
       },
     ],
   };
 
   
 
-
+  console.log(goodsInList);
  
 
   return (
