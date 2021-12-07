@@ -110,11 +110,41 @@ const SideNavContainer = styled.div`
   .ant-menu-title-content{
     font-size: 16px;
   }
+  .ant-menu-item:active{
+    color: var(--primary);
+    background-color: #f7f1e6;
+  }
+  
   .ant-menu-item-selected a, .ant-menu-item-selected a:hover {
-    color: red;
+    color: var(--primary);
   }
 
-.ant-menu-vertical .ant-menu-item::after, .ant-menu-vertical-left .ant-menu-item::after, .ant-menu-vertical-right .ant-menu-item::after, .ant-menu-inline .ant-menu-item::after{
-  border-right: 3px solid var(--primary);
-}
-  `
+  .ant-menu-vertical .ant-menu-item::after, .ant-menu-vertical-left .ant-menu-item::after, .ant-menu-vertical-right .ant-menu-item::after, .ant-menu-inline .ant-menu-item::after{
+    border-right: 3px solid var(--primary);
+  }
+
+  .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
+    background-color: #f7f1e6;
+  }
+  .ant-menu-item a:hover{
+    color: var(--primary);
+  }
+  .ant-menu-light .ant-menu-item:hover{
+    color: var(--primary);
+  }
+  .ant-menu-item .ant-menu-item-icon{
+    color: var(--primary)
+  }
+
+  /* for sub menu */
+  /* .ant-menu-submenu-selected {
+    color: var(--primary)
+  } */
+
+  .ant-menu-submenu-title .ant-menu-item-icon{
+    color: var(--primary);
+  }
+  .ant-menu-light .ant-menu-submenu-title:hover{
+    color: var(--primary);
+  }
+`

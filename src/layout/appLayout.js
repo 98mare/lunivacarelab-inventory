@@ -39,11 +39,7 @@ const AppLayout = (props) => {
             </Content>
             
             <Footer className="footer">
-<<<<<<< HEAD
              <h3>All rights reserved &copy; Luniatech Pvt.Ltd {date.getFullYear()}</h3>
-=======
-             <h3>All rights reserved &copy; Lunivatech Pvt.Ltd 2021</h3>
->>>>>>> 2d2398f6c58aaf75a5bf68edd2d7af52103833fd
             </Footer>
             
             <BottomNav></BottomNav>
