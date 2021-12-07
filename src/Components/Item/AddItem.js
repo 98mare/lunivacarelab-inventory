@@ -35,10 +35,10 @@ const AddItem = (props) => {
   const [previousValues, setPreviousValues] = useState(forEdit ? newItemReducer?.newItems[TId] : {});
 
   useEffect(() => {
+    getAllItemList()
     if (forEdit && previousValues === undefined) {
       dispatch(getLabItemsApi({ typeId: TyId, categoryId: CaId }, (val) => { }, TId))
     }
-    getAllItemList()
   }, [])
 
   useEffect(() => {
@@ -47,12 +47,18 @@ const AddItem = (props) => {
 
   useEffect(() => {
     if (previousValues !== undefined) {
+      handleRackLocation(previousValues?.LocationId)
       form.resetFields()
     }
   }, [previousValues])
 
   const getAllItemList = () => {
 
+    dispatch(
+      getLocationApi((val) => {
+        setlocationList(val)
+      })
+    )
     dispatch(
       getItemTypeApi((val) => {
         setItemList(val)
@@ -71,11 +77,6 @@ const AddItem = (props) => {
     dispatch(
       getManuDetApi((val) => {
         setmanuList(val)
-      })
-    )
-    dispatch(
-      getLocationApi((val) => {
-        setlocationList(val)
       })
     )
   }
