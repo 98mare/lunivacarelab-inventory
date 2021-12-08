@@ -55,6 +55,10 @@ const data = [
     name: 'Consumption',
     pathName: 'consumption'
   },
+  {
+    name: 'Stocks',
+    pathName: 'stocks'
+  },
 ]
 
 const Index = () => {
