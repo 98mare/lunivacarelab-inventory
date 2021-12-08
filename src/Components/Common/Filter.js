@@ -103,7 +103,7 @@ const Filter = (props) => {
         }
         {categroryType &&
           <Col md={6} sm={11} xs={24}>
-          <span className='labelTop'>Category Type</span>
+            <span className='labelTop'>Category Type</span>
             <Select style={{ width: '100%' }} defaultValue="0" onChange={(val) => { setCatType(val) }} size='large' className='inputWidth'>
               <Option value="0">All</Option>
               {cateList?.map(iTy => {
@@ -145,11 +145,13 @@ const Filter = (props) => {
         }
         {itemName &&
           <Col md={6} sm={12} xs={24}>
-          <span className='labelTop'>Item Name</span>
+            <span className='labelTop'>Item Name</span>
             <Select style={{ width: '100%' }} onChange={(val) => { setitemNameList(val) }} size='large' className='inputWidth'>
-            {notAll === undefined ? (<Option value='0'>
-                      All
-                    </Option>) : '' }
+              {notAll === undefined ? (
+                <Option value='0'>
+                  All
+                </Option>
+              ) : ''}
               {itemNameLister?.map(iTy => {
                 if (iTy?.IsActive) {
                   return (

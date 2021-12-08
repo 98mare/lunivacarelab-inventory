@@ -1,5 +1,3 @@
-
-
 export const MenuRoute = [
   {
     key: 'dashbord',
@@ -25,9 +23,6 @@ export const MenuRoute = [
     name: 'Goods Out',
     path: '/goodsout'
   },
-  
-  
-  
   {
     icon: 'icon-lab2',
     key: 'itemVsRatio',
@@ -35,30 +30,20 @@ export const MenuRoute = [
     path: '/itemvsratio'
   },
   {
-    icon: 'icon-line2-doc',
-    key: 'reports',
-    name: 'Reports',
-    path: '/reports'
-  },
-  {
     icon: 'icon-line-trash',
     key: 'wastage',
     name: 'wastage',
     path: '/wastage'
   },
-  
-  // {
-  //   icon: 'icon-line2-settings',
-  //   key: 'settings',
-  //   name: 'Settings',
-  //   path: '/',
-   
-  // }
-
-  
+  {
+    icon: 'icon-line2-doc',
+    key: 'reports',
+    name: 'Reports',
+    path: '/reports'
+  },
 ]
 
-export const settingsMenu= [
+export const settingsMenu = [
   {
     icon: 'icon-line-stack',
     key: 'type',
@@ -88,6 +73,5 @@ export const settingsMenu= [
     key: 'unit',
     name: 'unit',
     path: '/units'
-  }
-  
+  },
 ]

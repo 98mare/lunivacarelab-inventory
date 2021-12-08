@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import PageHeader from '../Common/pageHeader'
-import { Space, Table } from 'antd'
+import { Table } from 'antd'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
-import { getRackDetApi } from '../../services/itemRackService'
-import Filter from '../Common/Filter'
+// import { getRackDetApi } from '../../services/itemRackService'
+// import Filter from '../Common/Filter'
 import { getStockApi } from '../../services/stockService'
-
-
 
 const Index = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
 
   const [tableData, setTableData] = useState([])
 
@@ -31,36 +29,13 @@ const Index = () => {
       title: 'Transection Date',
       dataIndex: 'TransactionDate',
       key: 'TransactionDate'
-    },{
+    }, {
       title: 'Remening Count',
       dataIndex: 'RemainingCount',
       key: 'RemainingCount'
     }
-    // ,
-    // {
-    //   title: 'Is Active',
-    //   dataIndex: 'IsActive',
-    //   key: 'isActive',
-    //   render: (text) => {
-    //     if (text === true) {
-    //       return 'Active'
-    //     }
-    //     return 'Inactive'
-    //   }
-    // }
-    // ,
-    // {
-    //   title: 'action',
-    //   key: 'action',
-    //   render: (text, record) => (
-    //     <Space size="middle">
-    //       <a onClick={() => history.push(`rack/edit/${record.LocationId}/${record.RId}`)}>Edit</a>
-    //       {/* <a href="#">Delete</a> */}
-    //     </Space>
-    //   )
-    // }
   ]
-  useEffect(()=> {
+  useEffect(() => {
     locateRange();
   }, [])
 
@@ -73,7 +48,6 @@ const Index = () => {
   return (
     <StocksContainer>
       <PageHeader pageTitle="Stocks"></PageHeader>
-      {/* <Filter locateRange={locateRange}></Filter> */}
       <Table
         columns={columns}
         dataSource={tableData}

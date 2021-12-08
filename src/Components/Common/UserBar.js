@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { CaretDownFilled } from '@ant-design/icons'
+// import { CaretDownFilled } from '@ant-design/icons'
 // import { useDispatch } from 'react-redux';
-import { Menu, Dropdown, Popover, Button } from 'antd'
-import { Link, useHistory, Redirect} from 'react-router-dom'
-import { tokenString } from './HandleUser'
+import { Popover } from 'antd'
+import { Link, useHistory, Redirect } from 'react-router-dom'
+// import { tokenString } from './HandleUser'
 
 const UserBar = () => {
   const history = useHistory();
-  // const dispatch = useDispatch();
   const [userHere, setUserHere] = useState('');
 
   useEffect(() => {
@@ -21,7 +20,7 @@ const UserBar = () => {
 
   const handleUser = () => {
     const tokenStrings = JSON.parse(localStorage.getItem('token'));
-    if(tokenStrings === null){
+    if (tokenStrings === null) {
       history.push('/login');
       return
     }
@@ -34,26 +33,22 @@ const UserBar = () => {
       flexDirection: 'column',
       gap: '6px',
       color: 'red'
-      }}>
-      {/* <Link to=''>change passowrd</Link> */}
+    }}>
       <Link to='/login' onClick={handleLogout}>Logout</Link>
     </div>
   );
 
-  
-
   return (
     <UserBarContainer>
       <Popover placement="bottom" content={content} trigger="click">
-          <i className='icon-user1'></i>
-          <span className='userName'>{userHere}</span>
-        </Popover>
+        <i className='icon-user1'></i>
+        <span className='userName'>{userHere}</span>
+      </Popover>
     </UserBarContainer>
   )
 }
 
 export default UserBar
-
 
 const UserBarContainer = styled.div`
   display: flex;
@@ -76,6 +71,5 @@ const UserBarContainer = styled.div`
   .userName{
     font-size: 16px;
     margin-left: 20px;
-
   }
 `

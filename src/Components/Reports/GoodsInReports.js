@@ -1,6 +1,5 @@
 import { Table } from 'antd'
 import React, { useState } from 'react'
-// import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux';
 import { getGoodsInCountApi, getGoodsReceivedApi } from '../../services/labGoodsReceivedService'
@@ -17,10 +16,8 @@ import {
   Tooltip,
   ArcElement
 } from 'chart.js';
-import { Chart ,Doughnut  } from 'react-chartjs-2';
 import ReportChart from '../Common/ReportChart';
 import { ChartColor } from '../Common/ChartColor';
-// import faker from 'faker';
 
 ChartJS.register(
   LinearScale,
@@ -58,10 +55,8 @@ const columns = [
     key: 'ItemStatus',
   }
 ]
-// console.log("array distructoring", columns.title)
 
 const Index = () => {
-  // const history = useHistory();
   const dispatch = useDispatch();
   const [goodsList, setgoodsList] = useState([]);
   const [goodsInList, setGoodsInList] = useState([]);
@@ -70,13 +65,11 @@ const Index = () => {
   const getLabData = (data) => {
     dispatch(getGoodsReceivedApi(data, (val) => {
       setgoodsList(val)
-      // console.log("this is goods list",goodsList);
     }))
   }
 
   const graphData = (data) => {
     dispatch(getGoodsInCountApi(data, (val) => {
-      // setgoodsList(val)
       let pushedArr = []
       let pushedGoodsIn = []
       val.forEach(ele => {
@@ -85,8 +78,6 @@ const Index = () => {
       })
       setgoodslabe(pushedArr);
       setGoodsInList(pushedGoodsIn);
-      // 
-      // console.log("this is goods list",goodsList);
     }))
   }
 
@@ -98,22 +89,21 @@ const Index = () => {
     }
     getLabData(data);
     graphData(data);
-    
+
   }
 
- 
+
   const labels = goodsLabel;
   const dataDo = {
     labels,
     datasets: [
       {
-        
         label: 'Goods In',
         backgroundColor: ChartColor,
         data: goodsInList,
         borderColor: [
           'rgba(255, 255, 132, 1)',
-          
+
         ],
         borderWidth: 1,
       },
@@ -136,31 +126,26 @@ const Index = () => {
   return (
     <GoodsInContainer>
       <PageHeader
-       
+
         pageTitle='Goods In Report'
-        // buttonTitle='add Goods'
-        // buttonOnClick={() => history.push('./goodsin/add')}
         csvLinkTitle='Export csv'
         goodsIn
-      ></PageHeader>
+      />
       <Filter
         dateRange
         dateRet={dataRet}
         itemName
-      ></Filter>
-      {/* {console.log("new data ", goodsList)} */}
+      />
       <Table className='tableWidth'
         columns={columns}
         dataSource={goodsList}
       />
       {goodsLabel.length !== 0 ?
-        <ReportChart 
-        dataBar={dataBar}
-        dataDo={dataDo}
-      ></ReportChart>
-       : ''}
-      
-      
+        <ReportChart
+          dataBar={dataBar}
+          dataDo={dataDo}
+        ></ReportChart>
+        : ''}
     </GoodsInContainer>
   )
 }
