@@ -7,6 +7,7 @@ import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
 import { getGoodsOutApi, getGoodsOutCountApi } from '../../services/labGoodsOutService';
 import ReportChart from '../Common/ReportChart';
+import { ChartColor } from '../Common/ChartColor';
 
 const columns = [
   {
@@ -70,11 +71,7 @@ const Index = () => {
     }))
   }
   const getGoodsOutList =(data) => {
-    let newData = {
-      ...data,
-      itemid: 0
-    }
-    dispatch(getGoodsOutCountApi(newData, (val) => {
+    dispatch(getGoodsOutCountApi(data, (val) => {
       let pushedArr =[]
       let pushedGoodsOut = []
       
@@ -91,6 +88,7 @@ const Index = () => {
     let data = {
       fromdate: val[0].format("YYYY-MM-DD"),
       todate: val[1].format("YYYY-MM-DD"),
+      itemid: val?.itemid
     }
     getLabData(data);
     getGoodsOutList(data);
@@ -114,15 +112,8 @@ const Index = () => {
     datasets: [
       {
         
-        label: 'Goods In',
-        backgroundColor: [
-        'rgb(53, 162, 235)',
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',],
+        label: 'Goods Out',
+        backgroundColor: ChartColor,
         data: goodsOutList,
         borderColor: [
           'rgba(255, 255, 132, 1)',
@@ -143,12 +134,18 @@ const Index = () => {
       <Filter
         dateRange
         dateRet={dataRet}
+        itemName
       />
       <Table
         columns={columns}
         dataSource={goodsList}
       />
-      <ReportChart dataBar={dataBar} dataDo={dataDo}></ReportChart>
+      {goodsLabel.length !== 0 ?
+        <ReportChart 
+        dataBar={dataBar}
+        dataDo={dataDo}
+      ></ReportChart>
+       : ''}
     </GoodsOutContainer>
   )
 }

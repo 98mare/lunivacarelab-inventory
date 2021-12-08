@@ -11,7 +11,7 @@ import moment from 'moment';
 import { getLabItemsApi } from '../../services/itemNewItemService'
 
 const Filter = (props) => {
-  const { itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName } = props
+  const { itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll } = props
   const dispatch = useDispatch();
 
   const { Option } = Select;
@@ -23,7 +23,7 @@ const Filter = (props) => {
   const [locationList, setlocationList] = useState([])
   const [locationId, setlocationId] = useState(0)
   const [fromDate, setfromDate] = useState([moment(), moment()])
-  const [itemNameList, setitemNameList] = useState(1)
+  const [itemNameList, setitemNameList] = useState(notAll === undefined ? 0 : 1)
   const [itemNameLister, setitemNameLister] = useState([])
 
   const handleClicker = () => {
@@ -82,9 +82,10 @@ const Filter = (props) => {
   return (
     <FilterContainer>
 
-      <Row className="filterRow">
+      <Row className="filterRow" align='bottom'>
         {itemType &&
           <Col md={6} sm={11} xs={24}>
+            <span className='labelTop'>Item Type</span>
             <Select style={{ width: '100%' }} defaultValue="0" onChange={(val) => { setiType(val) }} size='large' className='inputWidth'>
               <Option value="0">All</Option>
               {itemList?.map(iTy => {
@@ -102,6 +103,7 @@ const Filter = (props) => {
         }
         {categroryType &&
           <Col md={6} sm={11} xs={24}>
+          <span className='labelTop'>Category Type</span>
             <Select style={{ width: '100%' }} defaultValue="0" onChange={(val) => { setCatType(val) }} size='large' className='inputWidth'>
               <Option value="0">All</Option>
               {cateList?.map(iTy => {
@@ -119,6 +121,7 @@ const Filter = (props) => {
         }
         {locateRange &&
           <Col md={6} sm={12} xs={24}>
+            <span className='labelTop'>Location</span>
             <Select style={{ width: '100%' }} onChange={(val) => { setlocationId(val) }} size='large' className='inputWidth'>
               {locationList?.map(iTy => {
                 if (iTy?.IsActive) {
@@ -136,12 +139,17 @@ const Filter = (props) => {
         {
           dateRange &&
           <Col md={6} sm={12} xs={24}>
+            <span className='labelTop'>From - To</span>
             <Datepicker defaultValuer={fromDate} onChanger={(value) => { setfromDate(value) }}></Datepicker>
           </Col>
         }
         {itemName &&
           <Col md={6} sm={12} xs={24}>
+          <span className='labelTop'>Item Name</span>
             <Select style={{ width: '100%' }} onChange={(val) => { setitemNameList(val) }} size='large' className='inputWidth'>
+            {notAll === undefined ? (<Option value='0'>
+                      All
+                    </Option>) : '' }
               {itemNameLister?.map(iTy => {
                 if (iTy?.IsActive) {
                   return (
@@ -169,5 +177,8 @@ const FilterContainer = styled.div`
 
   .filterRow > div {
     padding: 10px;
+  }
+  .labelTop{
+    
   }
 `

@@ -19,6 +19,7 @@ import {
 } from 'chart.js';
 import { Chart ,Doughnut  } from 'react-chartjs-2';
 import ReportChart from '../Common/ReportChart';
+import { ChartColor } from '../Common/ChartColor';
 // import faker from 'faker';
 
 ChartJS.register(
@@ -74,11 +75,7 @@ const Index = () => {
   }
 
   const graphData = (data) => {
-    let newData = {
-      ...data,
-      itemid: 0
-    }
-    dispatch(getGoodsInCountApi(newData, (val) => {
+    dispatch(getGoodsInCountApi(data, (val) => {
       // setgoodsList(val)
       let pushedArr = []
       let pushedGoodsIn = []
@@ -97,6 +94,7 @@ const Index = () => {
     let data = {
       fromdate: val[0].format("YYYY-MM-DD"),
       todate: val[1].format("YYYY-MM-DD"),
+      itemid: val?.itemid
     }
     getLabData(data);
     graphData(data);
@@ -111,14 +109,7 @@ const Index = () => {
       {
         
         label: 'Goods In',
-        backgroundColor: [
-        'rgb(53, 162, 235)',
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',],
+        backgroundColor: ChartColor,
         data: goodsInList,
         borderColor: [
           'rgba(255, 255, 132, 1)',
@@ -133,7 +124,7 @@ const Index = () => {
     datasets: [
       {
         type: 'bar',
-        label: 'Goods Out',
+        label: 'Goods In',
         backgroundColor: 'rgb(53, 162, 235)',
         data: goodsInList,
         borderWidth: 2
@@ -155,16 +146,20 @@ const Index = () => {
       <Filter
         dateRange
         dateRet={dataRet}
+        itemName
       ></Filter>
       {/* {console.log("new data ", goodsList)} */}
       <Table className='tableWidth'
         columns={columns}
         dataSource={goodsList}
       />
-      <ReportChart 
+      {goodsLabel.length !== 0 ?
+        <ReportChart 
         dataBar={dataBar}
         dataDo={dataDo}
       ></ReportChart>
+       : ''}
+      
       
     </GoodsInContainer>
   )

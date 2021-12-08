@@ -1,4 +1,3 @@
-import React, {useState} from 'react';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PageHeader from '../Common/pageHeader';
@@ -52,10 +51,10 @@ const InVsOutVsCon = () => {
   const [goodsOutLabel, setGoodsOutLabel] = useState([]);
 
   const getLabData = (data) => {
-    let newData = {
-      ...data,
-      itemid: 0
-    }
+    // let newData = {
+    //   ...data,
+    //   itemid: 0
+    // }
     let newData = { ...data }
     dispatch(getGoodsInCountApi(newData, (val) => {
       // setgoodsList(val)
@@ -150,7 +149,7 @@ const InVsOutVsCon = () => {
     
   }, [goodsInLister, goodsOutLister])
 
-  const labels = goodsLabel;
+  // const labels = goodsLabel;
 
   const data = {
     labels,
@@ -195,11 +194,12 @@ const InVsOutVsCon = () => {
 
   return (
     <InVsOutVsContainer>
-      <PageHeader pageTitle="Goods In Vs Goods Out Vs Consumption" buttonTitle='Add Rack' buttonOnClick={() => history.push('./rack/add')}></PageHeader>
+      {/* <PageHeader pageTitle="Goods In Vs Goods Out Vs Consumption" buttonTitle='Add Rack' buttonOnClick={() => history.push('./rack/add')}></PageHeader> */}
       <PageHeader pageTitle="Goods In Vs Goods Out Vs Consumption" buttonTitle='Add Rack' buttonOnClick={() => history.push('./rack/add')} />
       <Filter dateRange
         dateRet={dataRet}
         itemName
+        notAll
       />
       <Chart type='bar' data={data} />
     </InVsOutVsContainer>

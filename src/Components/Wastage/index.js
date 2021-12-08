@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import Filter from '../Common/Filter'
 import { getWastageApi } from '../../services/wastageService'
 import ReportChart from '../Common/ReportChart'
+import { ChartColor } from '../Common/ChartColor'
 
 
 
@@ -83,15 +84,8 @@ const Index = () => {
     datasets: [
       {
         
-        label: 'Goods In',
-        backgroundColor: [
-        'rgb(53, 162, 235)',
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',],
+        label: 'Wastage',
+        backgroundColor: ChartColor,
         data: wastage,
         borderColor: [
           'rgba(255, 255, 132, 1)',
@@ -106,7 +100,7 @@ const Index = () => {
     datasets: [
       {
         type: 'bar',
-        label: 'Goods Out',
+        label: 'Wastage',
         backgroundColor: 'rgb(53, 162, 235)',
         data: wastage,
         borderWidth: 2
@@ -121,7 +115,8 @@ const Index = () => {
       <PageHeader pageTitle="Wastage" buttonTitle='Add Wastage' buttonOnClick={() => history.push('./wastage/add')}></PageHeader>
       <Filter dateRange dateRet={dateRet}></Filter>
       <Table columns={columns} dataSource={tableData}></Table>
-      <ReportChart dataDo={dataDo} dataBar={dataBar}></ReportChart>
+      {label.length !== 0 ? <ReportChart dataDo={dataDo} dataBar={dataBar}></ReportChart>: ''}
+      
     </ItemContainer>
   )
 }

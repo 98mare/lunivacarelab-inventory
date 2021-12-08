@@ -55,10 +55,16 @@ const data = [
     name: 'Consumption Report',
     pathName: 'consumption'
   },
-{
+  {
     name: 'Stocks',
     pathName: 'stocks'
-  },]
+  },
+  {
+    name: 'Overall Report',
+    pathName: 'invs'
+  },
+
+]
 
 const Index = () => {
   // const dispatch = useDispatch();
