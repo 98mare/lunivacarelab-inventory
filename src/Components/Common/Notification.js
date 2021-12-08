@@ -53,6 +53,7 @@ const Notification = () => {
 export default Notification
 
 const NotificationContainer = styled.div`
+
   i{
     color: var(--primary);
     width: 40px;
@@ -65,6 +66,3 @@ const NotificationContainer = styled.div`
   }
 `
 
-const ContenetContainer = styled.div`
-
-`

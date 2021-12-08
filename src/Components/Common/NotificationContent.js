@@ -35,9 +35,13 @@ const NotificationContentContainer = styled.div`
     gap: 20px;
     margin-bottom: 10px;
     cursor: pointer;
+    border-right: 1px solid var(--primary);
     .icon{
       font-size: 30px;
-      color: #f34e24;
+      color: var(--primary);
+    }
+    &:hover{
+      border-right: 2px solid var(--primary);
     }
   }
 `

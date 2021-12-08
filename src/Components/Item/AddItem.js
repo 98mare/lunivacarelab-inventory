@@ -175,7 +175,8 @@ const AddItem = (props) => {
                 },
               ]}
             >
-              <SearchSelect itemList={
+              <SearchSelect
+               itemList={
                 itemList?.map(iTy => {
                   return (
                     <Option

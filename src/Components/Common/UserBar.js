@@ -55,14 +55,14 @@ const UserBarContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   border: 1px solid #fefefe;
-  padding: 10px 20px;
+  padding: 8px 20px;
   border-radius: 20px;
   background-color: #e95b29;
   color: #fefefe;
   gap: 15px;
   .userIcon{
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     img{
       width: 100%;
       height: 100%;
