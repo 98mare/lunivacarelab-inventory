@@ -1,5 +1,6 @@
-import { message } from 'antd';
-import React from 'react';
+import { message ,notification} from 'antd';
+import pMinDelay from 'p-min-delay';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import useToken from './useToken';
 import { useDispatch } from 'react-redux';
@@ -8,6 +9,30 @@ import { Form, Input, Button } from 'antd';
 import styled from 'styled-components';
 import logo from '../../assets/images/logo.png';
 
+const data = [
+  {
+    itemName : 'Some Item name 1',
+  },
+  {
+    itemName : 'Some Item name 3',
+  },
+  {
+    itemName : 'Some Item name 4',
+  },
+  {
+    itemName : 'Some Item name 2',
+  }, 
+]
+const openNotification = placement => {
+  data.map(e => (
+    notification.info({
+      message: `Notification`,
+      description:
+        `${e.itemName}`,
+      placement,
+    })
+  )) 
+};
 export default function Login() {
   const dispatch = useDispatch();
   const { token, setToken } = useToken();
@@ -27,7 +52,8 @@ export default function Login() {
           history.push({
             pathname: '/'
           })
-        } else {
+          pMinDelay(openNotification('topLeft'), 2000);
+        }else{
           message.error('Username or password incorrect');
         }
       } else {
