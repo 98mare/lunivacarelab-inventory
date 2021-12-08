@@ -1,4 +1,4 @@
-import { Modal, message } from 'antd';
+import { message ,notification} from 'antd';
 import pMinDelay from 'p-min-delay';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -29,6 +29,30 @@ const columns = [
 
 //   });
 // }
+const data = [
+  {
+    itemName : 'Some Item name 1',
+  },
+  {
+    itemName : 'Some Item name 3',
+  },
+  {
+    itemName : 'Some Item name 4',
+  },
+  {
+    itemName : 'Some Item name 2',
+  }, 
+]
+const openNotification = placement => {
+  data.map(e => (
+    notification.info({
+      message: `Notification`,
+      description:
+        `${e.itemName}`,
+      placement,
+    })
+  )) 
+};
 
 
 export default function Login() {
@@ -58,7 +82,7 @@ export default function Login() {
           history.push({
             pathname: '/'
           })
-          // pMinDelay(success(), 2000);
+          pMinDelay(openNotification('topLeft'), 2000);
         }else{
           message.error('Username or password incorrect');
         }

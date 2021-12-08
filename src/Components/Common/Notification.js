@@ -1,22 +1,50 @@
 import { notification } from 'antd';
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
+import { Popover } from 'antd';
+import NotificationContent from './NotificationContent';
 
-const openNotification = placement => {
-  notification.info({
-    message: `Notification`,
-    description:
-      'Some items needs to be re stocked',
-    placement,
-  });
-};
+
+// const openNotification = placement => {
+//   data.map(e => (
+//     notification.info({
+//       message: `Notification`,
+//       description:
+//         `${e.itemName}`,
+//       placement,
+//     })
+//   )) 
+// };
+
+const data = [
+  {
+    itemName : 'Some Item name 1',
+  },
+  {
+    itemName : 'Some Item name 3',
+  },
+  {
+    itemName : 'Some Item name 4',
+  },
+  {
+    itemName : 'Some Item name 2',
+  }, 
+]
+
+
 
 const Notification = () => {
+  
+  
   return (
     <NotificationContainer>
-      <span onClick={() => openNotification('topLeft')}>
+      {/* <span onClick={() => openNotification('topLeft')}>
       <i className='icon-line-bell'></i>
-      </span>
+      </span> */}
+
+      <Popover placement="bottom" content={<NotificationContent data={data}/>} trigger="click">
+      <i className='icon-line-bell'></i>
+      </Popover>
       
     </NotificationContainer>
   )
@@ -35,4 +63,8 @@ const NotificationContainer = styled.div`
     justify-content: center;
     align-items: center;
   }
+`
+
+const ContenetContainer = styled.div`
+
 `
