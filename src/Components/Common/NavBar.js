@@ -3,6 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import SerchBar from './SerchBar'
 import UserBar from './UserBar'
+import Notification from './Notification'
 
 const NavBar = () => {
   return (
@@ -13,7 +14,9 @@ const NavBar = () => {
             {/* <SerchBar></SerchBar> */}
             {/* <h1 style={{color: '#232324'}}>Inventory Management system</h1> */}
           </Col>
-          <Col>
+          
+          <Col className='costomeCol'>
+            <Notification />
             <UserBar></UserBar>
           </Col>
         </Row>
@@ -31,5 +34,10 @@ const NavBarContainer = styled.div`
 
   @media(max-width: 500px){
     display: none;
+  }
+  .costomeCol{
+    display: flex;
+    gap: 20px;
+    align-items: center;
   }
 `

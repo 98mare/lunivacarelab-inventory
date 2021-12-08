@@ -1,4 +1,3 @@
-import React, {useState} from 'react';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PageHeader from '../Common/pageHeader';
@@ -31,49 +30,42 @@ ChartJS.register(
   Tooltip
 );
 
-
-
-
-
-
 const InVsOutVsCon = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  // const [goodsList, setgoodsList] = useState([]);
   const [goodsInList, setGoodsInList] = useState([]);
   const [goodsInLister, setGoodsInLister] = useState([]);
   const [goodsOutList, setGoodsList] = useState([]);
-  const [goodsLabel, setgoodslabe] = useState([])
+<<<<<<< HEAD
   const [goodsOutLister, setGoodsOutLister] = useState([]);
   const [AllGoodsLabel, setAllGoodsLabel] = useState([])
 
   const [goodsInLabel, setGoodsInLabel] = useState([]);
   const [goodsOutLabel, setGoodsOutLabel] = useState([]);
+=======
+  const [goodsLabel, setgoodslabel] = useState([])
+>>>>>>> cbdb4cc00048df08e1cc9222223607469fdc0833
 
   const getLabData = (data) => {
-    let newData = {
-      ...data,
-      itemid: 0
-    }
     let newData = { ...data }
     dispatch(getGoodsInCountApi(newData, (val) => {
-      // setgoodsList(val)
       let pushedArr = []
       let pushedGoodsIn = []
       val.forEach(ele => {
-        pushedArr.push(ele?.GoodsInDate.split('T')[0])
         pushedArr.push(ele?.GoodsInDate)//.split('T')[0]
         pushedGoodsIn.push(ele?.GoodsInCount)
       })
-      setgoodslabe(pushedArr);
-      setGoodsInList(pushedGoodsIn);
-      // 
-      // console.log("this is goods list",goodsList);
+<<<<<<< HEAD
       setGoodsInLabel(pushedArr);
       // setGoodsInList(pushedGoodsIn);
       setGoodsInList(val);
-
+=======
+      setgoodslabel(pushedArr);
+      setGoodsInList(pushedGoodsIn);
+      // 
+      // console.log("this is goods list",goodsList);
+>>>>>>> cbdb4cc00048df08e1cc9222223607469fdc0833
     }))
 
     dispatch(getGoodsOutCountApi(newData, (val) => {
@@ -81,11 +73,9 @@ const InVsOutVsCon = () => {
       let pushedGoodsOut = []
 
       val.forEach(ele => {
-        pushedArr.push(ele?.GoodsInDate.split('T')[0])
         pushedArr.push(ele?.GoodsInDate)//.split('T')[0]
         pushedGoodsOut.push(ele?.GoodsInCount)
       })
-      setGoodsList(pushedGoodsOut);
       setGoodsOutLabel(pushedArr);
       // setGoodsList(pushedGoodsOut);
       setGoodsList(val);
@@ -129,14 +119,8 @@ const InVsOutVsCon = () => {
       itemid: val?.itemid
     }
     getLabData(data)
-    
   }
- 
-
-  
-  
- 
-
+<<<<<<< HEAD
 
   const labels = AllGoodsLabel;
 
@@ -149,8 +133,9 @@ const InVsOutVsCon = () => {
   useEffect(() => {
     
   }, [goodsInLister, goodsOutLister])
-
+=======
   const labels = goodsLabel;
+>>>>>>> cbdb4cc00048df08e1cc9222223607469fdc0833
 
   const data = {
     labels,
@@ -165,37 +150,30 @@ const InVsOutVsCon = () => {
       },
       {
         type: 'bar',
-        label: 'Goods Out',
-        backgroundColor: 'rgb(75, 192, 192)',
-        data: goodsOutList,
-        borderColor: 'white',
-        borderWidth: 2,
         label: 'Goods In',
         backgroundColor: 'rgb(53, 162, 235)',
         data: goodsInLister,
       },
       {
         type: 'bar',
-        label: 'Goods In',
-        backgroundColor: 'rgb(53, 162, 235)',
-        data: goodsInList,
+<<<<<<< HEAD
         label: 'Goods Out',
         backgroundColor: 'rgb(75, 192, 192)',
         // borderColor: 'white',
         // borderWidth: 2,
         data: goodsOutLister,
+=======
+        label: 'Goods In',
+        backgroundColor: 'rgb(53, 162, 235)',
+        data: goodsInList,
+        borderWidth: 2
+>>>>>>> cbdb4cc00048df08e1cc9222223607469fdc0833
       },
     ],
   };
 
-  
-
-  console.log(goodsInList);
- 
-
   return (
     <InVsOutVsContainer>
-      <PageHeader pageTitle="Goods In Vs Goods Out Vs Consumption" buttonTitle='Add Rack' buttonOnClick={() => history.push('./rack/add')}></PageHeader>
       <PageHeader pageTitle="Goods In Vs Goods Out Vs Consumption" buttonTitle='Add Rack' buttonOnClick={() => history.push('./rack/add')} />
       <Filter dateRange
         dateRet={dataRet}

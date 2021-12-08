@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
 import { getGoodsOutApi, getGoodsOutCountApi } from '../../services/labGoodsOutService';
+import ReportChart from '../Common/ReportChart';
 
 const columns = [
   {
@@ -53,6 +54,8 @@ const Index = () => {
   // const history = useHistory();
   const dispatch = useDispatch();
   const [goodsList, setgoodsList] = useState([])
+  const [goodsOutList, setGoodsOutList] = useState([]);
+  const [goodsLabel, setgoodslabel] = useState([])
 
   const getLabData = (data) => {
     dispatch(getGoodsOutApi(data, (val) => {
@@ -66,14 +69,69 @@ const Index = () => {
       console.log(val);
     }))
   }
+  const getGoodsOutList =(data) => {
+    let newData = {
+      ...data,
+      itemid: 0
+    }
+    dispatch(getGoodsOutCountApi(newData, (val) => {
+      let pushedArr =[]
+      let pushedGoodsOut = []
+      
+      val.forEach(ele => {
+        pushedArr.push(ele?.GoodsInDate.split('T')[0])
+        pushedGoodsOut.push(ele?.GoodsInCount)
+      })
+      setgoodslabel(pushedArr);
+      setGoodsOutList(pushedGoodsOut);
+    }))
+  }
 
   const dataRet = (val) => {
     let data = {
       fromdate: val[0].format("YYYY-MM-DD"),
       todate: val[1].format("YYYY-MM-DD"),
     }
-    getLabData(data)
+    getLabData(data);
+    getGoodsOutList(data);
   }
+  const labels = goodsLabel;
+
+  const dataBar = {
+    labels,
+    datasets: [
+      {
+        type: 'bar',
+        label: 'Goods Out',
+        backgroundColor: 'rgb(53, 162, 235)',
+        data: goodsOutList,
+        borderWidth: 2
+      },
+    ],
+  };
+  const dataDo = {
+    labels,
+    datasets: [
+      {
+        
+        label: 'Goods In',
+        backgroundColor: [
+        'rgb(53, 162, 235)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',],
+        data: goodsOutList,
+        borderColor: [
+          'rgba(255, 255, 132, 1)',
+          
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
 
   return (
     <GoodsOutContainer>
@@ -90,6 +148,7 @@ const Index = () => {
         columns={columns}
         dataSource={goodsList}
       />
+      <ReportChart dataBar={dataBar} dataDo={dataDo}></ReportChart>
     </GoodsOutContainer>
   )
 }
