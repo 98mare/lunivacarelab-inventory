@@ -4,9 +4,9 @@ import styled from 'styled-components'
 
 const openNotification = placement => {
   notification.info({
-    message: `Notification ${placement}`,
+    message: `Notification`,
     description:
-      'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+      'Some items needs to be re stocked',
     placement,
   });
 };
