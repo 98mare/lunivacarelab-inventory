@@ -2,7 +2,7 @@
 import { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
-import { AsyncAddCategory, AsyncAddItems, AsyncAddItemVsRatio, AsyncAddLocation, AsyncAddRack, AsyncAddType, AsyncAddUnits, AsyncAddWastage, AsyncAppLayout, AsyncCategory, AsyncConsumableReports, AsyncDashbord, AsyncGoodOut, AsyncGoodsIn, AsyncGoodsInAdd, AsyncGoodsInReports, AsyncGoodsOutAdd, AsyncGoodsOutReports, AsyncinvsReports, AsyncItems, AsyncItemVsRatio, AsyncLocation, AsyncLogin, AsyncNotFound, AsyncPublicLayout, AsyncRack, AsyncReports, AsyncSettings, AsyncType, AsyncUnits, AsyncWastage } from './App/asyncComponent';
+import { AsyncAddCategory, AsyncAddItems, AsyncAddItemVsRatio, AsyncAddLocation, AsyncAddRack, AsyncAddStocks, AsyncAddType, AsyncAddUnits, AsyncAddWastage, AsyncAppLayout, AsyncCategory, AsyncConsumableReports, AsyncDashbord, AsyncGoodOut, AsyncGoodsIn, AsyncGoodsInAdd, AsyncGoodsInReports, AsyncGoodsOutAdd, AsyncGoodsOutReports, AsyncinvsReports, AsyncItems, AsyncItemVsRatio, AsyncLocation, AsyncLogin, AsyncNotFound, AsyncPublicLayout, AsyncRack, AsyncReports, AsyncSettings, AsyncStocks, AsyncType, AsyncUnits, AsyncWastage } from './App/asyncComponent';
 import PrivateRouter from './Routes/PrivateRouter';
 import PublicRoute from './Routes/PublicRoute';
 import loadlogo from './assets/images/logo1.png';
@@ -274,6 +274,14 @@ function App() {
           layout={AsyncAppLayout}
           forEdit
         />
+
+        <PrivateRouter
+          exact
+          path='/reports/stocks'
+          component={AsyncStocks}
+          layout={AsyncAppLayout}
+        />
+        
 
         <Route component={AsyncNotFound} />
 

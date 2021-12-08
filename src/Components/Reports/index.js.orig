@@ -48,17 +48,23 @@ const data = [
     pathName: 'goodsin'
   },
   {
-    name: 'Goods Out reports',
+    name: 'Goods Out report',
     pathName: 'goodsout'
   },
   {
     name: 'Consumption Report',
     pathName: 'consumption'
   },
-{
+  {
+<<<<<<< HEAD
+    name: 'All Report Graph',
+    pathName: 'invs'
+=======
     name: 'Stocks',
     pathName: 'stocks'
-  },]
+>>>>>>> 4097a9a73a8edb48c0fd41bf21e264368c29ac35
+  },
+]
 
 const Index = () => {
   // const dispatch = useDispatch();

@@ -74,6 +74,8 @@ export const GetListOfTestForInventory = 'GetListOfTestForInventory';
  */
  export const GetGoodsInCountByDateWiseandItemWise = 'GetGoodsInCountByDateWiseandItemWise';
 
+ export const GetCurrentRemainingStockCountById = 'GetCurrentRemainingStockCountById'
+
 //POST
 /**
  * @desc: insert update item category
@@ -210,3 +212,5 @@ export const InsertUpdateNewItemsDetails = 'InsertUpdateNewItemsDetails';
 }
  */
 export const InsertUpdateGoodsoutRecord = 'InsertUpdateGoodsoutRecord'
+
+

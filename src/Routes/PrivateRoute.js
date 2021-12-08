@@ -23,6 +23,9 @@ import AddGoodsOut from '../Components/GoodsOut/AddGoodsOut';
 import ItemVsRatio from '../Components/ItemVsRatio'
 import AddItemVsRatio from '../Components/ItemVsRatio/AddItemVSRatio';
 import Reports from  '../Components/Reports'
+
+import Stocks from '../Components/Stocks'
+import AddStocks from '../Components/Stocks/AddStocks';
 // import AddReports from '../Components/Reports/AddReports';
 
 const PrivateRoute = (props) => {
@@ -102,6 +105,8 @@ const PrivateRoute = (props) => {
       <Route path='/reports/add' exact>
         {/* <AddReports/> */}
       </Route>
+
+      
       
       
       {/* <Route path=''>
