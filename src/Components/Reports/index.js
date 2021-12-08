@@ -3,45 +3,6 @@ import styled from 'styled-components'
 import PageHeader from '../Common/pageHeader'
 import { Link } from 'react-router-dom'
 
-// const columns = [
-//   {
-//     title: 'Id',
-//     dataIndex: 'RId',
-//     key: 'rackId'
-//   },
-//   {
-//     title: 'Rack Code',
-//     dataIndex: 'RackCode',
-//     key: 'rackCode'
-//   },
-//   {
-//     title: 'Rack Name',
-//     dataIndex: 'RackName',
-//     key: 'rackName'
-//   },
-//   {
-//     title: 'Is Active',
-//     dataIndex: 'IsActive',
-//     key: 'isActive',
-//     render: (text) => {
-//       if (text === true) {
-//         return 'Active'
-//       }
-//       return 'Inactive'
-//     }
-//   },
-//   {
-//     title: 'action',
-//     key: 'action',
-//     render: (text, record) => (
-//       <Space size="middle">
-//         <a href="#">Edit</a>
-//         <a href="#">Delete</a>
-//       </Space>
-//     )
-//   }
-// ]
-
 const data = [
   {
     name: 'Goods in Report',
@@ -59,25 +20,18 @@ const data = [
     name: 'Stocks',
     pathName: 'stocks'
   },
+  // {
+  //   name: 'Overall Report',
+  //   pathName: 'invs'
+  // },
   {
     name: 'Overall Report',
-    pathName: 'invs'
+    pathName: 'inoutcon'
   },
 
 ]
 
 const Index = () => {
-  // const dispatch = useDispatch();
-  // const history = useHistory();
-
-  // const [tableData, setTableData] = useState([])
-
-  // const locateRange = (val) => {
-  //   dispatch(getRackDetApi(val, (value) => {
-  //     setTableData(value)
-  //   }))
-  // }
-
   return (
     <ReportContainer>
       <PageHeader pageTitle="Reports"></PageHeader>
@@ -88,7 +42,7 @@ const Index = () => {
           ))
         }
       </div>
-     
+
     </ReportContainer>
   )
 }
@@ -121,7 +75,4 @@ const ReportContainer = styled.div`
     border: 1px solid rgba( 255, 255, 255, 0.18 );
     }
   }
-
-
-  
-`
+  `

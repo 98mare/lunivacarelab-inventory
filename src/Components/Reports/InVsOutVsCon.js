@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PageHeader from '../Common/pageHeader';
-import { useHistory } from 'react-router-dom';
 import Filter from '../Common/Filter';
-import { getGoodsInCountApi, getGoodsReceivedApi } from '../../services/labGoodsReceivedService'
+import { getGoodsInCountApi } from '../../services/labGoodsReceivedService'
+import { getGoodsOutCountApi } from '../../services/labGoodsOutService';
 import { useDispatch } from 'react-redux';
-
 import {
   Chart as ChartJS,
   LinearScale,
@@ -17,8 +16,6 @@ import {
   Tooltip,
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
-import { getGoodsOutCountApi } from '../../services/labGoodsOutService';
-// import faker from 'faker';
 
 ChartJS.register(
   LinearScale,
@@ -30,63 +27,33 @@ ChartJS.register(
   Tooltip
 );
 
-
-
-
-
-
 const InVsOutVsCon = () => {
-
   const dispatch = useDispatch();
-  const history = useHistory();
-  // const [goodsList, setgoodsList] = useState([]);
   const [goodsInList, setGoodsInList] = useState([]);
   const [goodsInLister, setGoodsInLister] = useState([]);
   const [goodsOutList, setGoodsList] = useState([]);
-  const [goodsLabel, setgoodslabe] = useState([])
   const [goodsOutLister, setGoodsOutLister] = useState([]);
   const [AllGoodsLabel, setAllGoodsLabel] = useState([])
-
   const [goodsInLabel, setGoodsInLabel] = useState([]);
   const [goodsOutLabel, setGoodsOutLabel] = useState([]);
 
   const getLabData = (data) => {
-    // let newData = {
-    //   ...data,
-    //   itemid: 0
-    // }
-    let newData = { ...data }
-    dispatch(getGoodsInCountApi(newData, (val) => {
-      // setgoodsList(val)
+    dispatch(getGoodsInCountApi(data, (val) => {
       let pushedArr = []
-      let pushedGoodsIn = []
       val.forEach(ele => {
-        pushedArr.push(ele?.GoodsInDate.split('T')[0])
         pushedArr.push(ele?.GoodsInDate)//.split('T')[0]
-        pushedGoodsIn.push(ele?.GoodsInCount)
       })
-      setgoodslabe(pushedArr);
-      setGoodsInList(pushedGoodsIn);
-      // 
-      // console.log("this is goods list",goodsList);
       setGoodsInLabel(pushedArr);
-      // setGoodsInList(pushedGoodsIn);
       setGoodsInList(val);
 
     }))
 
-    dispatch(getGoodsOutCountApi(newData, (val) => {
+    dispatch(getGoodsOutCountApi(data, (val) => {
       let pushedArr = []
-      let pushedGoodsOut = []
-
       val.forEach(ele => {
-        pushedArr.push(ele?.GoodsInDate.split('T')[0])
         pushedArr.push(ele?.GoodsInDate)//.split('T')[0]
-        pushedGoodsOut.push(ele?.GoodsInCount)
       })
-      setGoodsList(pushedGoodsOut);
       setGoodsOutLabel(pushedArr);
-      // setGoodsList(pushedGoodsOut);
       setGoodsList(val);
     }))
 
@@ -111,14 +78,13 @@ const InVsOutVsCon = () => {
         }
         return null;
       });
-      
+
       if (isGoodOut === true) {
         setGoodsOutLister(dataset);
       } else {
         setGoodsInLister(dataset)
       }
     }
-
   }
 
   const dataRet = (val) => {
@@ -128,28 +94,17 @@ const InVsOutVsCon = () => {
       itemid: val?.itemid
     }
     getLabData(data)
-    
   }
- 
-
-  
-  
- 
-
 
   const labels = AllGoodsLabel;
 
-  
   useEffect(() => {
     dubDa(goodsInList)
     dubDa(goodsOutList, true)
   }, [AllGoodsLabel])
 
   useEffect(() => {
-    
   }, [goodsInLister, goodsOutLister])
-
-  // const labels = goodsLabel;
 
   const data = {
     labels,
@@ -180,22 +135,14 @@ const InVsOutVsCon = () => {
         data: goodsInList,
         label: 'Goods Out',
         backgroundColor: 'rgb(75, 192, 192)',
-        // borderColor: 'white',
-        // borderWidth: 2,
         data: goodsOutLister,
       },
     ],
   };
 
-  
-
-  console.log(goodsInList);
- 
-
   return (
     <InVsOutVsContainer>
-      {/* <PageHeader pageTitle="Goods In Vs Goods Out Vs Consumption" buttonTitle='Add Rack' buttonOnClick={() => history.push('./rack/add')}></PageHeader> */}
-      <PageHeader pageTitle="Goods In Vs Goods Out Vs Consumption" buttonTitle='Add Rack' buttonOnClick={() => history.push('./rack/add')} />
+      <PageHeader pageTitle="Goods In Vs Goods Out Vs Consumption" />
       <Filter dateRange
         dateRet={dataRet}
         itemName
