@@ -23,12 +23,12 @@ const columns = [
   
 ]
 
-function success() {
-  Modal.success({
-    content: <Table columns={columns} />,
+// function success() {
+//   Modal.success({
+//     content: <Table columns={columns} />,
 
-  });
-}
+//   });
+// }
 
 
 export default function Login() {
@@ -58,7 +58,7 @@ export default function Login() {
           history.push({
             pathname: '/'
           })
-          pMinDelay(success(), 2000);
+          // pMinDelay(success(), 2000);
         }else{
           message.error('Username or password incorrect');
         }

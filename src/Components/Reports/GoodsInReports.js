@@ -15,8 +15,9 @@ import {
   LineElement,
   Legend,
   Tooltip,
+  ArcElement
 } from 'chart.js';
-import { Chart } from 'react-chartjs-2';
+import { Chart ,Doughnut  } from 'react-chartjs-2';
 import ReportChart from '../Common/ReportChart';
 // import faker from 'faker';
 
@@ -26,6 +27,7 @@ ChartJS.register(
   BarElement,
   PointElement,
   LineElement,
+  ArcElement,
   Legend,
   Tooltip
 );
@@ -101,16 +103,40 @@ const Index = () => {
     
   }
 
+ 
   const labels = goodsLabel;
-
-  const data = {
+  const dataDo = {
+    labels,
+    datasets: [
+      {
+        
+        label: 'Goods In',
+        backgroundColor: [
+        'rgb(53, 162, 235)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',],
+        data: goodsInList,
+        borderColor: [
+          'rgba(255, 255, 132, 1)',
+          
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+  const dataBar = {
     labels,
     datasets: [
       {
         type: 'bar',
-        label: 'Goods In',
+        label: 'Goods Out',
         backgroundColor: 'rgb(53, 162, 235)',
         data: goodsInList,
+        borderWidth: 2
       },
     ],
   };
@@ -135,7 +161,11 @@ const Index = () => {
         columns={columns}
         dataSource={goodsList}
       />
-      <ReportChart data={data}></ReportChart>
+      <ReportChart 
+        dataBar={dataBar}
+        dataDo={dataDo}
+      ></ReportChart>
+      
     </GoodsInContainer>
   )
 }

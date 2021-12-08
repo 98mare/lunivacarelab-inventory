@@ -111,6 +111,7 @@ const InVsOutVsCon = () =>{
         label: 'Goods In',
         backgroundColor: 'rgb(53, 162, 235)',
         data: goodsInList,
+        borderWidth: 2
       },
     ],
   };
