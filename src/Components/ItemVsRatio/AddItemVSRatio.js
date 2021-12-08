@@ -8,6 +8,7 @@ import { getItemVsRatioApi, getTestListApi, insertItemVsRatioApi } from '../../s
 import moment from 'moment';
 import { tokenString } from '../Common/HandleUser';
 import { formItemLayout } from '../Common/FormItemLayout';
+import { SearchSelect } from '../Common/SearchSelect';
 
 const AddItemVsRatio = (props) => {
   const { forEdit } = props;
@@ -117,18 +118,7 @@ const AddItemVsRatio = (props) => {
                 },
               ]}
             >
-              <Select
-                showSearch
-                optionFilterProp="children"
-                placeholder="select a test"
-                filterOption={(input, option) => {
-                  return (
-                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
-                    option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                  );
-                }}
-                allowClear>
-                {testList?.map(iTy => {
+              <SearchSelect itemList={testList?.map(iTy => {
                   return (
                     <Option
                       title={iTy?.Testname}
@@ -139,7 +129,8 @@ const AddItemVsRatio = (props) => {
                   )
                 })
                 }
-              </Select>
+                placer='Select a test'
+              />
             </Form.Item>
 
             <Form.Item
@@ -152,16 +143,19 @@ const AddItemVsRatio = (props) => {
                 },
               ]}
             >
-              <Select allowClear>
-                {itemList?.map(iTy => {
+              <SearchSelect itemList={itemList?.map(iTy => {
                   return (
-                    <Option value={iTy?.TId}>
+                    <Option
+                      title={iTy?.ItemName}
+                      key={iTy?.TId}
+                      value={iTy?.TId}>
                       {iTy?.ItemName}
                     </Option>
                   )
                 })
                 }
-              </Select>
+                placer='Select an item'
+              />
             </Form.Item>
 
             <Form.Item

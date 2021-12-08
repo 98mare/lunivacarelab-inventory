@@ -48,12 +48,16 @@ const data = [
     pathName: 'goodsin'
   },
   {
-    name: 'Goods Out reports',
+    name: 'Goods Out report',
     pathName: 'goodsout'
   },
   {
-    name: 'Consumption',
+    name: 'Consumption Report',
     pathName: 'consumption'
+  },
+  {
+    name: 'All Report Graph',
+    pathName: 'invs'
   },
 ]
 

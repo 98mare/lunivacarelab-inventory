@@ -7,6 +7,7 @@ import { getGoodsOutApi, insertGoodsOutApi } from '../../services/labGoodsOutSer
 import { getTestListApi } from '../../services/itemVsRatioService';
 import moment from 'moment';
 import { tokenString } from '../Common/HandleUser';
+import { SearchSelect } from '../Common/SearchSelect';
 
 const AddGoodsOut = (props) => {
   const { forEdit } = props
@@ -38,8 +39,8 @@ const AddGoodsOut = (props) => {
   const dateFormat = 'YYYY-MM-DD';
 
   useEffect(() => {
-    if(forEdit && previousValues === undefined) {
-      dispatch(getGoodsOutApi({fromdate: fromDat, todate: fromDat}, (val) => {}))
+    if (forEdit && previousValues === undefined) {
+      dispatch(getGoodsOutApi({ fromdate: fromDat, todate: fromDat }, (val) => { }))
     }
     getAllLabItem()
   }, [])
@@ -49,7 +50,7 @@ const AddGoodsOut = (props) => {
   }, [goodsOutReducer?.goodsOuts[GOId]])
 
   useEffect(() => {
-    if(previousValues !== undefined){
+    if (previousValues !== undefined) {
       form.resetFields()
     }
   }, [previousValues])
@@ -99,27 +100,27 @@ const AddGoodsOut = (props) => {
   };
 
   let prevVal = {}
-  if(previousValues !== undefined){
+  if (previousValues !== undefined) {
     prevVal = {
       ...previousValues,
       GoodsOutDate: moment(previousValues?.GoodsOutDate)
     }
   }
 
-/*
-labelCol={{
-              span: 6,
-            }}
-            wrapperCol={{
-              span: 6
-            }}*/
+  /*
+  labelCol={{
+                span: 6,
+              }}
+              wrapperCol={{
+                span: 6
+              }}*/
 
   return (
     <AddGoodsOutContainer>
       <Row justify='center'>
         <Col span={16}>
           <Form
-          form={form}
+            form={form}
             name="add_items"
             {...formItemLayout}
             labelAlign="left"
@@ -140,29 +141,20 @@ labelCol={{
                 },
               ]}
             >
-              <Select
-                showSearch
-                optionFilterProp="children"
-                placeholder="select a test"
-                filterOption={(input, option) => {
-                  return (
-                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
-                    option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                  );
-                }}
-                allowClear>
-                {testList?.map(iTy => {
-                  return (
-                    <Option
-                      title={iTy?.Testname}
-                      key={iTy?.Id}
-                      value={iTy?.Id}>
-                      {iTy?.Testname}
-                    </Option>
-                  )
-                })
-                }
-              </Select>
+
+              <SearchSelect itemList={testList?.map(iTy => {
+                return (
+                  <Option
+                    title={iTy?.Testname}
+                    key={iTy?.Id}
+                    value={iTy?.Id}>
+                    {iTy?.Testname}
+                  </Option>
+                )
+              })
+              }
+                placer='Select a test'
+              />
             </Form.Item>
             <Form.Item
               label="Item Name"
@@ -174,16 +166,19 @@ labelCol={{
                 },
               ]}
             >
-              <Select allowClear>
-                {itemList?.map(iTy => {
-                  return (
-                    <Option value={iTy?.TId}>
-                      {iTy?.ItemName}
-                    </Option>
-                  )
-                })
-                }
-              </Select>
+              <SearchSelect itemList={itemList?.map(iTy => {
+                return (
+                  <Option
+                    title={iTy?.ItemName}
+                    key={iTy?.TId}
+                    value={iTy?.TId}>
+                    {iTy?.ItemName}
+                  </Option>
+                )
+              })
+              }
+                placer='Select an item'
+              />
             </Form.Item>
 
             <Form.Item
@@ -196,8 +191,8 @@ labelCol={{
                 },
               ]}
             >
-              <InputNumber 
-              style={{ width: '100%' }}
+              <InputNumber
+                style={{ width: '100%' }}
               />
             </Form.Item>
 
@@ -211,8 +206,8 @@ labelCol={{
                 },
               ]}
             >
-              <InputNumber 
-              style={{ width: '100%' }}
+              <InputNumber
+                style={{ width: '100%' }}
               />
             </Form.Item>
 
@@ -258,7 +253,7 @@ labelCol={{
                 span: 16,
               }}
             >
-              <Button  htmlType="submit" disabled={butDis} className='btnPrimary'>
+              <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
                 {forEdit ? 'Edit' : 'Submit'}
               </Button>
             </Form.Item>

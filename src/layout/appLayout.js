@@ -24,14 +24,12 @@ const AppLayout = (props) => {
           <Layout className="main-app-layout">
             <NavBar></NavBar>
             <MobileNav />
-            {props?.secondaryNav &&
-              props?.secondaryNavigation
-            }
+            {props?.secondaryNav && props?.secondaryNavigation}
             <Content className={Value === true ? 'costomeContent2' : 'costomeContent1'}>
               {props?.children}
             </Content>
             <Footer className="footer">
-             <h3>All rights reserved &copy; Luniatech Pvt.Ltd {date.getFullYear()}</h3>
+              <h3>All rights reserved &copy; Lunivatech Pvt. Ltd {date.getFullYear()}</h3>
             </Footer>
             <BottomNav></BottomNav>
           </Layout>

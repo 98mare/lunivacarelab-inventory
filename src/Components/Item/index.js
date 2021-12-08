@@ -35,7 +35,13 @@ const Index = () => {
     {
       title: 'Location',
       dataIndex: 'Location',
-      key: 'Location'
+      key: 'Location',
+      render: (text, record) => {
+        if(text !== null){
+          return `${text} (${record.Rack})`;
+        }
+        return '';
+      }
     },
     {
       title: 'Action',

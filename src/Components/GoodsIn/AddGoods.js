@@ -9,6 +9,7 @@ import moment from 'moment';
 import { tokenString } from '../Common/HandleUser';
 import { formItemLayout } from '../Common/FormItemLayout';
 import { useHistory } from 'react-router-dom';
+import { SearchSelect } from '../Common/SearchSelect';
 
 const AddGoods = (props) => {
   const { forEdit } = props
@@ -140,16 +141,19 @@ const AddGoods = (props) => {
                 },
               ]}
             >
-              <Select allowClear>
-                {itemList?.map(iTy => {
-                  return (
-                    <Option value={iTy?.TId}>
-                      {iTy?.ItemName}
-                    </Option>
-                  )
-                })
-                }
-              </Select>
+              <SearchSelect itemList={itemList?.map(iTy => {
+                return (
+                  <Option
+                    title={iTy?.ItemName}
+                    key={iTy?.TId}
+                    value={iTy?.TId}>
+                    {iTy?.ItemName}
+                  </Option>
+                )
+              })
+              }
+                placer='Select an item'
+              />
             </Form.Item>
 
             <Form.Item

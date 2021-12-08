@@ -8,9 +8,10 @@ import { getItemTypeApi } from '../../services/itemItemTypeService'
 import { getItemCategoryApi } from '../../services/itemCategoryService'
 import { getLocationApi } from '../../services/itemLocationService'
 import moment from 'moment';
+import { getLabItemsApi } from '../../services/itemNewItemService'
 
 const Filter = (props) => {
-  const { itemType, categroryType, dateRange, dataRet, dateRet, locateRange } = props
+  const { itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName } = props
   const dispatch = useDispatch();
 
   const { Option } = Select;
@@ -22,10 +23,14 @@ const Filter = (props) => {
   const [locationList, setlocationList] = useState([])
   const [locationId, setlocationId] = useState(0)
   const [fromDate, setfromDate] = useState([moment(), moment()])
+  const [itemNameList, setitemNameList] = useState(1)
+  const [itemNameLister, setitemNameLister] = useState([])
 
   const handleClicker = () => {
     if (dateRange !== undefined) {
-      if (fromDate != null) {
+      if (itemName !== undefined) {
+        dateRet({ ...fromDate, itemid: itemNameList })
+      } else if (fromDate !== null) {
         dateRet(fromDate)
       }
     } else if (locateRange !== undefined) {
@@ -60,11 +65,23 @@ const Filter = (props) => {
         })
       )
     }
+
+    if (itemName !== undefined) {
+      let data = {
+        typeId: 0,
+        categoryId: 0
+      }
+      dispatch(
+        getLabItemsApi(data, (val) => {
+          setitemNameLister(val)
+        })
+      )
+    }
   }, [])
 
   return (
     <FilterContainer>
-      {/* <Row justify='space-between'> */}
+
       <Row className="filterRow">
         {itemType &&
           <Col md={6} sm={11} xs={24}>
@@ -122,13 +139,25 @@ const Filter = (props) => {
             <Datepicker defaultValuer={fromDate} onChanger={(value) => { setfromDate(value) }}></Datepicker>
           </Col>
         }
-
-        {/* <Col md={3} sm={6} xs={24}> */}
+        {itemName &&
+          <Col md={6} sm={12} xs={24}>
+            <Select style={{ width: '100%' }} onChange={(val) => { setitemNameList(val) }} size='large' className='inputWidth'>
+              {itemNameLister?.map(iTy => {
+                if (iTy?.IsActive) {
+                  return (
+                    <Option value={iTy?.TId}>
+                      {iTy?.ItemName}
+                    </Option>
+                  )
+                }
+              })
+              }
+            </Select>
+          </Col>
+        }
         <AppButton className='primary-btn' buttonTitle="Search" buttonOnClick={() => { handleClicker() }} priamryOutlineBtn></AppButton>
-      {/* </Col> */}
-      
+
       </Row>
-      {/* </Row> */}
     </FilterContainer>
   )
 }

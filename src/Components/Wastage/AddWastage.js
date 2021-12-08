@@ -8,6 +8,7 @@ import { getWastageApi, insertWastageApi } from '../../services/wastageService';
 import moment from 'moment';
 import { tokenString } from '../Common/HandleUser';
 import { formItemLayout } from '../Common/FormItemLayout';
+import { SearchSelect } from '../Common/SearchSelect';
 
 const AddWastage = (props) => {
   const { forEdit } = props;
@@ -109,16 +110,19 @@ const AddWastage = (props) => {
                 },
               ]}
             >
-              <Select allowClear>
-                {itemList?.map(iTy => {
-                  return (
-                    <Option value={iTy?.TId}>
-                      {iTy?.ItemName}
-                    </Option>
-                  )
-                })
-                }
-              </Select>
+              <SearchSelect itemList={itemList?.map(iTy => {
+                return (
+                  <Option
+                    title={iTy?.ItemName}
+                    key={iTy?.TId}
+                    value={iTy?.TId}>
+                    {iTy?.ItemName}
+                  </Option>
+                )
+              })
+              }
+                placer='Select an item'
+              />
             </Form.Item>
 
             <Form.Item

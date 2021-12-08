@@ -13,6 +13,7 @@ import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 import { tokenString } from '../Common/HandleUser';
 import { formItemLayout } from '../Common/FormItemLayout';
+import { SearchSelect } from '../Common/SearchSelect';
 
 const AddItem = (props) => {
   const { forEdit } = props;
@@ -174,16 +175,20 @@ const AddItem = (props) => {
                 },
               ]}
             >
-              <Select allowClear>
-                {itemList?.map(iTy => {
+              <SearchSelect itemList={
+                itemList?.map(iTy => {
                   return (
-                    <Option value={iTy?.TId}>
+                    <Option
+                      title={iTy?.ItemType}
+                      key={iTy?.TId}
+                      value={iTy?.TId}>
                       {iTy?.ItemType}
                     </Option>
                   )
                 })
-                }
-              </Select>
+              }
+                placer='Select an item type'
+              />
             </Form.Item>
 
             <Form.Item
@@ -196,16 +201,20 @@ const AddItem = (props) => {
                 },
               ]}
             >
-              <Select allowClear>
-                {cateList?.map(iTy => {
+              <SearchSelect itemList={
+                cateList?.map(iTy => {
                   return (
-                    <Option value={iTy?.CId}>
+                    <Option
+                      title={iTy?.CategoryType}
+                      key={iTy?.CId}
+                      value={iTy?.CId}>
                       {iTy?.CategoryType}
                     </Option>
                   )
                 })
-                }
-              </Select>
+              }
+                placer='Select category type'
+              />
             </Form.Item>
 
             <Form.Item
@@ -218,16 +227,20 @@ const AddItem = (props) => {
                 },
               ]}
             >
-              <Select allowClear>
-                {unitList?.map(iTy => {
+              <SearchSelect itemList={
+                unitList?.map(iTy => {
                   return (
-                    <Option value={iTy?.UnId}>
+                    <Option
+                      title={iTy?.Units}
+                      key={iTy?.UnId}
+                      value={iTy?.UnId}>
                       {iTy?.Units}
                     </Option>
                   )
                 })
-                }
-              </Select>
+              }
+                placer='Select an item unit'
+              />
             </Form.Item>
 
             <Form.Item
@@ -240,16 +253,20 @@ const AddItem = (props) => {
                 },
               ]}
             >
-              <Select allowClear>
-                {manuList?.map(iTy => {
+              <SearchSelect itemList={
+                manuList?.map(iTy => {
                   return (
-                    <Option value={iTy?.MId}>
+                    <Option
+                      title={iTy?.ManufactureBY}
+                      key={iTy?.MId}
+                      value={iTy?.MId}>
                       {iTy?.ManufactureBY}
                     </Option>
                   )
                 })
-                }
-              </Select>
+              }
+                placer='Select manufacturer'
+              />
             </Form.Item>
 
             <Form.Item
@@ -262,10 +279,23 @@ const AddItem = (props) => {
                 },
               ]}
             >
-              <Select onChange={(val) => handleRackLocation(val)} allowClear>
+              <Select
+                showSearch
+                optionFilterProp="children"
+                placeholder='Select location'
+                filterOption={(input, option) => {
+                  return (
+                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                    option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  );
+                }}
+                onChange={(val) => handleRackLocation(val)} allowClear>
                 {locationList?.map(iTy => {
                   return (
-                    <Option value={iTy?.LId}>
+                    <Option
+                      title={iTy?.Location}
+                      key={iTy?.LId}
+                      value={iTy?.LId}>
                       {iTy?.Location}
                     </Option>
                   )
@@ -284,16 +314,20 @@ const AddItem = (props) => {
                 },
               ]}
             >
-              <Select allowClear>
-                {rackList?.map(iTy => {
+              <SearchSelect itemList={
+                rackList?.map(iTy => {
                   return (
-                    <Option value={iTy?.RId}>
+                    <Option
+                      title={iTy?.RackName}
+                      key={iTy?.RId}
+                      value={iTy?.RId}>
                       {iTy?.RackName}
                     </Option>
                   )
                 })
-                }
-              </Select>
+              }
+                placer='Select rack'
+              />
             </Form.Item>
 
             <Form.Item
@@ -306,17 +340,16 @@ const AddItem = (props) => {
                 },
               ]}
             >
-              <InputNumber style={{width:'100%'}} />
+              <InputNumber style={{ width: '100%' }} />
             </Form.Item>
 
             <Form.Item
-            label='Is Active'
+              label='Is Active'
               name="IsActive"
               valuePropName="checked"
               offset={3}
             >
               <Switch />
-              {/* <Checkbox>Is Active</Checkbox> */}
             </Form.Item>
 
             <Form.Item
