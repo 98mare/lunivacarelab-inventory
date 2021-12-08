@@ -175,8 +175,18 @@ const AddItem = (props) => {
                 },
               ]}
             >
-              <SearchSelect itemList={
-                itemList?.map(iTy => {
+              <Select
+                showSearch
+                optionFilterProp="children"
+                placeholder="select item type"
+                filterOption={(input, option) => {
+                  return (
+                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                    option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  );
+                }}
+                allowClear>
+                {itemList?.map(iTy => {
                   return (
                     <Option
                       title={iTy?.ItemType}
@@ -186,9 +196,8 @@ const AddItem = (props) => {
                     </Option>
                   )
                 })
-              }
-                placer='Select an item type'
-              />
+                }
+              </Select>
             </Form.Item>
 
             <Form.Item
@@ -201,8 +210,18 @@ const AddItem = (props) => {
                 },
               ]}
             >
-              <SearchSelect itemList={
-                cateList?.map(iTy => {
+              <Select
+                showSearch
+                optionFilterProp="children"
+                placeholder="select item category"
+                filterOption={(input, option) => {
+                  return (
+                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                    option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  );
+                }}
+                allowClear>
+                {cateList?.map(iTy => {
                   return (
                     <Option
                       title={iTy?.CategoryType}
@@ -212,9 +231,8 @@ const AddItem = (props) => {
                     </Option>
                   )
                 })
-              }
-                placer='Select category type'
-              />
+                }
+              </Select>
             </Form.Item>
 
             <Form.Item
@@ -227,8 +245,18 @@ const AddItem = (props) => {
                 },
               ]}
             >
-              <SearchSelect itemList={
-                unitList?.map(iTy => {
+              <Select
+                showSearch
+                optionFilterProp="children"
+                placeholder="select item unit"
+                filterOption={(input, option) => {
+                  return (
+                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                    option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  );
+                }}
+                allowClear>
+                {unitList?.map(iTy => {
                   return (
                     <Option
                       title={iTy?.Units}
@@ -238,9 +266,8 @@ const AddItem = (props) => {
                     </Option>
                   )
                 })
-              }
-                placer='Select an item unit'
-              />
+                }
+              </Select>
             </Form.Item>
 
             <Form.Item
@@ -253,8 +280,18 @@ const AddItem = (props) => {
                 },
               ]}
             >
-              <SearchSelect itemList={
-                manuList?.map(iTy => {
+              <Select
+                showSearch
+                optionFilterProp="children"
+                placeholder="select rack"
+                filterOption={(input, option) => {
+                  return (
+                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                    option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  );
+                }}
+                allowClear>
+                {manuList?.map(iTy => {
                   return (
                     <Option
                       title={iTy?.ManufactureBY}
@@ -264,9 +301,8 @@ const AddItem = (props) => {
                     </Option>
                   )
                 })
-              }
-                placer='Select manufacturer'
-              />
+                }
+              </Select>
             </Form.Item>
 
             <Form.Item
@@ -314,8 +350,18 @@ const AddItem = (props) => {
                 },
               ]}
             >
-              <SearchSelect itemList={
-                rackList?.map(iTy => {
+              <Select
+                showSearch
+                optionFilterProp="children"
+                placeholder="select rack"
+                filterOption={(input, option) => {
+                  return (
+                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                    option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  );
+                }}
+                allowClear>
+                {rackList?.map(iTy => {
                   return (
                     <Option
                       title={iTy?.RackName}
@@ -325,9 +371,8 @@ const AddItem = (props) => {
                     </Option>
                   )
                 })
-              }
-                placer='Select rack'
-              />
+                }
+              </Select>
             </Form.Item>
 
             <Form.Item
