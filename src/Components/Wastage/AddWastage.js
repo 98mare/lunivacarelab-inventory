@@ -8,7 +8,7 @@ import { getWastageApi, insertWastageApi } from '../../services/wastageService';
 import moment from 'moment';
 import { tokenString } from '../Common/HandleUser';
 import { formItemLayout } from '../Common/FormItemLayout';
-import { SearchSelect } from '../Common/SearchSelect';
+// import { SearchSelect } from '../Common/SearchSelect';
 
 const AddWastage = (props) => {
   const { forEdit } = props;
@@ -24,10 +24,10 @@ const AddWastage = (props) => {
   const [previousValues, setPreviousValues] = useState(forEdit ? wastageReducer?.wastages[WId] : {});
 
   useEffect(() => {
+    getAllLabItem(0, 0)
     if (forEdit && previousValues === undefined) {
       dispatch(getWastageApi({ fromdate: '2021-11-28', todate: '2021-12-03' }, (val) => { }))
     }
-    getAllLabItem(0, 0)
   }, [])
 
   useEffect(() => {
@@ -110,19 +110,28 @@ const AddWastage = (props) => {
                 },
               ]}
             >
-              <SearchSelect itemList={itemList?.map(iTy => {
-                return (
-                  <Option
-                    title={iTy?.ItemName}
-                    key={iTy?.TId}
-                    value={iTy?.TId}>
-                    {iTy?.ItemName}
-                  </Option>
-                )
-              })
-              }
-                placer='Select an item'
-              />
+              <Select
+                showSearch
+                optionFilterProp="children"
+                placeholder='Select an item'
+                filterOption={(input, option) => {
+                  return (
+                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                    option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  );
+                }}
+              >
+                {itemList?.map(iTy => {
+                  return (
+                    <Option
+                      title={iTy?.ItemName}
+                      key={iTy?.TId}
+                      value={iTy?.TId}>
+                      {iTy?.ItemName}
+                    </Option>
+                  )
+                })}
+              </Select>
             </Form.Item>
 
             <Form.Item

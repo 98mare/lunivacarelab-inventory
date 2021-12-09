@@ -39,10 +39,10 @@ const AddGoodsOut = (props) => {
   const dateFormat = 'YYYY-MM-DD';
 
   useEffect(() => {
+    getAllLabItem()
     if (forEdit && previousValues === undefined) {
       dispatch(getGoodsOutApi({ fromdate: fromDat, todate: fromDat }, (val) => { }))
     }
-    getAllLabItem()
   }, [])
 
   useEffect(() => {
@@ -107,14 +107,6 @@ const AddGoodsOut = (props) => {
     }
   }
 
-  /*
-  labelCol={{
-                span: 6,
-              }}
-              wrapperCol={{
-                span: 6
-              }}*/
-
   return (
     <AddGoodsOutContainer>
       <Row justify='center'>
@@ -142,19 +134,29 @@ const AddGoodsOut = (props) => {
               ]}
             >
 
-              <SearchSelect itemList={testList?.map(iTy => {
-                return (
-                  <Option
-                    title={iTy?.Testname}
-                    key={iTy?.Id}
-                    value={iTy?.Id}>
-                    {iTy?.Testname}
-                  </Option>
-                )
-              })
-              }
-                placer='Select a test'
-              />
+              <Select
+                showSearch
+                optionFilterProp="children"
+                placeholder="select a test"
+                filterOption={(input, option) => {
+                  return (
+                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                    option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  );
+                }}
+                allowClear>
+                {testList?.map(iTy => {
+                  return (
+                    <Option
+                      title={iTy?.Testname}
+                      key={iTy?.Id}
+                      value={iTy?.Id}>
+                      {iTy?.Testname}
+                    </Option>
+                  )
+                })
+                }
+              </Select>
             </Form.Item>
             <Form.Item
               label="Item Name"
@@ -166,19 +168,29 @@ const AddGoodsOut = (props) => {
                 },
               ]}
             >
-              <SearchSelect itemList={itemList?.map(iTy => {
-                return (
-                  <Option
-                    title={iTy?.ItemName}
-                    key={iTy?.TId}
-                    value={iTy?.TId}>
-                    {iTy?.ItemName}
-                  </Option>
-                )
-              })
-              }
-                placer='Select an item'
-              />
+              <Select
+                showSearch
+                optionFilterProp="children"
+                placeholder="select an item"
+                filterOption={(input, option) => {
+                  return (
+                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                    option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  );
+                }}
+                allowClear>
+                {itemList?.map(iTy => {
+                  return (
+                    <Option
+                      title={iTy?.ItemName}
+                      key={iTy?.TId}
+                      value={iTy?.TId}>
+                      {iTy?.ItemName}
+                    </Option>
+                  )
+                })
+                }
+              </Select>
             </Form.Item>
 
             <Form.Item

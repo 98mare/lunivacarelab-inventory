@@ -8,7 +8,6 @@ import { getItemVsRatioApi, getTestListApi, insertItemVsRatioApi } from '../../s
 import moment from 'moment';
 import { tokenString } from '../Common/HandleUser';
 import { formItemLayout } from '../Common/FormItemLayout';
-import { SearchSelect } from '../Common/SearchSelect';
 
 const AddItemVsRatio = (props) => {
   const { forEdit } = props;
@@ -118,7 +117,18 @@ const AddItemVsRatio = (props) => {
                 },
               ]}
             >
-              <SearchSelect itemList={testList?.map(iTy => {
+              <Select
+                showSearch
+                optionFilterProp="children"
+                placeholder="select a test"
+                filterOption={(input, option) => {
+                  return (
+                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                    option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  );
+                }}
+                allowClear>
+                {testList?.map(iTy => {
                   return (
                     <Option
                       title={iTy?.Testname}
@@ -129,8 +139,7 @@ const AddItemVsRatio = (props) => {
                   )
                 })
                 }
-                placer='Select a test'
-              />
+              </Select>
             </Form.Item>
 
             <Form.Item
@@ -143,7 +152,18 @@ const AddItemVsRatio = (props) => {
                 },
               ]}
             >
-              <SearchSelect itemList={itemList?.map(iTy => {
+              <Select
+                showSearch
+                optionFilterProp="children"
+                placeholder="select an item"
+                filterOption={(input, option) => {
+                  return (
+                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                    option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  );
+                }}
+                allowClear>
+                {itemList?.map(iTy => {
                   return (
                     <Option
                       title={iTy?.ItemName}
@@ -154,8 +174,7 @@ const AddItemVsRatio = (props) => {
                   )
                 })
                 }
-                placer='Select an item'
-              />
+              </Select>
             </Form.Item>
 
             <Form.Item

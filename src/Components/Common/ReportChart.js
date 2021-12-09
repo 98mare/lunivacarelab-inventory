@@ -10,7 +10,7 @@ import {
   Tooltip,
   ArcElement,
 } from 'chart.js';
-import { Chart, Doughnut } from 'react-chartjs-2';
+import { Chart, Doughnut, Bar } from 'react-chartjs-2';
 import styled from 'styled-components';
 import { Tabs } from 'antd';
 
@@ -33,13 +33,13 @@ const ReportChart = ({ options, dataBar, dataDo }) => {
     <ReportChartContainer>
       <Tabs span={24} type='card'>
         <TabPane span={24} tab="Bar Graph" key="1" className='tabs'>
-          <Chart options={options} type='bar' data={dataBar} />
+          <Bar options={options} data={dataBar} />
         </TabPane>
         <TabPane tab="Doughnut Graph" key="2" className='tabs'>
           <Doughnut options={options} data={dataDo} />
         </TabPane>
         <TabPane tab="Both" key="3" className='tabs'>
-          <Chart options={options} type='bar' data={dataBar} />
+          <Bar options={options} data={dataBar} />
           <Doughnut options={options} data={dataDo} />
         </TabPane>
       </Tabs>

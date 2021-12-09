@@ -141,19 +141,29 @@ const AddGoods = (props) => {
                 },
               ]}
             >
-              <SearchSelect itemList={itemList?.map(iTy => {
-                return (
-                  <Option
-                    title={iTy?.ItemName}
-                    key={iTy?.TId}
-                    value={iTy?.TId}>
-                    {iTy?.ItemName}
-                  </Option>
-                )
-              })
-              }
-                placer='Select an item'
-              />
+              <Select
+                showSearch
+                optionFilterProp="children"
+                placeholder="select an item"
+                filterOption={(input, option) => {
+                  return (
+                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                    option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  );
+                }}
+                allowClear>
+                {itemList?.map(iTy => {
+                  return (
+                    <Option
+                      title={iTy?.ItemName}
+                      key={iTy?.TId}
+                      value={iTy?.TId}>
+                      {iTy?.ItemName}
+                    </Option>
+                  )
+                })
+                }
+              </Select>
             </Form.Item>
 
             <Form.Item
@@ -256,10 +266,23 @@ const AddGoods = (props) => {
                 },
               ]}
             >
-              <Select allowClear>
+              <Select
+                showSearch
+                optionFilterProp="children"
+                placeholder="select manufacturer"
+                filterOption={(input, option) => {
+                  return (
+                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                    option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  );
+                }}
+                allowClear>
                 {manuList?.map(iTy => {
                   return (
-                    <Option value={iTy?.MId}>
+                    <Option
+                      title={iTy?.ManufactureBY}
+                      key={iTy?.MId}
+                      value={iTy?.MId}>
                       {iTy?.ManufactureBY}
                     </Option>
                   )

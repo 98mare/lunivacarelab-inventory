@@ -39,6 +39,11 @@ const InOutCon = () => {
                 dateRet={dataRet}
                 itemName
             />
+            <table>
+                <thead>
+                    <th>Item Name</th>
+                </thead> 
+            </table>
         </>
     )
 }
