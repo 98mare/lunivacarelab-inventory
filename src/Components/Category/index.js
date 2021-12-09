@@ -58,7 +58,6 @@ const Index = () => {
   return (
     <ItemContainer>
       <PageHeader pageTitle="Category" buttonTitle='Add Category' buttonOnClick={() => history.push('./category/add')}></PageHeader>
-      {/* <Filter ></Filter> */}
       <Table
         columns={columns}
         dataSource={tableData}

@@ -55,7 +55,6 @@ const Index = () => {
       render: (text, record) => (
         <Space size="middle">
           <Edit onClick={() => history.push(`/itemvsratio/eidt/${record.RId}`)}>Edit</Edit>
-          {/* <a href="#">Delete</a> */}
         </Space>
       )
     }

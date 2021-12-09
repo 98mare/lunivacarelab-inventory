@@ -49,7 +49,6 @@ const Index = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          {/* <a onClick={() => history.push(`/item/edit/${record.TId}/${typId}/${catId}`)}>Edit</a> */}
           <Edit onClick={() => history.push(`/item/edit/${record.TId}/${typId}/${catId}`)}></Edit>
         </Space>
       )
