@@ -6,11 +6,12 @@ const content=(
   <span>edit</span>
 )
 
-const Edit = () => {
+const Edit = ({onClick}) => {
+  
   return (
     <EditContainer>
       <Popover content={content}>
-        <i className="icon-edit2"></i>
+        <i className="icon-edit2" onClick={onClick} ></i>
       </Popover>
     </EditContainer>
   )
