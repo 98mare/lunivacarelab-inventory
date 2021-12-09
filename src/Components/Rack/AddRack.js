@@ -134,7 +134,7 @@ const AddRack = (props) => {
               name="IsActive"
               valuePropName="checked"
             >
-              <Switch />
+              <Switch defaultChecked />
             </Form.Item>
 
             <Form.Item

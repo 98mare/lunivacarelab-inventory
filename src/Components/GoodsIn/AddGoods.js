@@ -9,7 +9,7 @@ import moment from 'moment';
 import { tokenString } from '../Common/HandleUser';
 import { formItemLayout } from '../Common/FormItemLayout';
 import { useHistory } from 'react-router-dom';
-import { SearchSelect } from '../Common/SearchSelect';
+// import { SearchSelect } from '../Common/SearchSelect';
 
 const AddGoods = (props) => {
   const { forEdit } = props

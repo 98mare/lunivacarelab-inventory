@@ -1,4 +1,4 @@
-import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col, Checkbox } from 'antd';
+import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col, Switch } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -6,8 +6,9 @@ import { getLabItemsApi } from '../../services/itemNewItemService';
 import { getGoodsOutApi, insertGoodsOutApi } from '../../services/labGoodsOutService';
 import { getTestListApi } from '../../services/itemVsRatioService';
 import moment from 'moment';
+import { useHistory } from 'react-router-dom';
 import { tokenString } from '../Common/HandleUser';
-import { SearchSelect } from '../Common/SearchSelect';
+// import { SearchSelect } from '../Common/SearchSelect';
 
 const AddGoodsOut = (props) => {
   const { forEdit } = props
@@ -15,6 +16,7 @@ const AddGoodsOut = (props) => {
   const { TextArea } = Input;
   const [form] = Form.useForm()
   const dispatch = useDispatch();
+  const history = useHistory();
   const [butDis, setButDis] = useState(false);
   const [itemList, setitemList] = useState([])
   const [testList, settestList] = useState([])
@@ -79,14 +81,14 @@ const AddGoodsOut = (props) => {
       "Quantity": values?.Quantity,
       "UserId": tokenString.UId,
       "GoodsOutDate": values?.GoodsOutDate.format('YYYY-MM-DD'),
-      "IsActive": values?.IsActive,
+      "IsActive": values?.IsActive !== undefined ? true : false,
       "Remarks": values?.Remarks
     }
     dispatch(insertGoodsOutApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
-          window.location.reload(false);
+          history.push('/goodsout')
         }, 1000);
       } else {
         setButDis(false)
@@ -253,10 +255,12 @@ const AddGoodsOut = (props) => {
             </Form.Item>
 
             <Form.Item
+              label='Is Active'
               name="IsActive"
               valuePropName="checked"
+              offset={3}
             >
-              <Checkbox>Is Active</Checkbox>
+              <Switch defaultChecked />
             </Form.Item>
 
             <Form.Item

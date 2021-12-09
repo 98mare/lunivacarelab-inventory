@@ -13,7 +13,7 @@ import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 import { tokenString } from '../Common/HandleUser';
 import { formItemLayout } from '../Common/FormItemLayout';
-import { SearchSelect } from '../Common/SearchSelect';
+// import { SearchSelect } from '../Common/SearchSelect';
 
 const AddItem = (props) => {
   const { forEdit } = props;
@@ -394,7 +394,7 @@ const AddItem = (props) => {
               valuePropName="checked"
               offset={3}
             >
-              <Switch />
+              <Switch defaultChecked />
             </Form.Item>
 
             <Form.Item
