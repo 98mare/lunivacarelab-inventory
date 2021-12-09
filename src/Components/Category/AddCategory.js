@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { getItemCategoryApi, insertItemCategoryApi } from '../../services/itemCategoryService';
+import { formItemLayout } from '../Common/FormItemLayout';
 
 const AddCategory = (props) => {
   const history = useHistory();
@@ -70,12 +71,7 @@ const AddCategory = (props) => {
           <Form
             form={form}
             name="add_items"
-            labelCol={{
-              span: 6,
-            }}
-            wrapperCol={{
-              span: 18
-            }}
+            {...formItemLayout}
             initialValues={prevVal}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}

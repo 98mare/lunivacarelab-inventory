@@ -221,6 +221,7 @@ const AddGoodsOut = (props) => {
               ]}
             >
               <InputNumber
+                min={0}
                 style={{ width: '100%' }}
               />
             </Form.Item>

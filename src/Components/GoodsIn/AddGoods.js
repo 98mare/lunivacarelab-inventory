@@ -177,6 +177,7 @@ const AddGoods = (props) => {
               ]}
             >
               <InputNumber
+                min={0}
                 onInput={(val) => { setenQty(val) }}
                 style={{ width: '100%' }}
               />
@@ -193,6 +194,7 @@ const AddGoods = (props) => {
               ]}
             >
               <InputNumber
+                min={0}
                 onInput={(val) => { setenRate(val) }}
                 style={{ width: '100%' }}
               />

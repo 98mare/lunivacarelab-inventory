@@ -187,7 +187,10 @@ const AddItemVsRatio = (props) => {
                 },
               ]}
             >
-              <InputNumber style={{ width: '100%' }} />
+              <InputNumber
+                min={0}
+                style={{ width: '100%' }}
+              />
             </Form.Item>
 
             <Form.Item
