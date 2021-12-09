@@ -5,6 +5,7 @@ import { Space, Table, Tag } from 'antd'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { getItemCategoryApi } from '../../services/itemCategoryService'
+import Edit from '../Common/Edit'
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -48,8 +49,7 @@ const Index = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <a onClick={()=>history.push(`./category/edit/${record.CId}`)}>Edit</a>
-          {/* <a href="#">Delete</a> */}
+          <Edit onClick={()=>history.push(`./category/edit/${record.CId}`)}>Edit</Edit>
         </Space>
       )
     }

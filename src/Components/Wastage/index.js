@@ -8,6 +8,7 @@ import Filter from '../Common/Filter'
 import { getWastageApi } from '../../services/wastageService'
 import ReportChart from '../Common/ReportChart'
 import { ChartColor } from '../Common/ChartColor'
+import Edit from '../Common/Edit'
 
 
 
@@ -49,7 +50,7 @@ const Index = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <a onClick={()=> history.push(`./wastage/edit/${record.WId}`)}>Edit</a>
+          <Edit onClick={()=> history.push(`./wastage/edit/${record.WId}`)}>Edit</Edit>
           {/* <a href="#">Delete</a> */}
         </Space>
       )

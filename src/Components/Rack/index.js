@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { getRackDetApi } from '../../services/itemRackService'
 import Filter from '../Common/Filter'
+import Edit from '../Common/Edit'
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ const Index = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <a onClick={() => history.push(`rack/edit/${record.LocationId}/${record.RId}`)}>Edit</a>
+          <Edit onClick={() => history.push(`rack/edit/${record.LocationId}/${record.RId}`)}>Edit</Edit>
           {/* <a href="#">Delete</a> */}
         </Space>
       )

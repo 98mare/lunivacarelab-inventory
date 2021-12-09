@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { getLabItemsApi } from '../../services/itemNewItemService'
 import PageHeader from '../Common/pageHeader'
 import Filter from '../Common/Filter'
+import Edit from '../Common/Edit';
 
 const Index = () => {
   const history = useHistory();
@@ -48,7 +49,8 @@ const Index = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <a onClick={() => history.push(`/item/edit/${record.TId}/${typId}/${catId}`)}>Edit</a>
+          {/* <a onClick={() => history.push(`/item/edit/${record.TId}/${typId}/${catId}`)}>Edit</a> */}
+          <Edit onClick={() => history.push(`/item/edit/${record.TId}/${typId}/${catId}`)}></Edit>
         </Space>
       )
     }
