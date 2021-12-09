@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import PageHeader from '../Common/pageHeader'
-import { Space, Table } from 'antd'
+import { Space, Table, Tag } from 'antd'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { getRackDetApi } from '../../services/itemRackService'
 import Filter from '../Common/Filter'
-
-
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -36,10 +34,13 @@ const Index = () => {
       dataIndex: 'IsActive',
       key: 'isActive',
       render: (text) => {
+        let retText = 'Inactive'
+        let retColor = 'red'
         if (text === true) {
-          return 'Active'
+          retText = 'Active'
+          retColor = 'green'
         }
-        return 'Inactive'
+        return <Tag color={retColor}>{retText}</Tag>
       }
     },
     {

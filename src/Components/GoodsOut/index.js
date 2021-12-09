@@ -1,4 +1,4 @@
-import { Space, Table } from 'antd'
+import { Space, Table, Tag } from 'antd'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
@@ -44,10 +44,13 @@ const Index = () => {
       dataIndex: 'IsActive',
       key: 'IsActive',
       render: (text) => {
+        let retText = 'Inactive'
+        let retColor = 'red'
         if (text === true) {
-          return 'Active'
+          retText = 'Active'
+          retColor = 'green'
         }
-        return 'Inactive'
+        return <Tag color={retColor}>{retText}</Tag>
       },
       responsive: ['sm'],
     },

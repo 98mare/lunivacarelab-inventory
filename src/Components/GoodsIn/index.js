@@ -1,4 +1,4 @@
-import { Space, Table } from 'antd'
+import { Space, Table, Tag } from 'antd'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
@@ -35,6 +35,13 @@ const Index = () => {
       title: 'Item Status',
       dataIndex: 'ItemStatus',
       key: 'ItemStatus',
+      render: (text) => {
+        let retColor = 'red'
+        if (text === 'Available') {
+          retColor = 'green'
+        }
+        return <Tag color={retColor}>{text}</Tag>
+      }
     },
     {
       title: 'Action',
