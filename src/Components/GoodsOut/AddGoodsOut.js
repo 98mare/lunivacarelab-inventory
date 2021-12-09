@@ -72,7 +72,8 @@ const AddGoodsOut = (props) => {
   }
 
   const onFinish = (values) => {
-    setButDis(true)
+    // setButDis(true)
+
     let data = {
       "GOId": forEdit ? GOId : 0,
       "TestId": values?.TestId,
@@ -81,7 +82,7 @@ const AddGoodsOut = (props) => {
       "Quantity": values?.Quantity,
       "UserId": tokenString.UId,
       "GoodsOutDate": values?.GoodsOutDate.format('YYYY-MM-DD'),
-      "IsActive": values?.IsActive !== undefined ? true : false,
+      "IsActive": values?.IsActive === undefined || values?.IsActive === true ? true : false,
       "Remarks": values?.Remarks
     }
     dispatch(insertGoodsOutApi(data, (res) => {

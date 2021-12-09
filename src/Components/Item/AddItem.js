@@ -105,7 +105,7 @@ const AddItem = (props) => {
       "MinQty": values?.MinQty,
       "CreatedBy": tokenString.UId, //needs login userid
       "CreatedDate": moment().format('YYYY-MM-DD'), //default date for now update
-      "IsActive": values?.IsActive !== undefined ? true : false
+      "IsActive": values?.IsActive === undefined || values?.IsActive === true ? true : false
     }
     dispatch(insertNewItemDetailsApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {

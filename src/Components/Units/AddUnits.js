@@ -38,7 +38,7 @@ const AddUnits = (props) => {
     let data = {
       "UnId": forEdit ? unId : 0,
       "Units": values?.unit_name,
-      "IsActive": values?.IsActive !== undefined ? true : false,
+      "IsActive": values?.IsActive === undefined || values?.IsActive === true ? true : false,
     }
     dispatch(insertItemUnitApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {

@@ -38,7 +38,7 @@ const AddType = (props) => {
     let data = {
       "TId": forEdit ? TId : 0,
       "ItemType": values?.ItemType,
-      "IsActive": values?.IsActive !== undefined ? true : false,
+      "IsActive": values?.IsActive === undefined || values?.IsActive === true ? true : false,
     }
     dispatch(insertItemTypeApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {

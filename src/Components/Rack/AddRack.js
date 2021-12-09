@@ -49,7 +49,7 @@ const AddRack = (props) => {
       "RackCode": values?.RackCode,
       "RackName": values?.RackName,
       "LocationId": values?.LocationId,
-      "IsActive": values?.IsActive !== undefined ? true : false,
+      "IsActive": values?.IsActive === undefined || values?.IsActive === true ? true : false,
     }
     dispatch(insertRackDetailsApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {

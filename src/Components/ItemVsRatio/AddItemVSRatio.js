@@ -62,7 +62,7 @@ const AddItemVsRatio = (props) => {
       "ItemId": values?.ItemId,
       "TestId": values?.TestId,
       "ItemPerUnitTest": values?.ItemPerUnitTest,
-      "IsActive": values?.IsActive !== undefined ? true : false,
+      "IsActive": values?.IsActive === undefined || values?.IsActive === true ? true : false,
       "CreatedDate": values?.CreatedDate.format('YYYY-MM-DD'),
       "CreatedBy": tokenString.UId
     }

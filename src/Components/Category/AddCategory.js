@@ -38,7 +38,7 @@ const AddCategory = (props) => {
     let data = {
       "CId": forEdit ? CuId : 0,
       "CategoryType": values?.cate_type,
-      "IsActive": values?.IsActive !== undefined ? true : false,
+      "IsActive": values?.IsActive === undefined || values?.IsActive === true ? true : false,
     }
     dispatch(insertItemCategoryApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {

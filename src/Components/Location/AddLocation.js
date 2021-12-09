@@ -39,7 +39,7 @@ const AddLocation = (props) => {
       "LId": forEdit ? LId : 0,
       "LCode": values?.LCode,
       "Location": values?.Location,
-      "IsActive": values?.IsActive !== undefined ? true : false,
+      "IsActive": values?.IsActive === undefined || values?.IsActive === true ? true : false,
     }
     dispatch(insertLocationApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
