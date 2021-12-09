@@ -4,6 +4,49 @@ import Filter from '../Common/Filter';
 import { useDispatch } from 'react-redux';
 import { getGoodsInCountApi } from '../../services/labGoodsReceivedService';
 import { getGoodsOutCountApi } from '../../services/labGoodsOutService';
+import { Col, Row ,Table} from 'antd';
+
+const columns1 = [
+    {
+      title: 'Item Id',
+      dataIndex: 'ItemId',
+      key: 'ItemId',
+    },
+    {
+      title: 'Goods In Count',
+      dataIndex: 'GoodsInCount',
+      key: 'GoodsInCount',
+    },
+    {
+      title: 'Goods In Date',
+      dataIndex: 'GoodsInDate',
+      key: 'GoodsInDate',
+      render: (text) => {
+        return text.split('T')[0]
+      }
+    }
+  ]
+  const columns2 = [
+    {
+      title: 'Item Id',
+      dataIndex: 'ItemId',
+      key: 'ItemId',
+    },
+    {
+      title: 'Goods Out Count',
+      dataIndex: 'GoodsInCount',
+      key: 'GoodsInCount',
+    },
+    {
+      title: 'Goods Out Date',
+      dataIndex: 'GoodsInDate',
+      key: 'GoodsInDate',
+      render: (text) => {
+        return text.split('T')[0]
+      }
+    }
+  ]
+  
 
 const InOutCon = () => {
     const dispatch = useDispatch();
@@ -32,6 +75,7 @@ const InOutCon = () => {
         console.log(goodsInList, goodsOutList);
     }, [goodsInList, goodsOutList])
 
+
     return (
         <>
             <PageHeader pageTitle="Goods In Vs Goods Out Vs Consumption" />
@@ -39,11 +83,16 @@ const InOutCon = () => {
                 dateRet={dataRet}
                 itemName
             />
-            <table>
-                <thead>
-                    <th>Item Name</th>
-                </thead> 
-            </table>
+            <Row>
+                <Col  xs={24} sm={24} md={24}>
+                    <h2>Goods In</h2>
+                    <Table columns={columns1} dataSource={goodsInList}></Table>
+                </Col>
+                <Col  xs={24} sm={24} md={24}>
+                    <h2>Goods Out</h2>
+                    <Table columns={columns2} dataSource={goodsOutList}></Table>
+                </Col>
+            </Row>
         </>
     )
 }

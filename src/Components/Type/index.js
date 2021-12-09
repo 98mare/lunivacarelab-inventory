@@ -5,6 +5,7 @@ import { Space, Table, Tag } from 'antd'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { getItemTypeApi } from '../../services/itemItemTypeService'
+import Edit from '../Common/Edit'
 
 
 
@@ -43,7 +44,7 @@ const Index = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <a onClick={()=> history.push(`./type/edit/${record.TId}`)}>Edit</a>
+          <Edit onClick={()=> history.push(`./type/edit/${record.TId}`)}>Edit</Edit>
           {/* <a href="#">Delete</a> */}
         </Space>
       )

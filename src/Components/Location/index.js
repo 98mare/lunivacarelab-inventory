@@ -5,6 +5,7 @@ import {Space, Table, Tag } from 'antd'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { getLocationApi } from '../../services/itemLocationService'
+import Edit from '../Common/Edit'
 
 
 
@@ -49,7 +50,7 @@ const Index = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <a onClick={()=> history.push(`./location/edit/${record.LId}`)}>Edit</a>
+          <Edit onClick={()=> history.push(`./location/edit/${record.LId}`)}>Edit</Edit>
           {/* <a href="#">Delete</a> */}
         </Space>
       )

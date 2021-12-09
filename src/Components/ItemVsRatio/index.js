@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { useDispatch } from 'react-redux';
 import PageHeader from '../Common/pageHeader'
 import { getItemVsRatioApi } from '../../services/itemVsRatioService';
+import Edit from '../Common/Edit';
 
 const Index = () => {
   const history = useHistory();
@@ -53,7 +54,7 @@ const Index = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <a onClick={() => history.push(`/itemvsratio/eidt/${record.RId}`)}>Edit</a>
+          <Edit onClick={() => history.push(`/itemvsratio/eidt/${record.RId}`)}>Edit</Edit>
           {/* <a href="#">Delete</a> */}
         </Space>
       )
