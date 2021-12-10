@@ -2,7 +2,6 @@ import { Table } from 'antd'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux';
-import { getGoodsInCountApi, getGoodsReceivedApi } from '../../services/labGoodsReceivedService'
 import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
 import {
@@ -18,6 +17,7 @@ import {
 } from 'chart.js';
 import ReportChart from '../Common/ReportChart';
 import { ChartColor } from '../Common/ChartColor';
+import { getGoodsOutCountApi } from '../../services/labGoodsOutService';
 
 ChartJS.register(
   LinearScale,
@@ -42,12 +42,12 @@ const columns = [
     key: 'itemName',
   },
   {
-    title: 'Goods In Count',
+    title: 'Goods Out Count',
     dataIndex: 'GoodsInCount',
     key: 'Total',
   },
   {
-    title: 'Goods In Date',
+    title: 'Goods Out Date',
     dataIndex: 'GoodsInDate',
     key: 'GoodsInDate',
     render: (text) => {
@@ -56,14 +56,14 @@ const columns = [
   }
 ]
 
-const NewGoodsInReport = () => {
+const NewGoodsOutReport = () => {
   const dispatch = useDispatch();
   const [goodsList, setgoodsList] = useState([]);
-  const [goodsInName, setGoodsInName]= useState([]);
+  const [goodsOutName, setGoodsOutName]= useState([]);
   const [goodLister, setgoodLister] = useState([])
 
   const graphData = (data) => {
-    dispatch(getGoodsInCountApi(data, (val) => {
+    dispatch(getGoodsOutCountApi(data, (val) => {
      
       let PushedGoodsName = []
       setgoodsList(val)
@@ -74,16 +74,15 @@ const NewGoodsInReport = () => {
       var filteredArray = PushedGoodsName.filter(function(item, pos){
         return PushedGoodsName.indexOf(item)=== pos; 
       });      
-      // setgoodLister(val)
-      setGoodsInName(filteredArray)
+      setGoodsOutName(filteredArray)
     }))
   }
 
-  // console.log("this is goods in name",goodsInName)
+  // console.log("this is goods in name",goodsOutName)
 
   useEffect(() => {
     retunDa()
-  }, [goodsInName])
+  }, [goodsOutName])
 
   const retunDa = () => {    
     const retDaa = groupData(goodsList).children
@@ -98,7 +97,6 @@ const NewGoodsInReport = () => {
         let a = totArr.reduce((a, b) => a + b, 0);
         mainArrDataset.push(a);
     })
-    // console.log(mainArrDataset);
     setgoodLister(mainArrDataset)
 
   }
@@ -121,13 +119,12 @@ const NewGoodsInReport = () => {
     graphData(data);
 
   }
-
-  const labels = goodsInName;
+  const labels = goodsOutName;
   const dataDo = {
     labels,
     datasets: [
       {
-        label: 'Goods In',
+        label: 'Goods Out',
         backgroundColor: ChartColor,
         data: goodLister,
         borderColor: [
@@ -143,7 +140,7 @@ const NewGoodsInReport = () => {
     datasets: [
       {
         type: 'bar',
-        label: 'Goods In',
+        label: 'Goods Out',
         backgroundColor: 'rgb(53, 162, 235)',
         data: goodLister,
         borderWidth: 2
@@ -169,12 +166,12 @@ const NewGoodsInReport = () => {
   };
 
   return (
-    <NewGoodsInContainer>
+    <NewGoodsOutContainer>
       <PageHeader
 
-        pageTitle='Goods In Report'
+        pageTitle='Goods Out Report'
         csvLinkTitle='Export csv'
-        goodsIn = {goodsList}
+        goodsOut = {goodsList}
       />
       <Filter
         dateRange
@@ -185,20 +182,20 @@ const NewGoodsInReport = () => {
         columns={columns}
         dataSource={goodsList}
       />
-      {goodsInName.length !== 0 ?
+      {goodsOutName.length !== 0 ?
         <ReportChart
           options={options}
           dataBar={dataBar}
           dataDo={dataDo}
         ></ReportChart>
         : ''}
-    </NewGoodsInContainer>
+    </NewGoodsOutContainer>
   )
 }
 
-export default NewGoodsInReport
+export default NewGoodsOutReport
 
-const NewGoodsInContainer = styled.div`
+const NewGoodsOutContainer = styled.div`
   background: rgba( 255, 255, 255, 0.25 );
   box-shadow: 0 2px 22px 0 rgba( 31, 38, 135, 0.10 );
   backdrop-filter: blur( 4px );

@@ -3,38 +3,37 @@ import React from 'react'
 import styled from 'styled-components'
 import AppButton from './AppButton'
 import { CSVLink } from 'react-csv';
-import { useSelector } from 'react-redux';
 
 const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, goodsIn, goodsOut }) => {
 
 
   // to CSV goods in report
-  const goodsInReducer = useSelector((state) => state.goodsin);
-  const GoodsInRed = (value) => {
-    let newArr = [];
-    for (const key in value) {
-      if (Object.hasOwnProperty.call(value, key)) {
-        const ele = value[key];
-        newArr.push(ele)
-      }
-    }
-    return newArr;
-  }
-  let goodsInData = GoodsInRed(goodsInReducer?.goodsin);
+  // const goodsInReducer = useSelector((state) => state.goodsin);
+  // const GoodsInRed = (value) => {
+  //   let newArr = [];
+  //   for (const key in value) {
+  //     if (Object.hasOwnProperty.call(value, key)) {
+  //       const ele = value[key];
+  //       newArr.push(ele)
+  //     }
+  //   }
+  //   return newArr;
+  // }
+  // let goodsInData = GoodsInRed(goodsInReducer?.goodsin);
 
   // to CSV goods out report
-  const GoodsOutReducer = useSelector((state) => state.goodsout);
-  const GoodsOutRed = (value) => {
-    let newArr = [];
-    for (const key in value) {
-      if (Object.hasOwnProperty.call(value, key)) {
-        const ele = value[key];
-        newArr.push(ele)
-      }
-    }
-    return newArr;
-  }
-  let goodsOutData = GoodsOutRed(GoodsOutReducer?.goodsOuts);
+  // const GoodsOutReducer = useSelector((state) => state.goodsout);
+  // const GoodsOutRed = (value) => {
+  //   let newArr = [];
+  //   for (const key in value) {
+  //     if (Object.hasOwnProperty.call(value, key)) {
+  //       const ele = value[key];
+  //       newArr.push(ele)
+  //     }
+  //   }
+  //   return newArr;
+  // }
+  // let goodsOutData = GoodsOutRed(GoodsOutReducer?.goodsOuts);
 
 
   return (
@@ -47,7 +46,7 @@ const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, goods
           {
             goodsIn &&
             <div className='link'>
-              <CSVLink filename={"goodsIn.csv"} className="btn ant-btn btn-primary btn-primary--outline" data={goodsInData}>{csvLinkTitle}</CSVLink>
+              <CSVLink filename={"goodsIn.csv"} className="btn ant-btn btn-primary btn-primary--outline" data={goodsIn}>{csvLinkTitle}</CSVLink>
               {/* <GoodsInCSV/> */}
             </div>
           }
@@ -55,7 +54,7 @@ const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, goods
           {
             goodsOut &&
             <div className='link'>
-              <CSVLink filename={"goodsOut.csv"} className="btn ant-btn btn-primary btn-primary--outline" data={goodsOutData}>{csvLinkTitle}</CSVLink>
+              <CSVLink filename={"goodsOut.csv"} className="btn ant-btn btn-primary btn-primary--outline" data={goodsOut}>{csvLinkTitle}</CSVLink>
               {/* <GoodsInCSV/> */}
             </div>
           }
