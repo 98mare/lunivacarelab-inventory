@@ -53,8 +53,8 @@ const InOutConTab = () => {
     const columns = [
         {
             title: 'Item Name',
-            dataIndex: 'ItemId',
-            key: 'ItemId',
+            dataIndex: 'ItemName',
+            key: 'ItemName',
         },
         {
             title: 'Total Goods In',
@@ -79,8 +79,8 @@ const InOutConTab = () => {
         dispatch(getTotalGoodsInOutApi((val) => {
             setAllGoodsList(val)
             val.forEach(ele => {
-                let itemName = ele?.ItemId
-                if (ele?.ItemId === null)
+                let itemName = ele?.ItemName
+                if (ele?.ItemName === null)
                     itemName = 'N/A'
                 newLabel.push(itemName);
                 inData.push(ele?.TotalGoodsIn);
