@@ -29,7 +29,7 @@ const BottomNav = () => {
         <Link to='/'><i className='icon-line2-home'></i></Link>
       </li>
       <li>
-        <Link to='/item'><i className='icon-line-box'></i></Link>
+        <Link to='/reports/minquantityreport'><i className='icon-line-bell'></i></Link>
       </li>
       <li>
         <Popover placement="top" content={content} trigger="click">
