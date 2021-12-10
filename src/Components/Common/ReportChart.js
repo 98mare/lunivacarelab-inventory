@@ -27,10 +27,20 @@ ChartJS.register(
   Title
 );
 
+//export options here
+export const options = {
+  responsive: true,
+  plugins: {
+      legend: {
+          position: 'top',
+      },
+  },
+};
+//export options here
+
 const { TabPane } = Tabs;
 
-const ReportChart = ({ options, dataBar, dataDo }) => {
-  // console.log("this is option", options)
+const ReportChart = ({ dataBar, dataDo }) => {
   return (
     <ReportChartContainer>
       <Tabs span={24} type='card'>
