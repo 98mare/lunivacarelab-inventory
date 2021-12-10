@@ -49,10 +49,10 @@ export const getGoodsInCountApi = (data, successCallback) => {
     }
 }
 
-export const getGoodsInByIdApi = (data, successCallback) => {
+export const getGoodsInByIdApi = (itemId, successCallback) => {
     return async dispatch => {
         try {
-            const response = await fetch(`${GetGoodReceivedDetailsbyItemId}?itemId=${data.itemId}`);
+            const response = await fetch(`${GetGoodReceivedDetailsbyItemId}?itemId=${itemId}`);
             if(response?.status === 200){
                 successCallback(response?.data?.GetGoodReceivedDetailsbyItemId)
             }else
