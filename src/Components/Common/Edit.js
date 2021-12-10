@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const content=(
-  <span>edit</span>
+  <span>Edit</span>
 )
 
 const Edit = ({onClick}) => {

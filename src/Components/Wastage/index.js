@@ -46,7 +46,7 @@ const Index = () => {
       key: 'Remarks'
     },
     {
-      title: 'action',
+      title: 'Action',
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
