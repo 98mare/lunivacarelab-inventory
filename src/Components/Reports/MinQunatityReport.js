@@ -61,5 +61,7 @@ const MinQunatityReport = () => {
 export default MinQunatityReport
 
 const MinQunatityReportContainer = styled.div`
-
+ @media(max-width: 576px){
+  margin-bottom: 50px;
+ }
 `

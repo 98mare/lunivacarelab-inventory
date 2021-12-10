@@ -54,7 +54,7 @@ const InOutConTab = () => {
         {
             title: 'Item Name',
             dataIndex: 'ItemName',
-            key: 'ItemId',
+            key: 'ItemName',
         },
         {
             title: 'Total Goods In',

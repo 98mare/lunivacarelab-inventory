@@ -3,39 +3,44 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Popover } from 'antd';
 import NotificationContent from './NotificationContent';
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { getItemNearApi } from '../../services/itemNewItemService';
 
 const Notification = () => {
   const dispatch = useDispatch();
   const [tableData, setTableData] = useState([]);
 
-  const getData =() => {
+  const getData = () => {
     const pushedArr = []
-    dispatch(getItemNearApi(value =>{ 
+    dispatch(getItemNearApi(value => {
       value.forEach(ele => {
         pushedArr.push(ele);
       })
-    setTableData(pushedArr)
-
-  }))
+      setTableData(pushedArr)
+    }))
   }
   useEffect(() => {
     getData();
   }, [])
-  
+
+
 
   return (
     <NotificationContainer>
-     
-      
-      <Popover placement="bottom" 
-        content={<NotificationContent 
-        data={tableData}/>} 
+
+
+      <Popover placement="bottom"
+        content={<NotificationContent
+          data={tableData} />}
         trigger="click">
-      <i className='icon-line-bell'></i>
+        <i className='icon-line-bell'>
+          {
+            tableData.length > 0 ? <span>{tableData.length}</span> : ''
+          }</i>
+
+
       </Popover>
-      
+
     </NotificationContainer>
   )
 }
@@ -53,6 +58,15 @@ const NotificationContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 4px;
+    
+    span{
+      positioin: absolute;
+      top: 0%;
+      left: 0;
+      color: var(--primary)
+    }
   }
+  
 `
 
