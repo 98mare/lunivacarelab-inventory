@@ -1,4 +1,4 @@
-import { GetListOfLabItemsDetailsByTypeId, InsertUpdateNewItemsDetails } from '../constants/url';
+import { GetListOfLabItemsDetailsByTypeId, InsertUpdateNewItemsDetails, GetListOfItemsNearToMinQuantity } from '../constants/url';
 import { fetch, store } from '../utils/httpUtil';
 import { generateUrlEncodedData } from '../utils/generateFormData';
 import { getAllNewItemSuccess } from '../store/slices/newItemSlice';
@@ -31,6 +31,23 @@ export const insertNewItemDetailsApi = (params, returnData) => {
             // if(response?.status === 200){
             returnData(response?.data);
             // }else{}
+        } catch (error) {
+
+        }
+
+    }
+}
+
+export const getItemNearApi = (successCallback) => {
+    return async dispatch => {
+        try {
+            let newUrl = GetListOfItemsNearToMinQuantity
+            const response = await fetch(newUrl);
+            if (response?.status === 200) {
+                successCallback(response?.data?.GetListOfItemsNearToMinQuantity);
+            }
+            else
+                successCallback([])
         } catch (error) {
 
         }

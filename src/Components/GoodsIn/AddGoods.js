@@ -23,6 +23,7 @@ const AddGoods = (props) => {
   const [enQty, setenQty] = useState(0);
   const [enRate, setenRate] = useState(0);
   const [totalCal, settotalCal] = useState(0);
+  const [itemTrack, setitemTrack] = useState('');
   const GId = props?.match?.params?.id;
   const fromDat = props?.match?.params?.from;
   const goodsInReducer = useSelector(state => state.goodsin);
@@ -109,7 +110,7 @@ const AddGoods = (props) => {
   }
 
   let prevVal = {}
-  if (previousValues !== undefined) {
+  if (previousValues !== undefined && forEdit === true) {
     prevVal = {
       ...previousValues,
       create_date: moment(previousValues?.CreatedDate),
@@ -117,6 +118,10 @@ const AddGoods = (props) => {
     }
   }
 
+  const handleItemCode = (e) => {
+    setitemTrack(e?.extradata);
+  }
+  
   return (
     <AddGoodsContainer>
       <Row justify='center'>
@@ -151,10 +156,12 @@ const AddGoods = (props) => {
                     option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
                   );
                 }}
+                onChange={(text, option) => handleItemCode(option) }
                 allowClear>
                 {itemList?.map(iTy => {
                   return (
                     <Option
+                      extradata={iTy?.ItemCode}
                       title={iTy?.ItemName}
                       key={iTy?.TId}
                       value={iTy?.TId}>
@@ -223,7 +230,7 @@ const AddGoods = (props) => {
                 },
               ]}
             >
-              <Input />
+              <Input value={itemTrack} />
             </Form.Item>
 
             <Form.Item

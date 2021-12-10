@@ -14,7 +14,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router basename={'/carelab'}>
+      <Router basename={'/carelabinventory'}>
         <App />
       </Router>
     </Provider>

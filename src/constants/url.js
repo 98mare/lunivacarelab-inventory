@@ -73,8 +73,16 @@ export const GetListOfTestForInventory = 'GetListOfTestForInventory';
  * @param: ?fromdate={fromdate}&todate={todate}&itemid={itemid}
  */
  export const GetGoodsInCountByDateWiseandItemWise = 'GetGoodsInCountByDateWiseandItemWise';
-
+/**
+ * @desc: get current remaining stock count by id
+ * @param: 
+ */
  export const GetCurrentRemainingStockCountById = 'GetCurrentRemainingStockCountById'
+/**
+ * @desc: get list of items near to min quantity
+ * @param: 
+ */
+ export const GetListOfItemsNearToMinQuantity = 'GetListOfItemsNearToMinQuantity';
 
 //POST
 /**
