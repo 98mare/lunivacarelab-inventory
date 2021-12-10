@@ -1,42 +1,24 @@
 import { message ,notification} from 'antd';
 import pMinDelay from 'p-min-delay';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import useToken from './useToken';
 import { useDispatch } from 'react-redux';
 import { getLoginApi } from '../../services/loginService';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button,Modal } from 'antd';
 import styled from 'styled-components';
 import logo from '../../assets/images/logo.png';
+import { getItemNearApi } from '../../services/itemNewItemService'
+import AppModel from  '../../Components/Common/AppModel'
 
-const data = [
-  {
-    itemName : 'Some Item name 1',
-  },
-  {
-    itemName : 'Some Item name 3',
-  },
-  {
-    itemName : 'Some Item name 4',
-  },
-  {
-    itemName : 'Some Item name 2',
-  }, 
-]
-const openNotification = placement => {
-  data.map(e => (
-    notification.info({
-      message: `Notification`,
-      description:
-        `${e.itemName}`,
-      placement,
-    })
-  )) 
-};
+
+
 export default function Login() {
   const dispatch = useDispatch();
   const { token, setToken } = useToken();
   const history = useHistory();
+  const [tableData, setTableData] = useState([]);
+  const [visible, setVisible] = useState();
 
   const onFinish = (values) => {
     let data = {
@@ -65,13 +47,37 @@ export default function Login() {
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
+  const getData =() => {
+    const pushedArr = []
+    dispatch(getItemNearApi(value =>{ 
+      value.forEach(ele => {
+        pushedArr.push(ele);
+      })
+    setTableData(pushedArr)
+
+  }))
+  }
+  useEffect(() => {
+    getData();
+  }, [])
+
+  const openNotification = (placement) => {
+      if(tableData.length >= 1){
+        notification.info({
+          message: `Some items Are out of Stocks`,
+          placement,
+        }) 
+      }else{
+        
+      }
+       
+  };
 
   return (
     <LoginFormContainer>
       <div className="logo">
         <img src={logo} alt="" />
       </div>
-
       <Form
         name="basic"
         labelCol={{ span: 8 }}

@@ -28,6 +28,10 @@ const data = [
     name: 'Overall Report',
     pathName: 'inoutcon'
   },
+  {
+    name: 'Min Quantity Report',
+    pathName: 'minquantityreport'
+  },
 
 ]
 
