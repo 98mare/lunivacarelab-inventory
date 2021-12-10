@@ -15,6 +15,7 @@ import {
     Title
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import { Table } from 'antd';
 
 ChartJS.register(
     LinearScale,
@@ -47,6 +48,25 @@ const InOutConTab = () => {
     const [label, setlabel] = useState([]);
     const [inData, setInData] = useState([]);
     const [outData, setOutData] = useState([]);
+    const [allGoodsList, setAllGoodsList] = useState([]);
+
+    const columns = [
+        {
+            title: 'Item Name',
+            dataIndex: 'ItemId',
+            key: 'ItemId',
+        },
+        {
+            title: 'Total Goods In',
+            dataIndex: 'TotalGoodsIn',
+            key: 'TotalGoodsIn',
+        },
+        {
+            title: 'Total Goods Out',
+            dataIndex: 'TotalGoodsOut',
+            key: 'TotalGoodsOut',
+        }
+    ]
 
     useEffect(() => {
         getLabData()
@@ -57,6 +77,7 @@ const InOutConTab = () => {
         let inData = [];
         let outData = [];
         dispatch(getTotalGoodsInOutApi((val) => {
+            setAllGoodsList(val)
             val.forEach(ele => {
                 let itemName = ele?.ItemId
                 if (ele?.ItemId === null)
@@ -96,6 +117,10 @@ const InOutConTab = () => {
         <>
             <PageHeader pageTitle="Total Goods In and Goods Out" />
             <Bar options={options} data={dataBar} />
+            <Table
+                columns={columns}
+                dataSource={allGoodsList}
+            />
         </>
     )
 }

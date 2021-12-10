@@ -78,7 +78,7 @@ const AddGoods = (props) => {
       "ExpiryDate": values?.expiry_date.format("YYYY-MM-DD"),
       "ManufactureId": values?.ManufactureId,
       "LotNo": values?.LotNO,
-      "ItmTrackId": values?.ItmTrackId,
+      "ItmTrackId": `${itemTrack}${values?.ItmTrackId}`,
       "CreatedDate": values?.create_date.format("YYYY-MM-DD"),
       "CreatedBy": tokenString.UId,
       "ItemStatus": values?.ItemStatus,
@@ -119,9 +119,9 @@ const AddGoods = (props) => {
   }
 
   useEffect(() => {
-    form.setFieldsValue({
-      ItmTrackId: itemTrack
-    });
+    // form.setFieldsValue({
+    //   ItmTrackId: itemTrack
+    // });
   }, [itemTrack])
 
   return (
@@ -158,7 +158,7 @@ const AddGoods = (props) => {
                     option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
                   );
                 }}
-                onChange={(text, option) => setitemTrack(option?.extradata) }
+                onChange={(text, option) => setitemTrack(`${option?.extradata}-`) }
                 allowClear>
                 {itemList?.map(iTy => {
                   return (
@@ -232,7 +232,7 @@ const AddGoods = (props) => {
                 },
               ]}
             >
-              <Input />
+              <Input prefix={itemTrack} />
             </Form.Item>
 
             <Form.Item
