@@ -122,6 +122,22 @@ const Index = () => {
     ],
   };
 
+  const options = {
+    title: {
+      display: true,
+      text: "Chart Title"
+    },
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            suggestedMin: 0,
+            suggestedMax: 100
+          }
+        }
+      ]
+    }
+  };
 
   return (
     <GoodsInContainer>
@@ -142,6 +158,7 @@ const Index = () => {
       />
       {goodsLabel.length !== 0 ?
         <ReportChart
+          options={options}
           dataBar={dataBar}
           dataDo={dataDo}
         ></ReportChart>

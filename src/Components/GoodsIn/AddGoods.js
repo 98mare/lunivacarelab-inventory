@@ -118,10 +118,12 @@ const AddGoods = (props) => {
     }
   }
 
-  const handleItemCode = (e) => {
-    setitemTrack(e?.extradata);
-  }
-  
+  useEffect(() => {
+    form.setFieldsValue({
+      ItmTrackId: itemTrack
+    });
+  }, [itemTrack])
+
   return (
     <AddGoodsContainer>
       <Row justify='center'>
@@ -156,7 +158,7 @@ const AddGoods = (props) => {
                     option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
                   );
                 }}
-                onChange={(text, option) => handleItemCode(option) }
+                onChange={(text, option) => setitemTrack(option?.extradata) }
                 allowClear>
                 {itemList?.map(iTy => {
                   return (
@@ -230,7 +232,7 @@ const AddGoods = (props) => {
                 },
               ]}
             >
-              <Input value={itemTrack} />
+              <Input />
             </Form.Item>
 
             <Form.Item

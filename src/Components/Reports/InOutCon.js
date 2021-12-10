@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { getGoodsInCountApi } from '../../services/labGoodsReceivedService';
 import { getGoodsOutCountApi } from '../../services/labGoodsOutService';
 import { Col, Row ,Table} from 'antd';
+import { getTotalGoodsInOutApi } from '../../services/itemNewItemService';
 
 const columns1 = [
     {
@@ -69,10 +70,14 @@ const InOutCon = () => {
         dispatch(getGoodsOutCountApi(data, (val) => {
             setGoodsOutList(val);
         }))
+
+        dispatch(getTotalGoodsInOutApi((val) => {
+          console.log(val);
+        }))
     }
 
     useEffect(() => {
-        console.log(goodsInList, goodsOutList);
+        // console.log(goodsInList, goodsOutList);
     }, [goodsInList, goodsOutList])
 
 

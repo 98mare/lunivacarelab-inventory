@@ -9,6 +9,7 @@ import {
   Legend,
   Tooltip,
   ArcElement,
+  Title
 } from 'chart.js';
 import { Chart, Doughnut, Bar } from 'react-chartjs-2';
 import styled from 'styled-components';
@@ -22,7 +23,8 @@ ChartJS.register(
   LineElement,
   ArcElement,
   Legend,
-  Tooltip
+  Tooltip,
+  Title
 );
 
 const { TabPane } = Tabs;

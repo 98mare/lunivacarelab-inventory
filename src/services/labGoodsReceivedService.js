@@ -1,4 +1,4 @@
-import { InsertUpdateLabGoodReceived, GetGoodReceivedDetailsByDate, GetGoodsInCountByDateWiseandItemWise } from '../constants/url';
+import { InsertUpdateLabGoodReceived, GetGoodReceivedDetailsByDate, GetGoodsInCountByDateWiseandItemWise, GetGoodReceivedDetailsbyItemId } from '../constants/url';
 import { fetch, store } from '../utils/httpUtil';
 import { generateUrlEncodedData } from '../utils/generateFormData';
 import { getAllGoodsInSucess } from '../store/slices/goodsInSlice';
@@ -40,6 +40,21 @@ export const getGoodsInCountApi = (data, successCallback) => {
             const response = await fetch(`${GetGoodsInCountByDateWiseandItemWise}?fromdate=${data.fromdate}&todate=${data.todate}&itemid=${data.itemid}`);
             if(response?.status === 200){
                 successCallback(response?.data?.GetGoodsInCountByDateWiseandItemWise)
+            }else
+                successCallback([])
+        } catch (error) {
+            
+        }
+
+    }
+}
+
+export const getGoodsInByIdApi = (data, successCallback) => {
+    return async dispatch => {
+        try {
+            const response = await fetch(`${GetGoodReceivedDetailsbyItemId}?itemId=${data.itemId}`);
+            if(response?.status === 200){
+                successCallback(response?.data?.GetGoodReceivedDetailsbyItemId)
             }else
                 successCallback([])
         } catch (error) {

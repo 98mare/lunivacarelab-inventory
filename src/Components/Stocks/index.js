@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import PageHeader from '../Common/pageHeader'
 import { Table } from 'antd'
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 // import { getRackDetApi } from '../../services/itemRackService'
 // import Filter from '../Common/Filter'
@@ -26,15 +26,25 @@ const Index = () => {
       key: 'ItemName'
     },
     {
-      title: 'Transection Date',
+      title: 'Transaction Date',
       dataIndex: 'TransactionDate',
-      key: 'TransactionDate'
-    }, {
-      title: 'Remening Count',
+      key: 'TransactionDate',
+      render: (text) => {
+        return text.split('T')[0]
+      }
+    },
+    {
+      title: 'Min Qty',
+      dataIndex: 'MinQty',
+      key: 'MinQty'
+    },
+    {
+      title: 'Remaining Count',
       dataIndex: 'RemainingCount',
       key: 'RemainingCount'
-    }
+    },
   ]
+
   useEffect(() => {
     locateRange();
   }, [])

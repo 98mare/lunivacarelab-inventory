@@ -83,6 +83,16 @@ export const GetListOfTestForInventory = 'GetListOfTestForInventory';
  * @param: 
  */
  export const GetListOfItemsNearToMinQuantity = 'GetListOfItemsNearToMinQuantity';
+/**
+ * @desc: get total goods in and out by item
+ * @param: 
+ */
+ export const GetTotalGoodsInAndOutByItem = 'GetTotalGoodsInAndOutByItem';
+/**
+ * @desc: get good received details by item id
+ * @param: ?itemId={itemId}
+ */
+ export const GetGoodReceivedDetailsbyItemId = 'GetGoodReceivedDetailsbyItemId';
 
 //POST
 /**
