@@ -51,6 +51,7 @@ export const AsyncAddUnits = lazy(() => pMinDelay(import('../Components/Units/Ad
 
 
 export const AsyncStocks = lazy(() => pMinDelay(import('../Components/Stocks/index'), 300));
+export const AsyncMinQuantityReport = lazy(() => pMinDelay(import('../Components/Reports/MinQunatityReport'), 300));
 
 
 export const AsyncNotFound = lazy(() => pMinDelay(import('../Components/Common/ErrorPage'), 300));

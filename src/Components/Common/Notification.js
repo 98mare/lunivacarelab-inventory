@@ -1,48 +1,38 @@
 import { notification } from 'antd';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Popover } from 'antd';
 import NotificationContent from './NotificationContent';
-
-
-// const openNotification = placement => {
-//   data.map(e => (
-//     notification.info({
-//       message: `Notification`,
-//       description:
-//         `${e.itemName}`,
-//       placement,
-//     })
-//   )) 
-// };
-
-const data = [
-  {
-    itemName : 'Some Item name 1',
-  },
-  {
-    itemName : 'Some Item name 3',
-  },
-  {
-    itemName : 'Some Item name 4',
-  },
-  {
-    itemName : 'Some Item name 2',
-  }, 
-]
-
-
+import {useDispatch} from 'react-redux'
+import { getItemNearApi } from '../../services/itemNewItemService';
 
 const Notification = () => {
+  const dispatch = useDispatch();
+  const [tableData, setTableData] = useState([]);
+
+  const getData =() => {
+    const pushedArr = []
+    dispatch(getItemNearApi(value =>{ 
+      value.forEach(ele => {
+        pushedArr.push(ele);
+      })
+    setTableData(pushedArr)
+
+  }))
+  }
+  useEffect(() => {
+    getData();
+  }, [])
   
-  
+
   return (
     <NotificationContainer>
-      {/* <span onClick={() => openNotification('topLeft')}>
-      <i className='icon-line-bell'></i>
-      </span> */}
-
-      <Popover placement="bottom" content={<NotificationContent data={data}/>} trigger="click">
+     
+      
+      <Popover placement="bottom" 
+        content={<NotificationContent 
+        data={tableData}/>} 
+        trigger="click">
       <i className='icon-line-bell'></i>
       </Popover>
       

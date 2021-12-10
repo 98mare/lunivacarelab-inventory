@@ -1,25 +1,29 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
-const NotificationContent = ({data}) => {
+const NotificationContent = ({ data }) => {
+ 
+  const history = useHistory();
   return (
     <NotificationContentContainer>
 
-    {
-      data.map(e => (
-        <div className="card">
-        <div className="icon">
-          <i className='icon-exclamation-sign'></i>
-        </div>
-        <div className="content">
-          <div className="h3">{e.itemName}</div>
-          <p>The item is going to be out of stock</p>
-        </div>
-      </div>
-      ))
-    }
-      
-      
+      {
+    
+        data.slice(0,5).map(e => (
+          <div className="card" onClick={()=>history.push('/reports/minquantityreport')}>
+            <div className="icon">
+              <i className='icon-exclamation-sign'></i>
+            </div>
+            <div className="content">
+              <div className="h3">{e.ItemName}</div>
+              <p>Min qty:{e.MinQty} Remanaing Count: {e.RemainingCount} </p>
+            </div>
+          </div>
+        ))
+      }
+
+      <a onClick={()=>history.push('/reports/minquantityreport')}>see more</a>
     </NotificationContentContainer>
   )
 }
@@ -36,6 +40,7 @@ const NotificationContentContainer = styled.div`
     margin-bottom: 10px;
     cursor: pointer;
     border-right: 1px solid var(--primary);
+    
     .icon{
       font-size: 30px;
       color: var(--primary);
