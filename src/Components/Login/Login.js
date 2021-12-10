@@ -9,7 +9,7 @@ import { Form, Input, Button,Modal } from 'antd';
 import styled from 'styled-components';
 import logo from '../../assets/images/logo.png';
 import { getItemNearApi } from '../../services/itemNewItemService'
-import AppModel from  '../../Components/Common/AppModel'
+
 
 
 
@@ -30,7 +30,7 @@ export default function Login() {
         let andd = val?.CheckValidLoginForInventory;
         if (andd[0]?.usruserid > 0) {
           setToken({ token: andd[0]?.usrUsername, username: andd[0]?.usrUsername, roleId: andd[0]?.usrrole, UId: andd[0]?.usruserid })
-          console.log(token);
+          // console.log(token);
           history.push({
             pathname: '/'
           })

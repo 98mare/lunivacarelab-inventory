@@ -78,13 +78,13 @@ const InOutConTab = () => {
         datasets: [
             {
                 label: 'Goods In',
-                backgroundColor: 'rgb(53, 162, 235)',
+                backgroundColor: 'rgb(77, 190, 143)',
                 data: inData,
                 borderWidth: 2
             },
             {
                 label: 'Goods Out',
-                backgroundColor: 'rgb(53, 162, 235)',
+                backgroundColor: 'rgb(184, 176, 71)',
                 data: outData,
                 borderWidth: 2
             },

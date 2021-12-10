@@ -30,7 +30,7 @@ ChartJS.register(
 const { TabPane } = Tabs;
 
 const ReportChart = ({ options, dataBar, dataDo }) => {
-  console.log("this is option", options)
+  // console.log("this is option", options)
   return (
     <ReportChartContainer>
       <Tabs span={24} type='card'>
