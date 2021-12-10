@@ -1,4 +1,4 @@
-import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col, Switch } from 'antd';
+import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col, Switch, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -8,6 +8,8 @@ import { getTestListApi } from '../../services/itemVsRatioService';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 import { tokenString } from '../Common/HandleUser';
+import { getGoodsInByIdApi } from '../../services/labGoodsReceivedService';
+import CustomModal from '../Common/CustomModal';
 // import { SearchSelect } from '../Common/SearchSelect';
 
 const AddGoodsOut = (props) => {
@@ -20,6 +22,13 @@ const AddGoodsOut = (props) => {
   const [butDis, setButDis] = useState(false);
   const [itemList, setitemList] = useState([])
   const [testList, settestList] = useState([])
+  const [recNo, setrecNo] = useState('');
+  const [goodsRecList, setgoodsRecList] = useState([]);
+
+  const [visible, setVisible] = useState(false);
+  // const [confirmLoading, setConfirmLoading] = useState(false);
+  const [maxer, setMaxer] = useState(0);
+
   const GOId = props?.match?.params?.id;
   const fromDat = props?.match?.params?.from;
   const goodsOutReducer = useSelector(state => state.goodsout);
@@ -72,8 +81,7 @@ const AddGoodsOut = (props) => {
   }
 
   const onFinish = (values) => {
-    // setButDis(true)
-
+    setButDis(true)
     let data = {
       "GOId": forEdit ? GOId : 0,
       "TestId": values?.TestId,
@@ -110,6 +118,57 @@ const AddGoodsOut = (props) => {
     }
   }
 
+  useEffect(() => {
+    if (recNo !== 0 && recNo !== undefined && recNo !== '') {
+      dispatch(getGoodsInByIdApi(recNo, (val) => {
+        setgoodsRecList(val);
+        if (val.length > 1) {
+          showModal()
+        } else {
+          form.setFieldsValue({
+            GoodReceivedNo: val[0]?.GoodsInId,
+            Quantity: val[0]?.RemainingCount
+          });
+          setMaxer(val[0]?.RemainingCount)
+        }
+      }))
+    }
+  }, [recNo])
+
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  // const handleOk = () => {
+  //   setConfirmLoading(true);
+  //   setTimeout(() => {
+  //     setVisible(false);
+  //     setConfirmLoading(false);
+  //   }, 2000);
+  // };
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
+
+  const retSelData = (val) => {
+    form.setFieldsValue({
+      GoodReceivedNo: val?.goodId,
+      Quantity: val?.remCount
+    });
+    setMaxer(val?.remCount)
+    setVisible(false);
+  }
+
+  // const handleMaxCount = (val) => {
+  //   console.log(val, Number(maxer));
+  //   // if(val > Number(maxer)){
+  //     form.setFieldsValue({
+  //       Quantity: maxer
+  //     });
+  //   // }
+  // }
+
   return (
     <AddGoodsOutContainer>
       <Row justify='center'>
@@ -140,7 +199,7 @@ const AddGoodsOut = (props) => {
               <Select
                 showSearch
                 optionFilterProp="children"
-                placeholder="select a test"
+                placeholder="Select a test"
                 filterOption={(input, option) => {
                   return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
@@ -174,13 +233,14 @@ const AddGoodsOut = (props) => {
               <Select
                 showSearch
                 optionFilterProp="children"
-                placeholder="select an item"
+                placeholder="Select an item"
                 filterOption={(input, option) => {
                   return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
                     option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
                   );
                 }}
+                onChange={(e) => setrecNo(e)}
                 allowClear>
                 {itemList?.map(iTy => {
                   return (
@@ -207,6 +267,8 @@ const AddGoodsOut = (props) => {
               ]}
             >
               <InputNumber
+                readOnly={true}
+                tabIndex={-1}
                 style={{ width: '100%' }}
               />
             </Form.Item>
@@ -223,6 +285,8 @@ const AddGoodsOut = (props) => {
             >
               <InputNumber
                 min={0}
+                max={maxer}
+                // onChange={handleMaxCount}
                 style={{ width: '100%' }}
               />
             </Form.Item>
@@ -279,6 +343,16 @@ const AddGoodsOut = (props) => {
         </Col>
 
       </Row>
+
+      <CustomModal
+        visible={visible}
+        // onOk={handleOk}
+        // confirmLoading={confirmLoading}
+        onCancel={handleCancel}
+        goodsRecList={goodsRecList}
+        retSelData={retSelData}
+      />
+
     </AddGoodsOutContainer>
   );
 };
