@@ -41,7 +41,9 @@ export const AsyncReports = lazy(() => pMinDelay(import('../Components/Reports/i
 // export const AsyncGoodsInReports = lazy(() => pMinDelay(import('../Components/Reports/GoodsInReports'), 300));
 export const AsyncGoodsInReports = lazy(() => pMinDelay(import('../Components/Reports/newGoodsInReport'), 300));
 
-export const AsyncGoodsOutReports = lazy(() => pMinDelay(import('../Components/Reports/GoodsOutReport'), 300));
+// export const AsyncGoodsOutReports = lazy(() => pMinDelay(import('../Components/Reports/GoodsOutReport'), 300));
+export const AsyncGoodsOutReports = lazy(() => pMinDelay(import('../Components/Reports/NewGoodsOutReport'), 300));
+
 export const AsyncConsumableReports = lazy(() => pMinDelay(import('../Components/Reports/ConsumableReport'), 300));
 export const AsyncinvsReports = lazy(() => pMinDelay(import('../Components/Reports/InVsOutVsCon'), 300));
 export const AsyncInOutConReports = lazy(() => pMinDelay(import('../Components/Reports/InOutConTab'), 300));
