@@ -190,7 +190,7 @@ function App() {
         />
         <PrivateRouter
           exact
-          path='/wastage/edit/:id'
+          path='/wastage/edit/:id/:from'
           component={AsyncAddWastage}
           layout={AsyncAppLayout}
           forEdit

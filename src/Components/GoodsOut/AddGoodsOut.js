@@ -162,7 +162,6 @@ const AddGoodsOut = (props) => {
   }
 
   const handleMaxCount = (val) => {
-    console.log(val, Number(maxer));
     if(val > Number(maxer)){
       openNotification(val)
       form.setFieldsValue({
@@ -196,6 +195,7 @@ const AddGoodsOut = (props) => {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
+            // onChangeCapture={handleMaxCount}
           >
 
             <Form.Item

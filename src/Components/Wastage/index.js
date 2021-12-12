@@ -9,6 +9,7 @@ import { getWastageApi } from '../../services/wastageService'
 import ReportChart from '../Common/ReportChart'
 import { ChartColor } from '../Common/ChartColor'
 import Edit from '../Common/Edit'
+import Cancle from '../Common/Cancle'
 
 
 
@@ -50,7 +51,7 @@ const Index = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <Edit onClick={()=> history.push(`./wastage/edit/${record.WId}`)}>Edit</Edit>
+          <Cancle onClick={()=> history.push(`./wastage/edit/${record.WId}/${record.CreatedDate}`)}>Cancel</Cancle>
         </Space>
       )
     }
