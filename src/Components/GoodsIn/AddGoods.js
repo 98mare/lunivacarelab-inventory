@@ -1,4 +1,4 @@
-import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col, Descriptions } from 'antd';
+import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col, Descriptions, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -30,6 +30,21 @@ const AddGoods = (props) => {
   const [previousValues, setPreviousValues] = useState(forEdit ? goodsInReducer?.goodsin[GId] : {});
 
   const dateFormat = 'YYYY-MM-DD';
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    form.submit();
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   useEffect(() => {
     if (forEdit && previousValues === undefined) {
@@ -343,9 +358,13 @@ const AddGoods = (props) => {
                 span: 16,
               }}
             >
-              <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
+              <Button htmlType={forEdit ? 'button' : "submit"}
+ onClick={forEdit ? showModal : ''} disabled={butDis} className='btnPrimary'>
                 {forEdit ? 'Cancel' : 'Submit'}
               </Button>
+              <Modal title="Warning" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                <p>Do You want to Cancel the Goods In</p> 
+              </Modal>
             </Form.Item>
           </Form>
         </Col>

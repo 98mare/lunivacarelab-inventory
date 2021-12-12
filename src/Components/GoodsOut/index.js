@@ -7,6 +7,7 @@ import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
 import { getGoodsOutApi } from '../../services/labGoodsOutService';
 import Edit from '../Common/Edit';
+import Cancle from '../Common/Cancle';
 
 const Index = () => {
   const history = useHistory();
@@ -66,7 +67,7 @@ const Index = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <Edit onClick={() => history.push(`/goodsout/edit/${record.GOId}/${record.GoodsOutDate}`)}>Edit</Edit>
+          <Cancle onClick={() => history.push(`/goodsout/edit/${record.GOId}/${record.GoodsOutDate}`)}>Cancle</Cancle>
         </Space>
       )
     }

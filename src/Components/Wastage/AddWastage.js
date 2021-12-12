@@ -83,7 +83,8 @@ const AddWastage = (props) => {
       "Reason": values?.Reason,
       "Remarks": values?.Remarks,
       "CreatedDate": values?.CreatedDate.format("YYYY-MM-DD"),
-      "CreatedBy": tokenString.UId
+      "CreatedBy": tokenString.UId,
+      // "edit": forEdit ? false : true
     }
     dispatch(insertWastageApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
@@ -231,7 +232,7 @@ const AddWastage = (props) => {
               </Button>
               
               <Modal title="Warning" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                <p>Do You want to Cancle the Wastage</p> 
+                <p>Do You want to Cancel the Wastage</p> 
               </Modal>
             </Form.Item>
           </Form>

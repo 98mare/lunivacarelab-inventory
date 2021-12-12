@@ -7,6 +7,7 @@ import { getGoodsReceivedApi } from '../../services/labGoodsReceivedService'
 import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
 import Edit from '../Common/Edit';
+import Cancle from '../Common/Cancle';
 
 const Index = () => {
   const history = useHistory();
@@ -49,7 +50,7 @@ const Index = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <Edit onClick={() => history.push(`/goodsin/edit/${record.GId}/${record.CreatedDate}`)}>Edit</Edit>
+          <Cancle onClick={() => history.push(`/goodsin/edit/${record.GId}/${record.CreatedDate}`)}>Cancle</Cancle>
         </Space>
       )
     }

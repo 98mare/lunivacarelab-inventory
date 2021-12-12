@@ -34,6 +34,21 @@ const AddGoodsOut = (props) => {
   const goodsOutReducer = useSelector(state => state.goodsout);
   const [previousValues, setPreviousValues] = useState(forEdit ? goodsOutReducer?.goodsOuts[GOId] : {});
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModalAlert = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOkAlert = () => {
+    form.submit();
+    setIsModalVisible(false);
+  };
+
+  const handleCancelAlert = () => {
+    setIsModalVisible(false);
+  };
+
   const formItemLayout = {
     labelCol: {
       xs: { span: 24 },
@@ -93,7 +108,6 @@ const AddGoodsOut = (props) => {
       "IsActive": forEdit ? false : (values?.IsActive === undefined || values?.IsActive === true ? true : false),
       "Remarks": values?.Remarks
     }
-    console.log(data);return;
     dispatch(insertGoodsOutApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
@@ -348,9 +362,13 @@ const AddGoodsOut = (props) => {
                 span: 16,
               }}
             >
-              <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
+              <Button htmlType={forEdit ? 'button' : "submit"}
+ onClick={forEdit ? showModalAlert : ''} disabled={butDis} className='btnPrimary'>
                 {forEdit ? 'Cancel' : 'Submit'}
               </Button>
+              <Modal title="Warning" visible={isModalVisible} onOk={handleOkAlert} onCancel={handleCancelAlert}>
+                <p>Do You want to Cancel the Goods Out</p> 
+              </Modal>
             </Form.Item>
           </Form>
         </Col>
