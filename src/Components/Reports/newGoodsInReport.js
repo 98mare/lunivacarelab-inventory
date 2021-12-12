@@ -113,7 +113,7 @@ const NewGoodsInReport = () => {
   }
 
   const groupData = (d) => {
-    console.log(d);
+    // console.log(d);
     let g = Object.entries(d.reduce((r, c) => (r[c.ItemName] = [...r[c.ItemName] || [], c], r), {}))
     return g.reduce((r, c) => (
       r.children.push(

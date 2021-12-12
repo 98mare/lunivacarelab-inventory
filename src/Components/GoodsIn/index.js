@@ -20,9 +20,9 @@ const Index = () => {
       key: 'itemName',
     },
     {
-      title: 'Total',
-      dataIndex: 'Total',
-      key: 'Total',
+      title: 'Quantity',
+      dataIndex: 'Quantity',
+      key: 'Quantity',
     },
     {
       title: 'Expiry Date',

@@ -40,6 +40,16 @@ export const options = {
             text: 'Total Goods In / Out',
             position: 'bottom'
         },
+
+        // tooltip: {
+        //     callbacks: {
+        //         title: function (d, o) {
+        //             console.log(d, o);
+        //             return d;
+        //         }
+        //     }
+        // },
+
     },
 };
 

@@ -81,7 +81,7 @@ const AddGoods = (props) => {
       "ItmTrackId": `${itemTrack}${values?.ItmTrackId}`,
       "CreatedDate": values?.create_date.format("YYYY-MM-DD"),
       "CreatedBy": tokenString.UId,
-      "ItemStatus": values?.ItemStatus,
+      "ItemStatus": forEdit ? 3 : values?.ItemStatus,
     }
     dispatch(insertGoodsReceivedApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
@@ -158,7 +158,7 @@ const AddGoods = (props) => {
                     option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
                   );
                 }}
-                onChange={(text, option) => setitemTrack(`${option?.extradata}-`) }
+                onChange={(text, option) => setitemTrack(`${option?.extradata}-`)}
                 allowClear>
                 {itemList?.map(iTy => {
                   return (
@@ -303,7 +303,7 @@ const AddGoods = (props) => {
             </Form.Item>
 
             <Form.Item
-              label="Item Status"
+              label={forEdit ? "Current Item Status" : "Item Status"}
               name="ItemStatus"
               rules={[
                 {
@@ -313,8 +313,16 @@ const AddGoods = (props) => {
               ]}
             >
               <Select allowClear>
-                <Option value="0">Not Available</Option>
-                <Option value="1">Available</Option>
+                {
+                  !forEdit ? (
+                    <>
+                      <Option value="0">Not Available</Option>
+                      <Option value="1">Available</Option>
+                    </>
+                  ) : (
+                    <Option value="3">Cancel</Option>
+                  )
+                }
               </Select>
             </Form.Item>
 
@@ -336,7 +344,7 @@ const AddGoods = (props) => {
               }}
             >
               <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
-                {forEdit ? 'Edit' : 'Submit'}
+                {forEdit ? 'Cancel' : 'Submit'}
               </Button>
             </Form.Item>
           </Form>

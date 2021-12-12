@@ -1,4 +1,4 @@
-import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col, Switch, Modal } from 'antd';
+import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col, Switch, Modal, notification } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -81,7 +81,7 @@ const AddGoodsOut = (props) => {
   }
 
   const onFinish = (values) => {
-    setButDis(true)
+    // setButDis(true)
     let data = {
       "GOId": forEdit ? GOId : 0,
       "TestId": values?.TestId,
@@ -90,9 +90,10 @@ const AddGoodsOut = (props) => {
       "Quantity": values?.Quantity,
       "UserId": tokenString.UId,
       "GoodsOutDate": values?.GoodsOutDate.format('YYYY-MM-DD'),
-      "IsActive": values?.IsActive === undefined || values?.IsActive === true ? true : false,
+      "IsActive": forEdit ? false : (values?.IsActive === undefined || values?.IsActive === true ? true : false),
       "Remarks": values?.Remarks
     }
+    console.log(data);return;
     dispatch(insertGoodsOutApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
@@ -160,14 +161,26 @@ const AddGoodsOut = (props) => {
     setVisible(false);
   }
 
-  // const handleMaxCount = (val) => {
-  //   console.log(val, Number(maxer));
-  //   // if(val > Number(maxer)){
-  //     form.setFieldsValue({
-  //       Quantity: maxer
-  //     });
-  //   // }
-  // }
+  const handleMaxCount = (val) => {
+    console.log(val, Number(maxer));
+    if(val > Number(maxer)){
+      openNotification(val)
+      form.setFieldsValue({
+        Quantity: maxer
+      });
+    }
+  }
+
+  const openNotification = (val) => {
+    notification.open({
+      message: 'Quantity going over',
+      description:
+        `Remaining count is ${maxer}, Entered Quantity is ${val}`,
+      onClick: () => {
+        console.log('Notification Clicked!');
+      },
+    });
+  };
 
   return (
     <AddGoodsOutContainer>
@@ -285,8 +298,8 @@ const AddGoodsOut = (props) => {
             >
               <InputNumber
                 min={0}
-                max={maxer}
-                // onChange={handleMaxCount}
+                // max={maxer}
+                onChange={handleMaxCount}
                 style={{ width: '100%' }}
               />
             </Form.Item>
@@ -326,7 +339,7 @@ const AddGoodsOut = (props) => {
               valuePropName="checked"
               offset={3}
             >
-              <Switch defaultChecked />
+              <Switch disabled={forEdit ? true : false} defaultChecked />
             </Form.Item>
 
             <Form.Item
@@ -336,7 +349,7 @@ const AddGoodsOut = (props) => {
               }}
             >
               <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
-                {forEdit ? 'Edit' : 'Submit'}
+                {forEdit ? 'Cancel' : 'Submit'}
               </Button>
             </Form.Item>
           </Form>
