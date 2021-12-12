@@ -1,4 +1,4 @@
-import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col } from 'antd';
+import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col, Modal } from 'antd';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -20,13 +20,31 @@ const AddWastage = (props) => {
   const [butDis, setButDis] = useState(false);
   const [itemList, setItemList] = useState([])
   const WId = props?.match?.params?.id;
+  const FromDater = props?.match?.params?.from;
   const wastageReducer = useSelector(state => state.wastage);
   const [previousValues, setPreviousValues] = useState(forEdit ? wastageReducer?.wastages[WId] : {});
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    form.submit();
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  
 
   useEffect(() => {
     getAllLabItem(0, 0)
     if (forEdit && previousValues === undefined) {
-      dispatch(getWastageApi({ fromdate: '2021-11-28', todate: '2021-12-03' }, (val) => { }))
+      dispatch(getWastageApi({ fromdate: FromDater, todate: FromDater }, (val) => { }))
     }
   }, [])
 
@@ -39,6 +57,12 @@ const AddWastage = (props) => {
       form.resetFields()
     }
   }, [previousValues])
+
+  // useEffect(()=> {
+    // if(forEdit){
+    //   showModal()
+    // }
+  // }, [forEdit])
 
   const getAllLabItem = (ty = 0, cI = 0) => {
     let data = {
@@ -198,9 +222,17 @@ const AddWastage = (props) => {
                 span: 16,
               }}
             >
-              <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
-                {forEdit ? 'Edit' : 'Submit'}
+              <Button 
+              htmlType={forEdit ? 'button' : "submit"} disabled={butDis} 
+              onClick={forEdit ? showModal : ''}
+              className='btnPrimary'
+              >
+                {forEdit ? 'Cancel' : 'Submit'}
               </Button>
+              
+              <Modal title="Warning" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                <p>Do You want to Cancle the Wastage</p> 
+              </Modal>
             </Form.Item>
           </Form>
         </Col>

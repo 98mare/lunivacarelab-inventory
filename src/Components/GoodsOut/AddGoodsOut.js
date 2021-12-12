@@ -160,14 +160,14 @@ const AddGoodsOut = (props) => {
     setVisible(false);
   }
 
-  // const handleMaxCount = (val) => {
-  //   console.log(val, Number(maxer));
-  //   // if(val > Number(maxer)){
-  //     form.setFieldsValue({
-  //       Quantity: maxer
-  //     });
-  //   // }
-  // }
+  const handleMaxCount = (val) => {
+    console.log(val, Number(maxer));
+    if(val > Number(maxer)){
+      form.setFieldsValue({
+        Quantity: maxer
+      });
+    }
+  }
 
   return (
     <AddGoodsOutContainer>
@@ -183,6 +183,7 @@ const AddGoodsOut = (props) => {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
+            // onChangeCapture={handleMaxCount}
           >
 
             <Form.Item
