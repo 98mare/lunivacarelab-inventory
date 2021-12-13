@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import Filter from '../Common/Filter';
 import { useDispatch } from 'react-redux';
 import { getActualConsumApi } from '../../services/stockService';
+import { ChartColor } from '../Common/ChartColor';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -14,42 +15,8 @@ const ConsumableReport = () => {
     const dispatch = useDispatch();
     const [tableData, setTableData] = useState([]);
     const [tableHead, setTableHead] = useState([]);
-
-    // const data = {
-    //     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    //     datasets: [
-    //         {
-    //             label: 'Consumption',
-    //             data: [12, 19, 3, 5, 2, 3],
-    //             backgroundColor: [
-    //                 'rgba(255, 99, 132, 0.2)',
-    //                 'rgba(54, 162, 235, 0.2)',
-    //                 'rgba(255, 206, 86, 0.2)',
-    //                 'rgba(75, 192, 192, 0.2)',
-    //                 'rgba(153, 102, 255, 0.2)',
-    //                 'rgba(255, 159, 64, 0.2)',
-    //             ],
-    //             borderColor: [
-    //                 'rgba(255, 99, 132, 1)',
-    //                 'rgba(54, 162, 235, 1)',
-    //                 'rgba(255, 206, 86, 1)',
-    //                 'rgba(75, 192, 192, 1)',
-    //                 'rgba(153, 102, 255, 1)',
-    //                 'rgba(255, 159, 64, 1)',
-    //             ],
-    //             borderWidth: 1,
-    //         },
-    //     ],
-    // };
-
-    // const options = {
-    //     plugins: {
-    //         title: {
-    //             display: true,
-    //             text: 'Consumption Report'
-    //         }
-    //     }
-    // }
+    const [labelName, setLabelName] = useState([]);
+    const [fullData, setfullData] = useState([]);
 
     const getAcutalCon = (data) => {
         dispatch(getActualConsumApi(data, (val) => {
@@ -73,6 +40,8 @@ const ConsumableReport = () => {
         if (tableData.length !== 0) {
             let tableKeys = Object.keys(tableData[0]);
             let data = []
+            let labels = [];
+
             tableKeys.forEach(ele => {
                 data.push({
                     title: ele,
@@ -80,9 +49,28 @@ const ConsumableReport = () => {
                     key: ele,
                 })
             })
+
+            tableData.forEach(ele => {
+                labels.push(ele.ItemName);
+            })
+
+            setLabelName(labels)
             setTableHead(data)
         }
     }
+
+    const data = {
+        labels: labelName,
+        datasets: [
+            {
+                label: 'Consumption',
+                data: fullData,
+                backgroundColor: ChartColor,
+                borderColor: ChartColor,
+                borderWidth: 1,
+            },
+        ],
+    };
 
     return (
         <ConsumeContainer>
@@ -99,14 +87,18 @@ const ConsumableReport = () => {
                     dataSource={tableData}
                 />
             </div>
-            {/* <Row>
-                <Col sm={12} xs={24}>
-                    <Doughnut
-                        data={data}
-                        options={options}
-                    />
-                </Col>
-            </Row> */}
+            {
+                fullData.length !== 0 ?
+                    (
+                        <Row>
+                            <Col sm={12} xs={24}>
+                                <Doughnut
+                                    data={data}
+                                />
+                            </Col>
+                        </Row>
+                    ) : ''
+            }
         </ConsumeContainer>
     )
 }

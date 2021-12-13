@@ -171,14 +171,14 @@ const AddItem = (props) => {
               rules={[
                 {
                   required: true,
-                  message: 'Please select item type!',
+                  message: 'Please Select item type!',
                 },
               ]}
             >
               <Select
                 showSearch
                 optionFilterProp="children"
-                placeholder="select item type"
+                placeholder="Select item type"
                 filterOption={(input, option) => {
                   return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
@@ -206,14 +206,14 @@ const AddItem = (props) => {
               rules={[
                 {
                   required: true,
-                  message: 'Please select item category!',
+                  message: 'Please Select item category!',
                 },
               ]}
             >
               <Select
                 showSearch
                 optionFilterProp="children"
-                placeholder="select item category"
+                placeholder="Select item category"
                 filterOption={(input, option) => {
                   return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
@@ -241,14 +241,14 @@ const AddItem = (props) => {
               rules={[
                 {
                   required: true,
-                  message: 'Please select item unit!',
+                  message: 'Please Select item unit!',
                 },
               ]}
             >
               <Select
                 showSearch
                 optionFilterProp="children"
-                placeholder="select item unit"
+                placeholder="Select item unit"
                 filterOption={(input, option) => {
                   return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
@@ -276,14 +276,14 @@ const AddItem = (props) => {
               rules={[
                 {
                   required: true,
-                  message: 'Please select item manufacturer!',
+                  message: 'Please Select item manufacturer!',
                 },
               ]}
             >
               <Select
                 showSearch
                 optionFilterProp="children"
-                placeholder="select rack"
+                placeholder="Select manufacturer"
                 filterOption={(input, option) => {
                   return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
@@ -311,7 +311,7 @@ const AddItem = (props) => {
               rules={[
                 {
                   required: true,
-                  message: 'Please select Location!',
+                  message: 'Please Select Location!',
                 },
               ]}
             >
@@ -346,14 +346,14 @@ const AddItem = (props) => {
               rules={[
                 {
                   required: true,
-                  message: 'Please select rack!',
+                  message: 'Please Select rack!',
                 },
               ]}
             >
               <Select
                 showSearch
                 optionFilterProp="children"
-                placeholder="select rack"
+                placeholder="Select rack"
                 filterOption={(input, option) => {
                   return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||

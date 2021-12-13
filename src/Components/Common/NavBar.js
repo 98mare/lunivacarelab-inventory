@@ -5,14 +5,15 @@ import styled from 'styled-components'
 import UserBar from './UserBar'
 import Notification from './Notification'
 
-const NavBar = () => {
+const NavBar = (props) => {
+  const { sideGo } = props
   return (
     <NavBarContainer>
 
       <Row justify="space-between">
         <Col>
           {/* <SerchBar></SerchBar> */}
-          {/* <h1 style={{color: '#232324'}}>Inventory Management system</h1> */}
+          <h2 className={sideGo} style={{ color: '#232324' }}>CareLab Inventory Management system</h2>
         </Col>
 
         <Col className='costomeCol'>

@@ -17,13 +17,13 @@ const NotificationContent = ({ data }) => {
             </div>
             <div className="content">
               <div className="h3">{e.ItemName}</div>
-              <p>Min qty:{e.MinQty} Remanaing Count: {e.RemainingCount} </p>
+              <p>Min qty:{e.MinQty} Remaining Count: {e.RemainingCount} </p>
             </div>
           </div>
         ))
       }
 
-      <a onClick={()=>history.push('/reports/minquantityreport')}>see more</a>
+      <a onClick={()=>history.push('/reports/minquantityreport')}>See more</a>
     </NotificationContentContainer>
   )
 }

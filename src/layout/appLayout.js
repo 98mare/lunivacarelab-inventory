@@ -22,7 +22,7 @@ const AppLayout = (props) => {
         <Layout>
           <SideNav statePass={statePass}></SideNav>
           <Layout className="main-app-layout">
-            <NavBar></NavBar>
+            <NavBar sideGo={Value === true ? 'customContent2' : 'customContent1'}></NavBar>
             <MobileNav />
             {props?.secondaryNav && props?.secondaryNavigation}
             <Content className={Value === true ? 'costomeContent2' : 'costomeContent1'}>
@@ -53,6 +53,19 @@ const MainAppContentComponentContainer = styled.div`
   }
   .costomeContent2{
     padding: 20px 20px 20px 100px;
+    @media(max-width: 576px){
+      padding: 20px;
+    }
+  }
+
+  .customContent1{
+    padding: 0px 0px 0px 220px;
+    @media(max-width: 576px){
+      padding: 20px;
+    }
+  }
+  .customContent2{
+    padding: 0px 0px 0px 100px;
     @media(max-width: 576px){
       padding: 20px;
     }

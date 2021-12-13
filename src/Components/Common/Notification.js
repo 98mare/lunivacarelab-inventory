@@ -27,20 +27,14 @@ const Notification = () => {
 
   return (
     <NotificationContainer>
-
-
-      <Popover placement="bottom"
-        content={<NotificationContent
-          data={tableData} />}
+      <Popover
+        placement="bottom"
+        content={
+          <NotificationContent data={tableData} />
+        }
         trigger="click">
-        <i className='icon-line-bell'>
-          {
-            tableData.length > 0 ? <span>{tableData.length}</span> : ''
-          }</i>
-
-
+        <i className='icon-line-bell'></i> {tableData.length > 0 ? <span className='notiCount'>{tableData.length}</span> : ''}
       </Popover>
-
     </NotificationContainer>
   )
 }
@@ -48,8 +42,6 @@ const Notification = () => {
 export default Notification
 
 const NotificationContainer = styled.div`
-  
-
   i{
     color: var(--primary);
     width: 40px;
@@ -60,14 +52,18 @@ const NotificationContainer = styled.div`
     justify-content: center;
     align-items: center;
     gap: 4px;
-    
-    span{
-      positioin: absolute;
-      top: 0%;
-      left: 0;
-      color: var(--primary)
-    }
   }
-  
+  .notiCount{
+    position: absolute;
+    color: #ffffff;
+    background: var(--primary);
+    width: 1rem;
+    text-align: center;
+    line-height: 1rem;
+    border-radius: 50%;
+    top: 0%;
+    height: 1rem;
+    left: 15%;
+    font-size: 12px;
+  }
 `
-
