@@ -358,12 +358,21 @@ const AddGoods = (props) => {
                 span: 16,
               }}
             >
-              <Button htmlType={forEdit ? 'button' : "submit"}
- onClick={forEdit ? showModal : ''} disabled={butDis} className='btnPrimary'>
-                {forEdit ? 'Cancel' : 'Submit'}
-              </Button>
+              {
+                forEdit && previousValues?.ItemStatus === 3 ? '' :
+                  (
+                    <Button
+                      htmlType={forEdit ? 'button' : "submit"}
+                      onClick={forEdit ? showModal : ''}
+                      disabled={butDis}
+                      className='btnPrimary'
+                    >
+                      {forEdit ? 'Cancel' : 'Submit'}
+                    </Button>
+                  )
+              }
               <Modal title="Warning" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                <p>Do You want to Cancel the Goods In</p> 
+                <p>Do You want to Cancel the Goods In</p>
               </Modal>
             </Form.Item>
           </Form>
