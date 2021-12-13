@@ -10,21 +10,11 @@ const LocationStockReport = () => {
     const [tableData, setTableData] = useState([]);
     const [tableHead, setTableHead] = useState([])
 
-    // const getLocationData = () => {
-    //     dispatch(getLocationReportApi((val) => {
-    //         setTableData(val);
-    //     }, 1))
-    // }
-
     const locateRange = (val) => {
         dispatch(getLocationReportApi((value) => {
             setTableData(value)
         }, val))
     }
-
-    // useEffect(() => {
-    //     getLocationData()
-    // }, [])
 
     useEffect(() => {
         createTableHead()
@@ -52,6 +42,7 @@ const LocationStockReport = () => {
             />
             <Filter
                 locateRange={locateRange}
+                notAllLocate
             />
             <div className="tableisRes">
                 <Table

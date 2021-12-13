@@ -191,9 +191,9 @@ const AddGoodsOut = (props) => {
       message: 'Quantity going over',
       description:
         `Remaining count is ${maxer}, Entered Quantity is ${val}`,
-      onClick: () => {
-        console.log('Notification Clicked!');
-      },
+      // onClick: () => {
+      //   console.log('Notification Clicked!');
+      // },
     });
   };
 
@@ -362,7 +362,7 @@ const AddGoodsOut = (props) => {
               valuePropName="checked"
               offset={3}
             >
-              <Switch readOnly={editDisabled} defaultChecked />
+              <Switch disabled={editDisabled} defaultChecked />
             </Form.Item>
 
             <Form.Item
@@ -377,7 +377,7 @@ const AddGoodsOut = (props) => {
                     <Button
                       htmlType={forEdit ? 'button' : "submit"}
                       onClick={forEdit ? showModalAlert : ''}
-                      readOnly={butDis}
+                      disabled={butDis}
                       className='btnPrimary'
                     >
                       {forEdit ? 'Cancel' : 'Submit'}

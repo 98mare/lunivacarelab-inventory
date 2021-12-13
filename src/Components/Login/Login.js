@@ -45,8 +45,9 @@ export default function Login() {
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    // console.log('Failed:', errorInfo);
   };
+  
   const getData =() => {
     const pushedArr = []
     dispatch(getItemNearApi(value =>{ 

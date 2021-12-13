@@ -72,7 +72,7 @@ const InOutCon = () => {
         }))
 
         dispatch(getTotalGoodsInOutApi((val) => {
-          console.log(val);
+          // console.log(val);
         }))
     }
 

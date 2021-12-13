@@ -98,6 +98,11 @@ export const GetListOfTestForInventory = 'GetListOfTestForInventory';
  * @param: ?location={location}
  */
  export const GetLocationWiseRemainingStockDetails = 'GetLocationWiseRemainingStockDetails';
+/**
+ * @desc: get actual consuption report by date range
+ * @param: ?from={from}&to={to}
+ */
+ export const GetActualConsumptionReportByDateRange = 'GetActualConsumptionReportByDateRange';
 
 //POST
 /**

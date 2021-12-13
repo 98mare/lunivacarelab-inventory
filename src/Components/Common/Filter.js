@@ -11,7 +11,7 @@ import moment from 'moment';
 import { getLabItemsApi } from '../../services/itemNewItemService'
 
 const Filter = (props) => {
-  const { itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll } = props
+  const { itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate } = props
   const dispatch = useDispatch();
 
   const { Option } = Select;
@@ -123,6 +123,11 @@ const Filter = (props) => {
           <Col md={6} sm={12} xs={24}>
             <span className='labelTop'>Location</span>
             <Select style={{ width: '100%' }} onChange={(val) => { setlocationId(val) }} size='large' className='inputWidth'>
+              {notAllLocate !== undefined ? (
+                <Option value='0'>
+                  All
+                </Option>
+              ) : ''}
               {locationList?.map(iTy => {
                 if (iTy?.IsActive) {
                   return (
@@ -176,11 +181,9 @@ export default Filter
 
 const FilterContainer = styled.div`
   background-color: #fefefe;
-
   .filterRow > div {
     padding: 10px;
   }
   .labelTop{
-    
   }
 `

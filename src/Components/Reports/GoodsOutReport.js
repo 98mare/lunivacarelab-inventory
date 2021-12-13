@@ -67,7 +67,7 @@ const Index = () => {
       itemid: 0
     }
     dispatch(getGoodsOutCountApi(newData, (val) => {
-      console.log(val);
+      // console.log(val);
     }))
   }
   const getGoodsOutList =(data) => {

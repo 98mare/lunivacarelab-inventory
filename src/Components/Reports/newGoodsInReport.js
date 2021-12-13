@@ -125,7 +125,7 @@ const NewGoodsInReport = () => {
     // let finalData = []
     d.forEach(ele => {
       ele.forEach(el => {
-        console.log(Object.entries(el));
+        // console.log(Object.entries(el));
       })
     })
     // let g = Object.entries(d.reduce((r, c) => (r[c.label] = [...r[c.label] || [], c], r), {}))
