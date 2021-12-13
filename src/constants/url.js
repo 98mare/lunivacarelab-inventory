@@ -93,6 +93,11 @@ export const GetListOfTestForInventory = 'GetListOfTestForInventory';
  * @param: ?itemId={itemId}
  */
  export const GetGoodReceivedDetailsbyItemId = 'GetGoodReceivedDetailsbyItemId';
+/**
+ * @desc: get location wise remaining stock details
+ * @param: ?location={location}
+ */
+ export const GetLocationWiseRemainingStockDetails = 'GetLocationWiseRemainingStockDetails';
 
 //POST
 /**

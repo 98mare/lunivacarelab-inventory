@@ -32,6 +32,10 @@ const data = [
     name: 'Min Quantity Report',
     pathName: 'minquantityreport'
   },
+  {
+    name: 'Location Stock Report',
+    pathName: 'locationstockreport'
+  },
 
 ]
 

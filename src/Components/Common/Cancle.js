@@ -2,12 +2,12 @@ import { Popover } from 'antd'
 import React from 'react'
 import styled from 'styled-components'
 
-const content=(
-  <span>Cancle</span>
+const content = (
+  <span>Cancel</span>
 )
 
-const Cancle = ({onClick}) => {
-  
+const Cancle = ({ onClick }) => {
+
   return (
     <CancleContainer>
       <Popover content={content}>
@@ -25,5 +25,4 @@ const CancleContainer = styled.div`
     cursor: pointer;
     font-size: 16px;
   }
-
 `

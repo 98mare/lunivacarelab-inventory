@@ -2,7 +2,7 @@ import { Table } from 'antd'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux';
-import { getGoodsInCountApi, getGoodsReceivedApi } from '../../services/labGoodsReceivedService'
+import { getGoodsInCountApi } from '../../services/labGoodsReceivedService'
 import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
 import {
@@ -122,7 +122,7 @@ const NewGoodsInReport = () => {
   }
 
   const groupData2 = (d) => {
-    let finalData = []
+    // let finalData = []
     d.forEach(ele => {
       ele.forEach(el => {
         console.log(Object.entries(el));

@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import PageHeader from '../Common/pageHeader'
-import { Space, Table } from 'antd'
+import { Space, Table, Tag } from 'antd'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import Filter from '../Common/Filter'
 import { getWastageApi } from '../../services/wastageService'
 import ReportChart from '../Common/ReportChart'
 import { ChartColor } from '../Common/ChartColor'
-import Edit from '../Common/Edit'
+// import Edit from '../Common/Edit'
 import Cancle from '../Common/Cancle'
 
 
@@ -45,6 +45,20 @@ const Index = () => {
       title: 'Remarks',
       dataIndex: 'Remarks',
       key: 'Remarks'
+    },
+    {
+      title: 'Is Active',
+      dataIndex: 'IsActive',
+      key: 'IsActive',
+      render: (text) => {
+        let retText = 'Inactive'
+        let retColor = 'red'
+        if (text === true) {
+          retText = 'Active'
+          retColor = 'green'
+        }
+        return <Tag color={retColor}>{retText}</Tag>
+      },
     },
     {
       title: 'Action',

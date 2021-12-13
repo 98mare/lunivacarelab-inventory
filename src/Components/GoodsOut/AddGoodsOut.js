@@ -36,6 +36,8 @@ const AddGoodsOut = (props) => {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+  const editDisabled = forEdit ? true : false;
+
   const showModalAlert = () => {
     setIsModalVisible(true);
   };
@@ -96,7 +98,7 @@ const AddGoodsOut = (props) => {
   }
 
   const onFinish = (values) => {
-    // setButDis(true)
+    setButDis(true)
     let data = {
       "GOId": forEdit ? GOId : 0,
       "TestId": values?.TestId,
@@ -176,7 +178,7 @@ const AddGoodsOut = (props) => {
   }
 
   const handleMaxCount = (val) => {
-    if(val > Number(maxer)){
+    if (val > Number(maxer)) {
       openNotification(val)
       form.setFieldsValue({
         Quantity: maxer
@@ -209,7 +211,7 @@ const AddGoodsOut = (props) => {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
-            // onChangeCapture={handleMaxCount}
+          // onChangeCapture={handleMaxCount}
           >
 
             <Form.Item
@@ -233,7 +235,9 @@ const AddGoodsOut = (props) => {
                     option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
                   );
                 }}
-                allowClear>
+                allowClear
+                readOnly={editDisabled}
+              >
                 {testList?.map(iTy => {
                   return (
                     <Option
@@ -268,7 +272,9 @@ const AddGoodsOut = (props) => {
                   );
                 }}
                 onChange={(e) => setrecNo(e)}
-                allowClear>
+                allowClear
+                readOnly={editDisabled}
+              >
                 {itemList?.map(iTy => {
                   return (
                     <Option
@@ -297,6 +303,7 @@ const AddGoodsOut = (props) => {
                 readOnly={true}
                 tabIndex={-1}
                 style={{ width: '100%' }}
+                readOnly={editDisabled}
               />
             </Form.Item>
 
@@ -315,6 +322,7 @@ const AddGoodsOut = (props) => {
                 // max={maxer}
                 onChange={handleMaxCount}
                 style={{ width: '100%' }}
+                readOnly={editDisabled}
               />
             </Form.Item>
 
@@ -331,6 +339,7 @@ const AddGoodsOut = (props) => {
               <DatePicker
                 style={{ width: '100%' }}
                 format={dateFormat}
+                readOnly={editDisabled}
               />
             </Form.Item>
 
@@ -344,7 +353,7 @@ const AddGoodsOut = (props) => {
                 },
               ]}
             >
-              <TextArea />
+              <TextArea readOnly={editDisabled} />
             </Form.Item>
 
             <Form.Item
@@ -353,7 +362,7 @@ const AddGoodsOut = (props) => {
               valuePropName="checked"
               offset={3}
             >
-              <Switch disabled={forEdit ? true : false} defaultChecked />
+              <Switch readOnly={editDisabled} defaultChecked />
             </Form.Item>
 
             <Form.Item
@@ -362,12 +371,21 @@ const AddGoodsOut = (props) => {
                 span: 16,
               }}
             >
-              <Button htmlType={forEdit ? 'button' : "submit"}
- onClick={forEdit ? showModalAlert : ''} disabled={butDis} className='btnPrimary'>
-                {forEdit ? 'Cancel' : 'Submit'}
-              </Button>
+              {
+                forEdit && previousValues?.IsActive === false ? '' :
+                  (
+                    <Button
+                      htmlType={forEdit ? 'button' : "submit"}
+                      onClick={forEdit ? showModalAlert : ''}
+                      readOnly={butDis}
+                      className='btnPrimary'
+                    >
+                      {forEdit ? 'Cancel' : 'Submit'}
+                    </Button>
+                  )
+              }
               <Modal title="Warning" visible={isModalVisible} onOk={handleOkAlert} onCancel={handleCancelAlert}>
-                <p>Do You want to Cancel the Goods Out</p> 
+                <p>Do You want to Cancel the Goods Out</p>
               </Modal>
             </Form.Item>
           </Form>

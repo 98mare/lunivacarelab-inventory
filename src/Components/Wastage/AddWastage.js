@@ -39,7 +39,7 @@ const AddWastage = (props) => {
     setIsModalVisible(false);
   };
 
-  
+
 
   useEffect(() => {
     getAllLabItem(0, 0)
@@ -59,9 +59,9 @@ const AddWastage = (props) => {
   }, [previousValues])
 
   // useEffect(()=> {
-    // if(forEdit){
-    //   showModal()
-    // }
+  // if(forEdit){
+  //   showModal()
+  // }
   // }, [forEdit])
 
   const getAllLabItem = (ty = 0, cI = 0) => {
@@ -84,7 +84,7 @@ const AddWastage = (props) => {
       "Remarks": values?.Remarks,
       "CreatedDate": values?.CreatedDate.format("YYYY-MM-DD"),
       "CreatedBy": tokenString.UId,
-      // "edit": forEdit ? false : true
+      "IsActive": forEdit ? false : true
     }
     dispatch(insertWastageApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
@@ -223,16 +223,21 @@ const AddWastage = (props) => {
                 span: 16,
               }}
             >
-              <Button 
-              htmlType={forEdit ? 'button' : "submit"} disabled={butDis} 
-              onClick={forEdit ? showModal : ''}
-              className='btnPrimary'
-              >
-                {forEdit ? 'Cancel' : 'Submit'}
-              </Button>
-              
+              {
+                forEdit && previousValues?.IsActive === false ? '' :
+                  (
+                    <Button
+                      htmlType={forEdit ? 'button' : "submit"} disabled={butDis}
+                      onClick={forEdit ? showModal : ''}
+                      className='btnPrimary'
+                    >
+                      {forEdit ? 'Cancel' : 'Submit'}
+                    </Button>
+                  )
+              }
+
               <Modal title="Warning" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                <p>Do You want to Cancel the Wastage</p> 
+                <p>Do You want to Cancel the Wastage</p>
               </Modal>
             </Form.Item>
           </Form>
