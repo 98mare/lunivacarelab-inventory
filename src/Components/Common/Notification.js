@@ -48,6 +48,7 @@ const Notification = () => {
 export default Notification
 
 const NotificationContainer = styled.div`
+  
 
   i{
     color: var(--primary);
