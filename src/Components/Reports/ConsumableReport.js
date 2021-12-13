@@ -51,11 +51,33 @@ const ConsumableReport = () => {
             })
 
             tableData.forEach(ele => {
-                labels.push(ele.ItemName);
+                if(ele.ItemName !== null)
+                    labels.push(ele.ItemName);
             })
 
             setLabelName(labels)
             setTableHead(data)
+        }
+    }
+
+    useEffect(() => {
+        dubDa()
+    }, [labelName])
+
+    const dubDa = () => {
+        const labels = labelName;
+        const data = tableData;
+
+        if (data !== null && data !== undefined) {
+            const filledMonths = data.map((month) => month.ItemName);
+            const dataset = labels.map(month => {
+                const indexOfFilledData = filledMonths.indexOf(month);
+                if (indexOfFilledData !== -1) {
+                    return data[indexOfFilledData].Consumption;
+                }
+                return null;
+            });
+            setfullData(dataset);
         }
     }
 
