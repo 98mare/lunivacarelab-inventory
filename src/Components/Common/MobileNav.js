@@ -9,7 +9,7 @@ const MobileNav = () => {
         <img src={loadlogo} alt="" />
       </div>
       <div className="userIcon">
-        
+
       </div>
     </MobileNavContainer>
   )
@@ -19,9 +19,15 @@ export default MobileNav
 
 const MobileNavContainer = styled.div`
   display: none;
-  padding: 8px 15px;
+  /* padding: 8px 15px; */
+  padding: 15px;
+
   background-color: #fefefe;
-  position: relative;
+  /* position: relative; */
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+  box-shadow: 0 2px 22px 0 rgb(31 38 135 / 17%);
   
   @media(max-width: 500px){
     display: block;
@@ -29,12 +35,11 @@ const MobileNavContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     .logo{
-    width: 40px;
-    img{
-      width: 100%;
+      width: 40px;
+      img{
+        width: 100%;
+      }
     }
-    
-  }
   }
   
 `

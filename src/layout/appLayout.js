@@ -58,6 +58,14 @@ const MainAppContentComponentContainer = styled.div`
     }
   }
 
+  .ant-layout-content {
+    margin-top: 75px;
+    margin-bottom: 30px;
+    @media(max-width: 576px){
+      margin-top: 65px;
+    }
+  }
+
   .customContent1{
     padding: 0px 0px 0px 220px;
     @media(max-width: 576px){
@@ -96,6 +104,13 @@ const MainAppContentComponentContainer = styled.div`
   .footer{
     display: flex;
     justify-content: center;
+
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 99;
+    padding: 7px 50px;
+
     h3{
       color: #a09999;
     }

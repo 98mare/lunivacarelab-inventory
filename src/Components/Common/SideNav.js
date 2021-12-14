@@ -1,5 +1,5 @@
 // import { Menu} from 'antd'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { MenuRoute, settingsMenu } from '../../Data/MenuRoute'
 import { NavLink } from 'react-router-dom'
@@ -21,7 +21,10 @@ const SideNav = (props) => {
     setcollpsed(!collpsed);
   }
 
-  statePass(collpsed)
+  useEffect(() => {
+    statePass(collpsed)
+  },[collpsed])
+
 
   return (
     <SideNavContainer>

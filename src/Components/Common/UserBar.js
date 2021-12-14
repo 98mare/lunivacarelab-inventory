@@ -3,7 +3,7 @@ import styled from 'styled-components'
 // import { CaretDownFilled } from '@ant-design/icons'
 // import { useDispatch } from 'react-redux';
 import { Popover } from 'antd'
-import { Link, useHistory, Redirect } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 // import { tokenString } from './HandleUser'
 
 const UserBar = () => {

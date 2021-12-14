@@ -5,20 +5,17 @@ import { useHistory } from 'react-router-dom';
 import useToken from './useToken';
 import { useDispatch } from 'react-redux';
 import { getLoginApi } from '../../services/loginService';
-import { Form, Input, Button,Modal } from 'antd';
+import { Form, Input, Button } from 'antd';
 import styled from 'styled-components';
 import logo from '../../assets/images/logo.png';
 import { getItemNearApi } from '../../services/itemNewItemService'
-
-
-
 
 export default function Login() {
   const dispatch = useDispatch();
   const { token, setToken } = useToken();
   const history = useHistory();
   const [tableData, setTableData] = useState([]);
-  const [visible, setVisible] = useState();
+  // const [visible, setVisible] = useState();
 
   const onFinish = (values) => {
     let data = {

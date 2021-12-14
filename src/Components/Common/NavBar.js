@@ -29,9 +29,15 @@ const NavBar = (props) => {
 export default NavBar
 
 const NavBarContainer = styled.div`
-  padding: 20px;
+/*  padding: 20px; */
+  padding: 15px;
   cursor: pointer;
   background-color: #fefefe;
+
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+  box-shadow: 0 2px 22px 0 rgb(31 38 135 / 17%);
 
   @media(max-width: 500px){
     display: none;

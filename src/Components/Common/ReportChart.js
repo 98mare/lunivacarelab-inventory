@@ -11,7 +11,7 @@ import {
   ArcElement,
   Title
 } from 'chart.js';
-import { Chart, Doughnut, Bar } from 'react-chartjs-2';
+import { Doughnut, Bar } from 'react-chartjs-2';
 import styled from 'styled-components';
 import { Tabs } from 'antd';
 

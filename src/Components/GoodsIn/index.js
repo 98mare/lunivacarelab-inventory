@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { getGoodsReceivedApi } from '../../services/labGoodsReceivedService'
 import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
-import Edit from '../Common/Edit';
+// import Edit from '../Common/Edit';
 import Cancle from '../Common/Cancle';
 
 const Index = () => {
