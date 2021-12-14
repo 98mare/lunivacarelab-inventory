@@ -128,18 +128,20 @@ const Index = () => {
     <GoodsOutContainer>
       <PageHeader
         pageTitle='Goods Out Report'
-        csvLinkTitle='Export csv'
-        goodsOut
+        // csvLinkTitle='Export csv'
+        // goodsOut
       ></PageHeader>
       <Filter
         dateRange
         dateRet={dataRet}
         itemName
       />
-      <Table
-        columns={columns}
-        dataSource={goodsList}
-      />
+      <div className="tableisRes">
+        <Table
+          columns={columns}
+          dataSource={goodsList}
+        />
+      </div>
       {goodsLabel.length !== 0 ?
         <ReportChart 
         dataBar={dataBar}

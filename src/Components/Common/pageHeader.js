@@ -4,8 +4,7 @@ import styled from 'styled-components'
 import AppButton from './AppButton'
 import { CSVLink } from 'react-csv';
 
-const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, goodsIn, goodsOut }) => {
-
+const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvToImport, csvDataName, csvActive, csvData }) => {
 
   // to CSV goods in report
   // const goodsInReducer = useSelector((state) => state.goodsin);
@@ -44,20 +43,20 @@ const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, goods
           {buttonTitle && <AppButton buttonTitle={buttonTitle} buttonOnClick={buttonOnClick} primaryBtn ></AppButton>}
 
           {
-            goodsIn &&
+            csvDataName &&
             <div className='link'>
-              <CSVLink filename={"goodsIn.csv"} className="btn ant-btn btn-primary btn-primary--outline" data={goodsIn}>{csvLinkTitle}</CSVLink>
-              {/* <GoodsInCSV/> */}
+              <CSVLink filename={csvDataName} className="btn ant-btn btn-primary btn-primary--outline" data={csvData}>{csvLinkTitle}</CSVLink>
+             
             </div>
           }
 
-          {
+          {/* {
             goodsOut &&
             <div className='link'>
               <CSVLink filename={"goodsOut.csv"} className="btn ant-btn btn-primary btn-primary--outline" data={goodsOut}>{csvLinkTitle}</CSVLink>
-              {/* <GoodsInCSV/> */}
+              
             </div>
-          }
+          } */}
 
         </Row>
       </Row>

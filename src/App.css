@@ -96,6 +96,8 @@ h4{
 /* .margin-bottom-table{
   margin-bottom:200px;
 } */
-.scrollTable{
-  overflow-x: auto;
+
+.tableisRes {
+  overflow: auto;
+  background-color: #fefefe;
 }

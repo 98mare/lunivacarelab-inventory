@@ -5,12 +5,7 @@ export const MenuRoute = [
     path: '/',
     icon: 'icon-line2-home'
   },
-  {
-    key: 'item',
-    name: 'Item',
-    path: '/item',
-    icon: 'icon-line-box',
-  },
+  
   {
     icon: 'icon-line-bag',
     key: 'goodsin',
@@ -23,12 +18,7 @@ export const MenuRoute = [
     name: 'Goods Out',
     path: '/goodsout'
   },
-  {
-    icon: 'icon-lab2',
-    key: 'itemVsRatio',
-    name: 'Item Vs Ratio',
-    path: '/itemvsratio'
-  },
+  
   {
     icon: 'icon-line-trash',
     key: 'wastage',
@@ -44,6 +34,18 @@ export const MenuRoute = [
 ]
 
 export const settingsMenu = [
+  {
+    key: 'item',
+    name: 'Item',
+    path: '/item',
+    icon: 'icon-line-box',
+  },
+  {
+    icon: 'icon-lab2',
+    key: 'itemVsRatio',
+    name: 'Item Vs Ratio',
+    path: '/itemvsratio'
+  },
   {
     icon: 'icon-line-stack',
     key: 'type',

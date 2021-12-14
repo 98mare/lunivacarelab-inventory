@@ -59,10 +59,12 @@ const Index = () => {
   return (
     <ItemContainer>
       <PageHeader pageTitle="Type" buttonTitle='Add Type' buttonOnClick={() => history.push('./type/add')}></PageHeader>
-      <Table
-        columns={columns}
-        dataSource={tableData}
-      />
+      <div className="tableisRes">
+        <Table
+          columns={columns}
+          dataSource={tableData}
+        />
+      </div>
     </ItemContainer>
   )
 }

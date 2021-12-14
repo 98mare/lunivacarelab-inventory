@@ -125,12 +125,19 @@ const InOutConTab = () => {
 
     return (
         <>
-            <PageHeader pageTitle="Total Goods In and Goods Out" />
+            <PageHeader 
+                pageTitle="Total Goods In and Goods Out"
+                csvLinkTitle='Export csv'
+                csvData={allGoodsList}
+                csvDataName='toalReport.csv'
+             />
             <Bar options={options} data={dataBar} />
-            <Table
-                columns={columns}
-                dataSource={allGoodsList}
-            />
+            <div className="tableisRes">
+                <Table
+                    columns={columns}
+                    dataSource={allGoodsList}
+                />
+            </div>
         </>
     )
 }

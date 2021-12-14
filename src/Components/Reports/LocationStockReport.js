@@ -39,6 +39,9 @@ const LocationStockReport = () => {
         <>
             <PageHeader
                 pageTitle='Location Stock Report'
+                csvLinkTitle='Export csv'
+                csvData={tableData}
+                csvDataName='locationStockReport.csv'
             />
             <Filter
                 locateRange={locateRange}

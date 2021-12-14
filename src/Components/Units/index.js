@@ -60,10 +60,12 @@ const Index = () => {
         pageTitle='Units'
         buttonOnClick={() => history.push('./units/add')}
       ></PageHeader>
-      <Table className='tableWidth'
-        columns={columns}
-        dataSource={unitList}
-      />
+      <div className="tableisRes">
+        <Table className='tableWidth'
+          columns={columns}
+          dataSource={unitList}
+        />
+      </div>
     </UnitContainer>
   )
 }
