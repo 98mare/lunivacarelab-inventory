@@ -32,13 +32,14 @@ const BottomNav = () => {
         <Link to='/reports/minquantityreport'><i className='icon-line-bell'></i></Link>
       </li>
       <li>
+        <Link to='/settings'><i className='icon-line2-settings'></i></Link>
+      </li>
+      <li>
         <Popover placement="top" content={content} trigger="click">
           <i className='icon-user1'></i>
         </Popover>
       </li>
-      <li>
-        <Link to='/settings'><i className='icon-line2-settings'></i></Link>
-      </li>
+      
     </BottomNavContainer>
   )
 }
