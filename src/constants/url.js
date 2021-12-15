@@ -67,42 +67,52 @@ export const GetListOfTestForInventory = 'GetListOfTestForInventory';
  * @desc: get goods out count by date wise and item wise
  * @param: ?fromdate={fromdate}&todate={todate}&itemid={itemid}
  */
- export const GetGoodsOutCountByDateWiseandItemWise = 'GetGoodsOutCountByDateWiseandItemWise';
+export const GetGoodsOutCountByDateWiseandItemWise = 'GetGoodsOutCountByDateWiseandItemWise';
 /**
  * @desc: get goods in count by date wise and item wise
  * @param: ?fromdate={fromdate}&todate={todate}&itemid={itemid}
  */
- export const GetGoodsInCountByDateWiseandItemWise = 'GetGoodsInCountByDateWiseandItemWise';
+export const GetGoodsInCountByDateWiseandItemWise = 'GetGoodsInCountByDateWiseandItemWise';
 /**
  * @desc: get current remaining stock count by id
  * @param: 
  */
- export const GetCurrentRemainingStockCountById = 'GetCurrentRemainingStockCountById'
+export const GetCurrentRemainingStockCountById = 'GetCurrentRemainingStockCountById'
 /**
  * @desc: get list of items near to min quantity
  * @param: 
  */
- export const GetListOfItemsNearToMinQuantity = 'GetListOfItemsNearToMinQuantity';
+export const GetListOfItemsNearToMinQuantity = 'GetListOfItemsNearToMinQuantity';
 /**
  * @desc: get total goods in and out by item
  * @param: 
  */
- export const GetTotalGoodsInAndOutByItem = 'GetTotalGoodsInAndOutByItem';
+export const GetTotalGoodsInAndOutByItem = 'GetTotalGoodsInAndOutByItem';
 /**
  * @desc: get good received details by item id
  * @param: ?itemId={itemId}
  */
- export const GetGoodReceivedDetailsbyItemId = 'GetGoodReceivedDetailsbyItemId';
+export const GetGoodReceivedDetailsbyItemId = 'GetGoodReceivedDetailsbyItemId';
 /**
  * @desc: get location wise remaining stock details
  * @param: ?location={location}
  */
- export const GetLocationWiseRemainingStockDetails = 'GetLocationWiseRemainingStockDetails';
+export const GetLocationWiseRemainingStockDetails = 'GetLocationWiseRemainingStockDetails';
 /**
  * @desc: get actual consuption report by date range
  * @param: ?from={from}&to={to}
  */
- export const GetActualConsumptionReportByDateRange = 'GetActualConsumptionReportByDateRange';
+export const GetActualConsumptionReportByDateRange = 'GetActualConsumptionReportByDateRange';
+/**
+ * @desc: get consumption group
+ * @param:
+ */
+export const GetConsumptionGroup = 'GetConsumptionGroup';
+/**
+* @desc: get consumption group test look up
+* @param:
+*/
+export const GetConsumptionGroupTestLookUp = 'GetConsumptionGroupTestLookUp';
 
 //POST
 /**
@@ -240,5 +250,22 @@ export const InsertUpdateNewItemsDetails = 'InsertUpdateNewItemsDetails';
 }
  */
 export const InsertUpdateGoodsoutRecord = 'InsertUpdateGoodsoutRecord'
-
-
+/**
+ * @desc: insert update consumption test look up
+ * @param: {
+  "CId": 1,
+  "ConsumptionGroupId": 2,
+  "TestId": 3,
+  "IsActive": true
+ }
+ */
+export const InsertUpdateConsumptionTestLookUp = 'InsertUpdateConsumptionTestLookUp';
+/**
+ * @desc: insert update consumption group
+ * @param: {
+  "CGId": 1,
+  "ConsumptionGroupName": "sample string 2",
+  "IsActive": true
+ }
+ */
+export const InsertUpdateConsumptionGroup = 'InsertUpdateConsumptionGroup';
