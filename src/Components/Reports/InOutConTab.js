@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PageHeader from '../Common/pageHeader';
 import { useDispatch } from 'react-redux';
 import { getTotalGoodsInOutApi } from '../../services/itemNewItemService';
+import Filter from '../Common/Filter'
+
 import {
     Chart as ChartJS,
     LinearScale,
@@ -106,16 +108,20 @@ const InOutConTab = () => {
 
     const labels = label;
 
-    useEffect(() => {
-        getConsuData()
-    }, [label])
+    // useEffect(() => {
+    //     getConsuData()
+    // }, [label])
 
-    const getConsuData = () => {
+    const dataRet = (val) => {
         let data = {
-            fromdate: '2021-10-01',
-            todate: '2021-12-15'
+          fromdate: val[0].format("YYYY-MM-DD"),
+          todate: val[1].format("YYYY-MM-DD"),
+          itemid: val?.itemid
         }
+        getConsuData(data);
+      }
 
+    const getConsuData = (data) => {
         dispatch(
             getActualConsumApi(data, (val) => {
                 let labels = label;
@@ -169,6 +175,10 @@ const InOutConTab = () => {
                 csvLinkTitle='Export csv'
                 csvData={allGoodsList}
                 csvDataName='toalReport.csv'
+            />
+            <Filter
+            dateRange
+            dateRet={dataRet}
             />
             <Bar options={options} data={dataBar} />
             <div className="tableisRes">
