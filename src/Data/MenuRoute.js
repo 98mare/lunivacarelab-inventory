@@ -76,4 +76,16 @@ export const settingsMenu = [
     name: 'unit',
     path: '/units'
   },
+  {
+    icon: 'icon-bar-chart',
+    key: 'consumption',
+    name: 'consumption',
+    path: '/consumption'
+  },
+  {
+    icon: 'icon-bar-chart',
+    key: 'cons lookup',
+    name: 'cons lookup',
+    path: '/consumptionlook'
+  },
 ]

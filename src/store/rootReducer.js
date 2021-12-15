@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import categorySlice from './slices/categorySlice';
+import consumptionSlice from './slices/consumptionSlice';
 import goodsInSlice from './slices/goodsInSlice';
 import goodsOutSlice from './slices/goodsOutSlice';
 import itemRatioSlice from './slices/itemRatioSlice';
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
     units: unitSlice,
     user: userSlice,
     wastage: wastageSlice,
+    consumption: consumptionSlice,
 })
 
 export default rootReducer
