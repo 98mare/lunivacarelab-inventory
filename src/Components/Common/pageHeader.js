@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import AppButton from './AppButton'
 import { CSVLink } from 'react-csv';
 
-const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, priamryOutlineBtn, csvDataName, csvData,buttonClick }) => {
+const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDataName, csvData,forGroup, forGroupButtonClick,forCon, forConButtonClick }) => {
 
   // to CSV goods in report
   // const goodsInReducer = useSelector((state) => state.goodsin);
@@ -40,9 +40,13 @@ const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, priam
       <Row justify='space-between align-center'>
         <span className='pageTtitle'>{pageTitle}</span>
         <Row style={{gap: '10px'}}>
+          {forCon && <AppButton buttonTitle={forCon} buttonOnClick={forConButtonClick} primaryBtn ></AppButton>}
+
           {buttonTitle && <AppButton buttonTitle={buttonTitle} buttonOnClick={buttonOnClick} primaryBtn ></AppButton>}
 
-          {priamryOutlineBtn && <AppButton buttonTitle={priamryOutlineBtn} buttonOnClick={buttonClick} priamryOutlineBtn ></AppButton>}
+          
+
+          {forGroup && <AppButton buttonTitle={forGroup} buttonOnClick={forGroupButtonClick} primaryBtn ></AppButton>}
 
           {
             csvDataName &&

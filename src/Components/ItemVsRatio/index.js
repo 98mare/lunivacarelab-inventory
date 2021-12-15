@@ -67,8 +67,11 @@ const Index = () => {
         pageTitle='Item Vs Ratio'
         buttonOnClick={() => history.push('./itemvsratio/add')}
 
-        priamryOutlineBtn="Add Group Item Vs Ratio"
-        buttonClick={()=> history.push('./itemvsratio/addgroup')}
+        forGroup="Add Group Item Vs Ratio"
+        forGroupButtonClick={()=> history.push('./itemvsratio/add/group')}
+
+        forCon="Add Group Item Vs Consumption"
+        forConButtonClick={()=> history.push('./itemvsratio/add/itemconsumption')}
 
       ></PageHeader>
       <div className="top"></div>

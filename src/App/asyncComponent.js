@@ -36,7 +36,7 @@ export const AsyncAddWastage = lazy(() => pMinDelay(import('../Components/Wastag
 
 export const AsyncItemVsRatio = lazy(() => pMinDelay(import('../Components/ItemVsRatio/index'), 300));
 export const AsyncAddItemVsRatio = lazy(() => pMinDelay(import('../Components/ItemVsRatio/AddItemVSRatio'), 300));
-export const AsyncAddGroupItemVsRatio = lazy(() => pMinDelay(import('../Components/ItemVsRatio/AddGroupItemVsRatio'), 300));
+export const AsyncAddGroupItemVsRatioVsConsumption = lazy(() => pMinDelay(import('../Components/ItemVsRatio/GroupAddItemVsRatioVsConsumtion'), 300));
 
 export const AsyncReports = lazy(() => pMinDelay(import('../Components/Reports/index'), 300));
 // export const AsyncCSVReports = lazy(() => pMinDelay(import('../Components/Reports/Reports'), 300));

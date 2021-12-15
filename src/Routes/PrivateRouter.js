@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 // import { useDispatch } from 'react-redux';
 
-const PrivateRouter = ({ component: Component, layout: Layout, forEdit, secondaryNav, secondaryNavigation, ...rest }) => {
+const PrivateRouter = ({ component: Component, layout: Layout, forEdit,forGroup,forCon, secondaryNav, secondaryNavigation, ...rest }) => {
 //   const dispatch = useDispatch();
 //   const profileReducer = useSelector(state => state.profile);
 
@@ -17,7 +17,7 @@ const PrivateRouter = ({ component: Component, layout: Layout, forEdit, secondar
       render={props => (
         checkAuthentication() ?
           <Layout secondaryNav={secondaryNav} secondaryNavigation={secondaryNavigation}>
-              <Component forEdit={forEdit} {...props} />
+              <Component forEdit={forEdit} forGroup={forGroup} forCon={forCon} {...props} />
           </Layout>
           :
           <Redirect to={{
