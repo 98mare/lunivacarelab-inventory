@@ -238,8 +238,8 @@ const GroupAddItemVsRatioVsConsumtion = (props) => {
             </Form.Item>
 
             <Form.Item
-              label={forGroup ? 'isGroup' : 'Consumption Group'}
-              name={forGroup ? 'isGroup' : 'Consumption Group'}
+              label={forGroup ? 'Is Group' : 'Is Consumption Group'}
+              name={forGroup ? 'Is Group' : 'Is Consumption Group'}
               valuePropName='checked'
             >
               <Switch disabled={true} defaultChecked></Switch>

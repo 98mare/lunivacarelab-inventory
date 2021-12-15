@@ -20,12 +20,12 @@ const ConsumptionLookIndex = () => {
         },
         {
             title: 'Consumption Group Name',
-            dataIndex: 'ConsumptionGroupId',
+            dataIndex: 'ConsumptionGroupName',
             key: 'ConsumptionGroupId',
         },
         {
             title: 'Test Name',
-            dataIndex: 'TestId',
+            dataIndex: 'Testname',
             key: 'TestId',
         },
         {
@@ -55,7 +55,7 @@ const ConsumptionLookIndex = () => {
 
     useEffect(() => {
         getLabData()
-    })
+    }, [])
 
     const getLabData = () => {
         dispatch(consumptionLookupApi((val) => {

@@ -222,13 +222,30 @@ function App() {
           layout={AsyncAppLayout}
           forGroup
         />
-         <PrivateRouter
+        <PrivateRouter
+          exact
+          path='/itemvsratio/edit/group/:id'
+          component={AsyncAddGroupItemVsRatioVsConsumption}
+          layout={AsyncAppLayout}
+          forEdit
+          forGroup
+        />
+        <PrivateRouter
+          exact
+          path='/itemvsratio/edit/itemconsumption/:id'
+          component={AsyncAddGroupItemVsRatioVsConsumption}
+          layout={AsyncAppLayout}
+          forEdit
+          forCon
+        />
+        <PrivateRouter
           exact
           path='/itemvsratio/add/itemconsumption'
           component={AsyncAddGroupItemVsRatioVsConsumption}
           layout={AsyncAppLayout}
           forCon
         />
+
 
         <PrivateRouter
           exact
