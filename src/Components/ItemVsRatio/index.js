@@ -50,6 +50,34 @@ const Index = () => {
       }
     },
     {
+      title: 'IsGroup',
+      dataIndex: 'IsGroup',
+      key: 'IsGroup',
+      render: (text) => {
+        let retText = 'Not In Group'
+        let retColor = 'red'
+        if (text === true) {
+          retText = 'In Group'
+          retColor = 'green'
+        }
+        return <Tag color={retColor}>{retText}</Tag>
+      }
+    },
+    {
+      title: 'IsConsumptionGroup',
+      dataIndex: 'IsConsumptionGroup',
+      key: 'IsConsumptionGroup',
+      render: (text) => {
+        let retText = 'Not In Consumption'
+        let retColor = 'red'
+        if (text === true) {
+          retText = 'In Consumption'
+          retColor = 'green'
+        }
+        return <Tag color={retColor}>{retText}</Tag>
+      }
+    },
+    {
       title: 'Action',
       key: 'action',
       render: (text, record) => (
