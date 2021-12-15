@@ -9,6 +9,7 @@ import { getItemCategoryApi } from '../../services/itemCategoryService'
 import { getLocationApi } from '../../services/itemLocationService'
 import moment from 'moment';
 import { getLabItemsApi } from '../../services/itemNewItemService'
+import FilterTable from './FilterTable'
 
 const Filter = (props) => {
   const { itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate } = props
@@ -171,6 +172,8 @@ const Filter = (props) => {
           </Col>
         }
         <AppButton className='primary-btn' buttonTitle="Search" buttonOnClick={() => { handleClicker() }} priamryOutlineBtn></AppButton>
+
+        <FilterTable></FilterTable>
 
       </Row>
     </FilterContainer>
