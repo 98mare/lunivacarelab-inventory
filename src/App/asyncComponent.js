@@ -60,5 +60,11 @@ export const AsyncStocks = lazy(() => pMinDelay(import('../Components/Stocks/ind
 export const AsyncMinQuantityReport = lazy(() => pMinDelay(import('../Components/Reports/MinQunatityReport'), 300));
 export const AsyncLocationStockReport = lazy(() => pMinDelay(import('../Components/Reports/LocationStockReport'), 300));
 
+export const AsyncConsumptionIndex = lazy(() => pMinDelay(import('../Components/Consumption/consumptionGroupIndex'), 300));
+export const AsyncAddConsumptionGroup = lazy(() => pMinDelay(import('../Components/Consumption/AddConsumptionGroup'), 300));
+
+export const AsyncConsumptionLookIndex = lazy(() => pMinDelay(import('../Components/Consumption/consumptionLookIndex'), 300));
+export const AsyncAddConsumptionLookGroup = lazy(() => pMinDelay(import('../Components/Consumption/AddConsumptionLook'), 300));
+
 
 export const AsyncNotFound = lazy(() => pMinDelay(import('../Components/Common/ErrorPage'), 300));

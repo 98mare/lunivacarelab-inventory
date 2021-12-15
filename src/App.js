@@ -2,7 +2,7 @@
 import { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
-import { AsyncAddCategory, AsyncAddGroupItemVsRatio, AsyncAddItems, AsyncAddItemVsRatio, AsyncAddLocation, AsyncAddRack, AsyncAddType, AsyncAddUnits, AsyncAddWastage, AsyncAppLayout, AsyncCategory, AsyncConsumableReports, AsyncDashbord, AsyncGoodOut, AsyncGoodsIn, AsyncGoodsInAdd, AsyncGoodsInReports, AsyncGoodsOutAdd, AsyncGoodsOutReports, AsyncInOutConReports, AsyncinvsReports, AsyncItems, AsyncItemVsRatio, AsyncLocation, AsyncLocationStockReport, AsyncLogin, AsyncMinQuantityReport, AsyncNotFound, AsyncPublicLayout, AsyncRack, AsyncReports, AsyncSettings, AsyncStocks, AsyncType, AsyncUnits, AsyncWastage } from './App/asyncComponent';
+import { AsyncAddCategory, AsyncAddGroupItemVsRatio, AsyncAddConsumptionGroup, AsyncAddConsumptionLookGroup, AsyncAddItems, AsyncAddItemVsRatio, AsyncAddLocation, AsyncAddRack, AsyncAddType, AsyncAddUnits, AsyncAddWastage, AsyncAppLayout, AsyncCategory, AsyncConsumableReports, AsyncConsumptionIndex, AsyncConsumptionLookIndex, AsyncDashbord, AsyncGoodOut, AsyncGoodsIn, AsyncGoodsInAdd, AsyncGoodsInReports, AsyncGoodsOutAdd, AsyncGoodsOutReports, AsyncInOutConReports, AsyncinvsReports, AsyncItems, AsyncItemVsRatio, AsyncLocation, AsyncLocationStockReport, AsyncLogin, AsyncMinQuantityReport, AsyncNotFound, AsyncPublicLayout, AsyncRack, AsyncReports, AsyncSettings, AsyncStocks, AsyncType, AsyncUnits, AsyncWastage } from './App/asyncComponent';
 import PrivateRouter from './Routes/PrivateRouter';
 import PublicRoute from './Routes/PublicRoute';
 import loadlogo from './assets/images/logo1.png';
@@ -210,16 +210,16 @@ function App() {
         />
         <PrivateRouter
           exact
-          path='/itemvsratio/addgroup'
-          component={AsyncAddGroupItemVsRatio}
-          layout={AsyncAppLayout}
-        />
-        <PrivateRouter
-          exact
           path='/itemvsratio/eidt/:id'
           component={AsyncAddItemVsRatio}
           layout={AsyncAppLayout}
           forEdit
+        />
+        <PrivateRouter
+          exact
+          path='/itemvsratio/addgroup'
+          component={AsyncAddGroupItemVsRatio}
+          layout={AsyncAppLayout}
         />
 
         <PrivateRouter
@@ -306,6 +306,50 @@ function App() {
           path='/reports/locationstockreport'
           component={AsyncLocationStockReport}
           layout={AsyncAppLayout}
+        />
+
+        <PrivateRouter
+          exact
+          path='/consumption'
+          component={AsyncConsumptionIndex}
+          layout={AsyncAppLayout}
+        />
+
+        <PrivateRouter
+          exact
+          path='/consumption/add'
+          component={AsyncAddConsumptionGroup}
+          layout={AsyncAppLayout}
+        />
+
+        <PrivateRouter
+          exact
+          path='/consumption/edit/:id'
+          component={AsyncAddConsumptionGroup}
+          layout={AsyncAppLayout}
+          forEdit
+        />
+
+        <PrivateRouter
+          exact
+          path='/consumptionlook'
+          component={AsyncConsumptionLookIndex}
+          layout={AsyncAppLayout}
+        />
+
+        <PrivateRouter
+          exact
+          path='/consumptionlook/add'
+          component={AsyncAddConsumptionLookGroup}
+          layout={AsyncAppLayout}
+        />
+
+        <PrivateRouter
+          exact
+          path='/consumptionlook/edit/:id'
+          component={AsyncAddConsumptionLookGroup}
+          layout={AsyncAppLayout}
+          forEdit
         />
 
         <Route component={AsyncNotFound} />
