@@ -50,7 +50,7 @@ const Index = () => {
       }
     },
     {
-      title: 'IsGroup',
+      title: 'Is Group',
       dataIndex: 'IsGroup',
       key: 'IsGroup',
       render: (text) => {
@@ -64,7 +64,7 @@ const Index = () => {
       }
     },
     {
-      title: 'IsConsumptionGroup',
+      title: 'Is Consumption Group',
       dataIndex: 'IsConsumptionGroup',
       key: 'IsConsumptionGroup',
       render: (text) => {
@@ -80,11 +80,19 @@ const Index = () => {
     {
       title: 'Action',
       key: 'action',
-      render: (text, record) => (
-        <Space size="middle">
-          <Edit onClick={() => history.push(`/itemvsratio/eidt/${record.RId}`)}>Edit</Edit>
-        </Space>
-      )
+      render: (text, record) => {
+        let pusherName = `/itemvsratio/eidt/${record.RId}`
+        if(record.IsGroup === true)
+          pusherName = `/itemvsratio/edit/group/${record.RId}`
+        else if(record.IsConsumptionGroup === true)
+          pusherName = `/itemvsratio/edit/itemconsumption/${record.RId}`
+        return (
+          <Space size="middle">
+            <Edit onClick={() => history.push(pusherName)}>Edit</Edit>
+          </Space>
+        )
+      }
+
     }
   ]
 
@@ -96,10 +104,10 @@ const Index = () => {
         buttonOnClick={() => history.push('./itemvsratio/add')}
 
         forGroup="Add Group Item Vs Ratio"
-        forGroupButtonClick={()=> history.push('./itemvsratio/add/group')}
+        forGroupButtonClick={() => history.push('./itemvsratio/add/group')}
 
         forCon="Add Group Item Vs Consumption"
-        forConButtonClick={()=> history.push('./itemvsratio/add/itemconsumption')}
+        forConButtonClick={() => history.push('./itemvsratio/add/itemconsumption')}
 
       ></PageHeader>
       <div className="top"></div>
@@ -109,7 +117,7 @@ const Index = () => {
           dataSource={tableData}
         />
       </div>
-      
+
     </ItemContainer>
   )
 }

@@ -11,15 +11,14 @@ import { formItemLayout } from '../Common/FormItemLayout';
 import { consumptionGroupApi } from '../../services/consumptionService';
 
 const GroupAddItemVsRatioVsConsumtion = (props) => {
-  const { forEdit,forGroup, forCon } = props;
-  console.log(props);
+  const { forEdit, forGroup, forCon } = props;
   const [form] = Form.useForm()
   const history = useHistory();
   const { Option } = Select;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
   const [itemList, setitemList] = useState([])
-  const [testList, settestList] = useState([]);
+  // const [testList, settestList] = useState([]);
   const [groupData, setgroupData] = useState([]);
   const RId = props?.match?.params?.id;
   const itemRatioReducer = useSelector(state => state.itemRatio);
@@ -32,16 +31,18 @@ const GroupAddItemVsRatioVsConsumtion = (props) => {
       dispatch(getItemVsRatioApi((val) => { }, RId))
     }
     getAllLabItem()
-    if(forGroup !== undefined){
-    dispatch(getGroupTestForInventory(val => {
-      setgroupData(val);
-    }))}
-    if(forCon !== undefined){
-    dispatch(consumptionGroupApi(val => {
-      setgroupData(val);
-    }))}
+    if (forGroup !== undefined) {
+      dispatch(getGroupTestForInventory(val => {
+        setgroupData(val);
+      }))
+    }
+    if (forCon !== undefined) {
+      dispatch(consumptionGroupApi(val => {
+        setgroupData(val);
+      }))
+    }
   }, [])
- 
+
 
 
   useEffect(() => {
@@ -63,28 +64,30 @@ const GroupAddItemVsRatioVsConsumtion = (props) => {
       setitemList(val)
     }))
 
-    dispatch(getTestListApi((val) => {
-      settestList(val)
-    }))
+    //   if (forGroup !== undefined) {
+    //   dispatch(getTestListApi((val) => {
+    //     settestList(val)
+    //   }))
+    // }
   }
 
   const onFinish = (values) => {
     setButDis(true)
     let data = {
       "RId": forEdit ? RId : 0,
-      "ItemId": values?.ItemId, 
+      "ItemId": values?.ItemId,
       "TestId": values?.TestId,
       "ItemPerUnitTest": values?.ItemPerUnitTest,
       "IsActive": values?.IsActive === undefined || values?.IsActive === true ? true : false,
       "CreatedDate": values?.CreatedDate.format('YYYY-MM-DD'),
       "CreatedBy": tokenString.UId,
       "IsGroup": forGroup ? true : false,
-      "IsConsumptionGroup": forCon ? true : false, 
+      "IsConsumptionGroup": forCon ? true : false,
     }
     dispatch(insertItemVsRatioApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
-        
+
         setTimeout(() => {
           history.push('/itemvsratio')
         }, 1000);
@@ -122,45 +125,8 @@ const GroupAddItemVsRatioVsConsumtion = (props) => {
             onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
-
-            {/* <Form.Item
-              label="Test Name"
-              name="TestId"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please select test!',
-                },
-              ]}
-            >
-              <Select
-                showSearch
-                optionFilterProp="children"
-                placeholder="select a test"
-                filterOption={(input, option) => {
-                  return (
-                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
-                    option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                  );
-                }}
-                allowClear>
-                {testList?.map(iTy => {
-                  return (
-                    <Option
-                      title={iTy?.Testname}
-                      key={iTy?.Id}
-                      value={iTy?.Id}>
-                      {iTy?.Testname}
-                    </Option>
-                  )
-                })
-                }
-              </Select>
-            </Form.Item> */}
-            {/* {
-              forGroup &&  */}
-              <Form.Item
-              label= {forGroup ? 'Group Name' : 'Consumption Name'}
+            <Form.Item
+              label={forGroup ? 'Group Name' : 'Consumption Name'}
               name='TestId'
               rules={[
                 {
@@ -173,28 +139,28 @@ const GroupAddItemVsRatioVsConsumtion = (props) => {
                 showSearch
                 optionFilterProp='children'
                 placeholder='slect group'
-                filterOption= {(input, option) => {
-                  return(
+                filterOption={(input, option) => {
+                  return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
-                    option.title.toLoweerCase().indexOf(input.toLowerCase()) >= 0
+                    option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
                   );
                 }}
                 allowClear>
                 {groupData?.map(ele => (
-                  <Option 
+                  <Option
                     title={forGroup ? ele.TestName : ele.ConsumptionGroupName}
                     key={forGroup ? ele?.Id : ele.CGId}
                     value={forGroup ? ele?.Id : ele.CGId}
-                 
+
                   >
-                  {forGroup ? ele.TestName : ele.ConsumptionGroupName}
+                    {forGroup ? ele.TestName : ele.ConsumptionGroupName}
                   </Option>
-                ) )}
+                ))}
               </Select>
 
             </Form.Item>
-            
-            
+
+
 
             <Form.Item
               label="Item Name"
@@ -271,9 +237,9 @@ const GroupAddItemVsRatioVsConsumtion = (props) => {
               <Switch defaultChecked />
             </Form.Item>
 
-            <Form.Item 
-              label={forGroup ? 'isGroup' : 'isConsumeable'}
-              name={forGroup ? 'isGroup' : 'isConsumeable'}
+            <Form.Item
+              label={forGroup ? 'Is Group' : 'Is Consumption Group'}
+              name={forGroup ? 'Is Group' : 'Is Consumption Group'}
               valuePropName='checked'
             >
               <Switch disabled={true} defaultChecked></Switch>
