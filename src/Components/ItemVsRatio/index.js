@@ -68,10 +68,13 @@ const Index = () => {
         buttonOnClick={() => history.push('./itemvsratio/add')}
       ></PageHeader>
       <div className="top"></div>
-      <Table
-        columns={columns}
-        dataSource={tableData}
-      />
+      <div className="tableisRes">
+        <Table
+          columns={columns}
+          dataSource={tableData}
+        />
+      </div>
+      
     </ItemContainer>
   )
 }

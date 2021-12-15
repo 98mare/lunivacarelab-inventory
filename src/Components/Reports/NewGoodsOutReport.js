@@ -171,17 +171,20 @@ const NewGoodsOutReport = () => {
 
         pageTitle='Goods Out Report'
         csvLinkTitle='Export csv'
-        goodsOut = {goodsList}
+        csvData={goodsList}
+        csvDataName='goodsOutReport.csv'
       />
       <Filter
         dateRange
         dateRet={dataRet}
         itemName
       />
-      <Table className='tableWidth'
-        columns={columns}
-        dataSource={goodsList}
-      />
+      <div className="tableisRes">
+        <Table className='tableWidth'
+          columns={columns}
+          dataSource={goodsList}
+        />
+      </div>
       {goodsOutName.length !== 0 ?
         <ReportChart
           options={options}

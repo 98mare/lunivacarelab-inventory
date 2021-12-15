@@ -76,11 +76,18 @@ const Index = () => {
 
   return (
     <StocksContainer>
-      <PageHeader pageTitle="Stocks"></PageHeader>
-      <Table
-        columns={tableHead}
-        dataSource={tableData}
-      />
+      <PageHeader 
+        pageTitle="Stocks"
+        csvLinkTitle='Export csv'
+        csvData={tableData}
+        csvDataName='stocks.csv'
+      ></PageHeader>
+      <div className="tableisRes">
+        <Table
+          columns={tableHead}
+          dataSource={tableData}
+        />
+      </div>
     </StocksContainer>
   )
 }

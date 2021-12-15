@@ -63,7 +63,9 @@ const DashbordContainer = styled.div`
     align-items: center;
     gap: 10px;
     background: #fefefe;
-    background-image: linear-gradient(to right top, #e0e0e0, #e8e8e8, #efefef, #f7f7f7, #ffffff);    box-shadow: 0 2px 22px 0 rgba( 31, 38, 135, 0.17 );
+    /* background-image: linear-gradient(to right top, #e0e0e0, #e8e8e8, #efefef, #f7f7f7, #ffffff);     */
+    
+    box-shadow: 0 2px 22px 0 rgba( 31, 38, 135, 0.17 );
     backdrop-filter: blur( 4px );
     -webkit-backdrop-filter: blur( 4px );
     border-radius: 10px;

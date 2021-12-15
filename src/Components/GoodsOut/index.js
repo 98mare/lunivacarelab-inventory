@@ -24,13 +24,13 @@ const Index = () => {
       title: 'Item Name',
       dataIndex: 'ItemName',
       key: 'itemName',
-      responsive: ['sm'],
+      // responsive: ['sm'],
     },
     {
       title: 'Quantity',
       dataIndex: 'Quantity',
       key: 'Quantity',
-      responsive: ['md'],
+      // responsive: ['md'],
     },
     {
       title: 'Goods Out Date',
@@ -39,7 +39,7 @@ const Index = () => {
       render: (text) => {
         return text.split('T')[0]
       },
-      responsive: ['md'],
+      // responsive: ['md'],
     },
     {
       title: 'Is Active',
@@ -54,13 +54,13 @@ const Index = () => {
         }
         return <Tag color={retColor}>{retText}</Tag>
       },
-      responsive: ['sm'],
+      // responsive: ['sm'],
     },
     {
       title: 'Remarks',
       dataIndex: 'Remarks',
       key: 'Remarks',
-      responsive: ['md'],
+      // responsive: ['md'],
     },
     {
       title: 'Action',
@@ -120,7 +120,5 @@ const GoodsOutContainer = styled.div`
   overflow: hidden;
   margin-bottom: 50px;
 
-  .tableisRes {
-    overflow: auto;
-  }
+ 
 `

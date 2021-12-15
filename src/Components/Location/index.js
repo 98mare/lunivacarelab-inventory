@@ -66,10 +66,12 @@ const Index = () => {
     <ItemContainer>
       <PageHeader pageTitle="Location" buttonTitle='Add Location' buttonOnClick={()=> history.push('./location/add')}></PageHeader>
       {/* <Filter ></Filter> */}
-      <Table 
-      columns={columns}
-      dataSource={tableData}
-      />
+      <div className="tableisRes">
+        <Table 
+        columns={columns}
+        dataSource={tableData}
+        />
+      </div>
     </ItemContainer>
   )
 }

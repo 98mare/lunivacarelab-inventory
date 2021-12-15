@@ -129,7 +129,9 @@ const Index = () => {
     <ItemContainer>
       <PageHeader pageTitle="Wastage" buttonTitle='Add Wastage' buttonOnClick={() => history.push('./wastage/add')}></PageHeader>
       <Filter dateRange dateRet={dateRet}></Filter>
-      <Table columns={columns} dataSource={tableData}></Table>
+      <div className="tableisRes">
+        <Table columns={columns} dataSource={tableData}></Table>
+      </div>
       {label.length !== 0 ? <ReportChart dataDo={dataDo} dataBar={dataBar}></ReportChart>: ''}
       
     </ItemContainer>

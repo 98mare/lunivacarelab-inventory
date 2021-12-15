@@ -81,7 +81,7 @@ const Index = () => {
         dateRange
         dateRet={dataRet}
       ></Filter>
-      <div className="scrollTable">
+      <div className="tableisRes">
         <Table className='tableWidth'
           columns={columns}
           dataSource={goodsList}

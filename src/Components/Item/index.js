@@ -88,10 +88,13 @@ const Index = () => {
         dataRet={dataRet}
       />
       <div className="top"></div>
+      <div className="tableisRes">
       <Table className='margin-bottom-table'
         columns={columns}
         dataSource={tableData}
       />
+      </div>
+     
     </ItemContainer>
   )
 }

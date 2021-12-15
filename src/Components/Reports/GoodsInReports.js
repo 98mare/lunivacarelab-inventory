@@ -145,17 +145,20 @@ const Index = () => {
 
         pageTitle='Goods In Report'
         csvLinkTitle='Export csv'
-        goodsIn
+        csvToImport= {goodsList}
+        csvDataName={'goodsIn csv'}
       />
       <Filter
         dateRange
         dateRet={dataRet}
         itemName
       />
-      <Table className='tableWidth'
-        columns={columns}
-        dataSource={goodsList}
-      />
+      <div className="tableisRes">
+        <Table className='tableWidth'
+          columns={columns}
+          dataSource={goodsList}
+        />
+      </div>
       {goodsLabel.length !== 0 ?
         <ReportChart
           options={options}
