@@ -8,9 +8,11 @@ import { getGroupTestForInventory, getItemVsRatioApi, getTestListApi, insertItem
 import moment from 'moment';
 import { tokenString } from '../Common/HandleUser';
 import { formItemLayout } from '../Common/FormItemLayout';
+import { consumptionGroupApi } from '../../services/consumptionService';
 
-const GroupAddItemVsRatio = (props) => {
-  const { forEdit } = props;
+const GroupAddItemVsRatioVsConsumtion = (props) => {
+  const { forEdit,forGroup, forCon } = props;
+  console.log(props);
   const [form] = Form.useForm()
   const history = useHistory();
   const { Option } = Select;
@@ -30,13 +32,16 @@ const GroupAddItemVsRatio = (props) => {
       dispatch(getItemVsRatioApi((val) => { }, RId))
     }
     getAllLabItem()
-    
+    if(forGroup !== undefined){
     dispatch(getGroupTestForInventory(val => {
       setgroupData(val);
-      console.log(val);
-    }))
+    }))}
+    if(forCon !== undefined){
+    dispatch(consumptionGroupApi(val => {
+      setgroupData(val);
+    }))}
   }, [])
-  console.log("Group data",groupData);
+ 
 
 
   useEffect(() => {
@@ -67,13 +72,14 @@ const GroupAddItemVsRatio = (props) => {
     setButDis(true)
     let data = {
       "RId": forEdit ? RId : 0,
-      "ItemId": values?.ItemId,
+      "ItemId": values?.ItemId, 
       "TestId": values?.TestId,
       "ItemPerUnitTest": values?.ItemPerUnitTest,
       "IsActive": values?.IsActive === undefined || values?.IsActive === true ? true : false,
       "CreatedDate": values?.CreatedDate.format('YYYY-MM-DD'),
       "CreatedBy": tokenString.UId,
-      "IsGroup": true,
+      "IsGroup": forGroup ? true : false,
+      "IsConsumptionGroup": forCon ? true : false, 
     }
     dispatch(insertItemVsRatioApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
@@ -104,7 +110,7 @@ const GroupAddItemVsRatio = (props) => {
   }
 
   return (
-    <GroupAddItemVsRatioContainer>
+    <GroupAddItemVsRatioVsConsumtionContainer>
       <Row justify='center'>
         <Col span={16}>
           <Form
@@ -151,9 +157,10 @@ const GroupAddItemVsRatio = (props) => {
                 }
               </Select>
             </Form.Item> */}
-
-            <Form.Item
-              label="Group Name"
+            {/* {
+              forGroup &&  */}
+              <Form.Item
+              label= {forGroup ? 'Group Name' : 'Consumption Name'}
               name='TestId'
               rules={[
                 {
@@ -175,16 +182,19 @@ const GroupAddItemVsRatio = (props) => {
                 allowClear>
                 {groupData?.map(ele => (
                   <Option 
-                    title={ele.TestName}
-                    key={ele?.Id}
-                    value={ele?.Id} 
+                    title={forGroup ? ele.TestName : ele.ConsumptionGroupName}
+                    key={forGroup ? ele?.Id : ele.CGId}
+                    value={forGroup ? ele?.Id : ele.CGId}
+                 
                   >
-                  {ele.TestName}
+                  {forGroup ? ele.TestName : ele.ConsumptionGroupName}
                   </Option>
                 ) )}
               </Select>
 
             </Form.Item>
+            
+            
 
             <Form.Item
               label="Item Name"
@@ -262,8 +272,8 @@ const GroupAddItemVsRatio = (props) => {
             </Form.Item>
 
             <Form.Item 
-              label="Is Group"
-              name="isGroup"
+              label={forGroup ? 'isGroup' : 'isConsumeable'}
+              name={forGroup ? 'isGroup' : 'isConsumeable'}
               valuePropName='checked'
             >
               <Switch disabled={true} defaultChecked></Switch>
@@ -283,13 +293,13 @@ const GroupAddItemVsRatio = (props) => {
         </Col>
 
       </Row>
-    </GroupAddItemVsRatioContainer>
+    </GroupAddItemVsRatioVsConsumtionContainer>
   );
 };
 
-export default GroupAddItemVsRatio;
+export default GroupAddItemVsRatioVsConsumtion;
 
-const GroupAddItemVsRatioContainer = styled.div`
+const GroupAddItemVsRatioVsConsumtionContainer = styled.div`
   background-color: #fefefe;
   padding-top: 30px;
   margin-bottom: 50px;

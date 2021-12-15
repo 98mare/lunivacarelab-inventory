@@ -65,7 +65,8 @@ const AddItemVsRatio = (props) => {
       "IsActive": values?.IsActive === undefined || values?.IsActive === true ? true : false,
       "CreatedDate": values?.CreatedDate.format('YYYY-MM-DD'),
       "CreatedBy": tokenString.UId,
-      "IsGroup": false
+      "IsGroup": false,
+      "IsConsumptionGroup":false, 
     }
     dispatch(insertItemVsRatioApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
