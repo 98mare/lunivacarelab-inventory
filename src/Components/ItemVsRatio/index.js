@@ -66,6 +66,10 @@ const Index = () => {
         buttonTitle='Add Item Vs Ratio'
         pageTitle='Item Vs Ratio'
         buttonOnClick={() => history.push('./itemvsratio/add')}
+
+        priamryOutlineBtn="Add Group Item Vs Ratio"
+        buttonClick={()=> history.push('./itemvsratio/addgroup')}
+
       ></PageHeader>
       <div className="top"></div>
       <div className="tableisRes">

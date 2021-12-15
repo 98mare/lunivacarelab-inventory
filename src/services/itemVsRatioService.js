@@ -1,4 +1,4 @@
-import { InsertUpdateItemVsTestRatio, GetListOfItemVsTestRatio, GetListOfTestForInventory } from '../constants/url';
+import { InsertUpdateItemVsTestRatio, GetListOfItemVsTestRatio, GetListOfTestForInventory, GetListOfGroupTestForInventory } from '../constants/url';
 import { fetch, store } from '../utils/httpUtil';
 import { generateUrlEncodedData } from '../utils/generateFormData';
 import { getAllItemRatioSuccess } from '../store/slices/itemRatioSlice';
@@ -47,5 +47,18 @@ export const getTestListApi = (successCallback) => {
             
         }
 
+    }
+}
+export const getGroupTestForInventory = (successCallback) => {
+    return async dispatch => {
+        try {
+            const response = await fetch(`${GetListOfGroupTestForInventory}`);
+            if(response?.status === 200)
+                successCallback(response?.data?.GetListOfGroupTest); // key milnu paro
+            else
+                successCallback([])
+        }catch(error){
+
+        }
     }
 }

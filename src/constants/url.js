@@ -53,6 +53,7 @@ export const GetlistOfwastageDetailsByDate = 'GetlistOfwastageDetailsByDate';
  * @param: ?id={id}
  */
 export const GetListOfItemVsTestRatio = 'GetListOfItemVsTestRatio';
+export const GetListOfGroupTestForInventory = 'GetListOfGroupTestForInventory'
 /**
  * @desc: get list of goods out record by date
  * @param: ?fromdate={fromdate}&todate={todate}
