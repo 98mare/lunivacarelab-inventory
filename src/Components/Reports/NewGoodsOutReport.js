@@ -173,6 +173,7 @@ const NewGoodsOutReport = () => {
         csvLinkTitle='Export csv'
         csvData={goodsList}
         csvDataName='goodsOutReport.csv'
+        
       />
       <Filter
         dateRange

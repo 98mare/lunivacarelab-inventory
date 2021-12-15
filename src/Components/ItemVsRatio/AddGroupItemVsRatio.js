@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { getLabItemsApi } from '../../services/itemNewItemService';
-import { getItemVsRatioApi, getTestListApi, insertItemVsRatioApi } from '../../services/itemVsRatioService';
+import { getGroupTestForInventory, getItemVsRatioApi, getTestListApi, insertItemVsRatioApi } from '../../services/itemVsRatioService';
 import moment from 'moment';
 import { tokenString } from '../Common/HandleUser';
 import { formItemLayout } from '../Common/FormItemLayout';
 
-const AddItemVsRatio = (props) => {
+const GroupAddItemVsRatio = (props) => {
   const { forEdit } = props;
   const [form] = Form.useForm()
   const history = useHistory();
@@ -17,7 +17,8 @@ const AddItemVsRatio = (props) => {
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
   const [itemList, setitemList] = useState([])
-  const [testList, settestList] = useState([])
+  const [testList, settestList] = useState([]);
+  const [groupData, setgroupData] = useState([]);
   const RId = props?.match?.params?.id;
   const itemRatioReducer = useSelector(state => state.itemRatio);
   const [previousValues, setPreviousValues] = useState(forEdit ? itemRatioReducer?.itemRatios[RId] : {});
@@ -29,7 +30,14 @@ const AddItemVsRatio = (props) => {
       dispatch(getItemVsRatioApi((val) => { }, RId))
     }
     getAllLabItem()
+    
+    dispatch(getGroupTestForInventory(val => {
+      setgroupData(val);
+      console.log(val);
+    }))
   }, [])
+  console.log("Group data",groupData);
+
 
   useEffect(() => {
     setPreviousValues(itemRatioReducer?.itemRatios[RId]);
@@ -65,7 +73,7 @@ const AddItemVsRatio = (props) => {
       "IsActive": values?.IsActive === undefined || values?.IsActive === true ? true : false,
       "CreatedDate": values?.CreatedDate.format('YYYY-MM-DD'),
       "CreatedBy": tokenString.UId,
-      "IsGroup": false
+      "IsGroup": true,
     }
     dispatch(insertItemVsRatioApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
@@ -96,7 +104,7 @@ const AddItemVsRatio = (props) => {
   }
 
   return (
-    <AddItemVsRatioContainer>
+    <GroupAddItemVsRatioContainer>
       <Row justify='center'>
         <Col span={16}>
           <Form
@@ -109,7 +117,7 @@ const AddItemVsRatio = (props) => {
             autoComplete="off"
           >
 
-            <Form.Item
+            {/* <Form.Item
               label="Test Name"
               name="TestId"
               rules={[
@@ -142,6 +150,40 @@ const AddItemVsRatio = (props) => {
                 })
                 }
               </Select>
+            </Form.Item> */}
+
+            <Form.Item
+              label="Group Name"
+              name='TestId'
+              rules={[
+                {
+                  required: true,
+                  message: 'Please selset Group!',
+                },
+              ]}
+            >
+              <Select
+                showSearch
+                optionFilterProp='children'
+                placeholder='slect group'
+                filterOption= {(input, option) => {
+                  return(
+                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                    option.title.toLoweerCase().indexOf(input.toLowerCase()) >= 0
+                  );
+                }}
+                allowClear>
+                {groupData?.map(ele => (
+                  <Option 
+                    title={ele.TestName}
+                    key={ele?.Id}
+                    value={ele?.Id} 
+                  >
+                  {ele.TestName}
+                  </Option>
+                ) )}
+              </Select>
+
             </Form.Item>
 
             <Form.Item
@@ -219,6 +261,14 @@ const AddItemVsRatio = (props) => {
               <Switch defaultChecked />
             </Form.Item>
 
+            <Form.Item 
+              label="Is Group"
+              name="isGroup"
+              valuePropName='checked'
+            >
+              <Switch disabled={true} defaultChecked></Switch>
+            </Form.Item>
+
             <Form.Item
               wrapperCol={{
                 offset: 8,
@@ -233,13 +283,13 @@ const AddItemVsRatio = (props) => {
         </Col>
 
       </Row>
-    </AddItemVsRatioContainer>
+    </GroupAddItemVsRatioContainer>
   );
 };
 
-export default AddItemVsRatio;
+export default GroupAddItemVsRatio;
 
-const AddItemVsRatioContainer = styled.div`
+const GroupAddItemVsRatioContainer = styled.div`
   background-color: #fefefe;
   padding-top: 30px;
   margin-bottom: 50px;
