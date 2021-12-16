@@ -12,7 +12,8 @@ import Cancle from '../Common/Cancle';
 const Index = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const [goodsList, setgoodsList] = useState([])
+  const [goodsList, setgoodsList] = useState([]);
+  const [ newGoodsList,setnewGoodsList] = useState([]);
 
   const columns = [
     {
@@ -76,6 +77,7 @@ const Index = () => {
   const getLabData = (data) => {
     dispatch(getGoodsOutApi(data, (val) => {
       setgoodsList(val)
+      setnewGoodsList(val)
     }))
   }
 
@@ -87,6 +89,14 @@ const Index = () => {
     getLabData(data)
   }
 
+  const handleSearch = (val) => {
+    if(val === undefined || val === ''){
+      setnewGoodsList(goodsList)
+    }else{
+      setnewGoodsList(val) 
+    }
+  }
+
   return (
     <GoodsOutContainer>
       <PageHeader
@@ -95,13 +105,18 @@ const Index = () => {
         buttonOnClick={() => history.push('./goodsout/add')}
       ></PageHeader>
       <Filter
+        dataReturn={handleSearch}
         dateRange
         dateRet={dataRet}
-      />
+        toCompareData={goodsList}
+        serchButton
+        onSearch
+        forGoodsOut
+      ></Filter>
       <div className="tableisRes">
       <Table
         columns={columns}
-        dataSource={goodsList}
+        dataSource={newGoodsList}
       />
       </div>
     </GoodsOutContainer>

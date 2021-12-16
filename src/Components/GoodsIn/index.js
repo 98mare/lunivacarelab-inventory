@@ -9,10 +9,12 @@ import PageHeader from '../Common/pageHeader'
 // import Edit from '../Common/Edit';
 import Cancle from '../Common/Cancle';
 
+
 const Index = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [goodsList, setgoodsList] = useState([])
+  const [newGoodsList, setnewGoodsList ] = useState([]);
 
   const columns = [
     {
@@ -59,6 +61,7 @@ const Index = () => {
   const getLabData = (data) => {
     dispatch(getGoodsReceivedApi(data, (val) => {
       setgoodsList(val)
+      setnewGoodsList(val)
     }))
   }
 
@@ -70,6 +73,16 @@ const Index = () => {
     getLabData(data)
   }
 
+  const handleSearch = (val) => { 
+    if(val === undefined || val === ''){
+      setnewGoodsList(goodsList)
+    }else{
+      setnewGoodsList(val) 
+    }
+  }
+
+
+
   return (
     <GoodsInContainer>
       <PageHeader
@@ -78,14 +91,20 @@ const Index = () => {
         buttonOnClick={() => history.push('./goodsin/add')}
       ></PageHeader>
       <Filter
+        dataReturn={handleSearch}
         dateRange
         dateRet={dataRet}
+        toCompareData={goodsList}
+        serchButton
+        onSearch
+        forGoodsIn
       ></Filter>
       <div className="tableisRes">
         <Table className='tableWidth'
           columns={columns}
-          dataSource={goodsList}
+          dataSource={newGoodsList}
         />
+        
       </div>
       
     </GoodsInContainer>

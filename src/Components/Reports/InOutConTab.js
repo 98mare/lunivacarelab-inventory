@@ -179,6 +179,7 @@ const InOutConTab = () => {
             <Filter
             dateRange
             dateRet={dataRet}
+            serchButton
             />
             <Bar options={options} data={dataBar} />
             <div className="tableisRes">

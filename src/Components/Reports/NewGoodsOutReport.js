@@ -61,12 +61,14 @@ const NewGoodsOutReport = () => {
   const [goodsList, setgoodsList] = useState([]);
   const [goodsOutName, setGoodsOutName]= useState([]);
   const [goodLister, setgoodLister] = useState([])
+  const [newGoodsList, setnewGoodsList] = useState([]);
 
   const graphData = (data) => {
     dispatch(getGoodsOutCountApi(data, (val) => {
      
       let PushedGoodsName = []
       setgoodsList(val)
+      setnewGoodsList(val);
       val.forEach(ele => {
         PushedGoodsName.push(ele?.ItemName)
       })
@@ -164,6 +166,13 @@ const NewGoodsOutReport = () => {
       ]
     }
   };
+  const handleSearch = (val) => {
+    if(val === undefined || val === ''){
+      setnewGoodsList(goodsList)
+    }else{
+      setnewGoodsList(val) 
+    }
+  }
 
   return (
     <NewGoodsOutContainer>
@@ -179,11 +188,16 @@ const NewGoodsOutReport = () => {
         dateRange
         dateRet={dataRet}
         itemName
+        onSearch
+        toCompareData={goodsList}
+        forGoodsIn
+        dataReturn={handleSearch}
+        serchButton
       />
       <div className="tableisRes">
         <Table className='tableWidth'
           columns={columns}
-          dataSource={goodsList}
+          dataSource={newGoodsList}
         />
       </div>
       {goodsOutName.length !== 0 ?

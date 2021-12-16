@@ -11,8 +11,8 @@ import moment from 'moment';
 import { getLabItemsApi } from '../../services/itemNewItemService'
 import FilterTable from './FilterTable'
 
-const Filter = (props) => {
-  const { itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate } = props
+const Filter = ({dataReturn, ...props}) => {
+  const { serchButton, itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate ,toCompareData, forGoodsIn, forGoodsOut, onSearch, forConsumptionReport} = props
   const dispatch = useDispatch();
 
   const { Option } = Select;
@@ -75,10 +75,52 @@ const Filter = (props) => {
       dispatch(
         getLabItemsApi(data, (val) => {
           setitemNameLister(val)
+
         })
       )
     }
   }, [])
+
+  const handleSerch= searchText => {
+    searchText = searchText.toLowerCase();
+    const pushedArr= [];
+    console.log(toCompareData)
+    toCompareData.map(e => {
+      if(forGoodsIn){
+        return (
+          e.ItemName.toLowerCase().includes(searchText) 
+          // || e.Testname.toLowerCase().includes(searchText) 
+          ? 
+        pushedArr.push(e)
+      : '' 
+        )
+      }
+      if(forGoodsOut){
+        return (
+          e.ItemName.toLowerCase().includes(searchText) 
+          || e.Testname.toLowerCase().includes(searchText) 
+          ? 
+        pushedArr.push(e)
+      : '' 
+        )
+      }
+      if(forConsumptionReport){
+        return (
+          // e.ItemName.toLowerCase().includes(searchText) || 
+          e.Test.toLowerCase().includes(searchText) 
+          ? 
+        pushedArr.push(e)
+      : '' 
+        )
+      }
+     
+      
+  }) 
+
+    dataReturn(pushedArr)
+  }
+
+ 
 
   return (
     <FilterContainer>
@@ -171,9 +213,18 @@ const Filter = (props) => {
             </Select>
           </Col>
         }
-        <AppButton className='primary-btn' buttonTitle="Search" buttonOnClick={() => { handleClicker() }} priamryOutlineBtn></AppButton>
-
-        <FilterTable></FilterTable>
+        {
+          serchButton &&
+          <AppButton className='primary-btn' buttonTitle="Search" buttonOnClick={() => { handleClicker() }} priamryOutlineBtn></AppButton>
+        }
+        
+        {
+          onSearch &&
+          <FilterTable
+          onInput = {e => handleSerch(e.target.value)} dataReturn
+        ></FilterTable>
+        }
+        
 
       </Row>
     </FilterContainer>

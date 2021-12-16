@@ -17,10 +17,12 @@ const ConsumableReport = () => {
     const [tableHead, setTableHead] = useState([]);
     const [labelName, setLabelName] = useState([]);
     const [fullData, setfullData] = useState([]);
+    const [newTableData, setnewTableData] = useState([]);
 
     const getAcutalCon = (data) => {
         dispatch(getActualConsumApi(data, (val) => {
-            setTableData(val)
+            setTableData(val);
+            setnewTableData(val);
         }))
     }
 
@@ -94,6 +96,15 @@ const ConsumableReport = () => {
         ],
     };
 
+    const handleSearch = (val) => {
+        if(val === undefined || val === ''){
+            setnewTableData(tableData)
+        }else{
+            setnewTableData(val) 
+        }
+      }
+    
+
     return (
         <ConsumeContainer>
             <PageHeader
@@ -105,11 +116,16 @@ const ConsumableReport = () => {
             <Filter
                 dateRange
                 dateRet={dataRet}
+                toCompareData={tableData}
+                onSearch
+                serchButton
+                dataReturn={handleSearch}
+                forConsumptionReport
             />
             <div className="tableisRes">
                 <Table
                     columns={tableHead}
-                    dataSource={tableData}
+                    dataSource={newTableData}
                 />
             </div>
             {

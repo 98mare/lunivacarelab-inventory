@@ -62,12 +62,14 @@ const NewGoodsInReport = () => {
   const dispatch = useDispatch();
   const [goodsList, setgoodsList] = useState([]);
   const [goodsInName, setGoodsInName] = useState([]);
-  const [goodLister, setgoodLister] = useState([])
+  const [goodLister, setgoodLister] = useState([]);
+  const [newGoodsList, setnewGoodsList] = useState([]);
 
   const graphData = (data) => {
     dispatch(getGoodsInCountApi(data, (val) => {
       let PushedGoodsName = []
       setgoodsList(val)
+      setnewGoodsList(val);
       val.forEach(ele => {
         PushedGoodsName.push(ele?.ItemName)
       })
@@ -172,24 +174,37 @@ const NewGoodsInReport = () => {
     ],
   };
 
+  const handleSearch = (val) => {
+    if(val === undefined || val === ''){
+      setnewGoodsList(goodsList)
+    }else{
+      setnewGoodsList(val) 
+    }
+  }
+
   return (
     <NewGoodsInContainer>
       <PageHeader
 
         pageTitle='Goods In Report'
         csvLinkTitle='Export csv'
-        csvData={goodsList}
+        csvData={newGoodsList}
         csvDataName='goodsInReport.csv'
       />
       <Filter
         dateRange
         dateRet={dataRet}
         itemName
+        onSearch
+        toCompareData={goodsList}
+        forGoodsIn
+        dataReturn={handleSearch}
+        serchButton
       />
       <div className="tableisRes">
         <Table className='tableWidth'
           columns={columns}
-          dataSource={goodsList}
+          dataSource={newGoodsList}
         />
       </div>
       {goodsInName.length !== 0 ?

@@ -2,7 +2,6 @@ import React from 'react'
 import { Input, Row, col } from 'antd'
 
 const Search = Input.Search;
-
 const FilterTable = ({onSearch, ...props}) => {
   return (
     <div className='filter' {...props} style={{float: 'right'}}>

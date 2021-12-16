@@ -7,12 +7,14 @@ import { useDispatch } from 'react-redux';
 // import { getRackDetApi } from '../../services/itemRackService'
 // import Filter from '../Common/Filter'
 import { getStockApi } from '../../services/stockService'
+import Filter from '../Common/Filter';
 
 const Index = () => {
   const dispatch = useDispatch();
   // const history = useHistory();
 
   const [tableData, setTableData] = useState([]);
+  const [newTableData, setnewTableData] = useState([]);
   const [tableHead, settableHead] = useState([]);
 
   // const columns = [
@@ -56,6 +58,7 @@ const Index = () => {
   const locateRange = () => {
     dispatch(getStockApi(0, (value) => {
       setTableData(value)
+      setnewTableData(value);
     }))
   }
   
@@ -73,6 +76,13 @@ const Index = () => {
       settableHead(data);
     }
   }
+  const handleSearch = (val) => {
+    if(val === undefined || val === ''){
+      setnewTableData(tableData)
+    }else{
+      setnewTableData(val);
+    }
+  }
 
   return (
     <StocksContainer>
@@ -82,10 +92,16 @@ const Index = () => {
         csvData={tableData}
         csvDataName='stocks.csv'
       ></PageHeader>
+      <Filter
+        onSearch
+        toCompareData={tableData}
+        forGoodsIn
+        dataReturn={handleSearch}
+      ></Filter>
       <div className="tableisRes">
         <Table
           columns={tableHead}
-          dataSource={tableData}
+          dataSource={newTableData}
         />
       </div>
     </StocksContainer>

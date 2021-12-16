@@ -17,6 +17,7 @@ const Index = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [tableData, setTableData] = useState([]);
+  const [newTableData, setnewTableData] = useState([]);
   const [label,  setLabel]  = useState([]);
   const [wastage, setWastage] = useState([]);
 
@@ -74,6 +75,7 @@ const Index = () => {
   const getWastage = (data) => {
     dispatch(getWastageApi(data, (val) => {
       setTableData(val)
+      setnewTableData(val)
       let pushedArr = []
       let pushedWastage =[]
       val.forEach(ele => {
@@ -122,15 +124,32 @@ const Index = () => {
       },
     ],
   };
+  const handleSearch = (val) => {
+    console.log(val);
+    if(val === undefined || val === ''){
+      setnewTableData(setTableData)
+    }else{
+      setnewTableData(val) 
+    }
+  }
 
 
 
   return (
     <ItemContainer>
       <PageHeader pageTitle="Wastage" buttonTitle='Add Wastage' buttonOnClick={() => history.push('./wastage/add')}></PageHeader>
-      <Filter dateRange dateRet={dateRet}></Filter>
+      <Filter 
+        dateRange 
+        dateRet={dateRet}
+        dataReturn={handleSearch}
+        toCompareData={tableData}
+        serchButton
+        onSearch
+        forGoodsIn
+        >  
+      </Filter>
       <div className="tableisRes">
-        <Table columns={columns} dataSource={tableData}></Table>
+        <Table columns={columns} dataSource={newTableData}></Table>
       </div>
       {label.length !== 0 ? <ReportChart dataDo={dataDo} dataBar={dataBar}></ReportChart>: ''}
       
