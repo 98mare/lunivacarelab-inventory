@@ -7,7 +7,7 @@ const FilterTable = ({onSearch, ...props}) => {
     <div className='filter' {...props} style={{float: 'right'}}>
       <Input
         placeholder='search'
-        onSearch={onSearch}
+        onSearch={Search}
         style={{width: 200}}
       ></Input>
     </div>

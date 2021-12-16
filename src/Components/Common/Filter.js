@@ -12,7 +12,7 @@ import { getLabItemsApi } from '../../services/itemNewItemService'
 import FilterTable from './FilterTable'
 
 const Filter = ({dataReturn, ...props}) => {
-  const { serchButton, itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate ,toCompareData, forGoodsIn, forGoodsOut, onSearch, forConsumptionReport} = props
+  const { serchButton, itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate ,toCompareData, forGoodsIn, forGoodsOut, onSearch, forConsumptionReport, forItem, forItemVsRatio} = props
   const dispatch = useDispatch();
 
   const { Option } = Select;
@@ -108,6 +108,24 @@ const Filter = ({dataReturn, ...props}) => {
         return (
           // e.ItemName.toLowerCase().includes(searchText) || 
           e.Test.toLowerCase().includes(searchText) 
+          ? 
+        pushedArr.push(e)
+      : '' 
+        )
+      }
+      if(forItem){
+        return(
+          e.ItemName.toLowerCase().includes(searchText)
+          || e.Location.toLowerCase().includes(searchText) 
+          ||e.ItemCode.toLowerCase().includes(searchText) 
+          ? pushedArr.push(e) : ''
+        )
+      
+      }
+      if(forItemVsRatio){
+        return (
+          e.ItemName.toLowerCase().includes(searchText) 
+          || e.TestName.toLowerCase().includes(searchText) 
           ? 
         pushedArr.push(e)
       : '' 

@@ -46,6 +46,7 @@ const LocationStockReport = () => {
             <Filter
                 locateRange={locateRange}
                 notAllLocate
+                serchButton
             />
             <div className="tableisRes">
                 <Table

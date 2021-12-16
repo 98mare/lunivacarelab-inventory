@@ -7,15 +7,18 @@ import { useDispatch } from 'react-redux';
 import PageHeader from '../Common/pageHeader'
 import { getItemVsRatioApi } from '../../services/itemVsRatioService';
 import Edit from '../Common/Edit';
+import Filter from '../Common/Filter';
 
 const Index = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [tableData, setTableData] = useState([]);
+  const [newTableData,setnewTableData] = useState([]);
 
   useEffect(() => {
     dispatch(getItemVsRatioApi((val) => {
       setTableData(val)
+      setnewTableData(val)
     }))
   }, [])
 
@@ -96,6 +99,14 @@ const Index = () => {
     }
   ]
 
+  const handleSearch = (val) => {
+    if(val === undefined || val === ''){
+      setnewTableData(tableData)
+    }else{
+      setnewTableData(val) 
+    }
+  }
+
   return (
     <ItemContainer>
       <PageHeader
@@ -111,10 +122,17 @@ const Index = () => {
 
       ></PageHeader>
       <div className="top"></div>
+      <Filter
+        onSearch
+        toCompareData={tableData}
+        forGoodsIn
+        dataReturn={handleSearch}
+        forItemVsRatio
+      ></Filter>
       <div className="tableisRes">
         <Table
           columns={columns}
-          dataSource={tableData}
+          dataSource={newTableData}
         />
       </div>
 

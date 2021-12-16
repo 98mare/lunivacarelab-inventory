@@ -13,6 +13,7 @@ const Index = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [tableData, setTableData] = useState([]);
+  const [newTableData, setnewTableData] = useState([]);
   const [typId, setTypId] = useState(0)
   const [catId, setCatId] = useState(0)
 
@@ -62,6 +63,7 @@ const Index = () => {
     }
     dispatch(getLabItemsApi(data, (val) => {
       setTableData(val)
+      setnewTableData(val)
     }))
   }
 
@@ -75,6 +77,14 @@ const Index = () => {
     setCatId(val?.cType)
   }
 
+  const henadleSearch = (val) => {
+    if(val === undefined || val=== ''){
+      setnewTableData(tableData)
+    }else{
+      setnewTableData(val)
+    }
+  }
+
   return (
     <ItemContainer>
       <PageHeader
@@ -86,12 +96,17 @@ const Index = () => {
         itemType
         categroryType
         dataRet={dataRet}
+        serchButton
+        onSearch
+        toCompareData={tableData}
+        forItem
+        dataReturn={henadleSearch}
       />
       <div className="top"></div>
       <div className="tableisRes">
       <Table className='margin-bottom-table'
         columns={columns}
-        dataSource={tableData}
+        dataSource={newTableData}
       />
       </div>
      
