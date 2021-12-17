@@ -30,11 +30,14 @@ const AppButtonContainer = styled.div`
     background-color: #1890ff;
     color: #fefefe;
     border-radius: 30px!important;
-    padding:  20px 40px;
+    width: auto;
+    min-height: 36PX;
     display: flex;
     align-items: center;
-    font-size: 18px;
-    letter-spacing: 1.1px;
+    font-size: 16px;
+    padding: 0 10px;
+    letter-spacing: 1px;
+    justify-content: center;
     font-weight: 400;
     border: 2px solid #1890ff;
     &:hover{
@@ -47,11 +50,12 @@ const AppButtonContainer = styled.div`
     background-color: transparent;
     color: #e95b29;
     border-radius: 30px!important;
-    padding:  20px 40px;
+    widtautoh
+    min-height: 36PX;
     display: flex;
     align-items: center;
-    font-size: 18px;
-    letter-spacing: 1.1px;
+    font-size: 16px;
+    letter-spacing: 1px;
     font-weight: 400;
     border: 2px solid #e95b29;
     &:hover{

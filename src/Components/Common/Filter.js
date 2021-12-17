@@ -201,105 +201,115 @@ const Filter = ({dataReturn, ...props}) => {
   return (
     <FilterContainer>
 
-      <Row className="filterRow" align='bottom'>
-        {itemType &&
-          <Col md={6} sm={11} xs={24}>
-            <span className='labelTop'>Item Type</span>
-            <Select style={{ width: '100%' }} defaultValue="0" onChange={(val) => { setiType(val) }} size='large' className='inputWidth'>
-              <Option value="0">All</Option>
-              {itemList?.map(iTy => {
-                if (iTy?.IsActive) {
-                  return (
-                    <Option value={iTy?.TId}>
-                      {iTy?.ItemType}
-                    </Option>
-                  )
+      <Row justify='space-between' align='bottom'>
+        <Col lg={20} md={24} sm={24}>
+          <Row className="filterRow" align='bottom'>
+            {itemType &&
+            <Col lg={10} md={12} sm={11} xs={24}>
+              <span className='labelTop'>Item Type</span>
+              <Select style={{ width: '100%' }} defaultValue="0" onChange={(val) => { setiType(val) }}>
+                <Option value="0">All</Option>
+                {itemList?.map(iTy => {
+                  if (iTy?.IsActive) {
+                    return (
+                      <Option value={iTy?.TId}>
+                        {iTy?.ItemType}
+                      </Option>
+                    )
+                  }
+                })
                 }
-              })
-              }
-            </Select>
-          </Col>
-        }
-        {categroryType &&
-          <Col md={6} sm={11} xs={24}>
-            <span className='labelTop'>Category Type</span>
-            <Select style={{ width: '100%' }} defaultValue="0" onChange={(val) => { setCatType(val) }} size='large' className='inputWidth'>
-              <Option value="0">All</Option>
-              {cateList?.map(iTy => {
-                if (iTy?.IsActive) {
-                  return (
-                    <Option value={iTy?.CId}>
-                      {iTy?.CategoryType}
-                    </Option>
-                  )
+              </Select>
+            </Col>
+          }
+          {categroryType &&
+            <Col lg={10} md={12} sm={11} xs={24}>
+              <span className='labelTop'>Category Type</span>
+              <Select style={{ width: '100%' }} defaultValue="0" onChange={(val) => { setCatType(val) }} size='default'>
+                <Option value="0">All</Option>
+                {cateList?.map(iTy => {
+                  if (iTy?.IsActive) {
+                    return (
+                      <Option value={iTy?.CId}>
+                        {iTy?.CategoryType}
+                      </Option>
+                    )
+                  }
+                })
                 }
-              })
-              }
-            </Select>
-          </Col>
-        }
-        {locateRange &&
-          <Col md={6} sm={12} xs={24}>
-            <span className='labelTop'>Location</span>
-            <Select style={{ width: '100%' }} onChange={(val) => { setlocationId(val) }} size='large' className='inputWidth'>
-              {notAllLocate !== undefined ? (
-                <Option value='0'>
-                  All
-                </Option>
-              ) : ''}
-              {locationList?.map(iTy => {
-                if (iTy?.IsActive) {
-                  return (
-                    <Option value={iTy?.LId}>
-                      {iTy?.Location}
-                    </Option>
-                  )
+              </Select>
+            </Col>
+          }
+          {locateRange &&
+            <Col lg={10} md={12} sm={12} xs={24}>
+              <span className='labelTop'>Location</span>
+              <Select style={{ width: '100%' }} onChange={(val) => { setlocationId(val) }} size='default'>
+                {notAllLocate !== undefined ? (
+                  <Option value='0'>
+                    All
+                  </Option>
+                ) : ''}
+                {locationList?.map(iTy => {
+                  if (iTy?.IsActive) {
+                    return (
+                      <Option value={iTy?.LId}>
+                        {iTy?.Location}
+                      </Option>
+                    )
+                  }
+                })
                 }
-              })
-              }
-            </Select>
-          </Col>
-        }
-        {
-          dateRange &&
-          <Col md={6} sm={12} xs={24}>
-            <span className='labelTop'>From - To</span>
-            <Datepicker defaultValuer={fromDate} onChanger={(value) => { setfromDate(value) }}></Datepicker>
-          </Col>
-        }
-        {itemName &&
-          <Col md={6} sm={12} xs={24}>
-            <span className='labelTop'>Item Name</span>
-            <Select style={{ width: '100%' }} onChange={(val) => { setitemNameList(val) }} size='large' className='inputWidth'>
-              {notAll === undefined ? (
-                <Option value='0'>
-                  All
-                </Option>
-              ) : ''}
-              {itemNameLister?.map(iTy => {
-                if (iTy?.IsActive) {
-                  return (
-                    <Option value={iTy?.TId}>
-                      {iTy?.ItemName}
-                    </Option>
-                  )
+              </Select>
+            </Col>
+          }
+          {
+            dateRange &&
+            <Col lg={10} md={12} sm={12} xs={24}>
+              <span className='labelTop'>From - To</span>
+              <Datepicker defaultValuer={fromDate} onChanger={(value) => { setfromDate(value) }} size='default'></Datepicker>
+            </Col>
+          }
+          {itemName &&
+            <Col lg={10} md={12} sm={12} xs={24}>
+              <span className='labelTop'>Item Name</span>
+              <Select style={{ width: '100%' }} onChange={(val) => { setitemNameList(val) }} size='default'>
+                {notAll === undefined ? (
+                  <Option value='0'>
+                    All
+                  </Option>
+                ) : ''}
+                {itemNameLister?.map(iTy => {
+                  if (iTy?.IsActive) {
+                    return (
+                      <Option value={iTy?.TId}>
+                        {iTy?.ItemName}
+                      </Option>
+                    )
+                  }
+                })
                 }
-              })
-              }
-            </Select>
+              </Select>
+            </Col>
+          }
+          <Col>
+            {
+              serchButton &&
+              <AppButton className='primary-btn' buttonTitle="Search" buttonOnClick={() => { handleClicker() }} priamryOutlineBtn></AppButton>
+            }
           </Col>
-        }
-        {
-          serchButton &&
-          <AppButton className='primary-btn' buttonTitle="Search" buttonOnClick={() => { handleClicker() }} priamryOutlineBtn></AppButton>
-        }
+          
+          </Row>
+        </Col>
+        <Col lg={4} md={24} sm={24}>
+          {
+            onSearch &&
+              <FilterTable className='costomeInput'
+                onInput = {e => handleSerch(e.target.value)} dataReturn
+              ></FilterTable>
+          }
+        </Col>
         
-        {
-          onSearch &&
-          <FilterTable
-          onInput = {e => handleSerch(e.target.value)} dataReturn
-        ></FilterTable>
-        }
+        
         
 
       </Row>
@@ -311,9 +321,13 @@ export default Filter
 
 const FilterContainer = styled.div`
   background-color: #fefefe;
+  padding: 5px;
   .filterRow > div {
-    padding: 10px;
+    padding: 4px;
   }
   .labelTop{
+  }
+  .costomeInput{
+    
   }
 `
