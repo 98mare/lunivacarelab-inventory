@@ -86,7 +86,7 @@ const ConsumptionLookIndex = () => {
                 toCompareData={goodsList}
                 // forGoodsIn
                 dataReturn={handleSearch}
-                forConsumption
+                forConsumptionLookUp
             ></Filter>
             <div className="tableisRes">
                 <Table className='tableWidth'

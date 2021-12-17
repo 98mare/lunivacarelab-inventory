@@ -52,7 +52,7 @@ const ConsumptionGroupIndex = () => {
 
     useEffect(() => {
         getLabData()
-    })
+    }, [])
 
     const getLabData = () => {
         dispatch(consumptionGroupApi((val) => {
