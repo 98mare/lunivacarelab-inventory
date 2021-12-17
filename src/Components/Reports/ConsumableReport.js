@@ -110,8 +110,8 @@ const ConsumableReport = () => {
             <PageHeader
                 pageTitle='Consumption Report'
                 csvLinkTitle='Export csv'
-                csvData={tableData}
-                csvDataName='goodsInReport.csv'
+                csvData={newTableData}
+                csvDataName='consumptionReport.csv'
             />
             <Filter
                 dateRange

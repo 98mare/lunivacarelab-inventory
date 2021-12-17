@@ -180,7 +180,7 @@ const NewGoodsOutReport = () => {
 
         pageTitle='Goods Out Report'
         csvLinkTitle='Export csv'
-        csvData={goodsList}
+        csvData={newGoodsList}
         csvDataName='goodsOutReport.csv'
         
       />

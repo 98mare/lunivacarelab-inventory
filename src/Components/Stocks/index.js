@@ -89,7 +89,7 @@ const Index = () => {
       <PageHeader 
         pageTitle="Stocks"
         csvLinkTitle='Export csv'
-        csvData={tableData}
+        csvData={newTableData}
         csvDataName='stocks.csv'
       ></PageHeader>
       <Filter
