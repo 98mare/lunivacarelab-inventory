@@ -6,16 +6,19 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { getItemCategoryApi } from '../../services/itemCategoryService'
 import Edit from '../Common/Edit'
+import Filter from '../Common/Filter'
 
 const Index = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
   const [tableData, setTableData] = useState([])
+  const [newTableData, setnewTableData]= useState([])
 
   useEffect(() => {
     dispatch(getItemCategoryApi((val) => {
       setTableData(val)
+      setnewTableData(val)
     }))
   }, [])
 
@@ -54,14 +57,28 @@ const Index = () => {
       )
     }
   ]
+  const handleSearch = (val) => {
+    if(val === undefined || val === ''){
+      setnewTableData(tableData)
+    }else{
+      setnewTableData(val) 
+    }
+  }
 
   return (
     <ItemContainer>
       <PageHeader pageTitle="Category" buttonTitle='Add Category' buttonOnClick={() => history.push('./category/add')}></PageHeader>
       <div className="tableisRes">
+      <Filter
+        onSearch
+        toCompareData={tableData}
+        // forGoodsIn
+        dataReturn={handleSearch}
+        forCategory
+      ></Filter>
       <Table 
         columns={columns}
-        dataSource={tableData}
+        dataSource={newTableData}
       ></Table>
       </div>
       

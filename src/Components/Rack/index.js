@@ -13,7 +13,7 @@ const Index = () => {
   const history = useHistory();
 
   const [tableData, setTableData] = useState([])
-
+  const [newTableData, setnewTableData] = useState([])
   const columns = [
     {
       title: 'Id',
@@ -58,7 +58,15 @@ const Index = () => {
   const locateRange = (val) => {
     dispatch(getRackDetApi(val, (value) => {
       setTableData(value)
+      setnewTableData(value)
     }))
+  }
+  const handleSearch = (val) => {
+    if(val === undefined || val === ''){
+      setnewTableData(tableData)
+    }else{
+      setnewTableData(val) 
+    }
   }
 
   return (
@@ -66,9 +74,16 @@ const Index = () => {
       <PageHeader pageTitle="Rack" buttonTitle='Add Rack' buttonOnClick={() => history.push('./rack/add')}></PageHeader>
       <Filter locateRange={locateRange} serchButton></Filter>
       <div className="tableisRes">
+      <Filter
+        onSearch
+        toCompareData={tableData}
+        // forGoodsIn
+        dataReturn={handleSearch}
+        forRack
+      ></Filter>
         <Table
           columns={columns}
-          dataSource={tableData}
+          dataSource={newTableData}
         />
       </div>
     </ItemContainer>

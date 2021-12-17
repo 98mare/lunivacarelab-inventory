@@ -6,11 +6,13 @@ import { useDispatch } from 'react-redux';
 import PageHeader from '../Common/pageHeader'
 import Edit from '../Common/Edit';
 import { consumptionLookupApi } from '../../services/consumptionService';
+import Filter from '../Common/Filter';
 
 const ConsumptionLookIndex = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const [goodsList, setgoodsList] = useState([])
+    const [newgoodsList,  setnewgoodsList]= useState([])
 
     const columns = [
         {
@@ -60,8 +62,17 @@ const ConsumptionLookIndex = () => {
     const getLabData = () => {
         dispatch(consumptionLookupApi((val) => {
             setgoodsList(val)
+            setnewgoodsList(val)
         }))
     }
+     const handleSearch = (val) => {
+        if(val === undefined || val === ''){
+            setnewgoodsList(goodsList)
+        }else{
+            setnewgoodsList(val) 
+        }
+      }
+
 
     return (
         <ConsumptionLookIndexContainer>
@@ -70,10 +81,17 @@ const ConsumptionLookIndex = () => {
                 pageTitle='Consumption Look Up'
                 buttonOnClick={() => history.push('/consumptionlook/add')}
             />
+            <Filter
+                onSearch
+                toCompareData={goodsList}
+                // forGoodsIn
+                dataReturn={handleSearch}
+                forConsumption
+            ></Filter>
             <div className="tableisRes">
                 <Table className='tableWidth'
                     columns={columns}
-                    dataSource={goodsList}
+                    dataSource={newgoodsList}
                 />
             </div>
 

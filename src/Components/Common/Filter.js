@@ -12,7 +12,7 @@ import { getLabItemsApi } from '../../services/itemNewItemService'
 import FilterTable from './FilterTable'
 
 const Filter = ({dataReturn, ...props}) => {
-  const { serchButton, itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate ,toCompareData, forGoodsIn, forGoodsOut, onSearch, forConsumptionReport, forItem, forItemVsRatio} = props
+  const { serchButton, itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate ,toCompareData, forGoodsIn, forGoodsOut, onSearch, forConsumptionReport, forItem, forItemVsRatio, forItemType, forCategory, forLocation, forRack, forUnits, forConsumption} = props
   const dispatch = useDispatch();
 
   const { Option } = Select;
@@ -84,7 +84,7 @@ const Filter = ({dataReturn, ...props}) => {
   const handleSerch= searchText => {
     searchText = searchText.toLowerCase();
     const pushedArr= [];
-    console.log(toCompareData)
+    console.log(toCompareData);
     toCompareData.map(e => {
       if(forGoodsIn){
         return (
@@ -123,9 +123,59 @@ const Filter = ({dataReturn, ...props}) => {
       
       }
       if(forItemVsRatio){
+        
         return (
-          e.ItemName.toLowerCase().includes(searchText) 
-          || e.TestName.toLowerCase().includes(searchText) 
+          e.TestName.toLowerCase().includes(searchText) || e.ItemName.toLowerCase().includes(searchText) 
+          ? 
+        pushedArr.push(e)
+      : '' 
+        )
+      }
+      if(forItemType){
+        return (
+          e.ItemType.toLowerCase().includes(searchText)
+          ? 
+        pushedArr.push(e)
+      : '' 
+        )
+      }
+      if(forCategory){
+        return (
+          e.CategoryType.toLowerCase().includes(searchText)
+          ? 
+        pushedArr.push(e)
+      : '' 
+        )
+      }
+      if(forLocation){
+        return (
+          e.Location.toLowerCase().includes(searchText)
+          || e.LCode.toLowerCase().includes(searchText)
+          ? 
+        pushedArr.push(e)
+      : '' 
+        )
+      }
+      if(forRack){
+        return (
+          e.RackCode.toLowerCase().includes(searchText)
+          || e.RackName.toLowerCase().includes(searchText)
+          ? 
+        pushedArr.push(e)
+      : '' 
+        )
+      }
+      if(forUnits){
+        return (
+          e.Units.toLowerCase().includes(searchText)
+          ? 
+        pushedArr.push(e)
+      : '' 
+        )
+      }
+       if(forConsumption){
+        return (
+          e.ConsumptionGroupName.toLowerCase().includes(searchText)
           ? 
         pushedArr.push(e)
       : '' 

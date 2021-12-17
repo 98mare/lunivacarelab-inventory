@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { getLocationApi } from '../../services/itemLocationService'
 import Edit from '../Common/Edit'
+import Filter from '../Common/Filter'
 
 
 
@@ -14,6 +15,7 @@ const Index = () => {
   const history = useHistory();
 
   const [tableData, setTableData] = useState([])
+  const [newTableData, setnewTableData] = useState([]);
 
   const columns = [
     {
@@ -59,17 +61,35 @@ const Index = () => {
   useEffect(() => {
     dispatch(getLocationApi((val) => {
       setTableData(val)
+      setnewTableData(val)
     }))
   }, [])
+
+  const handleSearch = (val) => {
+    if(val === undefined || val === ''){
+      setnewTableData(tableData)
+    }else{
+      setnewTableData(val) 
+    }
+  }
+
 
   return (
     <ItemContainer>
       <PageHeader pageTitle="Location" buttonTitle='Add Location' buttonOnClick={()=> history.push('./location/add')}></PageHeader>
       {/* <Filter ></Filter> */}
+
+      <Filter
+        onSearch
+        toCompareData={tableData}
+        // forGoodsIn
+        dataReturn={handleSearch}
+        forLocation
+      ></Filter>
       <div className="tableisRes">
         <Table 
         columns={columns}
-        dataSource={tableData}
+        dataSource={newTableData}
         />
       </div>
     </ItemContainer>

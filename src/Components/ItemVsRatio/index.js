@@ -125,7 +125,7 @@ const Index = () => {
       <Filter
         onSearch
         toCompareData={tableData}
-        forGoodsIn
+        // forGoodsIn
         dataReturn={handleSearch}
         forItemVsRatio
       ></Filter>

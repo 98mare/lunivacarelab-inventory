@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { getItemTypeApi } from '../../services/itemItemTypeService'
 import Edit from '../Common/Edit'
+import Filter from '../Common/Filter'
 
 
 
@@ -13,6 +14,7 @@ const Index = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [tableData, setTableData] = useState([])
+  const [newTableData, setnewTableData] = useState([]);
 
   const columns = [
     {
@@ -53,16 +55,32 @@ const Index = () => {
   useEffect(() => {
     dispatch(getItemTypeApi((val) => {
       setTableData(val)
+      setnewTableData(val)
     }))
   }, [])
+  const handleSearch = (val) => {
+    if(val === undefined || val === ''){
+      setnewTableData(tableData)
+    }else{
+      setnewTableData(val) 
+    }
+  }
 
   return (
     <ItemContainer>
       <PageHeader pageTitle="Type" buttonTitle='Add Type' buttonOnClick={() => history.push('./type/add')}></PageHeader>
       <div className="tableisRes">
+      <Filter
+        onSearch
+        toCompareData={tableData}
+        // forGoodsIn
+        dataReturn={handleSearch}
+        forItemType
+      ></Filter>
         <Table
           columns={columns}
-          dataSource={tableData}
+          dataSource={newTableData}
+         
         />
       </div>
     </ItemContainer>

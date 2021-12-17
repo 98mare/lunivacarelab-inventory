@@ -6,11 +6,13 @@ import { useDispatch } from 'react-redux';
 import PageHeader from '../Common/pageHeader'
 import Edit from '../Common/Edit';
 import { consumptionGroupApi } from '../../services/consumptionService';
+import Filter from '../Common/Filter';
 
 const ConsumptionGroupIndex = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const [goodsList, setgoodsList] = useState([])
+    const [newgoodsList, setnewgoodsList] = useState([])
 
     const columns = [
         {
@@ -55,8 +57,16 @@ const ConsumptionGroupIndex = () => {
     const getLabData = () => {
         dispatch(consumptionGroupApi((val) => {
             setgoodsList(val)
+            setnewgoodsList(val)
         }))
     }
+    const handleSearch = (val) => {
+        if(val === undefined || val === ''){
+            setnewgoodsList(goodsList)
+        }else{
+            setnewgoodsList(val) 
+        }
+      }
 
     return (
         <ConsumptionGroupIndexContainer>
@@ -65,10 +75,17 @@ const ConsumptionGroupIndex = () => {
                 pageTitle='Consumption Group'
                 buttonOnClick={() => history.push('/consumption/add')}
             />
+            <Filter
+                onSearch
+                toCompareData={goodsList}
+                // forGoodsIn
+                dataReturn={handleSearch}
+                forConsumption
+            ></Filter>
             <div className="tableisRes">
                 <Table className='tableWidth'
                     columns={columns}
-                    dataSource={goodsList}
+                    dataSource={newgoodsList}
                 />
             </div>
 

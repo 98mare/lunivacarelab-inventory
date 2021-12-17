@@ -6,12 +6,14 @@ import { useDispatch } from 'react-redux';
 import PageHeader from '../Common/pageHeader'
 import { getItemUnitApi } from '../../services/itemUnitService';
 import Edit from '../Common/Edit';
+import Filter from '../Common/Filter';
 
 const Index = () => {
 
   const history = useHistory();
   const dispatch = useDispatch();
   const [unitList, setunitList] = useState([])
+  const [newunitList, setnewunitList] = useState([])
 
   useEffect(() => {
     getLabData()
@@ -20,6 +22,7 @@ const Index = () => {
   const getLabData = () => {
     dispatch(getItemUnitApi((val) => {
       setunitList(val)
+      setnewunitList(val)
     }))
   }
   const columns = [
@@ -52,6 +55,13 @@ const Index = () => {
       )
     }
   ]
+  const handleSearch = (val) => {
+    if(val === undefined || val === ''){
+      setnewunitList(unitList)
+    }else{
+      setnewunitList(val) 
+    }
+  }
 
   return (
     <UnitContainer>
@@ -60,10 +70,17 @@ const Index = () => {
         pageTitle='Units'
         buttonOnClick={() => history.push('./units/add')}
       ></PageHeader>
+       <Filter
+        onSearch
+        toCompareData={unitList}
+        // forGoodsIn
+        dataReturn={handleSearch}
+        forUnits
+      ></Filter>
       <div className="tableisRes">
         <Table className='tableWidth'
           columns={columns}
-          dataSource={unitList}
+          dataSource={newunitList}
         />
       </div>
     </UnitContainer>
