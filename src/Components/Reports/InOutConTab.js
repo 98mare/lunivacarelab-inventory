@@ -14,7 +14,8 @@ import {
     Legend,
     Tooltip,
     ArcElement,
-    Title
+    Title,
+    registerables 
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { Table } from 'antd';
@@ -29,7 +30,8 @@ ChartJS.register(
     ArcElement,
     Legend,
     Tooltip,
-    Title
+    Title,
+    ...registerables
 );
 
 export const options = {
@@ -133,7 +135,7 @@ const InOutConTab = () => {
                         if (indexOfFilledData !== -1) {
                             return datas[indexOfFilledData].Consumption;
                         }
-                        return null;
+                        return 0;
                     });
                     setconsumptionList(dataset)
                 }
@@ -161,8 +163,11 @@ const InOutConTab = () => {
                 type: 'line',
                 label: 'Consumption',
                 backgroundColor: '#e95b29',
+                fill: false,
+                borderColor: '#e95b29',
+                tension: 0.1,
                 data: consumptionList,
-                borderWidth: 2
+                borderWidth: 2,
             }
         ],
     };
