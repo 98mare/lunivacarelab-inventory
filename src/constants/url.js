@@ -131,6 +131,26 @@ export const GetReferedDoctorList = 'GetReferedDoctorList'
 * @param: ?from={from}&to={to}&reqId={reqId}
 */
 export const GetDatewiseRequestorTransactionDetails = 'GetDatewiseRequestorTransactionDetails'
+/**
+* @desc: get date wise refrered doctor transaction details
+* @param: ?from={from}&to={to}&refId={refId}
+*/
+export const GetDatewiseReferredDoctorTransactionDetails = 'GetDatewiseReferredDoctorTransactionDetails';
+/**
+* @desc: get test type
+* @param: 
+*/
+export const GetTestType = 'GetTestType';
+/**
+* @desc: get list of test by type for bulk update
+* @param: ?testTypeId={testTypeId} for some reason this post lol
+*/
+export const GetListOfTestByTypeForBulkUpdate = 'GetListOfTestByTypeForBulkUpdate';
+/**
+* @desc: get requestor wise total sales summary by date
+* @param: ?from={from}&to={to}
+*/
+export const GetRequestorwiseTotalSalesSummaryByDate = 'GetRequestorwiseTotalSalesSummaryByDate';
 //carelabdatametric services only dont mix up
 
 //POST

@@ -31,6 +31,12 @@ export const MenuRoute = [
     name: 'Reports',
     path: '/reports'
   },
+  {
+    icon: 'icon-line2-doc',
+    key: 'misreports',
+    name: 'MIS Reports',
+    path: '/datametric'
+  },
 ]
 
 export const settingsMenu = [

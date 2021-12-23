@@ -13,7 +13,7 @@ const Index = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [goodsList, setgoodsList] = useState([]);
-  const [ newGoodsList,setnewGoodsList] = useState([]);
+  const [newGoodsList, setnewGoodsList] = useState([]);
 
   const columns = [
     {
@@ -90,10 +90,10 @@ const Index = () => {
   }
 
   const handleSearch = (val) => {
-    if(val === undefined || val === ''){
+    if (val === undefined || val === '') {
       setnewGoodsList(goodsList)
-    }else{
-      setnewGoodsList(val) 
+    } else {
+      setnewGoodsList(val)
     }
   }
 
@@ -103,7 +103,7 @@ const Index = () => {
         buttonTitle='Add Goods out'
         pageTitle='Goods Out'
         buttonOnClick={() => history.push('./goodsout/add')}
-      ></PageHeader>
+      />
       <Filter
         dataReturn={handleSearch}
         dateRange
@@ -112,12 +112,12 @@ const Index = () => {
         serchButton
         onSearch
         forGoodsOut
-      ></Filter>
-      <div className="tableisRes">
-      <Table
-        columns={columns}
-        dataSource={newGoodsList}
       />
+      <div className="tableisRes">
+        <Table
+          columns={columns}
+          dataSource={newGoodsList}
+        />
       </div>
     </GoodsOutContainer>
   )
@@ -134,6 +134,4 @@ const GoodsOutContainer = styled.div`
   border: 1px solid rgba( 255, 255, 255, 0.18 );
   overflow: hidden;
   margin-bottom: 50px;
-
- 
 `
