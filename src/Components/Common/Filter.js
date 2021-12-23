@@ -13,7 +13,8 @@ import FilterTable from './FilterTable'
 import { getGetRequestorList, getGetRefererList } from '../../services/datametricService'
 
 const Filter = ({ dataReturn, ...props }) => {
-  const { serchButton, itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate, toCompareData, forGoodsIn, forGoodsOut, onSearch, forConsumptionReport, forItem, forItemVsRatio, forItemType, forCategory, forLocation, forRack, forUnits, forConsumption, forConsumptionLookUp, getrequestorlist, getrefererlist } = props
+  const { serchButton, itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate, toCompareData, forGoodsIn, forGoodsOut, onSearch, forConsumptionReport, forItem, forItemVsRatio, forItemType, forCategory, forLocation, forRack, forUnits, forConsumption, forConsumptionLookUp, getrequestorlist, getrefererlist, columns
+  } = props
   const dispatch = useDispatch();
 
   const { Option } = Select;
@@ -108,6 +109,7 @@ const Filter = ({ dataReturn, ...props }) => {
     searchText = searchText.toLowerCase();
     const pushedArr = [];
     console.log(toCompareData);
+    console.log(columns);
     toCompareData.map(e => {
       if (forGoodsIn) {
         return (
@@ -116,6 +118,11 @@ const Filter = ({ dataReturn, ...props }) => {
             ?
             pushedArr.push(e)
             : ''
+          // columns.map(eem => {
+
+          // })
+
+
         )
       }
       if (forGoodsOut) {

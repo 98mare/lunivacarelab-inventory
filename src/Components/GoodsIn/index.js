@@ -98,6 +98,7 @@ const Index = () => {
         serchButton
         onSearch
         forGoodsIn
+        columns={columns}
       ></Filter>
       <div className="tableisRes">
         <Table className='tableWidth'
