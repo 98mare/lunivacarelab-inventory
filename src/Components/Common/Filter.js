@@ -10,10 +10,10 @@ import { getLocationApi } from '../../services/itemLocationService'
 import moment from 'moment';
 import { getLabItemsApi } from '../../services/itemNewItemService'
 import FilterTable from './FilterTable'
-import { getGetRequestorList, getGetRefererList, getGetTestTypeList } from '../../services/datametricService'
+import { getGetRequestorList, getGetRefererList, getGetTestTypeList, getListofUser } from '../../services/datametricService'
 
 const Filter = ({ dataReturn, ...props }) => {
-  const { serchButton, itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate, toCompareData, forGoodsIn, forGoodsOut, onSearch, forConsumptionReport, forItem, forItemVsRatio, forItemType, forCategory, forLocation, forRack, forUnits, forConsumption, forConsumptionLookUp, getrequestorlist, getrefererlist, gettesttypelist } = props
+  const { serchButton, itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate, toCompareData, forGoodsIn, forGoodsOut, onSearch, forConsumptionReport, forItem, forItemVsRatio, forItemType, forCategory, forLocation, forRack, forUnits, forConsumption, forConsumptionLookUp, getrequestorlist, getrefererlist, gettesttypelist, getuserslist } = props
   const dispatch = useDispatch();
 
   const { Option } = Select;
@@ -28,7 +28,9 @@ const Filter = ({ dataReturn, ...props }) => {
   const [itemNameList, setitemNameList] = useState(notAll === undefined ? 0 : 1)
   const [itemNameLister, setitemNameLister] = useState([])
   const [requestorList, setrequestorList] = useState([])
-  const [requestorId, setrequestorId] = useState()
+  const [requestorId, setrequestorId] = useState(0)
+  const [userLister, setuserLister] = useState([])
+  const [userListId, setuserListId] = useState(0)
 
   const handleClicker = () => {
     if (dateRange !== undefined) {
@@ -36,6 +38,8 @@ const Filter = ({ dataReturn, ...props }) => {
         dateRet({ ...fromDate, itemid: itemNameList })
       } else if (getrequestorlist !== undefined || getrefererlist != undefined) {
         dateRet({ ...fromDate, reqid: requestorId })
+      } else if (getuserslist !== undefined) {
+        dateRet({ ...fromDate, userId: userListId })
       } else if (fromDate !== null) {
         dateRet(fromDate)
       }
@@ -101,10 +105,18 @@ const Filter = ({ dataReturn, ...props }) => {
       )
     }
 
-    if (gettesttypelist !== undefined) {
+    // if (gettesttypelist !== undefined) {
+    //   dispatch(
+    //     getGetTestTypeList(val => {
+    //       console.log(val);
+    //     })
+    //   )
+    // }
+
+    if (getuserslist !== undefined) {
       dispatch(
-        getGetTestTypeList(val => {
-          console.log(val);
+        getListofUser(val => {
+          setuserLister(val)
         })
       )
     }
@@ -354,6 +366,22 @@ const Filter = ({ dataReturn, ...props }) => {
                 </Select>
               </Col>
             }
+
+            {getuserslist &&
+              <Col lg={8} md={10} sm={12} xs={24}>
+                <span className='labelTop'>Users</span>
+                <Select style={{ width: '100%' }} onChange={(val) => { setuserListId(val) }} size='default'>
+                  <Option value="0">All</Option>
+                  {userLister?.map(iTy => (
+                    <Option value={iTy?.Id}>
+                      {iTy?.usrFullName}
+                    </Option>
+                  ))
+                  }
+                </Select>
+              </Col>
+            }
+
 
             <Col>
               {

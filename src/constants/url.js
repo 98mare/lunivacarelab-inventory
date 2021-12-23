@@ -1,5 +1,6 @@
 // export const DEV_URL = 'http://192.168.100.34/CarelabInventory/';
 export const DEV_URL = 'http://lunivacare.ddns.net/CarelabDataMetricService_qc/';
+// http://192.168.100.34/CarelabDataMetricServiceCrystal/
 export const BASE_URL = `${DEV_URL}Api/`; // see service for api or Api
 // for inventory lab only
 //GET
@@ -151,6 +152,21 @@ export const GetListOfTestByTypeForBulkUpdate = 'GetListOfTestByTypeForBulkUpdat
 * @param: ?from={from}&to={to}
 */
 export const GetRequestorwiseTotalSalesSummaryByDate = 'GetRequestorwiseTotalSalesSummaryByDate';
+/**
+* @desc: get daily summary transaction user wise by date
+* @param: ?from={from}&to={to}&userId={userId}
+*/
+export const GetDailySummaryTransactionUserWiseByDate = 'GetDailySummaryTransactionUserWiseByDate';
+/**
+* @desc: get daily transaction by userid and date
+* @param: ?from={from}&to={to}&userId={userId}
+*/
+export const GetDailyTransactionByUserIdAndDate = 'GetDailyTransactionByUserIdAndDate';
+/**
+* @desc: get list of user for metric
+* @param: 
+*/
+export const GetListOfUserForMetric = 'GetListOfUserForMetric';
 //carelabdatametric services only dont mix up
 
 //POST
