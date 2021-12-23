@@ -2,10 +2,10 @@ import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
-import { getRequestorReport } from "../../services/datametricService";
+import { getRequestorTotalSalesReport } from "../../services/datametricService";
 import { Table } from "antd";
 
-const RequestorReport = () => {
+const RequestorSalesReport = () => {
     const dispatch = useDispatch();
     const [testData, setTestData] = useState([]);
 
@@ -15,33 +15,46 @@ const RequestorReport = () => {
             dataIndex: 'Requestor',
             key: 'Requestor',
         },
+        {
+            title: 'Total Price',
+            dataIndex: 'TotalPrice',
+            key: 'TotalPrice',
+        },
+        {
+            title: 'Discount Total',
+            dataIndex: 'DiscountTotal',
+            key: 'DiscountTotal',
+        },
+        {
+            title: 'Actual Total',
+            dataIndex: 'ActualTotal',
+            key: 'ActualTotal',
+        },
     ]
 
     const getDataForReport = (data) => {
-        dispatch(getRequestorReport(data, (val) => {
+        dispatch(getRequestorTotalSalesReport(data, (val) => {
             setTestData(val)
         }))
     }
 
     const dataRet = (val) => {
         let data = {
-            ...val,
             fromdate: val[0].format("YYYY-MM-DD"),
             todate: val[1].format("YYYY-MM-DD"),
-          }
-          getDataForReport(data)
+        }
+        getDataForReport(data)
     }
 
     return (
         <>
             <PageHeader
-                pageTitle='Requestor Report'
+                pageTitle='Requestor Total Sales Summary'
             />
             <Filter
                 dateRange
                 dateRet={dataRet}
                 serchButton
-                getrequestorlist
             />
             <Table
                 columns={columns}
@@ -51,4 +64,4 @@ const RequestorReport = () => {
     )
 }
 
-export default RequestorReport
+export default RequestorSalesReport

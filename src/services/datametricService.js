@@ -1,10 +1,10 @@
-import { GetDatewiseRequestorTransactionDetails, GetRequestorList, GetReferedDoctorList } from '../constants/url';
-import { fetch } from '../utils/httpUtil';
+import { GetListOfTestByTypeForBulkUpdate, GetTestType, GetDatewiseRequestorTransactionDetails, GetRequestorList, GetReferedDoctorList, GetRequestorwiseTotalSalesSummaryByDate, GetDatewiseReferredDoctorTransactionDetails } from '../constants/url';
+import { fetch, store } from '../utils/httpUtil';
 
 export const getTestTypeReport = (data, successCallback) => {
     return async dispatch => {
         try {
-            const response = await fetch();
+            const response = await store(`${GetListOfTestByTypeForBulkUpdate}?testTypeId=${data.testType}`);
             if (response?.status === 200) {
                 successCallback([])
             } else {
@@ -19,7 +19,7 @@ export const getTestTypeReport = (data, successCallback) => {
 export const getReferReport = (data, successCallback) => {
     return async dispatch => {
         try {
-            const response = await fetch();
+            const response = await fetch(`${GetDatewiseReferredDoctorTransactionDetails}?from=${data.fromdate}&to=${data.todate}&refId=${data.reqid}`);
             if (response?.status === 200) {
                 successCallback([])
             } else {
@@ -34,9 +34,24 @@ export const getReferReport = (data, successCallback) => {
 export const getRequestorReport = (data, successCallback) => {
     return async dispatch => {
         try {
-            const response = await fetch(`${GetDatewiseRequestorTransactionDetails}?from=2021-09-01&to=2021-12-22&reqId=0`);
+            const response = await fetch(`${GetDatewiseRequestorTransactionDetails}?from=${data.fromdate}&to=${data.todate}&reqId=${data.reqid}`);
             if (response?.status === 200) {
                 successCallback([])
+            } else {
+                successCallback([])
+            }
+        } catch (error) {
+
+        }
+    }
+}
+
+export const getRequestorTotalSalesReport = (data, successCallback) => {
+    return async dispatch => {
+        try {
+            const response = await fetch(`${GetRequestorwiseTotalSalesSummaryByDate}?from=${data?.fromdate}&to=${data?.todate}`);
+            if (response?.status === 200) {
+                successCallback(response?.data?.ReportDetails)
             } else {
                 successCallback([])
             }
@@ -50,12 +65,12 @@ export const getGetRequestorList = (successCallback) => {
     return async dispatch => {
         try {
             const response = await fetch(GetRequestorList);
-            if(response?.status === 200){
+            if (response?.status === 200) {
                 successCallback(response?.data?.ReportType)
-            }else{
+            } else {
                 successCallback([])
             }
-        }catch(error){
+        } catch (error) {
 
         }
     }
@@ -65,12 +80,27 @@ export const getGetRefererList = (successCallback) => {
     return async dispatch => {
         try {
             const response = await fetch(GetReferedDoctorList);
-            if(response?.status === 200){
+            if (response?.status === 200) {
                 successCallback(response?.data?.ReportType)
-            }else{
+            } else {
                 successCallback([])
             }
-        }catch(error){
+        } catch (error) {
+
+        }
+    }
+}
+
+export const getGetTestTypeList = (successCallback) => {
+    return async dispatch => {
+        try {
+            const response = await fetch(GetTestType);
+            if (response?.status === 200) {
+                successCallback(response?.data?.TestType)
+            } else {
+                successCallback([])
+            }
+        } catch (error) {
 
         }
     }

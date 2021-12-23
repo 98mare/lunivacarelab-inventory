@@ -10,11 +10,10 @@ import { getLocationApi } from '../../services/itemLocationService'
 import moment from 'moment';
 import { getLabItemsApi } from '../../services/itemNewItemService'
 import FilterTable from './FilterTable'
-import { getGetRequestorList, getGetRefererList } from '../../services/datametricService'
+import { getGetRequestorList, getGetRefererList, getGetTestTypeList } from '../../services/datametricService'
 
 const Filter = ({ dataReturn, ...props }) => {
-  const { serchButton, itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate, toCompareData, forGoodsIn, forGoodsOut, onSearch, forConsumptionReport, forItem, forItemVsRatio, forItemType, forCategory, forLocation, forRack, forUnits, forConsumption, forConsumptionLookUp, getrequestorlist, getrefererlist, columns
-  } = props
+  const { serchButton, itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate, toCompareData, forGoodsIn, forGoodsOut, onSearch, forConsumptionReport, forItem, forItemVsRatio, forItemType, forCategory, forLocation, forRack, forUnits, forConsumption, forConsumptionLookUp, getrequestorlist, getrefererlist, gettesttypelist } = props
   const dispatch = useDispatch();
 
   const { Option } = Select;
@@ -89,7 +88,6 @@ const Filter = ({ dataReturn, ...props }) => {
     if (getrequestorlist !== undefined) {
       dispatch(
         getGetRequestorList(val => {
-          console.log(val);
           setrequestorList(val)
         })
       )
@@ -103,13 +101,19 @@ const Filter = ({ dataReturn, ...props }) => {
       )
     }
 
+    if (gettesttypelist !== undefined) {
+      dispatch(
+        getGetTestTypeList(val => {
+          console.log(val);
+        })
+      )
+    }
+
   }, [])
 
   const handleSerch = searchText => {
     searchText = searchText.toLowerCase();
     const pushedArr = [];
-    console.log(toCompareData);
-    console.log(columns);
     toCompareData.map(e => {
       if (forGoodsIn) {
         return (
@@ -153,7 +157,6 @@ const Filter = ({ dataReturn, ...props }) => {
 
       }
       if (forItemVsRatio) {
-
         return (
           e.TestName.toLowerCase().includes(searchText) || e.ItemName.toLowerCase().includes(searchText)
             ?
@@ -271,7 +274,7 @@ const Filter = ({ dataReturn, ...props }) => {
               </Col>
             }
             {locateRange &&
-              <Col lg={10} md={12} sm={12} xs={24}>
+              <Col lg={8} md={10} sm={12} xs={24}>
                 <span className='labelTop'>Location</span>
                 <Select style={{ width: '100%' }} onChange={(val) => { setlocationId(val) }} size='default'>
                   {notAllLocate !== undefined ? (
@@ -293,13 +296,16 @@ const Filter = ({ dataReturn, ...props }) => {
               </Col>
             }
             {dateRange &&
-              <Col lg={10} md={12} sm={12} xs={24}>
+              <Col lg={8} md={10} sm={12} xs={24}>
                 <span className='labelTop'>From - To</span>
-                <Datepicker defaultValuer={fromDate} onChanger={(value) => { setfromDate(value) }} size='default'></Datepicker>
+                <Datepicker
+                  defaultValuer={fromDate}
+                  onChanger={(value) => { setfromDate(value) }}
+                />
               </Col>
             }
             {itemName &&
-              <Col lg={10} md={12} sm={12} xs={24}>
+              <Col lg={8} md={10} sm={12} xs={24}>
                 <span className='labelTop'>Item Name</span>
                 <Select style={{ width: '100%' }} onChange={(val) => { setitemNameList(val) }} size='default'>
                   {notAll === undefined ? (
@@ -322,7 +328,7 @@ const Filter = ({ dataReturn, ...props }) => {
             }
 
             {getrequestorlist &&
-              <Col lg={10} md={12} sm={12} xs={24}>
+              <Col lg={8} md={10} sm={12} xs={24}>
                 <span className='labelTop'>Requestor List</span>
                 <Select style={{ width: '100%' }} onChange={(val) => { setrequestorId(val) }} size='default'>
                   {requestorList?.map(iTy => (
@@ -336,7 +342,7 @@ const Filter = ({ dataReturn, ...props }) => {
             }
 
             {getrefererlist &&
-              <Col lg={10} md={12} sm={12} xs={24}>
+              <Col lg={8} md={10} sm={12} xs={24}>
                 <span className='labelTop'>Refered By</span>
                 <Select style={{ width: '100%' }} onChange={(val) => { setrequestorId(val) }} size='default'>
                   {requestorList?.map(iTy => (
@@ -352,7 +358,12 @@ const Filter = ({ dataReturn, ...props }) => {
             <Col>
               {
                 serchButton &&
-                <AppButton className='primary-btn' buttonTitle="Search" buttonOnClick={() => { handleClicker() }} priamryOutlineBtn></AppButton>
+                <AppButton
+                  className='primary-btn'
+                  buttonTitle="Load"
+                  buttonOnClick={() => { handleClicker() }}
+                  priamryOutlineBtn
+                />
               }
             </Col>
 
@@ -362,9 +373,11 @@ const Filter = ({ dataReturn, ...props }) => {
         <Col lg={4} md={24} sm={24}>
           {
             onSearch &&
-            <FilterTable className='costomeInput'
-              onInput={e => handleSerch(e.target.value)} dataReturn
-            ></FilterTable>
+            <FilterTable
+              className='costomeInput'
+              onInput={e => handleSerch(e.target.value)}
+              dataReturn
+            />
           }
         </Col>
 
@@ -382,6 +395,7 @@ const FilterContainer = styled.div`
     padding: 4px;
   }
   .labelTop{
+    display: block;
   }
   .costomeInput{}
 `

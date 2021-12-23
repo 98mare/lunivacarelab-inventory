@@ -9,7 +9,7 @@ const Datepicker = (props) => {
   return (
     <>
       <Space direction="vertical" size='large'>
-        <RangePicker defaultValue={defaultValuer} onChange={onChanger}  size= "large"/>
+        <RangePicker defaultValue={defaultValuer} onChange={onChanger} style={{ width: '100%' }} size= "default"/>
       </Space>
     </>
   )
