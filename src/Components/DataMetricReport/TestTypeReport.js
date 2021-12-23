@@ -33,7 +33,7 @@ const TestTypeReport = () => {
     return (
         <>
             <PageHeader
-                pageTitle='Requestor Report'
+                pageTitle='Test Type Report'
             />
             <Filter
                 gettesttypelist

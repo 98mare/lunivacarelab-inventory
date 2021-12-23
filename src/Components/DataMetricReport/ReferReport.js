@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
 import { getReferReport } from "../../services/datametricService";
 import { Table } from "antd";
 
-
 const ReferReport = () => {
     const dispatch = useDispatch();
-    const [testData, setTestData] = useState([]);
+    const [tableData, settableData] = useState([]);
+    const [labelName, setlabelName] = useState([]);
+    
 
     const columns = [
         {
@@ -20,7 +21,7 @@ const ReferReport = () => {
 
     const getDataForReport = (data) => {
         dispatch(getReferReport(data, (val) => {
-            setTestData(val)
+            settableData(val)
         }))
     }
 
@@ -29,14 +30,45 @@ const ReferReport = () => {
             ...val,
             fromdate: val[0].format("YYYY-MM-DD"),
             todate: val[1].format("YYYY-MM-DD"),
-          }
-          getDataForReport(data)
+        }
+        getDataForReport(data)
+    }
+
+    useEffect(() => {
+        createTableHead()
+        console.log(tableData)
+        console.log(labelName)
+    }, [tableData]);
+
+    const createTableHead = () => {
+        if(tableData.leght !== 0){
+            let tableKeys = Object.keys(tableData[0]);
+            let data =[]
+            let labels = [];
+            tableKeys.forEach(ele => {
+                data.push({
+                    title: ele,
+                    dataIndex: ele,
+                    key: ele,
+                })
+            })
+            
+            tableData.forEach(ele => {
+                if(ele['Requestor Name'] !== null)
+                    labels.push(ele['Requestor Name']);
+            })
+
+            setlabelName(labels)
+            settableData(data)
+        }
     }
 
     return (
         <>
-        <PageHeader
+            <PageHeader
                 pageTitle='Referer Report'
+                csvDataName="export CSV"
+                csvData={tableData}
             />
             <Filter
                 dateRange
@@ -45,8 +77,8 @@ const ReferReport = () => {
                 getrefererlist
             />
             <Table
-                columns={columns}
-                dataSource={testData}
+                columns={labelName}
+                dataSource={tableData}
             />
         </>
     )
