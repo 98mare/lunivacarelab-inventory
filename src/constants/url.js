@@ -115,6 +115,24 @@ export const GetConsumptionGroup = 'GetConsumptionGroup';
 */
 export const GetConsumptionGroupTestLookUp = 'GetConsumptionGroupTestLookUp';
 
+//carelabdatametric services only dont mix up
+/**
+* @desc: get requestor list
+* @param: 
+ */
+export const GetRequestorList = 'GetRequestorList'
+/**
+* @desc: get refered doctor list
+* @param: 
+ */
+export const GetReferedDoctorList = 'GetReferedDoctorList'
+/**
+* @desc: get date wise requestor transaction details
+* @param: ?from={from}&to={to}&reqId={reqId}
+*/
+export const GetDatewiseRequestorTransactionDetails = 'GetDatewiseRequestorTransactionDetails'
+//carelabdatametric services only dont mix up
+
 //POST
 /**
  * @desc: insert update item category

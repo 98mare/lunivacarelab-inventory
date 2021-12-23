@@ -2,7 +2,7 @@
 import { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
-import { AsyncAddCategory, AsyncAddGroupItemVsRatio, AsyncAddConsumptionGroup, AsyncAddConsumptionLookGroup, AsyncAddItems, AsyncAddItemVsRatio, AsyncAddLocation, AsyncAddRack, AsyncAddType, AsyncAddUnits, AsyncAddWastage, AsyncAppLayout, AsyncCategory, AsyncConsumableReports, AsyncConsumptionIndex, AsyncConsumptionLookIndex, AsyncDashbord, AsyncGoodOut, AsyncGoodsIn, AsyncGoodsInAdd, AsyncGoodsInReports, AsyncGoodsOutAdd, AsyncGoodsOutReports, AsyncInOutConReports, AsyncinvsReports, AsyncItems, AsyncItemVsRatio, AsyncLocation, AsyncLocationStockReport, AsyncLogin, AsyncMinQuantityReport, AsyncNotFound, AsyncPublicLayout, AsyncRack, AsyncReports, AsyncSettings, AsyncStocks, AsyncType, AsyncUnits, AsyncWastage, AsyncAddGroupItemVsRatioVsConsumption } from './App/asyncComponent';
+import { AsyncAddCategory, AsyncAddGroupItemVsRatio, AsyncAddConsumptionGroup, AsyncAddConsumptionLookGroup, AsyncAddItems, AsyncAddItemVsRatio, AsyncAddLocation, AsyncAddRack, AsyncAddType, AsyncAddUnits, AsyncAddWastage, AsyncAppLayout, AsyncCategory, AsyncConsumableReports, AsyncConsumptionIndex, AsyncConsumptionLookIndex, AsyncDashbord, AsyncGoodOut, AsyncGoodsIn, AsyncGoodsInAdd, AsyncGoodsInReports, AsyncGoodsOutAdd, AsyncGoodsOutReports, AsyncInOutConReports, AsyncinvsReports, AsyncItems, AsyncItemVsRatio, AsyncLocation, AsyncLocationStockReport, AsyncLogin, AsyncMinQuantityReport, AsyncNotFound, AsyncPublicLayout, AsyncRack, AsyncReports, AsyncSettings, AsyncStocks, AsyncType, AsyncUnits, AsyncWastage, AsyncAddGroupItemVsRatioVsConsumption, AsyncRequestorReport, AsyncTestTypeReport, AsyncReferReport } from './App/asyncComponent';
 import PrivateRouter from './Routes/PrivateRouter';
 import PublicRoute from './Routes/PublicRoute';
 import loadlogo from './assets/images/logo1.png';
@@ -375,6 +375,27 @@ function App() {
           component={AsyncAddConsumptionLookGroup}
           layout={AsyncAppLayout}
           forEdit
+        />
+
+        <PrivateRouter
+          exact
+          path='/datametric/testtype'
+          component={AsyncTestTypeReport}
+          layout={AsyncAppLayout}
+        />
+
+        <PrivateRouter
+          exact
+          path='/datametric/requestor'
+          component={AsyncRequestorReport}
+          layout={AsyncAppLayout}
+        />
+
+        <PrivateRouter
+          exact
+          path='/datametric/referer'
+          component={AsyncReferReport}
+          layout={AsyncAppLayout}
         />
 
         <Route component={AsyncNotFound} />

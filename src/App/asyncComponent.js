@@ -66,5 +66,8 @@ export const AsyncAddConsumptionGroup = lazy(() => pMinDelay(import('../Componen
 export const AsyncConsumptionLookIndex = lazy(() => pMinDelay(import('../Components/Consumption/consumptionLookIndex'), 300));
 export const AsyncAddConsumptionLookGroup = lazy(() => pMinDelay(import('../Components/Consumption/AddConsumptionLook'), 300));
 
+export const AsyncTestTypeReport = lazy(() => pMinDelay(import('../Components/DataMetricReport/TestTypeReport'), 300));
+export const AsyncReferReport = lazy(() => pMinDelay(import('../Components/DataMetricReport/ReferReport'), 300));
+export const AsyncRequestorReport = lazy(() => pMinDelay(import('../Components/DataMetricReport/RequestorReport'), 300));
 
 export const AsyncNotFound = lazy(() => pMinDelay(import('../Components/Common/ErrorPage'), 300));
