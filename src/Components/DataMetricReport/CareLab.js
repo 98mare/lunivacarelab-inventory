@@ -5,9 +5,17 @@ import { Link } from 'react-router-dom'
 
 const data = [
     {
-        name: 'Test Type Report',
-        pathName: 'testtype'
+        name: 'Daily Summary',
+        pathName: 'dailysummary'
     },
+    {
+        name: 'Daily Transaction',
+        pathName: 'dailytransaction'
+    },
+    // {
+    //     name: 'Test Type Report',
+    //     pathName: 'testtype'
+    // },
     {
         name: 'Requestor Report',
         pathName: 'requestor'
