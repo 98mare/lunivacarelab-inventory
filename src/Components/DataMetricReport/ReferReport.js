@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
 import { getReferReport } from "../../services/datametricService";
-import Filter from '../Common/Filter'
+import { Table } from "antd";
 
 const ReferReport = () => {
     const dispatch = useDispatch();
@@ -28,13 +28,13 @@ const ReferReport = () => {
             ...val,
             fromdate: val[0].format("YYYY-MM-DD"),
             todate: val[1].format("YYYY-MM-DD"),
-          }
-          getDataForReport(data)
+        }
+        getDataForReport(data)
     }
 
     return (
         <>
-        <PageHeader
+            <PageHeader
                 pageTitle='Referer Report'
             />
             <Filter
