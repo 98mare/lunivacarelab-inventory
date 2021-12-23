@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Popover } from 'antd';
 
 const handleLogout = () => {
-  localStorage.clear()
+  sessionStorage.clear()
 }
 
 

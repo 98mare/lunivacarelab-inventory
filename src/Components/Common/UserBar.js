@@ -15,11 +15,12 @@ const UserBar = () => {
   }, [])
 
   const handleLogout = () => {
-    localStorage.clear()
+    sessionStorage.clear()
   }
 
   const handleUser = () => {
-    const tokenStrings = JSON.parse(localStorage.getItem('token'));
+    // if cookies edit here and set
+    const tokenStrings = JSON.parse(sessionStorage.getItem('token'));
     if (tokenStrings === null) {
       history.push('/login');
       return

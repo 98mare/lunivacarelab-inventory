@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
 import { getReferReport } from "../../services/datametricService";
-import { Table } from "antd";
+import Filter from '../Common/Filter'
 
 const ReferReport = () => {
     const dispatch = useDispatch();

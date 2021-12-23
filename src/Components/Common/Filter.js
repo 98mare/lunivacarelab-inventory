@@ -122,6 +122,11 @@ const Filter = ({ dataReturn, ...props }) => {
             ?
             pushedArr.push(e)
             : ''
+          // columns.map(eem => {
+
+          // })
+
+
         )
       }
       if (forGoodsOut) {
