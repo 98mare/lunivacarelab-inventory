@@ -237,11 +237,11 @@ const Filter = ({ dataReturn, ...props }) => {
       }
       if (forRequestorReport) {
         return (
-          e["Requestor Name"].toLowerCase().includes(searchText) 
-          ||(e.BillNo !== undefined && e.BillNo.toLowerCase().includes(searchText))
-          ||(e.Test !== undefined && e.Test.toLowerCase().includes(searchText))
-          ||e["Patient Name"].toLowerCase().includes(searchText)
-          // ||(e.Price!== undefined && e.Price.toLowerCase().includes(searchText))
+          e["Requestor Name"].toLowerCase().includes(searchText)
+            || (e.BillNo !== undefined && e.BillNo.toLowerCase().includes(searchText))
+            || (e.Test !== undefined && e.Test.toLowerCase().includes(searchText))
+            || e["Patient Name"].toLowerCase().includes(searchText)
+            // ||(e.Price!== undefined && e.Price.toLowerCase().includes(searchText))
             ?
             pushedArr.push(e)
             : ''
@@ -367,6 +367,7 @@ const Filter = ({ dataReturn, ...props }) => {
               <Col lg={8} md={10} sm={12} xs={24}>
                 <span className='labelTop'>Requestor List</span>
                 <Select style={{ width: '100%' }} onChange={(val) => { setrequestorId(val) }} size='default'>
+                  <Option value="0">All</Option>
                   {requestorList?.map(iTy => (
                     <Option value={iTy?.Id}>
                       {iTy?.Requestor}
@@ -381,6 +382,7 @@ const Filter = ({ dataReturn, ...props }) => {
               <Col lg={8} md={10} sm={12} xs={24}>
                 <span className='labelTop'>Refered By</span>
                 <Select style={{ width: '100%' }} onChange={(val) => { setrequestorId(val) }} size='default'>
+                  <Option value="0">All</Option>
                   {requestorList?.map(iTy => (
                     <Option value={iTy?.Id}>
                       {iTy?.Name}
