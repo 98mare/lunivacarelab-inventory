@@ -36,7 +36,8 @@ export const getRequestorReport = (data, successCallback) => {
         try {
             const response = await fetch(`${GetDatewiseRequestorTransactionDetails}?from=${data.fromdate}&to=${data.todate}&reqId=${data.reqid}`);
             if (response?.status === 200) {
-                successCallback([])
+                successCallback(response?.data?.ReportDetails)
+                
             } else {
                 successCallback([])
             }

@@ -10,6 +10,7 @@ const RequestorReport = () => {
     const [tableData, settableData] = useState([]);
     const [tableHead, setTableHead] = useState([]);
     const [labelName, setLabelName] = useState([]);
+    const [newTableData,setnewTableData] = useState([]);
  
     // const columns = [
     //     {
@@ -22,7 +23,7 @@ const RequestorReport = () => {
     const getDataForReport = (data) => {
         dispatch(getRequestorReport(data, (val) => {
             settableData(val)
-            console.log(val);
+            setnewTableData(val)
         }))
     }
 
@@ -38,12 +39,13 @@ const RequestorReport = () => {
 
     useEffect(() => {
         createTableHead()
-        
+
     }, [tableData]);
     
     
 
     const createTableHead = () => {
+        console.log(tableData.length);
         if (tableData.length !== 0) {
             let tableKeys = Object.keys(tableData[0]);
             let data = []
@@ -58,30 +60,48 @@ const RequestorReport = () => {
             })
 
             // tableData.forEach(ele => {
-            //     if(ele.ItemName !== null)
-            //         labels.push(ele.ItemName);
+            //     if(ele["Patient Name"] !== null)
+            //         labels.push(ele["Patient Name"]);
             // })
 
-            setLabelName(labels)
+            // setLabelName(labels)
             setTableHead(data)
-            console.log("table head", tableHead);
+            
         }
     }
-
+    console.log("table head", tableHead);
+    console.log("table labels", labelName);
+    
+    const handleSearch = (val) => {
+        if(val === undefined || val === ''){
+            setnewTableData(tableData)
+        }else{
+            setnewTableData(val) 
+        }
+      }
     return (
         <>
             <PageHeader
                 pageTitle='Requestor Report'
+                csvLinkTitle='Export Csv'
+                csvData={newTableData}
+                csvDataName='requestorReport.csv'
             />
             <Filter
                 dateRange
                 dateRet={dataRet}
                 serchButton
                 getrequestorlist
+                toCompareData={tableData}
+                onSearch
+                dataReturn={handleSearch}
+                forRequestorReport
+                
+
             />
             <Table
-                columns={labelName}
-                dataSource={tableData}
+                columns={tableHead}
+                dataSource={newTableData}
             />
         </>
     )
