@@ -36,10 +36,6 @@ const RequestorReport = () => {
 
 
     const createTableHead = () => {
-<<<<<<< HEAD
-        
-=======
->>>>>>> 7b499d5efa02086eea7e8100f7a38adaab329b41
         if (tableData.length !== 0) {
             let tableKeys = Object.keys(tableData[0]);
             let data = []
@@ -55,11 +51,6 @@ const RequestorReport = () => {
             setTableHead(data)
         }
     }
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> 7b499d5efa02086eea7e8100f7a38adaab329b41
     const handleSearch = (val) => {
         if (val === undefined || val === '') {
             setnewTableData(tableData)
