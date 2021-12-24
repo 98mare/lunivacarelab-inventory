@@ -21,7 +21,7 @@ export const getReferReport = (data, successCallback) => {
         try {
             const response = await fetch(`${GetDatewiseReferredDoctorTransactionDetails}?from=${data.fromdate}&to=${data.todate}&refId=${data.reqid}`);
             if (response?.status === 200) {
-                successCallback([])
+                successCallback(response?.data?.ReportDetails)
             } else {
                 successCallback([])
             }

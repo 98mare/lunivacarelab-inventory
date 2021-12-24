@@ -29,8 +29,8 @@ const Notification = () => {
     <NotificationContainer>
       <Popover
         placement="bottom"
-        content={
-          <NotificationContent data={tableData} />
+        content={tableData > 0?
+          <NotificationContent data={tableData} /> : 'no new notification'
         }
         trigger="click">
         <i className='icon-line-bell'></i> {tableData.length > 0 ? <span className='notiCount'>{tableData.length}</span> : ''}

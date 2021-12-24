@@ -45,7 +45,7 @@ const RequestorReport = () => {
     
 
     const createTableHead = () => {
-        console.log(tableData.length);
+        
         if (tableData.length !== 0) {
             let tableKeys = Object.keys(tableData[0]);
             let data = []
@@ -69,8 +69,6 @@ const RequestorReport = () => {
             
         }
     }
-    console.log("table head", tableHead);
-    console.log("table labels", labelName);
     
     const handleSearch = (val) => {
         if(val === undefined || val === ''){
@@ -83,7 +81,7 @@ const RequestorReport = () => {
         <>
             <PageHeader
                 pageTitle='Requestor Report'
-                csvLinkTitle='Export Csv'
+                csvLinkTitle='Export CSV'
                 csvData={newTableData}
                 csvDataName='requestorReport.csv'
             />

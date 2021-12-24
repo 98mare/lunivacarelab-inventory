@@ -10,10 +10,10 @@ import { getLocationApi } from '../../services/itemLocationService'
 import moment from 'moment';
 import { getLabItemsApi } from '../../services/itemNewItemService'
 import FilterTable from './FilterTable'
-import { getGetRequestorList, getGetRefererList, getGetTestTypeList, getListofUser } from '../../services/datametricService'
+import { getGetRequestorList, getGetRefererList, getListofUser } from '../../services/datametricService'
 
 const Filter = ({ dataReturn, ...props }) => {
-  const { serchButton, itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate, toCompareData, forGoodsIn, forGoodsOut, onSearch, forConsumptionReport, forItem, forItemVsRatio, forItemType, forCategory, forLocation, forRack, forUnits, forConsumption, forConsumptionLookUp, getrequestorlist, getrefererlist, gettesttypelist, getuserslist,forRequestorReport } = props
+  const { serchButton, itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate, toCompareData, forGoodsIn, forGoodsOut, onSearch, forConsumptionReport, forItem, forItemVsRatio, forItemType, forCategory, forLocation, forRack, forUnits, forConsumption, forConsumptionLookUp, getrequestorlist, getrefererlist, getuserslist,forRequestorReport, forRefererReport } = props
   const dispatch = useDispatch();
 
   const { Option } = Select;
@@ -238,6 +238,18 @@ const Filter = ({ dataReturn, ...props }) => {
       if (forRequestorReport) {
         return (
           e["Requestor Name"].toLowerCase().includes(searchText) 
+          ||(e.BillNo !== undefined && e.BillNo.toLowerCase().includes(searchText))
+          ||(e.Test !== undefined && e.Test.toLowerCase().includes(searchText))
+          ||e["Patient Name"].toLowerCase().includes(searchText)
+          // ||(e.Price!== undefined && e.Price.toLowerCase().includes(searchText))
+            ?
+            pushedArr.push(e)
+            : ''
+        ) 
+      }
+      if (forRefererReport) {
+        return (
+          e["Refer Name"].toLowerCase().includes(searchText) 
           ||(e.BillNo !== undefined && e.BillNo.toLowerCase().includes(searchText))
           ||(e.Test !== undefined && e.Test.toLowerCase().includes(searchText))
           ||e["Patient Name"].toLowerCase().includes(searchText)

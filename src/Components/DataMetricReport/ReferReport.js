@@ -8,20 +8,23 @@ import { Table } from "antd";
 const ReferReport = () => {
     const dispatch = useDispatch();
     const [tableData, settableData] = useState([]);
-    const [labelName, setlabelName] = useState([]);
+    const [tableHead, settableHead] = useState([]);
+    const [newTableData, setnewTableData] = useState([]);
     
 
-    const columns = [
-        {
-            title: 'Referer',
-            dataIndex: 'Referer',
-            key: 'Referer',
-        },
-    ]
+    // const columns = [
+    //     {
+    //         title: 'Referer',
+    //         dataIndex: 'Referer',
+    //         key: 'Referer',
+    //     },
+    // ]
 
     const getDataForReport = (data) => {
         dispatch(getReferReport(data, (val) => {
             settableData(val)
+            setnewTableData(val)
+            
         }))
     }
 
@@ -36,15 +39,12 @@ const ReferReport = () => {
 
     useEffect(() => {
         createTableHead()
-        console.log(tableData)
-        console.log(labelName)
     }, [tableData]);
 
     const createTableHead = () => {
-        if(tableData.leght !== 0){
+        if(tableData.length !== 0){
             let tableKeys = Object.keys(tableData[0]);
             let data =[]
-            let labels = [];
             tableKeys.forEach(ele => {
                 data.push({
                     title: ele,
@@ -53,32 +53,44 @@ const ReferReport = () => {
                 })
             })
             
-            tableData.forEach(ele => {
-                if(ele['Requestor Name'] !== null)
-                    labels.push(ele['Requestor Name']);
-            })
+            // tableData.forEach(ele => {
+            //     if(ele['Requestor Name'] !== null)
+            //         labels.push(ele['Requestor Name']);
+            // })
 
-            setlabelName(labels)
-            settableData(data)
+            settableHead(data);
         }
     }
+    const handleSearch = (val) => {
+        if(val === undefined || val === ''){
+            setnewTableData(tableData)
+        }else{
+            setnewTableData(val) 
+        }
+      }
 
     return (
         <>
             <PageHeader
                 pageTitle='Referer Report'
-                csvDataName="export CSV"
-                csvData={tableData}
+                csvLinkTitle='Export CSV'
+                csvData={newTableData}
+                csvDataName='RefererReport.csv'
             />
             <Filter
                 dateRange
                 dateRet={dataRet}
                 serchButton
                 getrefererlist
+                toCompareData={tableData}
+                onSearch
+                dataReturn={handleSearch}
+                forRefererReport
+                
             />
             <Table
-                columns={labelName}
-                dataSource={tableData}
+                columns={tableHead}
+                dataSource={newTableData}
             />
         </>
     )
