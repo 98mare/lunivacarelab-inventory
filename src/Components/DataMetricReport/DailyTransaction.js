@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
 import { getDailyTransactionReport } from "../../services/datametricService";
-import { Table } from "antd";
+import { Table, Tag } from "antd";
 
 const DailyTransaction = () => {
     const dispatch = useDispatch();
@@ -11,17 +11,96 @@ const DailyTransaction = () => {
 
     const columns = [
         {
-            title: 'Name',
+            title: 'Patient Info',
             dataIndex: 'FirstName',
             key: 'Name',
             render: (text, record) => {
-                return `${text} ${record.MiddleName} ${record.LastName}`
+                let fullName = `${text} ${record.MiddleName} ${record.LastName}`
+                let ager = `(${record.Age})`
+                return (
+                    <>
+                        <div>{fullName},</div>
+                        <div>{record.Id},</div>
+                        <div>{ager}</div>
+                        <div>{record.ContactNo}</div>
+                    </>
+                )
             }
         },
         {
-            title: 'Name',
-            dataIndex: 'FirstName',
-            key: 'Name',
+            title: 'Bill No',
+            dataIndex: 'BillNo',
+            key: 'BillNo',
+        },
+        {
+            title: 'Created On',
+            dataIndex: 'CreatedOn',
+            key: 'CreatedOn',
+            render: (text, record) => (
+                `${text.split('T')[0]} (${record.CreatedOnNepaliDate})`
+            )
+        },
+        {
+            title: 'Payment Details',
+            dataIndex: 'PaymentTYpe',
+            key: 'PaymentTYpe',
+            render: (text, record) => {
+                // let retColor = ''
+                // if(text !== null && text.toLowerCase() === 'cash')
+                //     retColor = 'green'
+                return (
+                    <>
+                        {/* <Tag color={retColor}>{text}</Tag> */}
+                        Type: {text} <br />
+                        Mode: {record.PaymentMOde} <br />
+                        Code: {record.PaymentCode}
+                    </>
+                )
+            }
+        },
+        {
+            title: 'Is Paid',
+            dataIndex: 'IsPaid',
+            key: 'IsPaid',
+            render: (text) => {
+                let retText = 'Not Paid'
+                let retColor = 'red'
+                if (text === true) {
+                    retText = 'Paid'
+                    retColor = 'green'
+                }
+                return <Tag color={retColor}>{retText}</Tag>
+            }
+        },
+        {
+            title: 'Sample Id',
+            dataIndex: 'SampleId',
+            key: 'SampleId',
+        },
+        {
+            title: 'Requestor',
+            dataIndex: 'Requestor',
+            key: 'Requestor',
+        },
+        {
+            title: 'User Name',
+            dataIndex: 'usrFullName',
+            key: 'usrFullName',
+        },
+        {
+            title: 'Amount',
+            dataIndex: 'Amount',
+            key: 'Amount',
+        },
+        {
+            title: 'Remaining Amount',
+            dataIndex: 'RemainingAmount',
+            key: 'RemainingAmount',
+        },
+        {
+            title: 'Total Price',
+            dataIndex: 'TotalPrice',
+            key: 'TotalPrice',
         },
     ]
 
@@ -51,10 +130,12 @@ const DailyTransaction = () => {
                 serchButton
                 getuserslist
             />
-            <Table
-                columns={columns}
-                dataSource={testData}
-            />
+            <div className="tableisRes">
+                <Table
+                    columns={columns}
+                    dataSource={testData}
+                />
+            </div>
         </>
     )
 }

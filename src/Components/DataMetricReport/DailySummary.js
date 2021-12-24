@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
 import { getDailySummaryReport } from "../../services/datametricService";
-import { Table } from "antd";
+import { Table, Tag } from "antd";
 
 const DailySummary = () => {
     const dispatch = useDispatch();
@@ -34,6 +34,20 @@ const DailySummary = () => {
             title: 'Payment Type',
             dataIndex: 'PaymentType',
             key: 'PaymentType',
+            render: (text) => {
+                let retColor = ''
+                if (text !== null) {
+                    if (text.toLowerCase() == 'cash')
+                        retColor = 'green'
+                    else if (text.toLowerCase() == 'card')
+                        retColor = 'blue'
+                    else if (text.toLowerCase() == 'due' || text.toLowerCase() == 'duecollection')
+                        retColor = 'yellow'
+                    else if (text.toLowerCase() == 'credit' || text.toLowerCase() == 'creditcollection')
+                        retColor = 'red'
+                }
+                return <Tag color={retColor}>{text}</Tag>
+            }
         },
     ]
 
