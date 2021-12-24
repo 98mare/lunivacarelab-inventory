@@ -1,4 +1,4 @@
-import { message ,notification} from 'antd';
+import { message, notification } from 'antd';
 import pMinDelay from 'p-min-delay';
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -22,25 +22,30 @@ export default function Login() {
       user: values?.username,
       pass: values?.password
     }
-    setToken({ token: 'asd', username: 'asd', roleId: 1, UId: 1 })
-          // setToken({ token: andd[0]?.usrUsername, username: andd[0]?.usrUsername, roleId: andd[0]?.usrrole, UId: andd[0]?.usruserid })
-          // console.log(token);
-          history.push({
-            pathname: '/'
-          })
+    setToken({
+      token: 'admin',
+      username: 'admin',
+      roleId: 1,
+      UId: 1
+    })
+    history.push({
+      pathname: '/'
+    })
     dispatch(getLoginApi(data, (val) => {
       if (val.length !== 0) {
         let andd = val?.CheckValidLoginForInventory;
-        if (1 === 1) {
-          // andd[0]?.usruserid > 0
-          setToken({ token: 'asd', username: 'asd', roleId: 1, UId: 1 })
-          // setToken({ token: andd[0]?.usrUsername, username: andd[0]?.usrUsername, roleId: andd[0]?.usrrole, UId: andd[0]?.usruserid })
-          // console.log(token);
+        if (andd[0]?.usruserid > 0) {
+          setToken({
+            token: andd[0]?.usrUsername,
+            username: andd[0]?.usrUsername,
+            roleId: andd[0]?.usrrole,
+            UId: andd[0]?.usruserid
+          })
           history.push({
             pathname: '/'
           })
           pMinDelay(openNotification('topLeft'), 2000);
-        }else{
+        } else {
           message.error('Username or password incorrect');
         }
       } else {
@@ -50,33 +55,32 @@ export default function Login() {
   };
 
   const onFinishFailed = (errorInfo) => {
-    // console.log('Failed:', errorInfo);
   };
-  
-  const getData =() => {
+
+  const getData = () => {
     const pushedArr = []
-    dispatch(getItemNearApi(value =>{ 
+    dispatch(getItemNearApi(value => {
       value.forEach(ele => {
         pushedArr.push(ele);
       })
-    setTableData(pushedArr)
+      setTableData(pushedArr)
 
-  }))
+    }))
   }
   useEffect(() => {
     getData();
   }, [])
 
   const openNotification = (placement) => {
-      if(tableData.length >= 1){
-        notification.info({
-          message: `Some items Are out of Stocks`,
-          placement,
-        }) 
-      }else{
-        
-      }
-       
+    if (tableData.length >= 1) {
+      notification.info({
+        message: `Some items Are out of Stocks`,
+        placement,
+      })
+    } else {
+
+    }
+
   };
 
   return (
