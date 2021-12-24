@@ -10,15 +10,7 @@ const RequestorReport = () => {
     const [tableData, settableData] = useState([]);
     const [tableHead, setTableHead] = useState([]);
     const [labelName, setLabelName] = useState([]);
-    const [newTableData,setnewTableData] = useState([]);
- 
-    // const columns = [
-    //     {
-    //         title: 'Requestor',
-    //         dataIndex: 'Requestor',
-    //         key: 'Requestor',
-    //     },
-    // ]
+    const [newTableData, setnewTableData] = useState([]);
 
     const getDataForReport = (data) => {
         dispatch(getRequestorReport(data, (val) => {
@@ -33,19 +25,17 @@ const RequestorReport = () => {
             ...val,
             fromdate: val[0].format("YYYY-MM-DD"),
             todate: val[1].format("YYYY-MM-DD"),
-          }
-          getDataForReport(data)
+        }
+        getDataForReport(data)
     }
 
     useEffect(() => {
         createTableHead()
-
     }, [tableData]);
-    
-    
+
+
 
     const createTableHead = () => {
-        console.log(tableData.length);
         if (tableData.length !== 0) {
             let tableKeys = Object.keys(tableData[0]);
             let data = []
@@ -58,27 +48,17 @@ const RequestorReport = () => {
                     key: ele,
                 })
             })
-
-            // tableData.forEach(ele => {
-            //     if(ele["Patient Name"] !== null)
-            //         labels.push(ele["Patient Name"]);
-            // })
-
-            // setLabelName(labels)
             setTableHead(data)
-            
         }
     }
-    console.log("table head", tableHead);
-    console.log("table labels", labelName);
-    
+
     const handleSearch = (val) => {
-        if(val === undefined || val === ''){
+        if (val === undefined || val === '') {
             setnewTableData(tableData)
-        }else{
-            setnewTableData(val) 
+        } else {
+            setnewTableData(val)
         }
-      }
+    }
     return (
         <>
             <PageHeader
@@ -96,8 +76,6 @@ const RequestorReport = () => {
                 onSearch
                 dataReturn={handleSearch}
                 forRequestorReport
-                
-
             />
             <Table
                 columns={tableHead}

@@ -41,7 +41,7 @@ const ReferReport = () => {
     }, [tableData]);
 
     const createTableHead = () => {
-        if(tableData.leght !== 0){
+        if(tableData.length !== 0){
             let tableKeys = Object.keys(tableData[0]);
             let data =[]
             let labels = [];
