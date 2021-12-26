@@ -13,7 +13,7 @@ import FilterTable from './FilterTable'
 import { getGetRequestorList, getGetRefererList, getListofUser } from '../../services/datametricService'
 
 const Filter = ({ dataReturn, ...props }) => {
-  const { serchButton, itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate, toCompareData, forGoodsIn, forGoodsOut, onSearch, forConsumptionReport, forItem, forItemVsRatio, forItemType, forCategory, forLocation, forRack, forUnits, forConsumption, forConsumptionLookUp, getrequestorlist, getrefererlist, getuserslist,forRequestorReport, forRefererReport } = props
+  const { serchButton, itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate, toCompareData, forGoodsIn, forGoodsOut, onSearch, forConsumptionReport, forItem, forItemVsRatio, forItemType, forCategory, forLocation, forRack, forUnits, forConsumption, forConsumptionLookUp, getrequestorlist, getrefererlist, getuserslist, forRequestorReport, forRefererReport } = props
   const dispatch = useDispatch();
 
   const { Option } = Select;
@@ -28,7 +28,7 @@ const Filter = ({ dataReturn, ...props }) => {
   const [itemNameList, setitemNameList] = useState(notAll === undefined ? 0 : 1)
   const [itemNameLister, setitemNameLister] = useState([])
   const [requestorList, setrequestorList] = useState([])
-  const [requestorId, setrequestorId] = useState(0)
+  const [requestorId, setrequestorId] = useState()
   const [userLister, setuserLister] = useState([])
   const [userListId, setuserListId] = useState(0)
 
@@ -245,15 +245,15 @@ const Filter = ({ dataReturn, ...props }) => {
             ?
             pushedArr.push(e)
             : ''
-        ) 
+        )
       }
       if (forRefererReport) {
         return (
-          e["Refer Name"].toLowerCase().includes(searchText) 
-          ||(e.BillNo !== undefined && e.BillNo.toLowerCase().includes(searchText))
-          ||(e.Test !== undefined && e.Test.toLowerCase().includes(searchText))
-          ||e["Patient Name"].toLowerCase().includes(searchText)
-          // ||(e.Price!== undefined && e.Price.toLowerCase().includes(searchText))
+          e["Refer Name"].toLowerCase().includes(searchText)
+            || (e.BillNo !== undefined && e.BillNo.toLowerCase().includes(searchText))
+            || (e.Test !== undefined && e.Test.toLowerCase().includes(searchText))
+            || e["Patient Name"].toLowerCase().includes(searchText)
+            // ||(e.Price!== undefined && e.Price.toLowerCase().includes(searchText))
             ?
             pushedArr.push(e)
             : ''
@@ -366,10 +366,26 @@ const Filter = ({ dataReturn, ...props }) => {
             {getrequestorlist &&
               <Col lg={8} md={10} sm={12} xs={24}>
                 <span className='labelTop'>Requestor List</span>
-                <Select style={{ width: '100%' }} onChange={(val) => { setrequestorId(val) }} size='default'>
-                  <Option value="0">All</Option>
+                <Select
+                  showSearch
+                  optionFilterProp="children"
+                  placeholder="Select Requestor"
+                  filterOption={(input, option) => {
+                    return (
+                      option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                      option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    );
+                  }}
+                  style={{ width: '100%' }}
+                  onChange={(val) => { setrequestorId(val) }}
+                  size='default'
+                >
+                  {/* <Option value="0">All</Option> */}
                   {requestorList?.map(iTy => (
-                    <Option value={iTy?.Id}>
+                    <Option
+                      title={iTy?.Requestor}
+                      key={iTy?.Id}
+                      value={iTy?.Id}>
                       {iTy?.Requestor}
                     </Option>
                   ))
@@ -381,10 +397,27 @@ const Filter = ({ dataReturn, ...props }) => {
             {getrefererlist &&
               <Col lg={8} md={10} sm={12} xs={24}>
                 <span className='labelTop'>Refered By</span>
-                <Select style={{ width: '100%' }} onChange={(val) => { setrequestorId(val) }} size='default'>
-                  <Option value="0">All</Option>
+                <Select
+                  showSearch
+                  optionFilterProp="children"
+                  placeholder="Select Referer"
+                  filterOption={(input, option) => {
+                    return (
+                      option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                      option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    );
+                  }}
+                  style={{ width: '100%' }}
+                  onChange={(val) => { setrequestorId(val) }}
+                  size='default'
+                >
+                  {/* <Option value="0">All</Option> */}
                   {requestorList?.map(iTy => (
-                    <Option value={iTy?.Id}>
+                    <Option
+                      title={iTy?.Name}
+                      key={iTy?.Id}
+                      value={iTy?.Id}
+                    >
                       {iTy?.Name}
                     </Option>
                   ))
@@ -396,10 +429,27 @@ const Filter = ({ dataReturn, ...props }) => {
             {getuserslist &&
               <Col lg={8} md={10} sm={12} xs={24}>
                 <span className='labelTop'>Users</span>
-                <Select style={{ width: '100%' }} onChange={(val) => { setuserListId(val) }} size='default'>
-                  <Option value="0">All</Option>
+                <Select
+                  showSearch
+                  optionFilterProp="children"
+                  placeholder="Select User"
+                  filterOption={(input, option) => {
+                    return (
+                      option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                      option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    );
+                  }}
+                  style={{ width: '100%' }}
+                  onChange={(val) => { setuserListId(val) }}
+                  size='default'
+                >
+                  <Option title="All"
+                    key="0" value="0">All</Option>
                   {userLister?.map(iTy => (
-                    <Option value={iTy?.Id}>
+                    <Option
+                      title={iTy?.usrFullName}
+                      key={iTy?.Id}
+                      value={iTy?.Id}>
                       {iTy?.usrFullName}
                     </Option>
                   ))
