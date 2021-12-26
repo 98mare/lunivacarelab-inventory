@@ -4,20 +4,26 @@ import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
 import { getReferReport } from "../../services/datametricService";
 import { Table } from "antd";
+import { getAllPritDataSucess } from "../../store/slices/printSlice";
 
 const ReferReport = () => {
     const dispatch = useDispatch();
     const [tableData, settableData] = useState([]);
     const [tableHead, settableHead] = useState([]);
     const [newTableData, setnewTableData] = useState([]);
+    const [printData, setprintData] = useState([])
 
     const getDataForReport = (data) => {
+        setprintData(data)
         dispatch(getReferReport(data, (val) => {
             settableData(val)
             setnewTableData(val)
+            let obj = {data, val }
+            dispatch(getAllPritDataSucess(obj))
             
         }))
     }
+    // console.log("date",printData)
 
     const dataRet = (val) => {
         let data = {
@@ -27,6 +33,7 @@ const ReferReport = () => {
         }
         getDataForReport(data)
     }
+    
 
     useEffect(() => {
         createTableHead()
@@ -48,10 +55,18 @@ const ReferReport = () => {
         }
     }
     const handleSearch = (val) => {
+        let data = printData
+        
         if(val === undefined || val === ''){
             setnewTableData(tableData)
+            // dispatch(getAllPritDataSucess(val))
+            let obj2={data, tableData}
+            dispatch(getAllPritDataSucess(obj2))
         }else{
             setnewTableData(val) 
+            // dispatch(getAllPritDataSucess(val))
+            let obj3={data, val}
+            dispatch(getAllPritDataSucess(obj3))
         }
       }
 
@@ -62,6 +77,9 @@ const ReferReport = () => {
                 csvLinkTitle='Export CSV'
                 csvData={newTableData}
                 csvDataName='RefererReport.csv'
+
+                printFileName='referReport'
+                printTitle='Refrerer Name'
             />
             <Filter
                 dateRange

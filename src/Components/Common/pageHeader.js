@@ -3,46 +3,40 @@ import React from 'react'
 import styled from 'styled-components'
 import AppButton from './AppButton'
 import { CSVLink } from 'react-csv';
+import { Link, useHistory } from 'react-router-dom';
+import { useState } from 'react';
+import PrintFile from './PritFile';
 
-const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDataName, csvData,forGroup, forGroupButtonClick,forCon, forConButtonClick }) => {
+const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDataName, csvData, forGroup, forGroupButtonClick, forCon, forConButtonClick, printFileName,
+  printTitle,
+  getDate,
+  tableHead,
+  dataSource }) => {
 
-  // to CSV goods in report
-  // const goodsInReducer = useSelector((state) => state.goodsin);
-  // const GoodsInRed = (value) => {
-  //   let newArr = [];
-  //   for (const key in value) {
-  //     if (Object.hasOwnProperty.call(value, key)) {
-  //       const ele = value[key];
-  //       newArr.push(ele)
-  //     }
-  //   }
-  //   return newArr;
-  // }
-  // let goodsInData = GoodsInRed(goodsInReducer?.goodsin);
+    // console.log(getDate);
 
-  // to CSV goods out report
-  // const GoodsOutReducer = useSelector((state) => state.goodsout);
-  // const GoodsOutRed = (value) => {
-  //   let newArr = [];
-  //   for (const key in value) {
-  //     if (Object.hasOwnProperty.call(value, key)) {
-  //       const ele = value[key];
-  //       newArr.push(ele)
-  //     }
-  //   }
-  //   return newArr;
-  // }
-  // let goodsOutData = GoodsOutRed(GoodsOutReducer?.goodsOuts);
+  const [printData, setprintData] = useState({});
+  // const printDataFunction =() => {
+  //   let arr = [printTitle, getDate, tableHead, dataSource]
+  //   setprintData(arr)
+  // }\
+  // console.log(dataSource);
+  
+  // useState(()=> {
+  //   let arr = {printTitle, getDate, tableHead, dataSource}
+  //   setprintData(arr)
+  // }, [dataSource])
 
+  // console.log('this is pirt data',printData);
 
   return (
     <PageHeaderContainer>
       <Row justify='space-between align-center'>
         <span className='pageTtitle'>{pageTitle}</span>
-        <Row style={{gap: '10px'}}>
+        <Row style={{ gap: '10px' }}>
           {forCon && <AppButton buttonTitle={forCon} buttonOnClick={forConButtonClick} primaryBtn ></AppButton>}
 
-          {buttonTitle && <AppButton buttonTitle={buttonTitle} buttonOnClick={buttonOnClick} primaryBtn ></AppButton>}          
+          {buttonTitle && <AppButton buttonTitle={buttonTitle} buttonOnClick={buttonOnClick} primaryBtn ></AppButton>}
 
           {forGroup && <AppButton buttonTitle={forGroup} buttonOnClick={forGroupButtonClick} primaryBtn ></AppButton>}
 
@@ -53,13 +47,18 @@ const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDa
             </div>
           }
 
-          {/* {
-            goodsOut &&
+          {
+            printFileName &&
             <div className='link'>
-              <CSVLink filename={"goodsOut.csv"} className="btn ant-btn btn-primary btn-primary--outline" data={goodsOut}>{csvLinkTitle}</CSVLink>
-              
+              <Link filename={printFileName} className="btn ant-btn btn-primary btn-primary--outline" 
+              to='/printfile'
+              // target={"_blank"}
+              // rel="noopener noreferrer"
+                // printData={printData}
+              >print</Link>
             </div>
-          } */}
+          }
+
 
         </Row>
       </Row>
