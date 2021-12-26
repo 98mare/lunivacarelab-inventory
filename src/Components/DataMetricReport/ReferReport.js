@@ -10,15 +10,6 @@ const ReferReport = () => {
     const [tableData, settableData] = useState([]);
     const [tableHead, settableHead] = useState([]);
     const [newTableData, setnewTableData] = useState([]);
-    
-
-    // const columns = [
-    //     {
-    //         title: 'Referer',
-    //         dataIndex: 'Referer',
-    //         key: 'Referer',
-    //     },
-    // ]
 
     const getDataForReport = (data) => {
         dispatch(getReferReport(data, (val) => {
@@ -52,11 +43,6 @@ const ReferReport = () => {
                     key: ele,
                 })
             })
-            
-            // tableData.forEach(ele => {
-            //     if(ele['Requestor Name'] !== null)
-            //         labels.push(ele['Requestor Name']);
-            // })
 
             settableHead(data);
         }

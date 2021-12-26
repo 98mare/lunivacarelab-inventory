@@ -42,9 +42,7 @@ const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDa
         <Row style={{gap: '10px'}}>
           {forCon && <AppButton buttonTitle={forCon} buttonOnClick={forConButtonClick} primaryBtn ></AppButton>}
 
-          {buttonTitle && <AppButton buttonTitle={buttonTitle} buttonOnClick={buttonOnClick} primaryBtn ></AppButton>}
-
-          
+          {buttonTitle && <AppButton buttonTitle={buttonTitle} buttonOnClick={buttonOnClick} primaryBtn ></AppButton>}          
 
           {forGroup && <AppButton buttonTitle={forGroup} buttonOnClick={forGroupButtonClick} primaryBtn ></AppButton>}
 
@@ -52,7 +50,6 @@ const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDa
             csvDataName &&
             <div className='link'>
               <CSVLink filename={csvDataName} className="btn ant-btn btn-primary btn-primary--outline" data={csvData}>{csvLinkTitle}</CSVLink>
-             
             </div>
           }
 
