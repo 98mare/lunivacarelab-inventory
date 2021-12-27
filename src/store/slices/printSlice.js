@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { normalize, schema } from "normalizr";
 
-const initialState=
-{
+const initialState = {
     printdata: {},
     date: {}
 }
@@ -16,7 +14,6 @@ const printdata = createSlice({
         getAllPritDataSucess: (state, action) => {
             state.printdata = action.payload.val;
             state.date = action.payload.data;
-
         }
     }
 })
