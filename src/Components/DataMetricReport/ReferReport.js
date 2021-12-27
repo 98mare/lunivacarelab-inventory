@@ -6,6 +6,8 @@ import { getReferReport } from "../../services/datametricService";
 import { Table } from "antd";
 import { getAllPritDataSucess } from "../../store/slices/printSlice";
 import { newTableStyles } from "../Common/TableStyles";
+import styled from "styled-components";
+import styledComponents from "styled-components";
 
 const ReferReport = () => {
     const dispatch = useDispatch();
@@ -119,7 +121,7 @@ const ReferReport = () => {
     }
 
     return (
-        <>
+        <ReferReportContainer>
             <PageHeader
                 pageTitle='Referer Report'
                 csvLinkTitle='Export CSV'
@@ -128,8 +130,13 @@ const ReferReport = () => {
 
                 printFileName='referReport'
                 printTitle='Refrerer Name'
-            />
-            <button onClick={handlePrinter}>Printer</button>
+            >
+
+            </PageHeader>
+            <div className="printBtncontainer">
+                <button onClick={handlePrinter} className="costomeBtn btn ant-btn btn-primary btn-primary--outline">Printer</button>
+            </div>
+
             <Filter
                 dateRange
                 dateRet={dataRet}
@@ -145,8 +152,24 @@ const ReferReport = () => {
                 columns={tableHead}
                 dataSource={newTableData}
             />
-        </>
+        </ReferReportContainer>
     )
 }
 
 export default ReferReport
+
+const ReferReportContainer = styledComponents.div`
+    .printBtncontainer{
+        display: flex;
+        background-color: #fefefe;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: end; 
+        width: 100%;
+        .costomeBtn
+            {
+                width: 100px;
+            }
+    }
+    
+`
