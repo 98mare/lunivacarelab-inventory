@@ -30,9 +30,7 @@ tbody > tr > td {
     border-bottom: 1px solid #f0f0f0;
     transition: background 0.3s;
 }
-thead > tr> th:first-child, tbody > tr > td:first-child{
-    display: none;
-}
+
 
 .gocenter {
     text-align: center;
