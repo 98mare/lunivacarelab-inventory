@@ -1,4 +1,4 @@
-import { GetListOfUserForMetric, GetListOfTestByTypeForBulkUpdate, GetTestType, GetDatewiseRequestorTransactionDetails, GetRequestorList, GetReferedDoctorList, GetRequestorwiseTotalSalesSummaryByDate, GetDatewiseReferredDoctorTransactionDetails, GetDailySummaryTransactionUserWiseByDate, GetDailyTransactionByUserIdAndDate } from '../constants/url';
+import { GetListOfUserForMetric, GetListOfTestByTypeForBulkUpdate, GetTestType, GetDatewiseRequestorTransactionDetails, GetRequestorList, GetReferedDoctorList, GetRequestorwiseTotalSalesSummaryByDate, GetDatewiseReferredDoctorTransactionDetails, GetDailySummaryTransactionUserWiseByDate, GetDailyTransactionByUserIdAndDate, GetCompanyDetials } from '../constants/url';
 import { fetch, store } from '../utils/httpUtil';
 
 export const getTestTypeReport = (data, successCallback) => {
@@ -141,6 +141,21 @@ export const getListofUser = (successCallback) => {
     return async dispatch => {
         try {
             const response = await fetch(`${GetListOfUserForMetric}`);
+            if (response?.status === 200) {
+                successCallback(response?.data?.ReportType)
+            } else {
+                successCallback([])
+            }
+        } catch (error) {
+
+        }
+    }
+}
+
+export const getListofcompany = (successCallback) => {
+    return async dispatch => {
+        try {
+            const response = await fetch(`${GetCompanyDetials}`);
             if (response?.status === 200) {
                 successCallback(response?.data?.ReportType)
             } else {

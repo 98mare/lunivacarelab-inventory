@@ -167,6 +167,7 @@ export const GetDailyTransactionByUserIdAndDate = 'GetDailyTransactionByUserIdAn
 * @param: 
 */
 export const GetListOfUserForMetric = 'GetListOfUserForMetric';
+export const GetCompanyDetials = 'GetCompanyDetials';
 //carelabdatametric services only dont mix up
 
 //POST

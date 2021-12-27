@@ -9,31 +9,36 @@ body {
 table {
     width: 100%;
     max-width: 100%;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
     border-spacing: 0;
     border-collapse: collapse;
 }
 thead > tr > th, tbody > tr > td {
-    padding: 16px 16px;
+    padding: 4px 4px;
     overflow-wrap: break-word;
+    font-size: 10px;
+    border-bottom: 1px solid #232325;
 }
 thead > tr > th {
     position: relative;
     color: rgba(0, 0, 0, 0.85);
     font-weight: 500;
     text-align: left;
-    background: #fafafa;
-    border-bottom: 1px solid #f0f0f0;
+    // background: #fafafa;
+    border-bottom: 1px solid #232325;
     transition: background 0.3s ease;
 }
 tbody > tr > td {
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f1;
     transition: background 0.3s;
 }
 
 
 .gocenter {
     text-align: center;
+}
+.gocenter h2, .gocenter p{
+    margin: 0;
 }
 .headingContent{
     display: flex;

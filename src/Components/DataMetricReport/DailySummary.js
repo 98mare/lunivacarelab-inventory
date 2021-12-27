@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
-import { getDailySummaryReport } from "../../services/datametricService";
+import { getDailySummaryReport, getListofcompany } from "../../services/datametricService";
 import { Table, Tag } from "antd";
 import { newTableStyles } from "../Common/TableStyles";
+import { useEffect } from "react";
 
 const DailySummary = () => {
     const dispatch = useDispatch();
     const [tableData, settableData] = useState([]);
     const [newTableData, setNewTableData] = useState([]);
     const [fromToDate, setfromToDate] = useState({});
+    const [companyDetail, setcompanyDetail] = useState([]);
 
     const tableHead = [
         {
@@ -86,11 +88,22 @@ const DailySummary = () => {
             // dispatch(getAllPritDataSucess(obj3))
         }
       }
+      useEffect(()=> {
+        dispatch(getListofcompany(data=> {
+            setcompanyDetail(data[0])
+        }))
+    }, [])
       const handlePrinter = () => {
         if (tableHead.length !== 0) {
             let newWindow = window.open()
 
-            let refName = `<h3 class="gocenter">Daily Summery Report</h3><div class="headingContent">
+            let refName = `
+            <div class="gocenter">
+                <h2> ${companyDetail.CompanyName} </h2>
+                <p> ${companyDetail.COmpanyAddress} </p>
+                <p>Contact no:${companyDetail.COmpanyContactNo} </p>
+            </div>
+            <h2 class="gocenter">Daily Summary Report</h2><div class="headingContent">
         <div>
         
         </div>
@@ -136,6 +149,9 @@ const DailySummary = () => {
         <>
             <PageHeader
                 pageTitle='Daily Summary Report'
+                csvLinkTitle='Export CSV'
+                csvData={newTableData}
+                csvDataName='dailySummeryReport.csv'
             />
             <div className="printBtncontainer">
                 <button onClick={handlePrinter} className="btn ant-btn btn-primary btn-primary--outline">Print</button>

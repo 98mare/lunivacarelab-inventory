@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
-import { getReferReport } from "../../services/datametricService";
+import { getListofcompany, getReferReport } from "../../services/datametricService";
 import { Table } from "antd";
 import { getAllPritDataSucess } from "../../store/slices/printSlice";
 import { newTableStyles } from "../Common/TableStyles";
@@ -15,6 +15,7 @@ const ReferReport = () => {
     const [newTableData, setnewTableData] = useState([]);
     const [printData, setprintData] = useState([])
     const [fromToDate, setfromToDate] = useState({});
+    const [companyDetail, setcompanyDetail] = useState([]);
 
     const getDataForReport = (data) => {
         setprintData(data)
@@ -37,6 +38,12 @@ const ReferReport = () => {
         getDataForReport(data)
         setfromToDate(data);
     }
+    useEffect(()=> {
+        dispatch(getListofcompany(data=> {
+            setcompanyDetail(data[0])
+        }))
+    }, [])
+
 
 
     useEffect(() => {
@@ -78,7 +85,13 @@ const ReferReport = () => {
         if (tableHead.length !== 0) {
             let newWindow = window.open()
 
-            let refName = `<h3 class="gocenter">Referer Report</h3><div class="headingContent">
+            let refName = `
+            <div class="gocenter">
+                <h2> ${companyDetail.CompanyName} </h2>
+                <p> ${companyDetail.COmpanyAddress} </p>
+                <p>Contact no:${companyDetail.COmpanyContactNo} </p>
+            </div>
+            <h2 class="gocenter">Referer Report</h2><div class="headingContent">
         <div>
         Referer Name: ${newTableData[0]['Refer Name']}
         </div>
@@ -91,7 +104,7 @@ const ReferReport = () => {
             let tableBody = '';
             let tableHeadHtml = '<thead>';
             let columns = [];
-            let newStyle = `<style>thead > tr> th:first-child, tbody > tr > td:first-child{
+            let newStyle = `<style>thead > tr> th:first-child, thead > tr> th:nth-child(2), tbody > tr > td:first-child,tbody > tr > td:nth-child(2){
                 display: none;
                }</style>`
 

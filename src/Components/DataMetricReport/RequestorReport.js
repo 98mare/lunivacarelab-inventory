@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
-import { getRequestorReport } from "../../services/datametricService";
+import { getListofcompany, getRequestorReport } from "../../services/datametricService";
 import { Table } from "antd";
 import { newTableStyles } from "../Common/TableStyles";
 
@@ -11,7 +11,7 @@ const RequestorReport = () => {
     const dispatch = useDispatch();
     const [tableData, settableData] = useState([]);
     const [tableHead, setTableHead] = useState([]);
-    const [labelName, setLabelName] = useState([]);
+    const [companyDetail, setcompanyDetail] = useState([]);
     const [newTableData, setnewTableData] = useState([]);
     const [fromToDate, setfromToDate] = useState({});
 
@@ -20,6 +20,7 @@ const RequestorReport = () => {
             settableData(val)
             setnewTableData(val)
         }))
+
     }
 
 
@@ -36,6 +37,12 @@ const RequestorReport = () => {
     useEffect(() => {
         createTableHead()
     }, [tableData]);
+
+    useEffect(()=> {
+        dispatch(getListofcompany(data=> {
+            setcompanyDetail(data[0])
+        }))
+    }, [])
 
 
 
@@ -63,24 +70,30 @@ const RequestorReport = () => {
         }
     }
     const handlePrinter = () => {
-        
+
         if (tableHead.length !== 0) {
             let newWindow = window.open()
 
-            let refName = `<h3 class="gocenter">Requerstor Report</h3><div class="headingContent">
-        <div>
-        Requestor name: ${newTableData[0]['Requestor Name']}
-        </div>
-        <div>
-        From ${fromToDate?.fromdate} - To ${fromToDate?.todate}
-        </div>
-        </div>
-        `;
+            let refName = `
+            <div class="gocenter">
+                <h2> ${companyDetail.CompanyName} </h2>
+                <p> ${companyDetail.COmpanyAddress} </p>
+                <p>Contact no:${companyDetail.COmpanyContactNo} </p>
+            </div>
+            <h2 class="gocenter">Requestor Report</h2><div class="headingContent">
+            <div>
+            Requestor name: ${newTableData[0]['Requestor Name']}
+            </div>
+            <div>
+            From ${fromToDate?.fromdate} - To ${fromToDate?.todate}
+            </div>
+            </div>
+            `;
 
             let tableBody = '';
             let tableHeadHtml = '<thead>';
             let columns = [];
-            let newStyle = `<style>thead > tr> th:first-child, tbody > tr > td:first-child{
+            let newStyle = `<style>thead > tr> th:first-child, thead > tr> th:nth-child(2), tbody > tr > td:first-child,tbody > tr > td:nth-child(2){
                  display: none;
                 }</style>`
 
@@ -102,7 +115,7 @@ const RequestorReport = () => {
 
             let allTable = `<table>${tableHeadHtml}${tableBody}</table>`
 
-            newWindow.document.body.innerHTML = newTableStyles + newStyle + refName + allTable 
+            newWindow.document.body.innerHTML = newTableStyles + newStyle + refName + allTable
 
             setTimeout(function () {
                 newWindow.print();
