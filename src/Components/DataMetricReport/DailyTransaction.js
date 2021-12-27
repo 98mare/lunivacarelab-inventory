@@ -7,7 +7,8 @@ import { Table, Tag } from "antd";
 
 const DailyTransaction = () => {
     const dispatch = useDispatch();
-    const [testData, setTestData] = useState([]);
+    const [tableData, settableData] = useState([]);
+    const [newtableData, setnewtableData] = useState([]);
 
     const columns = [
         {
@@ -106,7 +107,8 @@ const DailyTransaction = () => {
 
     const getDataForReport = (data) => {
         dispatch(getDailyTransactionReport(data, (val) => {
-            setTestData(val)
+            settableData(val)
+            setnewtableData(val)
         }))
     }
 
@@ -118,6 +120,22 @@ const DailyTransaction = () => {
         }
         getDataForReport(data)
     }
+    const handleSearch = (val) => {
+        // let data = printData
+        
+        if(val === undefined || val === ''){
+            setnewtableData(tableData)
+            // dispatch(getAllPritDataSucess(val))
+            // let obj2={data, tableData}
+            // dispatch(getAllPritDataSucess(obj2))
+        }else{
+            setnewtableData(val) 
+            // dispatch(getAllPritDataSucess(val))
+            // let obj3={data, val}
+            // dispatch(getAllPritDataSucess(obj3))
+        }
+      }
+
 
     return (
         <>
@@ -129,11 +147,15 @@ const DailyTransaction = () => {
                 dateRet={dataRet}
                 serchButton
                 getuserslist
+                toCompareData={tableData}
+                onSearch
+                dataReturn={handleSearch}
+                forDailyTrasection
             />
             <div className="tableisRes">
                 <Table
                     columns={columns}
-                    dataSource={testData}
+                    dataSource={newtableData}
                 />
             </div>
         </>

@@ -7,7 +7,8 @@ import { Table } from "antd";
 
 const RequestorSalesReport = () => {
     const dispatch = useDispatch();
-    const [testData, setTestData] = useState([]);
+    const [tableData, settableData] = useState([]);
+    const [newtableData, setnewtableData] = useState([]);
 
     const columns = [
         {
@@ -34,7 +35,8 @@ const RequestorSalesReport = () => {
 
     const getDataForReport = (data) => {
         dispatch(getRequestorTotalSalesReport(data, (val) => {
-            setTestData(val)
+            settableData(val)
+            setnewtableData(val)
         }))
     }
 
@@ -45,6 +47,21 @@ const RequestorSalesReport = () => {
         }
         getDataForReport(data)
     }
+    const handleSearch = (val) => {
+        // let data = printData
+        
+        if(val === undefined || val === ''){
+            setnewtableData(tableData)
+            // dispatch(getAllPritDataSucess(val))
+            // let obj2={data, tableData}
+            // dispatch(getAllPritDataSucess(obj2))
+        }else{
+            setnewtableData(val) 
+            // dispatch(getAllPritDataSucess(val))
+            // let obj3={data, val}
+            // dispatch(getAllPritDataSucess(obj3))
+        }
+      }
 
     return (
         <>
@@ -55,10 +72,14 @@ const RequestorSalesReport = () => {
                 dateRange
                 dateRet={dataRet}
                 serchButton
+                toCompareData={tableData}
+                onSearch
+                dataReturn={handleSearch}
+                forReportSalesReport
             />
             <Table
                 columns={columns}
-                dataSource={testData}
+                dataSource={newtableData}
             />
         </>
     )

@@ -13,7 +13,7 @@ import FilterTable from './FilterTable'
 import { getGetRequestorList, getGetRefererList, getListofUser } from '../../services/datametricService'
 
 const Filter = ({ dataReturn, ...props }) => {
-  const { serchButton, itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate, toCompareData, forGoodsIn, forGoodsOut, onSearch, forConsumptionReport, forItem, forItemVsRatio, forItemType, forCategory, forLocation, forRack, forUnits, forConsumption, forConsumptionLookUp, getrequestorlist, getrefererlist, getuserslist, forRequestorReport, forRefererReport } = props
+  const { serchButton, itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate, toCompareData, forGoodsIn, forGoodsOut, onSearch, forConsumptionReport, forItem, forItemVsRatio, forItemType, forCategory, forLocation, forRack, forUnits, forConsumption, forConsumptionLookUp, getrequestorlist, getrefererlist, getuserslist, forRequestorReport, forRefererReport, forDailyReport,forDailyTrasection, forReportSalesReport } = props
   const dispatch = useDispatch();
 
   const { Option } = Select;
@@ -259,6 +259,77 @@ const Filter = ({ dataReturn, ...props }) => {
             : ''
         )
       }
+      if (forDailyReport) {
+        return (
+          e.UserName.toLowerCase().includes(searchText)
+          || e.PaymentType.toLowerCase().includes(searchText)
+          || e.Remaining.toString().includes(searchText)
+          || e.TotalSales.toString().includes(searchText)
+          || e.Collection.toString().includes(searchText)
+
+          ?
+          pushedArr.push(e) : ''
+        )
+      }
+
+      if(forDailyTrasection){ 
+        // Age: "37 yrs"
+        // Amount: 1200
+        // BillId: 156716
+        // BillNo: "LUC0117279  "
+        // ContactNo: "9842574502"
+        // CreatedBy: 149
+        // CreatedOn: "2021-12-27T11:37:39.177"
+        // CreatedOnNepaliDate: "2078/09/12"
+        // FirstName: "Gyan"
+        // FiscalYearId: 4
+        // Id: 156716
+        // IsPaid: true
+        // LastName: "Lo"
+        // MiddleName: "Bahadur"
+        // PaymentCode: null
+        // PaymentMOde: "Cash"
+        // PaymentTYpe: "Cash"
+        // RemainingAmount: 0
+        // Requestor: "Airport Self Collection "
+        // SampleId: 117279
+        // TotalPrice: 1200
+        // usrFullName: "Sandip Shrestha"
+        return(
+           e.Age.toLowerCase().includes(searchText)
+          || e.Amount.toString().includes(searchText)
+          || e.RemainingAmount.toString().includes(searchText)
+          || e.BillId.toString().includes(searchText)
+          || e.BillNo.toString().includes(searchText)
+          || e.ContactNo.toString().includes(searchText)
+          || e.CreatedOn.toLowerCase().includes(searchText)
+          || e.CreatedOnNepaliDate.toLowerCase().includes(searchText)
+          || e.FirstName.toLowerCase().includes(searchText)
+          || e.LastName.toLowerCase().includes(searchText)
+          || e.MiddleName.toLowerCase().includes(searchText)
+          || e.PaymentMOde.toLowerCase().includes(searchText)
+          || e.PaymentTYpe.toLowerCase().includes(searchText)
+          || e.SampleId.toString().includes(searchText)
+          || e.usrFullName.toLowerCase().includes(searchText)
+          || e.Requestor.toLowerCase().includes(searchText)
+
+          ?
+          pushedArr.push(e) : ''
+        )
+      }
+      if(forReportSalesReport){
+        // ActualTotal: 6000
+        // DiscountTotal: 4000
+        // Requestor: "A Quality Health Care"
+        // TotalPrice: 10000
+        return(
+          e.Requestor.toLowerCase().includes(searchText)
+          || e.DiscountTotal.toString().includes(searchText)
+          || e.ActualTotal.toString().includes(searchText)
+          || e.TotalPrice.toString().includes(searchText)
+          ? pushedArr.push(e) : ''
+        )
+      }
 
     })
 
@@ -458,7 +529,7 @@ const Filter = ({ dataReturn, ...props }) => {
               </Col>
             }
 
-            
+
 
             <Col>
               {
