@@ -74,9 +74,10 @@ const ReferReport = () => {
     }
 
     const handlePrinter = () => {
-        let newWindow = window.open()
+        if (tableHead.length !== 0) {
+            let newWindow = window.open()
 
-        let refName = `<h3 class="gocenter">Referer Report</h3><div class="headingContent">
+            let refName = `<h3 class="gocenter">Referer Report</h3><div class="headingContent">
         <div>
         ${newTableData[0]['Refer Name']}
         </div>
@@ -86,34 +87,35 @@ const ReferReport = () => {
         </div>
         `;
 
-        let tableBody = '';
-        let tableHeadHtml = '<thead>';
-        let columns = [];
+            let tableBody = '';
+            let tableHeadHtml = '<thead>';
+            let columns = [];
 
-        tableHead.forEach(ele => {
-            tableHeadHtml += `<th>${ele?.title}</th>`;
-            columns.push(ele.title);
-        })
-        tableHeadHtml += '</thead>';
+            tableHead.forEach(ele => {
+                tableHeadHtml += `<th>${ele?.title}</th>`;
+                columns.push(ele.title);
+            })
+            tableHeadHtml += '</thead>';
 
-        newTableData.forEach(ele => {
-            tableBody = tableBody + '<tr>'
+            newTableData.forEach(ele => {
+                tableBody = tableBody + '<tr>'
 
-            columns.forEach(cell => {
-                tableBody = tableBody + '<td>' + ele[cell] + '</td>'
+                columns.forEach(cell => {
+                    tableBody = tableBody + '<td>' + ele[cell] + '</td>'
+                })
+
+                tableBody = tableBody + '</tr>'
             })
 
-            tableBody = tableBody + '</tr>'
-        })
+            let allTable = `<table>${tableHeadHtml}${tableBody}</table>`
 
-        let allTable = `<table>${tableHeadHtml}${tableBody}</table>`
+            newWindow.document.body.innerHTML = newTableStyles + refName + allTable
 
-        newWindow.document.body.innerHTML = newTableStyles + refName + allTable
-
-        setTimeout(function () {
-            newWindow.print();
-            newWindow.close();
-        }, 1000);
+            setTimeout(function () {
+                newWindow.print();
+                newWindow.close();
+            }, 1000);
+        }
     }
 
     return (
