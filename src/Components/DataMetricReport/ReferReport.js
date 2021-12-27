@@ -80,7 +80,7 @@ const ReferReport = () => {
 
             let refName = `<h3 class="gocenter">Referer Report</h3><div class="headingContent">
         <div>
-        ${newTableData[0]['Refer Name']}
+        Referer Name: ${newTableData[0]['Refer Name']}
         </div>
         <div>
         From ${fromToDate?.fromdate} - To ${fromToDate?.todate}
