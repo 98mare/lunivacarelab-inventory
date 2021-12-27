@@ -38,16 +38,17 @@ const PrintFile = () => {
 
   return (
     <PritFileContainer>
-      <h3 className="title">title of the page</h3>
+      <h3 className="title">Referer Report</h3>
       <div className="headingContent">
         <div className="details">
-          <p><span className='detailsTitle'>Address: </span>kupadon Lalitpur</p>
-          <p><span className='detailsTitle'>Phone Number: </span>9804587</p>
-          <p><span className='detailsTitle'>Phone Number: </span>9804587</p>
+          <p>
+            <span className='detailsTitle'>Refered By: </span>{tableData[0]['Refer Name']}
+          </p>
         </div>
         <div className="date">
-          <p><span className="detailsTitle">From: </span>{`${date.fromdate}`}</p>
-          <p><span className="detailsTitle">To: </span>{`${date.todate}`}</p>
+          <p>
+            <span className="detailsTitle">From: </span>{date.fromdate} - <span className="detailsTitle">To: </span>{date.todate}
+          </p>
         </div>
       </div>
       <Table
@@ -63,12 +64,12 @@ const PrintFile = () => {
 export default PrintFile;
 
 const PritFileContainer = styled.div`
-  
   .title{
     font-size: 24px;
     font-weight: 600;
     letter-spacing: 1.2px;
     text-transform: capitalize;
+    text-align: center;
   }
   .headingContent{
     display: flex;
@@ -79,9 +80,7 @@ const PritFileContainer = styled.div`
     text-transform: capitalize;
     font-weight: 600;
   }
+  thead.ant-table-thead th:first-child, tbody.ant-table-tbody td:first-child {
+    display:none
+  }
 `
-
-
-
-
-
