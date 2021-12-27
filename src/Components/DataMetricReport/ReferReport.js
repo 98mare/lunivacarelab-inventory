@@ -116,7 +116,7 @@ const ReferReport = () => {
             setTimeout(function () {
                 newWindow.print();
                 newWindow.close();
-            }, 1000);
+            }, 300);
         }
     }
 
@@ -127,14 +127,11 @@ const ReferReport = () => {
                 csvLinkTitle='Export CSV'
                 csvData={newTableData}
                 csvDataName='RefererReport.csv'
-
-                printFileName='referReport'
-                printTitle='Refrerer Name'
             >
 
             </PageHeader>
             <div className="printBtncontainer">
-                <button onClick={handlePrinter} className="costomeBtn btn ant-btn btn-primary btn-primary--outline">Printer</button>
+                <button onClick={handlePrinter} className="btn ant-btn btn-primary btn-primary--outline">Print</button>
             </div>
 
             <Filter
@@ -159,17 +156,6 @@ const ReferReport = () => {
 export default ReferReport
 
 const ReferReportContainer = styledComponents.div`
-    .printBtncontainer{
-        display: flex;
-        background-color: #fefefe;
-        flex-direction: column;
-        align-items: flex-end;
-        justify-content: end; 
-        width: 100%;
-        .costomeBtn
-            {
-                width: 100px;
-            }
-    }
+    
     
 `

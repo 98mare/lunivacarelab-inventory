@@ -318,10 +318,6 @@ const Filter = ({ dataReturn, ...props }) => {
         )
       }
       if(forReportSalesReport){
-        // ActualTotal: 6000
-        // DiscountTotal: 4000
-        // Requestor: "A Quality Health Care"
-        // TotalPrice: 10000
         return(
           e.Requestor.toLowerCase().includes(searchText)
           || e.DiscountTotal.toString().includes(searchText)
