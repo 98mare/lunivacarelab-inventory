@@ -86,35 +86,34 @@ const ReferReport = () => {
         </div>
         `;
 
-        let allTable = '<table>'
+        let tableBody = '';
         let tableHeadHtml = '<thead>';
+        let columns = [];
+
         tableHead.forEach(ele => {
             tableHeadHtml += `<th>${ele?.title}</th>`;
+            columns.push(ele.title);
         })
         tableHeadHtml += '</thead>';
 
-        let tableBodyHtml = '<tbody>'
-        for (let i = 0; i < newTableData.length; i++) {
-            tableBodyHtml += '<tr>';
-            tableBodyHtml += '<td>' + newTableData[i]['Refer Name'] + '</td>';
-            tableBodyHtml += '<td>' + newTableData[i]['Date'] + '</td>';
-            tableBodyHtml += '<td>' + newTableData[i]['NepaliDate'] + '</td>';
-            tableBodyHtml += '<td>' + newTableData[i]['BillNo'] + '</td>';
-            tableBodyHtml += '<td>' + newTableData[i]['Test'] + '</td>';
-            tableBodyHtml += '<td>' + newTableData[i]['Patient Name'] + '</td>';
-            tableBodyHtml += '<td>' + newTableData[i]['Price'] + '</td>';
-            tableBodyHtml += '</tr>';
-        }
-        tableBodyHtml += '</tbody>';
+        newTableData.forEach(ele => {
+            tableBody = tableBody + '<tr>'
 
-        allTable += tableHeadHtml + tableBodyHtml + '</table>'
+            columns.forEach(cell => {
+                tableBody = tableBody + '<td>' + ele[cell] + '</td>'
+            })
+
+            tableBody = tableBody + '</tr>'
+        })
+
+        let allTable = `<table>${tableHeadHtml}${tableBody}</table>`
 
         newWindow.document.body.innerHTML = newTableStyles + refName + allTable
 
-        // setTimeout(function () {
-        //     newWindow.print();
-        //     newWindow.close();
-        // }, 1000);
+        setTimeout(function () {
+            newWindow.print();
+            newWindow.close();
+        }, 1000);
     }
 
     return (
