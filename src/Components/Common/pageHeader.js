@@ -3,9 +3,8 @@ import React from 'react'
 import styled from 'styled-components'
 import AppButton from './AppButton'
 import { CSVLink } from 'react-csv';
-import { Link } from 'react-router-dom';
 
-const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDataName, csvData, forGroup, forGroupButtonClick, forCon, forConButtonClick, printFileName }) => {
+const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDataName, csvData, forGroup, forGroupButtonClick, forCon, forConButtonClick }) => {
 
   return (
     <PageHeaderContainer>
@@ -25,16 +24,7 @@ const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDa
             </div>
           }
 
-          {
-            printFileName &&
-            <div className='link'>
-              <Link
-                filename={printFileName}
-                className="btn ant-btn btn-primary btn-primary--outline"
-                to='/printfile'
-              >Print</Link>
-            </div>
-          }
+
 
         </Row>
       </Row>

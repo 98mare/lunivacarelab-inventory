@@ -127,9 +127,6 @@ const ReferReport = () => {
                 csvLinkTitle='Export CSV'
                 csvData={newTableData}
                 csvDataName='RefererReport.csv'
-
-                printFileName='referReport'
-                printTitle='Refrerer Name'
             >
 
             </PageHeader>
@@ -166,6 +163,7 @@ const ReferReportContainer = styledComponents.div`
         align-items: flex-end;
         justify-content: end; 
         width: 100%;
+        padding: 0 10px;
         .costomeBtn
             {
                 width: 100px;
