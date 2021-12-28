@@ -14,16 +14,14 @@ const RequestorReport = () => {
     const [companyDetail, setcompanyDetail] = useState([]);
     const [newTableData, setnewTableData] = useState([]);
     const [fromToDate, setfromToDate] = useState({});
+    const [nepaliDate, setnepaliDate] = useState({})
 
     const getDataForReport = (data) => {
         dispatch(getRequestorReport(data, (val) => {
             settableData(val)
             setnewTableData(val)
         }))
-
     }
-
-
     const dataRet = (val) => {
         let data = {
             ...val,
@@ -32,7 +30,23 @@ const RequestorReport = () => {
         }
         getDataForReport(data)
         setfromToDate(data);
+        
+        
+        
     }
+    var adbs = require("ad-bs-converter");
+    useEffect(() => {
+        var nepaliFromDate = fromToDate.fromdate;
+        var nepaliToDate =fromToDate.todate;
+        if(nepaliFromDate !== undefined){
+            var nNepaliFromDate = nepaliFromDate.replaceAll("-", "/");
+            var nNepaliToDate = nepaliToDate.replaceAll("-", "/");
+            var converterNepaliFromDate = adbs.ad2bs(nNepaliFromDate);
+            var converterNepalitoDate = adbs.ad2bs(nNepaliToDate);
+            console.log(converterNepaliFromDate, converterNepalitoDate);
+            setnepaliDate({converterNepaliFromDate,converterNepalitoDate})
+        }  
+    }, [fromToDate])
 
     useEffect(() => {
         createTableHead()
@@ -42,6 +56,7 @@ const RequestorReport = () => {
         dispatch(getListofcompany(data=> {
             setcompanyDetail(data[0])
         }))
+
     }, [])
 
 

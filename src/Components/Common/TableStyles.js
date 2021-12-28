@@ -16,22 +16,34 @@ table {
 thead > tr > th, tbody > tr > td {
     padding: 4px 4px;
     overflow-wrap: break-word;
-    font-size: 10px;
+    
     border-bottom: 1px solid #232325;
 }
 thead > tr > th {
     position: relative;
     color: rgba(0, 0, 0, 0.85);
+    font-size: 12px;
     font-weight: 500;
     text-align: left;
     // background: #fafafa;
+    border-top: 1px solid #232325;
     border-bottom: 1px solid #232325;
     transition: background 0.3s ease;
 }
 tbody > tr > td {
     border-bottom: 1px solid #f0f0f1;
     transition: background 0.3s;
+    font-size: 10px;
 }
+tbody > tr:last-child{
+    background-color: #f0f0f2;
+
+}
+tbody > tr:last-child > td{
+    font-size: 12px;
+    font-weight: 500;
+}
+
 
 
 .gocenter {
